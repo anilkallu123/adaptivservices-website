@@ -110,22 +110,58 @@
 
     <div class="divider" style="margin: 5rem 0;"></div>
 
-    <!-- TEAM -->
+    <!-- FOUNDER -->
     <div id="team">
       <div class="section-header center fade-up">
         <p class="eyebrow">The team</p>
         <h2>Veteran engineers. <span class="grad-text">Zero ego.</span></h2>
         <p>We hire people who have shipped things before — and who are hungry to ship things again.</p>
       </div>
-      <div class="grid-3 fade-up">
-        <div class="team-card">
-          <div class="team-avatar">👨‍💻</div>
-          <div class="team-info">
-            <h4>Anil Kallu</h4>
-            <div class="role">Founder & Cloud Architect</div>
-            <p>Senior cloud architect and data engineer with deep expertise in Azure, Oracle Cloud, and enterprise migration pipelines.</p>
+
+      <!-- Founder spotlight -->
+      <div class="card-grad fade-up" style="margin-bottom: 2rem;">
+        <div class="card-grad-inner">
+          <div style="display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: start;">
+            <div style="text-align: center;">
+              <div style="width: 96px; height: 96px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; margin: 0 auto 0.75rem;">👨‍💻</div>
+              <a href="https://anilkallu.netlify.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Full profile →</a>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+                <h3 style="margin: 0;">Anil Kallu</h3>
+                <span class="badge badge-grad">Founder</span>
+              </div>
+              <div class="role" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--cyan); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;">Senior Cloud Architect & Data Engineer · Oslo</div>
+              <p style="margin-bottom: 1.25rem;">15+ years delivering enterprise cloud infrastructure and data platforms for government, financial, and healthcare organisations across Norway. Clients include Skatteetaten (Norway's Tax Authority), national health platforms, and major Nordic enterprises. 30+ zero-downtime migrations shipped in production.</p>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">15+</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Years experience</div>
+                </div>
+                <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">30+</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Zero-downtime migrations</div>
+                </div>
+                <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">30%</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Cycle time reduction</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                <span class="badge badge-cyan">Oracle Cloud / ExaDB</span>
+                <span class="badge badge-cyan">Microsoft Azure</span>
+                <span class="badge badge-grad">Kubernetes · Terraform</span>
+                <span class="badge badge-grad">Data Engineering</span>
+                <span class="badge badge-magenta">AI / LLM Platforms</span>
+                <span class="badge badge-magenta">Healthcare & Gov</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+      <!-- Open roles -->
+      <div class="grid-2 fade-up" style="margin-bottom: 2.5rem;">
         <div class="team-card">
           <div class="team-avatar">👩‍💼</div>
           <div class="team-info">
@@ -143,7 +179,8 @@
           </div>
         </div>
       </div>
-      <div style="text-align:center; margin-top:2.5rem;">
+
+      <div style="text-align:center;">
         <p style="font-size:0.9rem; margin-bottom:1rem;">Think you belong here? We're always looking for exceptional engineers.</p>
         <a href="contact.html" class="btn btn-ghost">Reach out →</a>
       </div>
