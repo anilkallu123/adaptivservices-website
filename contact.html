@@ -7,6 +7,16 @@
   <meta name="description" content="Get in touch with Adaptiv AS. Oslo-based Norwegian IT and technology company."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact — Adaptiv AS"/>
+  <meta property="og:description" content="Get in touch with Adaptiv AS. Oslo-based Norwegian IT and technology company."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/contact"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <meta property="og:site_name" content="Adaptiv AS"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -20,7 +30,10 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="what-we-do.html">What We Do</a></li>
       <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
       <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html">Insights</a></li>
       <li><a href="contact.html" class="nav-cta active">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
@@ -48,7 +61,11 @@
       <div class="contact-form fade-up">
         <h3 style="margin-bottom:0.5rem;">Send us a message</h3>
         <p style="font-size:0.88rem; margin-bottom:2rem;">We typically respond within one business day.</p>
-        <form onsubmit="handleSubmit(event)">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY"/>
+          <input type="hidden" name="subject" value="New enquiry — Adaptiv AS"/>
+          <input type="hidden" name="from_name" value="Adaptiv AS Website"/>
+          <input type="hidden" name="redirect" value="false"/>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your name *</label>
@@ -101,10 +118,24 @@
               </div>
             </div>
             <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(123,79,255,0.1); border:1px solid rgba(123,79,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📅</div>
+              <div style="flex:1;">
+                <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Book a call</div>
+                <a href="https://calendly.com/adaptiv-as/30min" target="_blank" rel="noopener" style="color:var(--text-primary); font-weight:500;">30-min discovery call →</a>
+              </div>
+            </div>
+            <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
               <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,45,155,0.1); border:1px solid rgba(255,45,155,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📍</div>
               <div>
                 <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Location</div>
                 <span style="color:var(--text-primary); font-weight:500;">Oslo, Norway</span>
+              </div>
+            </div>
+            <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">💼</div>
+              <div>
+                <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">LinkedIn</div>
+                <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener" style="color:var(--text-primary); font-weight:500;">linkedin.com/in/anilkallu</a>
               </div>
             </div>
           </div>
@@ -155,6 +186,8 @@
         <h5>Company</h5>
         <ul>
           <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html">Insights</a></li>
           <li><a href="about.html#team">Team</a></li>
           <li><a href="about.html#principles">Principles</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -178,18 +211,29 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Adaptiv AS. All rights reserved.</span>
-      <span>Org. nr. 937 171 250 — Oslo, Norway</span>
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250 — Oslo, Norway</span>
     </div>
   </div>
 </footer>
 
 <script>
 function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  document.getElementById('form-success').style.display = 'block';
-  e.target.reset();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  const data = new FormData(e.target);
+  const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: data });
+  const json = await res.json();
+  if (json.success) {
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+  } else {
+    btn.textContent = 'Send message →';
+    btn.disabled = false;
+    alert('Something went wrong. Please email us directly at sales@adaptivservices.com');
+  }
 }
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });

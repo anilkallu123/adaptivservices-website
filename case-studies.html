@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Studies — Adaptiv AS</title>
+  <meta name="description" content="Real-world results from Adaptiv AS — Oracle migrations, cloud platforms, and AI systems delivered for Norwegian enterprises."/>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Case Studies — Adaptiv AS"/>
+  <meta property="og:description" content="Real-world results — Oracle migrations, cloud platforms, and AI systems for Norwegian enterprises."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/case-studies"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="what-we-do.html">What We Do</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="case-studies.html" class="active">Case Studies</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <p class="eyebrow fade-up">Proof of work</p>
+    <h1 class="fade-up">Real problems. <span class="grad-text">Real outcomes.</span></h1>
+    <p class="lead fade-up">We don't talk about what we can do — we show what we have done. These are selected examples from 15+ years of enterprise delivery across Norway and Europe.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Case 1 -->
+    <div class="card-grad fade-up" style="margin-bottom: 2rem;">
+      <div class="card-grad-inner">
+        <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+          <div>
+            <p class="eyebrow">01 — Public Sector / Cloud Migration</p>
+            <h2 style="font-size:1.6rem; margin-bottom:0.5rem;">Oracle ExaDB 19c → 26ai Migration</h2>
+            <p style="font-size:0.9rem; color:var(--text-muted);">Norwegian Tax Authority (Skatteetaten) · Azure / Oracle Cloud</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <span class="badge badge-cyan">Oracle ExaDB</span>
+            <span class="badge badge-grad">Azure</span>
+            <span class="badge badge-magenta">Zero downtime</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+          <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Challenge</div>
+            <p style="font-size:0.88rem;">Legacy Oracle 19c database running critical national tax processing — required migration to ExaDB 26ai on Azure without any downtime or data loss.</p>
+          </div>
+          <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Approach</div>
+            <p style="font-size:0.88rem;">Designed a Data Pump export pipeline with parallel streams, OCI Object Storage staging, and automated cutover orchestration using Azure VM run-commands.</p>
+          </div>
+          <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Outcome</div>
+            <p style="font-size:0.88rem;">Zero-downtime migration completed. Full schema and data integrity verified. Processing performance improved 40% on the new ExaDB 26ai cluster.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
+          <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">0</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Minutes downtime</span></div>
+          <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">40%</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Performance uplift</span></div>
+          <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">100%</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Data integrity verified</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 2 -->
+    <div class="card fade-up" style="margin-bottom: 2rem;">
+      <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+        <div>
+          <p class="eyebrow">02 — Healthcare / Data Platform</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.5rem;">National Health Data Platform</h2>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Norwegian Health Authority · Azure · DIPS Arena</p>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="badge badge-cyan">Azure</span>
+          <span class="badge badge-grad">Data Engineering</span>
+          <span class="badge badge-magenta">Healthcare</span>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Challenge</div>
+          <p style="font-size:0.88rem;">Clinical data siloed across disparate hospital systems — no unified view for analytics, reporting, or AI-assisted clinical decision support.</p>
+        </div>
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Approach</div>
+          <p style="font-size:0.88rem;">Built an Azure-native data lakehouse with medallion architecture. FHIR-compliant ingestion pipelines, dbt transformations, and a semantic layer for BI and ML consumption.</p>
+        </div>
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Outcome</div>
+          <p style="font-size:0.88rem;">Unified clinical data platform serving multiple hospital trusts. Enabled first national-scale analytics on patient pathway data, cutting reporting cycle from weeks to hours.</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
+        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Weeks→Hours</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Reporting cycle</span></div>
+        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">FHIR</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Compliant pipelines</span></div>
+      </div>
+    </div>
+
+    <!-- Case 3 -->
+    <div class="card fade-up" style="margin-bottom: 2rem;">
+      <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+        <div>
+          <p class="eyebrow">03 — ERP / Manufacturing</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.5rem;">D365 F&O Enterprise Programme — Alfa Laval</h2>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Alfa Laval · Microsoft Dynamics 365 · Europe-wide</p>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="badge badge-cyan">D365 F&O</span>
+          <span class="badge badge-grad">Azure Integration</span>
+          <span class="badge badge-magenta">Multi-country</span>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Challenge</div>
+          <p style="font-size:0.88rem;">One of the largest D365 implementations in Europe — upgrading global ERP across multiple legal entities, countries, and thousands of users while maintaining business continuity.</p>
+        </div>
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Approach</div>
+          <p style="font-size:0.88rem;">Phased country rollout with parallel-run periods. X++ customisations for local compliance. Azure Data Factory integration layer connecting D365 to supply chain and logistics systems.</p>
+        </div>
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Outcome</div>
+          <p style="font-size:0.88rem;">Full ERP consolidation across all European entities. Standardised financial reporting, unified supply chain visibility, and 30% reduction in month-end close cycle time.</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
+        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">30%</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Faster month-end close</span></div>
+        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Europe-wide</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">ERP consolidation</span></div>
+      </div>
+    </div>
+
+    <!-- Case 4 -->
+    <div class="card fade-up" style="margin-bottom: 2rem;">
+      <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+        <div>
+          <p class="eyebrow">04 — AI / Developer Tooling</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.5rem;">Nexus — Multi-Model AI Coding Agent</h2>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Adaptiv AS internal · Claude · GPT-4 · Gemini</p>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="badge badge-cyan">AI / LLM</span>
+          <span class="badge badge-grad">Python · Streamlit</span>
+          <span class="badge badge-magenta">Open Source</span>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Challenge</div>
+          <p style="font-size:0.88rem;">AI coding assistants are expensive and single-model — no intelligent routing across Claude, GPT-4, and Gemini based on task type and cost optimisation.</p>
+        </div>
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Approach</div>
+          <p style="font-size:0.88rem;">Built a keyword-based routing layer that dispatches tasks to the optimal model — free models preferred on ties, paid models for quality-critical operations. Streaming Streamlit UI.</p>
+        </div>
+        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Outcome</div>
+          <p style="font-size:0.88rem;">70%+ of tasks handled by free models without quality loss. Full tool suite: browser automation, GitHub, database migration, code execution, and memory.</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
+        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">70%+</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">Cost routed to free models</span></div>
+        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">4</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;">AI models integrated</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band fade-up">
+      <div class="cta-band-halo"></div>
+      <p class="eyebrow">Your project next</p>
+      <h2>Tell us what you're <span class="grad-text">trying to solve</span></h2>
+      <p>Every case study above started with a conversation. Yours can too.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+        <a href="https://calendly.com/adaptiv-as/30min" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">Book a 30-min call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html">AI & ML</a></li>
+          <li><a href="what-we-do.html">Cloud</a></li>
+          <li><a href="what-we-do.html">Electronics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@adaptivservices.com">sales@adaptivservices.com</a></li>
+          <li><a href="#">Oslo, Norway</a></li>
+          <li><a href="https://www.linkedin.com/company/adaptiv-as" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250 — Oslo, Norway</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

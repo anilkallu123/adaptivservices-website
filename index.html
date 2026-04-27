@@ -7,6 +7,42 @@
   <meta name="description" content="Adaptiv AS is an ambitious Norwegian IT venture building products, platforms, and infrastructure for the businesses of tomorrow."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Adaptiv AS — Build What Matters"/>
+  <meta property="og:description" content="An ambitious Norwegian IT venture building products, AI, cloud infrastructure, and custom electronics for tomorrow's industries."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <meta property="og:site_name" content="Adaptiv AS"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Adaptiv AS",
+    "url": "https://www.adaptivservices.com",
+    "logo": "https://www.adaptivservices.com/assets/icon_dark.png",
+    "description": "Norwegian IT venture specialising in cloud architecture, AI engineering, Oracle migrations, D365 ERP, and custom electronics.",
+    "foundingDate": "2026",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Oslo",
+      "addressCountry": "NO"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "sales@adaptivservices.com",
+      "contactType": "sales"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/anilkallu/",
+      "https://github.com/anilkallu123"
+    ]
+  }
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -21,6 +57,8 @@
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="what-we-do.html">What We Do</a></li>
       <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="blog.html">Insights</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
     </ul>
@@ -45,6 +83,7 @@
       <div class="hero-actions">
         <a href="what-we-do.html" class="btn btn-primary btn-lg">Explore our work</a>
         <a href="contact.html" class="btn btn-ghost btn-lg">Start a conversation</a>
+        <a href="https://calendly.com/adaptiv-as/30min" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">Book 30-min call</a>
       </div>
       <div class="hero-stat-row">
         <div class="hero-stat">
@@ -197,6 +236,42 @@
 
 <div class="divider"></div>
 
+<!-- CASE STUDIES TEASER -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <p class="eyebrow">Proof of work</p>
+      <h2>Results, not <span class="grad-text">promises</span></h2>
+      <p>Selected outcomes from 15+ years of enterprise delivery across Norway and Europe.</p>
+    </div>
+    <div class="grid-3 fade-up">
+      <div class="card">
+        <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.75rem;">Public Sector · Cloud</div>
+        <h3 style="font-size:1.05rem; margin-bottom:0.5rem;">Oracle ExaDB Migration — Skatteetaten</h3>
+        <p style="font-size:0.85rem; margin-bottom:1rem;">Zero-downtime migration of national tax database from 19c to 26ai. 40% performance uplift.</p>
+        <a href="case-studies.html" class="read-more" style="font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); letter-spacing:0.06em;">Read case study →</a>
+      </div>
+      <div class="card">
+        <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.75rem;">Healthcare · Data Platform</div>
+        <h3 style="font-size:1.05rem; margin-bottom:0.5rem;">National Health Data Platform</h3>
+        <p style="font-size:0.85rem; margin-bottom:1rem;">FHIR-compliant Azure data lakehouse. Reporting cycle: weeks → hours across multiple hospital trusts.</p>
+        <a href="case-studies.html" class="read-more" style="font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); letter-spacing:0.06em;">Read case study →</a>
+      </div>
+      <div class="card">
+        <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.75rem;">ERP · Manufacturing</div>
+        <h3 style="font-size:1.05rem; margin-bottom:0.5rem;">D365 F&O — Alfa Laval Europe</h3>
+        <p style="font-size:0.85rem; margin-bottom:1rem;">One of Europe's largest D365 implementations. 30% faster month-end close across 8 countries.</p>
+        <a href="case-studies.html" class="read-more" style="font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); letter-spacing:0.06em;">Read case study →</a>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="case-studies.html" class="btn btn-ghost">See all case studies →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- CTA -->
 <section class="section">
   <div class="container">
@@ -225,6 +300,8 @@
         <h5>Company</h5>
         <ul>
           <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html">Insights</a></li>
           <li><a href="about.html#team">Team</a></li>
           <li><a href="about.html#principles">Principles</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -248,8 +325,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Adaptiv AS. All rights reserved.</span>
-      <span>Org. nr. 937 171 250 — Oslo, Norway</span>
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250 — Oslo, Norway</span>
     </div>
   </div>
 </footer>

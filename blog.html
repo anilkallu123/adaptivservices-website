@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insights — Adaptiv AS</title>
+  <meta name="description" content="Technical insights from Adaptiv AS — Oracle migrations, Azure architecture, AI engineering, and D365 ERP."/>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta property="og:title" content="Insights — Adaptiv AS"/>
+  <meta property="og:description" content="Technical insights on Oracle migrations, Azure architecture, AI engineering, and D365 ERP."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/blog"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .article-card {
+      background: var(--ink-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .article-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(123,79,255,0.35);
+      box-shadow: 0 16px 48px rgba(123,79,255,0.12);
+    }
+    .article-header {
+      height: 8px;
+      background: var(--grad);
+    }
+    .article-body { padding: 1.75rem; }
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    .article-body h3 { margin-bottom: 0.75rem; font-size: 1.15rem; }
+    .article-body p { font-size: 0.88rem; margin-bottom: 1.25rem; }
+    .read-more {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="what-we-do.html">What We Do</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <p class="eyebrow fade-up">Insights</p>
+    <h1 class="fade-up">What we're <span class="grad-text">thinking about</span></h1>
+    <p class="lead fade-up">Technical deep-dives, architecture decisions, and lessons learned from 15+ years of enterprise delivery across Norway and Europe.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-3 fade-up">
+
+      <div class="article-card">
+        <div class="article-header"></div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-cyan" style="font-size:0.68rem;">Oracle / Cloud</span>
+            <span>Apr 2026</span>
+            <span>8 min read</span>
+          </div>
+          <h3>Oracle ExaDB 19c to 26ai: What Actually Works in Production</h3>
+          <p>Most migration guides skip the hard parts. Here's what we learned running Data Pump export pipelines with parallel streams, OCI Object Storage staging, and automated cutover for a national-scale database — without a maintenance window.</p>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-header"></div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-grad" style="font-size:0.68rem;">AI Engineering</span>
+            <span>Mar 2026</span>
+            <span>6 min read</span>
+          </div>
+          <h3>Building a Multi-Model AI Router: Claude vs GPT-4 vs Gemini</h3>
+          <p>When you're routing 100+ daily tasks across Claude Sonnet, GPT-4.1, and Gemini 2.5 Flash, the routing logic is everything. We built Nexus — here's the architecture, the tradeoffs, and why keyword routing beats embeddings for most production workloads.</p>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-header"></div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-magenta" style="font-size:0.68rem;">ERP / D365</span>
+            <span>Feb 2026</span>
+            <span>7 min read</span>
+          </div>
+          <h3>D365 F&O at Scale: Lessons from One of Europe's Largest Implementations</h3>
+          <p>The Alfa Laval programme touched 8 countries, 1000s of users, and every major financial process. What the textbooks don't tell you about phased ERP rollouts, parallel-run risk, and X++ at enterprise scale.</p>
+          <a href="https://swapnakallu.netlify.app" target="_blank" rel="noopener" class="read-more">Read more →</a>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-header"></div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-cyan" style="font-size:0.68rem;">Azure / Data</span>
+            <span>Jan 2026</span>
+            <span>5 min read</span>
+          </div>
+          <h3>Medallion Architecture on Azure for Norwegian Healthcare</h3>
+          <p>FHIR compliance, GDPR, and sub-second query performance — building a clinical data lakehouse that satisfies Norwegian health data regulation without compromising analyst experience.</p>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-header"></div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-grad" style="font-size:0.68rem;">Cloud / DevOps</span>
+            <span>Dec 2025</span>
+            <span>6 min read</span>
+          </div>
+          <h3>Azure DaaS: Building a Data Platform Landing Zone from Scratch</h3>
+          <p>Landing zones are usually over-engineered or under-specified. Here's how we built the DIPS DaaS platform — Terraform modules, ArgoCD GitOps, AKS, and identity — as a reusable template for Norwegian enterprises.</p>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+        </div>
+      </div>
+
+      <div class="article-card" style="border: 1px dashed rgba(123,79,255,0.3); background: var(--ink-1);">
+        <div class="article-header" style="background: var(--ink-3);"></div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-grad" style="font-size:0.68rem;">Coming soon</span>
+          </div>
+          <h3 style="color:var(--text-secondary);">More insights on the way</h3>
+          <p>We publish when we have something worth saying — not to hit a content calendar. Subscribe or follow us on LinkedIn to get notified.</p>
+          <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener" class="read-more">Follow on LinkedIn →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band fade-up">
+      <div class="cta-band-halo"></div>
+      <p class="eyebrow">Work with us</p>
+      <h2>Ideas are worthless. <span class="grad-text">Execution is everything.</span></h2>
+      <p>If any of these problems sound familiar — let's talk about what we could build together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html">AI & ML</a></li>
+          <li><a href="what-we-do.html">Cloud</a></li>
+          <li><a href="what-we-do.html">Electronics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@adaptivservices.com">sales@adaptivservices.com</a></li>
+          <li><a href="#">Oslo, Norway</a></li>
+          <li><a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250 — Oslo, Norway</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
