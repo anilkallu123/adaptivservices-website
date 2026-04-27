@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Adaptiv AS</title>
+  <meta name="description" content="Get in touch with Adaptiv AS. Oslo-based Norwegian IT and technology company."/>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.svg" alt="Adaptiv AS" class="nav-logo-mark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="what-we-do.html">What We Do</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta active">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <p class="eyebrow fade-up">Contact us</p>
+    <h1 class="fade-up">Let's start a <span class="grad-text">conversation</span></h1>
+    <p class="lead fade-up">Tell us about your project, your problem, or your ambition. We'll respond within one business day — and if we're not the right fit, we'll say so honestly.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:4rem; align-items:start;">
+
+      <!-- Form -->
+      <div class="contact-form fade-up">
+        <h3 style="margin-bottom:0.5rem;">Send us a message</h3>
+        <p style="font-size:0.88rem; margin-bottom:2rem;">We typically respond within one business day.</p>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your name *</label>
+              <input type="text" id="name" placeholder="Ola Nordmann" required/>
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" placeholder="Acme AS"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" placeholder="ola@company.no" required/>
+          </div>
+          <div class="form-group">
+            <label for="topic">What's this about?</label>
+            <select id="topic">
+              <option value="">Select a topic</option>
+              <option>Product development</option>
+              <option>AI / Machine learning</option>
+              <option>Cloud & infrastructure</option>
+              <option>Custom electronics</option>
+              <option>Talent & staffing</option>
+              <option>Security</option>
+              <option>Partnership / investment</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us more *</label>
+            <textarea id="message" placeholder="Describe your project, challenge, or ambition. The more detail the better — we'll make the first meeting count." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send message →</button>
+        </form>
+        <div id="form-success" style="display:none; margin-top:1.5rem; padding:1.25rem; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.25); border-radius:var(--radius-md); color:var(--cyan); font-size:0.9rem;">
+          Message sent — we'll be in touch within one business day.
+        </div>
+      </div>
+
+      <!-- Contact info -->
+      <div class="fade-up">
+        <div style="margin-bottom:2.5rem;">
+          <p class="eyebrow">Direct contact</p>
+          <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+            <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">✉️</div>
+              <div>
+                <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Email</div>
+                <a href="mailto:sales@adaptivservices.com" style="color:var(--text-primary); font-weight:500;">sales@adaptivservices.com</a>
+              </div>
+            </div>
+            <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(123,79,255,0.1); border:1px solid rgba(123,79,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📞</div>
+              <div>
+                <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Phone</div>
+                <a href="tel:+4792541460" style="color:var(--text-primary); font-weight:500;">+47 925 41 460</a>
+              </div>
+            </div>
+            <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,45,155,0.1); border:1px solid rgba(255,45,155,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📍</div>
+              <div>
+                <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Location</div>
+                <span style="color:var(--text-primary); font-weight:500;">Oslo, Norway</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow">What to expect</p>
+          <div class="process-steps" style="margin-top:1rem;">
+            <div class="process-step">
+              <div class="process-step-num">01</div>
+              <div class="process-step-body">
+                <h4>We respond within 1 day</h4>
+                <p style="font-size:0.88rem;">Always a real engineer, never a sales script.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">02</div>
+              <div class="process-step-body">
+                <h4>30-minute discovery call</h4>
+                <p style="font-size:0.88rem;">We listen more than we talk. No pitch deck.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">03</div>
+              <div class="process-step-body">
+                <h4>Honest proposal or referral</h4>
+                <p style="font-size:0.88rem;">If we're the right fit — we'll say so and how. If not — we'll point you somewhere better.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/logo.svg" alt="Adaptiv AS" class="nav-logo-mark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <li><a href="about.html#principles">Principles</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html">AI & ML</a></li>
+          <li><a href="what-we-do.html">Cloud</a></li>
+          <li><a href="what-we-do.html">Electronics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@adaptivservices.com">sales@adaptivservices.com</a></li>
+          <li><a href="tel:+4792541460">+47 925 41 460</a></li>
+          <li><a href="#">Oslo, Norway</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved.</span>
+      <span>Org. nr. — Oslo, Norway</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById('form-success').style.display = 'block';
+  e.target.reset();
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

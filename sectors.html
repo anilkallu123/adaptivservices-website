@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sectors — Adaptiv AS</title>
+  <meta name="description" content="Adaptiv AS works across health, energy, public sector, industrial, maritime, and emerging industries in Norway and the Nordics."/>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.svg" alt="Adaptiv AS" class="nav-logo-mark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="what-we-do.html">What We Do</a></li>
+      <li><a href="sectors.html" class="active">Sectors</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <p class="eyebrow fade-up">Industries we serve</p>
+    <h1 class="fade-up">We go where the<br/><span class="grad-text">problems are hardest</span></h1>
+    <p class="lead fade-up">We are drawn to industries where digital transformation is overdue, the stakes are high, and the incumbents move slowly. That's where Adaptiv AS delivers the most value.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Health -->
+    <div class="card-grad fade-up" style="margin-bottom:1.5rem;">
+      <div class="card-grad-inner">
+        <div style="display:grid; grid-template-columns: 80px 1fr auto; gap:2rem; align-items:start;">
+          <div style="font-size:3rem; padding-top:0.25rem;">🏥</div>
+          <div>
+            <p class="eyebrow">01</p>
+            <h2 style="font-size:1.6rem; margin-bottom:0.75rem;">Health & Life Sciences</h2>
+            <p style="margin-bottom:1.25rem;">Norway's healthcare system generates enormous data — and most of it is trapped in legacy systems. We build clinical workflow software, patient data platforms, AI-assisted diagnostics, and integration layers that make health data actually usable.</p>
+            <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+              <span class="badge badge-cyan">Clinical systems</span>
+              <span class="badge badge-grad">Patient platforms</span>
+              <span class="badge badge-grad">AI diagnostics</span>
+              <span class="badge badge-cyan">HL7 / FHIR</span>
+              <span class="badge badge-magenta">GDPR-compliant</span>
+            </div>
+          </div>
+          <a href="contact.html" class="btn btn-ghost" style="white-space:nowrap;">Talk to us →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Energy -->
+    <div class="card fade-up" style="margin-bottom:1.5rem;">
+      <div style="display:grid; grid-template-columns: 80px 1fr auto; gap:2rem; align-items:start;">
+        <div style="font-size:3rem; padding-top:0.25rem;">⚡</div>
+        <div>
+          <p class="eyebrow">02</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.75rem;">Energy & Utilities</h2>
+          <p style="margin-bottom:1.25rem;">From offshore platforms to smart grid management, the Norwegian energy sector is undergoing a digital-physical convergence. We build the software and electronics to make it work — grid intelligence, offshore monitoring, and clean energy infrastructure management.</p>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+            <span class="badge badge-cyan">Smart grid</span>
+            <span class="badge badge-grad">Offshore systems</span>
+            <span class="badge badge-grad">IoT sensors</span>
+            <span class="badge badge-magenta">SCADA integration</span>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-ghost" style="white-space:nowrap;">Talk to us →</a>
+      </div>
+    </div>
+
+    <!-- Public Sector -->
+    <div class="card fade-up" style="margin-bottom:1.5rem;">
+      <div style="display:grid; grid-template-columns: 80px 1fr auto; gap:2rem; align-items:start;">
+        <div style="font-size:3rem; padding-top:0.25rem;">🏛️</div>
+        <div>
+          <p class="eyebrow">03</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.75rem;">Public Sector & Government</h2>
+          <p style="margin-bottom:1.25rem;">Digital services that actually work for citizens. We understand the procurement constraints, security requirements, and compliance frameworks that come with public sector work — and we design around them, not against them.</p>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+            <span class="badge badge-cyan">NIS2</span>
+            <span class="badge badge-grad">ISO 27001</span>
+            <span class="badge badge-grad">Difi guidelines</span>
+            <span class="badge badge-magenta">Accessibility (WCAG)</span>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-ghost" style="white-space:nowrap;">Talk to us →</a>
+      </div>
+    </div>
+
+    <!-- Industrial -->
+    <div class="card fade-up" style="margin-bottom:1.5rem;">
+      <div style="display:grid; grid-template-columns: 80px 1fr auto; gap:2rem; align-items:start;">
+        <div style="font-size:3rem; padding-top:0.25rem;">🏭</div>
+        <div>
+          <p class="eyebrow">04</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.75rem;">Industrial & Manufacturing</h2>
+          <p style="margin-bottom:1.25rem;">Norway's industrial backbone — aluminium, chemicals, paper, aquaculture — runs on processes that were digitised decades ago and never revisited. We bring edge compute, IoT, and modern automation to production floors without disrupting them.</p>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+            <span class="badge badge-cyan">Edge compute</span>
+            <span class="badge badge-grad">Process automation</span>
+            <span class="badge badge-grad">Predictive maintenance</span>
+            <span class="badge badge-magenta">Digital twin</span>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-ghost" style="white-space:nowrap;">Talk to us →</a>
+      </div>
+    </div>
+
+    <!-- Maritime -->
+    <div class="card fade-up" style="margin-bottom:1.5rem;">
+      <div style="display:grid; grid-template-columns: 80px 1fr auto; gap:2rem; align-items:start;">
+        <div style="font-size:3rem; padding-top:0.25rem;">🚢</div>
+        <div>
+          <p class="eyebrow">05</p>
+          <h2 style="font-size:1.6rem; margin-bottom:0.75rem;">Maritime & Logistics</h2>
+          <p style="margin-bottom:1.25rem;">Fleet intelligence, port operations, and supply chain visibility for a connected maritime economy. Norway is a maritime nation — we build software and systems that match that heritage with 21st-century capability.</p>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+            <span class="badge badge-cyan">Fleet tracking</span>
+            <span class="badge badge-grad">Port operations</span>
+            <span class="badge badge-grad">Supply chain</span>
+            <span class="badge badge-magenta">AIS integration</span>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-ghost" style="white-space:nowrap;">Talk to us →</a>
+      </div>
+    </div>
+
+    <!-- Your sector -->
+    <div class="card-grad fade-up">
+      <div class="card-grad-inner" style="text-align:center; padding: 3rem;">
+        <div style="font-size:3rem; margin-bottom:1rem;">💡</div>
+        <p class="eyebrow" style="text-align:center;">06 — Open</p>
+        <h2 style="font-size:1.6rem; margin-bottom:0.75rem;">Your sector</h2>
+        <p style="max-width:480px; margin: 0 auto 2rem;">We haven't listed yours? Good. That usually means the opportunity is biggest and the competition thinnest. We're curious by default — tell us about your industry and we'll tell you honestly if we can help.</p>
+        <a href="contact.html" class="btn btn-primary btn-lg">Tell us about it →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/logo.svg" alt="Adaptiv AS" class="nav-logo-mark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html">AI & ML</a></li>
+          <li><a href="what-we-do.html">Cloud</a></li>
+          <li><a href="what-we-do.html">Electronics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@adaptivservices.com">sales@adaptivservices.com</a></li>
+          <li><a href="tel:+4792541460">+47 925 41 460</a></li>
+          <li><a href="#">Oslo, Norway</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved.</span>
+      <span>Org. nr. — Oslo, Norway</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
