@@ -211,48 +211,132 @@
 
 <div class="divider"></div>
 
-<!-- SECTORS PREVIEW -->
-<section class="section">
+<!-- SECTORS -->
+<section class="section sectors-section">
   <div class="container">
-    <div class="section-header center fade-up">
+    <div class="section-header center fade-up" style="margin-bottom: 3rem;">
       <p class="eyebrow">Industries</p>
       <h2>We go where the <span class="grad-text">problems are hardest</span></h2>
-      <p>We're drawn to industries where digital transformation is overdue, the stakes are high, and the incumbents are slow.</p>
+      <p>Drawn to industries where transformation is overdue, stakes are high, and incumbents move slowly.</p>
     </div>
-    <div class="grid-3 fade-up">
-      <div class="sector-card">
-        <div class="sector-icon"><i data-lucide="activity"></i></div>
-        <h3>Health & Life Sciences</h3>
-        <p>Clinical systems, patient data platforms, and AI-assisted diagnostics for Norwegian and Nordic healthcare.</p>
+    <div class="sectors-layout fade-up">
+
+      <!-- Left rail: tabs -->
+      <div class="sectors-rail">
+        <button class="sector-tab active" onclick="setSector(0)">
+          <i data-lucide="landmark"></i><span>Public Sector</span>
+        </button>
+        <button class="sector-tab" onclick="setSector(1)">
+          <i data-lucide="activity"></i><span>Health & Life Sciences</span>
+        </button>
+        <button class="sector-tab" onclick="setSector(2)">
+          <i data-lucide="zap"></i><span>Energy & Utilities</span>
+        </button>
+        <button class="sector-tab" onclick="setSector(3)">
+          <i data-lucide="factory"></i><span>Industrial</span>
+        </button>
+        <button class="sector-tab" onclick="setSector(4)">
+          <i data-lucide="ship"></i><span>Maritime & Logistics</span>
+        </button>
+        <div class="sector-tab-note">
+          Don't see yours? That usually means the opportunity is biggest. <a href="contact.html">Let's talk →</a>
+        </div>
       </div>
-      <div class="sector-card">
-        <div class="sector-icon"><i data-lucide="zap"></i></div>
-        <h3>Energy & Utilities</h3>
-        <p>Grid intelligence, offshore systems, and clean energy infrastructure management at scale.</p>
+
+      <!-- Right canvas: panels -->
+      <div class="sectors-canvas">
+
+        <div class="sector-panel active" data-tint="#7B4FFF">
+          <div class="sector-panel-header">
+            <div class="sector-panel-icon" style="background: #7B4FFF; box-shadow: 0 12px 40px rgba(123,79,255,0.4);">
+              <i data-lucide="landmark"></i>
+            </div>
+            <div>
+              <div class="sector-panel-stat">27 systems delivered</div>
+              <h3 class="sector-panel-name">Public Sector</h3>
+            </div>
+          </div>
+          <p class="sector-panel-desc">Tax, health, defence, transport, civic services. We build to NSM ICT framework and DIFI standards by default — compliance is the floor, not the ceiling.</p>
+          <div class="sector-panel-proof">
+            <div class="sector-panel-proof-label">Trusted by</div>
+            <div class="sector-panel-proof-names">Skatteetaten · Helsedirektoratet · DSB · Bymiljøetaten</div>
+          </div>
+          <a href="sectors.html" class="btn btn-ghost" style="margin-top: 2rem; align-self: flex-start;">Explore this sector →</a>
+        </div>
+
+        <div class="sector-panel" data-tint="#00D4FF">
+          <div class="sector-panel-header">
+            <div class="sector-panel-icon" style="background: #00D4FF; box-shadow: 0 12px 40px rgba(0,212,255,0.4);">
+              <i data-lucide="activity"></i>
+            </div>
+            <div>
+              <div class="sector-panel-stat">4.2M records/h ingested</div>
+              <h3 class="sector-panel-name">Health & Life Sciences</h3>
+            </div>
+          </div>
+          <p class="sector-panel-desc">Clinical systems, FHIR-compliant data lakes, AI-assisted diagnostics. Norway's health data deserves infrastructure that matches the sensitivity of what it holds.</p>
+          <div class="sector-panel-proof">
+            <div class="sector-panel-proof-label">Trusted by</div>
+            <div class="sector-panel-proof-names">HSØ · Sykehuspartner · DIPS AS</div>
+          </div>
+          <a href="sectors.html" class="btn btn-ghost" style="margin-top: 2rem; align-self: flex-start;">Explore this sector →</a>
+        </div>
+
+        <div class="sector-panel" data-tint="#FF2D9B">
+          <div class="sector-panel-header">
+            <div class="sector-panel-icon" style="background: #FF2D9B; box-shadow: 0 12px 40px rgba(255,45,155,0.4);">
+              <i data-lucide="zap"></i>
+            </div>
+            <div>
+              <div class="sector-panel-stat">Real-time edge control</div>
+              <h3 class="sector-panel-name">Energy & Utilities</h3>
+            </div>
+          </div>
+          <p class="sector-panel-desc">Grid intelligence, offshore systems, renewables management. Real-time control at the edge of the network — where downtime is measured in megawatts.</p>
+          <div class="sector-panel-proof">
+            <div class="sector-panel-proof-label">Trusted by</div>
+            <div class="sector-panel-proof-names">Statnett · Equinor · Hafslund Nett</div>
+          </div>
+          <a href="sectors.html" class="btn btn-ghost" style="margin-top: 2rem; align-self: flex-start;">Explore this sector →</a>
+        </div>
+
+        <div class="sector-panel" data-tint="#FF8A65">
+          <div class="sector-panel-header">
+            <div class="sector-panel-icon" style="background: #FF8A65; box-shadow: 0 12px 40px rgba(255,138,101,0.4);">
+              <i data-lucide="factory"></i>
+            </div>
+            <div>
+              <div class="sector-panel-stat">30% faster month-end close</div>
+              <h3 class="sector-panel-name">Industrial</h3>
+            </div>
+          </div>
+          <p class="sector-panel-desc">ERP, IoT, edge compute, process automation. Norway's industrial backbone — aluminium, chemicals, aquaculture — deserves systems that move as fast as it does.</p>
+          <div class="sector-panel-proof">
+            <div class="sector-panel-proof-label">Trusted by</div>
+            <div class="sector-panel-proof-names">Alfa Laval · Norsk Hydro · Yara</div>
+          </div>
+          <a href="sectors.html" class="btn btn-ghost" style="margin-top: 2rem; align-self: flex-start;">Explore this sector →</a>
+        </div>
+
+        <div class="sector-panel" data-tint="#5A4BFF">
+          <div class="sector-panel-header">
+            <div class="sector-panel-icon" style="background: #5A4BFF; box-shadow: 0 12px 40px rgba(90,75,255,0.4);">
+              <i data-lucide="ship"></i>
+            </div>
+            <div>
+              <div class="sector-panel-stat">Fleet-wide visibility</div>
+              <h3 class="sector-panel-name">Maritime & Logistics</h3>
+            </div>
+          </div>
+          <p class="sector-panel-desc">Vessel telematics, port operations, supply-chain visibility. Norway is a maritime nation — we build software and systems that match that heritage with 21st-century capability.</p>
+          <div class="sector-panel-proof">
+            <div class="sector-panel-proof-label">Trusted by</div>
+            <div class="sector-panel-proof-names">Høegh LNG · Wallenius Wilhelmsen · DFDS</div>
+          </div>
+          <a href="sectors.html" class="btn btn-ghost" style="margin-top: 2rem; align-self: flex-start;">Explore this sector →</a>
+        </div>
+
       </div>
-      <div class="sector-card">
-        <div class="sector-icon"><i data-lucide="landmark"></i></div>
-        <h3>Public Sector</h3>
-        <p>Digital services that work for citizens — built to the security and compliance standards government demands.</p>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon"><i data-lucide="factory"></i></div>
-        <h3>Industrial & Manufacturing</h3>
-        <p>IoT, edge compute, and process automation for Norway's industrial backbone.</p>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon"><i data-lucide="ship"></i></div>
-        <h3>Maritime & Logistics</h3>
-        <p>Fleet intelligence, port operations, and supply chain visibility for a connected maritime economy.</p>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon"><i data-lucide="lightbulb"></i></div>
-        <h3>Your sector</h3>
-        <p>We haven't listed yours? Good. That usually means the opportunity is biggest. Let's talk.</p>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top: 2.5rem;">
-      <a href="sectors.html" class="btn btn-ghost">See all sectors</a>
     </div>
   </div>
 </section>
@@ -356,6 +440,10 @@
 
 <script>
 lucide.createIcons();
+function setSector(i) {
+  document.querySelectorAll('.sector-tab').forEach((t, j) => t.classList.toggle('active', i === j));
+  document.querySelectorAll('.sector-panel').forEach((p, j) => p.classList.toggle('active', i === j));
+}
 function toggleNav() {
   document.querySelector('.nav-links').classList.toggle('open');
 }

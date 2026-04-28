@@ -555,7 +555,122 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .process-step-body h4 { margin-bottom: 0.5rem; }
 .process-step-body p { font-size: 0.9rem; }
 
-/* ── Sector cards ── */
+/* ── Sector tabs ── */
+.sectors-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.sectors-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.sector-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  letter-spacing: -0.01em;
+}
+.sector-tab svg { width: 18px; height: 18px; stroke-width: 1.5; flex-shrink: 0; }
+.sector-tab:hover { color: var(--text-secondary); background: rgba(255,255,255,0.04); }
+.sector-tab.active {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.06);
+  border-left-color: var(--cyan);
+}
+.sector-tab-note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.sector-tab-note a { color: var(--cyan); }
+.sectors-canvas { position: relative; }
+.sector-panel {
+  display: none;
+  flex-direction: column;
+  padding: 2.5rem;
+  background: var(--ink-2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  min-height: 340px;
+}
+.sector-panel.active { display: flex; }
+.sector-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.sector-panel-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+.sector-panel-icon svg { width: 26px; height: 26px; stroke-width: 1.5; }
+.sector-panel-stat {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+.sector-panel-name {
+  font-size: 1.8rem;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.sector-panel-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 2rem;
+}
+.sector-panel-proof {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: auto;
+}
+.sector-panel-proof-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.sector-panel-proof-names {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* keep sector-card for sectors.html page */
 .sector-card {
   background: var(--ink-2);
   border: 1px solid rgba(255,255,255,0.07);
@@ -736,6 +851,8 @@ p { color: var(--text-secondary); line-height: 1.75; }
   .btn-lg { width: 100%; justify-content: center; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
   .cta-band { padding: 2rem 1.5rem; }
+  .sectors-layout { grid-template-columns: 1fr; }
+  .sector-panel { padding: 1.5rem; }
   .profile-grid { grid-template-columns: 1fr !important; }
   .profile-grid > .profile-left {
     flex-direction: row !important;
