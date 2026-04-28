@@ -242,7 +242,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
               var(--grad) border-box;
   border: 2px solid transparent;
 }
-.card-grad-inner { padding: 2rem; border-radius: calc(var(--radius-lg) - 2px); }
+.card-grad-inner { padding: 2rem; border-radius: calc(var(--radius-lg) - 2px); background: var(--ink-2); }
 
 /* ── Trust strip ── */
 .trust-strip {
@@ -1033,6 +1033,13 @@ p { color: var(--text-secondary); line-height: 1.75; }
   .btn-lg { width: 100%; justify-content: center; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
   .cta-band { padding: 2rem 1.5rem; }
+  .card, .card-grad-inner { padding: 1.25rem; }
+  .card-grad { overflow: hidden; }
+  /* sectors cards: icon | content | button → stack button below */
+  .sector-row { grid-template-columns: 48px 1fr !important; }
+  .sector-row .sector-cta { grid-column: 1 / -1; }
+  /* about page: 3-col stat grids inside profile cards */
+  .profile-stats { grid-template-columns: 1fr 1fr !important; }
   .sectors-layout { grid-template-columns: 1fr; }
   .sector-panel { padding: 1.5rem; }
   .profile-grid { grid-template-columns: 1fr !important; }
