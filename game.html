@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bunny Run — Adaptiv AS</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body { background: var(--ink-0); }
+    .game-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+      min-height: calc(100vh - var(--nav-h));
+    }
+    .game-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+    .game-sub {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    #game-canvas {
+      border-radius: var(--radius-lg);
+      border: 2px solid transparent;
+      background: linear-gradient(var(--ink-1), var(--ink-1)) padding-box,
+                  var(--grad) border-box;
+      display: block;
+      max-width: 100%;
+      cursor: pointer;
+      touch-action: none;
+    }
+    .game-hint {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+    .game-hint span { color: var(--cyan); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
+      <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    </div>
+  </div>
+</nav>
+
+<div class="game-wrap">
+  <div class="game-title">Bunny Run</div>
+  <div class="game-sub">An Adaptiv mini-game · Don't let the bushes win</div>
+  <canvas id="game-canvas" width="800" height="240"></canvas>
+  <p class="game-hint"><span>Space / ↑ / Tap</span> to jump · <span>Double-jump</span> supported</p>
+</div>
+
+<script>
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+
+// ── Responsive canvas ─────────────────────────────────────────
+function resize() {
+  const maxW = Math.min(800, window.innerWidth - 32);
+  canvas.style.width  = maxW + 'px';
+  canvas.style.height = (maxW * 240 / 800) + 'px';
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── Constants ─────────────────────────────────────────────────
+const W = 800, H = 240;
+const GROUND = H - 48;
+const GRAVITY = 0.65;
+const JUMP_V  = -13.5;
+
+// ── Palette ───────────────────────────────────────────────────
+const C = {
+  bg:      '#07080F',
+  ground:  '#0D0F1C',
+  grass:   '#1a3a1a',
+  cyan:    '#00D4FF',
+  purple:  '#7B4FFF',
+  magenta: '#FF2D9B',
+  muted:   '#4a4f6a',
+  white:   '#E8EAFF',
+  bush1:   '#1f5c1f',
+  bush2:   '#2d8a2d',
+  bush3:   '#3aad3a',
+  bunFur:  '#f0e8d8',
+  bunEar:  '#e8c0c0',
+  bunNose: '#ff9999',
+};
+
+// ── Game state ────────────────────────────────────────────────
+let state  = 'start'; // 'start' | 'running' | 'dead'
+let score  = 0;
+let frame  = 0;
+let speed  = 5;
+let hi     = parseInt(localStorage.getItem('bunny_hi') || '0');
+let obstacles = [];
+let nextObs   = 80;
+let stars     = Array.from({length: 40}, () => ({
+  x: Math.random() * W,
+  y: Math.random() * (GROUND - 20),
+  r: Math.random() * 1.5 + 0.3,
+  a: Math.random(),
+}));
+
+// ── Bunny ─────────────────────────────────────────────────────
+const bun = { x: 90, y: GROUND, w: 28, h: 36, vy: 0, jumps: 0, dead: false };
+
+function resetGame() {
+  state = 'running';
+  frame = 0; score = 0; speed = 5;
+  obstacles = []; nextObs = 90;
+  bun.y = GROUND; bun.vy = 0; bun.jumps = 0; bun.dead = false;
+}
+
+function jump() {
+  if (bun.jumps < 2) {
+    bun.vy = JUMP_V - (bun.jumps * 1.5);
+    bun.jumps++;
+  }
+}
+
+function handleInput() {
+  if (state === 'start' || state === 'dead') { resetGame(); }
+  else if (state === 'running') { jump(); }
+}
+
+// ── Input ─────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); handleInput(); }
+});
+canvas.addEventListener('click',      handleInput);
+canvas.addEventListener('touchstart', e => { e.preventDefault(); handleInput(); }, { passive: false });
+
+// ── Spawn helpers ─────────────────────────────────────────────
+function spawnBush() {
+  const h = 22 + Math.random() * 22;
+  const w = 28 + Math.random() * 24;
+  obstacles.push({ x: W + 10, y: GROUND - h + 2, w, h, type: 'bush' });
+}
+function spawnDouble() {
+  const gap = 58 + Math.random() * 30;
+  const h1 = 20 + Math.random() * 18, w1 = 26 + Math.random() * 20;
+  const h2 = 24 + Math.random() * 20, w2 = 28 + Math.random() * 22;
+  obstacles.push({ x: W + 10,       y: GROUND - h1 + 2, w: w1, h: h1, type: 'bush' });
+  obstacles.push({ x: W + 10 + w1 + gap, y: GROUND - h2 + 2, w: w2, h: h2, type: 'bush' });
+}
+
+// ── Update ────────────────────────────────────────────────────
+function update() {
+  frame++;
+  score = Math.floor(frame / 7);
+  speed = 5 + Math.min(score / 300, 5);
+
+  // Bunny physics
+  bun.vy += GRAVITY;
+  bun.y  += bun.vy;
+  if (bun.y >= GROUND) { bun.y = GROUND; bun.vy = 0; bun.jumps = 0; }
+
+  // Spawn obstacles
+  nextObs--;
+  if (nextObs <= 0) {
+    const roll = Math.random();
+    if (score > 150 && roll < 0.28) spawnDouble();
+    else spawnBush();
+    const minGap = Math.max(38, 72 - score / 40);
+    nextObs = minGap + Math.random() * 70;
+  }
+
+  // Move obstacles
+  for (let i = obstacles.length - 1; i >= 0; i--) {
+    obstacles[i].x -= speed;
+    if (obstacles[i].x + obstacles[i].w < 0) obstacles.splice(i, 1);
+  }
+
+  // Collision (shrunk hitbox)
+  const bx = bun.x + 6, by = bun.y - bun.h + 6, bw = bun.w - 12, bh = bun.h - 8;
+  for (const o of obstacles) {
+    if (bx < o.x + o.w && bx + bw > o.x && by < o.y + o.h && by + bh > o.y) {
+      state = 'dead';
+      bun.dead = true;
+      if (score > hi) { hi = score; localStorage.setItem('bunny_hi', hi); }
+      return;
+    }
+  }
+
+  // Twinkle stars
+  stars.forEach(s => { s.a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(frame * 0.04 + s.x)); });
+}
+
+// ── Draw helpers ──────────────────────────────────────────────
+function drawStars() {
+  stars.forEach(s => {
+    ctx.globalAlpha = s.a * 0.6;
+    ctx.fillStyle = C.white;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+function drawGround() {
+  // Ground fill
+  ctx.fillStyle = C.ground;
+  ctx.fillRect(0, GROUND, W, H - GROUND);
+
+  // Gradient line
+  const g = ctx.createLinearGradient(0, 0, W, 0);
+  g.addColorStop(0,   C.purple);
+  g.addColorStop(0.5, C.cyan);
+  g.addColorStop(1,   C.magenta);
+  ctx.strokeStyle = g;
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, GROUND); ctx.lineTo(W, GROUND); ctx.stroke();
+
+  // Scrolling grass tufts
+  ctx.fillStyle = C.grass;
+  const t = (frame * speed * 0.5) % 80;
+  for (let x = -t; x < W + 10; x += 80) {
+    ctx.beginPath();
+    ctx.moveTo(x, GROUND);
+    ctx.lineTo(x + 5, GROUND - 5);
+    ctx.lineTo(x + 10, GROUND);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(x + 40, GROUND);
+    ctx.lineTo(x + 44, GROUND - 4);
+    ctx.lineTo(x + 48, GROUND);
+    ctx.fill();
+  }
+}
+
+function drawBush(o) {
+  const cx = o.x + o.w / 2;
+
+  // Stem / trunk
+  ctx.fillStyle = '#4a2e00';
+  ctx.fillRect(cx - 3, o.y + o.h * 0.65, 6, o.h * 0.35);
+
+  // Shadow
+  ctx.globalAlpha = 0.18;
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.ellipse(cx, GROUND - 1, o.w * 0.45, 5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Leaves — layered circles
+  const layers = [
+    { ox: 0,             oy: o.h * 0.55, r: o.w * 0.42, col: C.bush1 },
+    { ox: -o.w * 0.25,   oy: o.h * 0.45, r: o.w * 0.33, col: C.bush2 },
+    { ox:  o.w * 0.25,   oy: o.h * 0.45, r: o.w * 0.33, col: C.bush2 },
+    { ox: 0,             oy: o.h * 0.28, r: o.w * 0.36, col: C.bush2 },
+    { ox: -o.w * 0.15,   oy: o.h * 0.15, r: o.w * 0.24, col: C.bush3 },
+    { ox:  o.w * 0.18,   oy: o.h * 0.18, r: o.w * 0.20, col: C.bush3 },
+    { ox: 0,             oy: 0,           r: o.w * 0.22, col: C.bush3 },
+  ];
+  layers.forEach(l => {
+    ctx.fillStyle = l.col;
+    ctx.beginPath();
+    ctx.arc(o.x + o.w / 2 + l.ox, o.y + l.oy, l.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // Highlight
+  ctx.globalAlpha = 0.15;
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(cx - o.w * 0.1, o.y + o.h * 0.15, o.w * 0.14, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+function drawBunny() {
+  const x = bun.x, y = bun.y, h = bun.h;
+  const air = bun.y < GROUND - 2;
+  const legAnim = air ? 0 : Math.sin(frame * 0.28) * 4;
+
+  // Shadow
+  ctx.globalAlpha = 0.2;
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.ellipse(x + bun.w / 2, GROUND, 14, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Tail
+  ctx.fillStyle = C.white;
+  ctx.beginPath();
+  ctx.arc(x + bun.w - 2, y - h * 0.35, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Legs
+  ctx.fillStyle = C.bunFur;
+  // back leg
+  ctx.beginPath();
+  ctx.ellipse(x + 7, y - 5 + legAnim, 7, 5, air ? -0.5 : 0, 0, Math.PI * 2);
+  ctx.fill();
+  // front leg
+  ctx.beginPath();
+  ctx.ellipse(x + 20, y - 5 - legAnim, 7, 5, air ? 0.5 : 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Body
+  ctx.fillStyle = C.bunFur;
+  ctx.beginPath();
+  ctx.ellipse(x + bun.w / 2, y - h * 0.38, bun.w / 2 - 1, h * 0.35, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Head
+  ctx.fillStyle = C.bunFur;
+  ctx.beginPath();
+  ctx.arc(x + bun.w / 2, y - h * 0.78, 11, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ears
+  const earTilt = air ? 0.15 : 0;
+  // left ear
+  ctx.fillStyle = C.bunFur;
+  ctx.save();
+  ctx.translate(x + bun.w / 2 - 5, y - h * 0.78 - 10);
+  ctx.rotate(-0.15 - earTilt);
+  ctx.beginPath();
+  ctx.ellipse(0, -8, 3.5, 9, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = C.bunEar;
+  ctx.beginPath();
+  ctx.ellipse(0, -8, 1.8, 6.5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+  // right ear
+  ctx.fillStyle = C.bunFur;
+  ctx.save();
+  ctx.translate(x + bun.w / 2 + 5, y - h * 0.78 - 10);
+  ctx.rotate(0.15 + earTilt);
+  ctx.beginPath();
+  ctx.ellipse(0, -8, 3.5, 9, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = C.bunEar;
+  ctx.beginPath();
+  ctx.ellipse(0, -8, 1.8, 6.5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Eye
+  if (!bun.dead) {
+    ctx.fillStyle = '#1a0a00';
+    ctx.beginPath();
+    ctx.arc(x + bun.w / 2 + 5, y - h * 0.8, 2.2, 0, Math.PI * 2);
+    ctx.fill();
+    // shine
+    ctx.fillStyle = C.white;
+    ctx.beginPath();
+    ctx.arc(x + bun.w / 2 + 6, y - h * 0.82, 0.8, 0, Math.PI * 2);
+    ctx.fill();
+    // Nose
+    ctx.fillStyle = C.bunNose;
+    ctx.beginPath();
+    ctx.arc(x + bun.w / 2 + 9, y - h * 0.74, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  } else {
+    // X eyes when dead
+    ctx.strokeStyle = '#ff4444';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x + bun.w / 2 + 3, y - h * 0.83); ctx.lineTo(x + bun.w / 2 + 7, y - h * 0.77); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x + bun.w / 2 + 7, y - h * 0.83); ctx.lineTo(x + bun.w / 2 + 3, y - h * 0.77); ctx.stroke();
+  }
+}
+
+function drawHUD() {
+  ctx.font = '700 13px "Courier New", monospace';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = C.muted;
+  ctx.fillText(`HI  ${String(hi).padStart(5, '0')}`, W - 16, 22);
+  ctx.fillStyle = C.cyan;
+  ctx.fillText(`${String(score).padStart(5, '0')}`, W - 16, 40);
+}
+
+function drawOverlay(title, titleColor, sub, hint) {
+  ctx.fillStyle = 'rgba(7,8,15,0.72)';
+  ctx.fillRect(0, 0, W, H);
+
+  // Panel
+  ctx.fillStyle = 'rgba(13,15,28,0.95)';
+  const pw = 320, ph = 110, px = (W - pw) / 2, py = (H - ph) / 2;
+  ctx.beginPath();
+  ctx.roundRect(px, py, pw, ph, 12);
+  ctx.fill();
+  ctx.strokeStyle = titleColor;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.roundRect(px, py, pw, ph, 12);
+  ctx.stroke();
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = titleColor;
+  ctx.font = 'bold 22px "Courier New", monospace';
+  ctx.fillText(title, W / 2, py + 38);
+
+  ctx.fillStyle = C.white;
+  ctx.font = '14px "Courier New", monospace';
+  ctx.fillText(sub, W / 2, py + 64);
+
+  ctx.fillStyle = C.muted;
+  ctx.font = '11px "Courier New", monospace';
+  ctx.fillText(hint, W / 2, py + 90);
+}
+
+// ── Main loop ─────────────────────────────────────────────────
+function draw() {
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  drawStars();
+  drawGround();
+  obstacles.forEach(o => drawBush(o));
+  drawBunny();
+  drawHUD();
+
+  if (state === 'start') {
+    drawOverlay('🐇  BUNNY RUN', C.cyan,
+      'Jump over the bushes!',
+      'SPACE / ↑ / TAP  to start');
+  }
+  if (state === 'dead') {
+    drawOverlay('GAME OVER', C.magenta,
+      `Score: ${score}   Best: ${hi}`,
+      'SPACE / TAP  to restart');
+  }
+}
+
+function loop() {
+  if (state === 'running') update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+</script>
+  <script src="js/i18n.js"></script>
+  <script src="js/consent.js"></script>
+</body>
+</html>
