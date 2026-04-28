@@ -80,9 +80,9 @@
       <li><a href="index.html" data-i18n="nav_home">Home</a></li>
       <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
       <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
-      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
-      <li><a href="blog.html" class="active" data-i18n="nav_insights">Insights</a></li>
-      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies" data-i18n="footer_cs_lnk">Case Studies</a></li>
+      <li><a href="blog.html" class="active" data-i18n="nav_insights" data-i18n="footer_insights_lnk" data-i18n="blog_hero_eyebrow">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about" data-i18n="footer_about_lnk">About</a></li>
       <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
@@ -101,7 +101,7 @@
   <div class="container">
     <p class="eyebrow fade-up">Insights</p>
     <h1 class="fade-up" data-i18n-html="blog_h1">What we're <span class="grad-text">thinking about</span></h1>
-    <p class="lead fade-up">Technical deep-dives, architecture decisions, and lessons learned from 15+ years of enterprise delivery across Norway and Europe.</p>
+    <p class="lead fade-up" data-i18n="blog_hero_lead">Technical deep-dives, architecture decisions, and lessons learned from 15+ years of enterprise delivery across Norway and Europe.</p>
   </div>
 </section>
 
@@ -121,7 +121,7 @@
           </div>
           <h3>Oracle ExaDB 19c to 26ai: What Actually Works in Production</h3>
           <p>Most migration guides skip the hard parts. Here's what we learned running Data Pump export pipelines with parallel streams, OCI Object Storage staging, and automated cutover for a national-scale database — without a maintenance window.</p>
-          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more" data-i18n="blog_read_hashnode">Read on Hashnode →</a>
         </div>
       </div>
 
@@ -135,7 +135,7 @@
           </div>
           <h3>Building a Multi-Model AI Router: Claude vs GPT-4 vs Gemini</h3>
           <p>When you're routing 100+ daily tasks across Claude Sonnet, GPT-4.1, and Gemini 2.5 Flash, the routing logic is everything. We built Nexus — here's the architecture, the tradeoffs, and why keyword routing beats embeddings for most production workloads.</p>
-          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more" data-i18n="blog_read_hashnode">Read on Hashnode →</a>
         </div>
       </div>
 
@@ -149,7 +149,7 @@
           </div>
           <h3>D365 F&O at Scale: Lessons from One of Europe's Largest Implementations</h3>
           <p>The Alfa Laval programme touched 8 countries, 1000s of users, and every major financial process. What the textbooks don't tell you about phased ERP rollouts, parallel-run risk, and X++ at enterprise scale.</p>
-          <a href="https://swapnakallu.netlify.app" target="_blank" rel="noopener" class="read-more">Read more →</a>
+          <a href="https://swapnakallu.netlify.app" target="_blank" rel="noopener" class="read-more" data-i18n="blog_read_more">Read more →</a>
         </div>
       </div>
 
@@ -163,7 +163,7 @@
           </div>
           <h3>Medallion Architecture on Azure for Norwegian Healthcare</h3>
           <p>FHIR compliance, GDPR, and sub-second query performance — building a clinical data lakehouse that satisfies Norwegian health data regulation without compromising analyst experience.</p>
-          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more" data-i18n="blog_read_hashnode">Read on Hashnode →</a>
         </div>
       </div>
 
@@ -177,7 +177,7 @@
           </div>
           <h3>Azure DaaS: Building a Data Platform Landing Zone from Scratch</h3>
           <p>Landing zones are usually over-engineered or under-specified. Here's how we built the DIPS DaaS platform — Terraform modules, ArgoCD GitOps, AKS, and identity — as a reusable template for Norwegian enterprises.</p>
-          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more">Read on Hashnode →</a>
+          <a href="https://anilkallu.hashnode.dev" target="_blank" rel="noopener" class="read-more" data-i18n="blog_read_hashnode">Read on Hashnode →</a>
         </div>
       </div>
 
@@ -187,7 +187,7 @@
           <div class="article-meta">
             <span class="badge badge-grad" style="font-size:0.68rem;">Coming soon</span>
           </div>
-          <h3 style="color:var(--text-secondary);">More insights on the way</h3>
+          <h3 style="color:var(--text-secondary);" data-i18n="blog_more_h3">More insights on the way</h3>
           <p>We publish when we have something worth saying — not to hit a content calendar. Subscribe or follow us on LinkedIn to get notified.</p>
           <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener" class="read-more">Follow on LinkedIn →</a>
         </div>
@@ -203,10 +203,10 @@
   <div class="container">
     <div class="cta-band fade-up">
       <div class="cta-band-halo"></div>
-      <p class="eyebrow">Work with us</p>
-      <h2>Ideas are worthless. <span class="grad-text">Execution is everything.</span></h2>
-      <p>If any of these problems sound familiar — let's talk about what we could build together.</p>
-      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+      <p class="eyebrow" data-i18n="blog_work_with_us">Work with us</p>
+      <h2>Ideas are worthless. <span class="grad-text" data-i18n="blog_tagline">Execution is everything.</span></h2>
+      <p data-i18n="blog_cta_p">If any of these problems sound familiar — let's talk about what we could build together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg" data-i18n="blog_cta_btn">Start a conversation →</a>
     </div>
   </div>
 </section>
@@ -243,10 +243,10 @@
       <div class="footer-col">
         <h5 data-i18n="footer_services">Services</h5>
         <ul>
-          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_products_lnk">Products</a></li>
           <li><a href="what-we-do.html">AI & ML</a></li>
-          <li><a href="what-we-do.html">Cloud</a></li>
-          <li><a href="what-we-do.html">Electronics</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_cloud_lnk">Cloud</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_elec_lnk">Electronics</a></li>
         </ul>
       </div>
       <div class="footer-col">

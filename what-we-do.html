@@ -46,9 +46,9 @@
       <li><a href="index.html" data-i18n="nav_home">Home</a></li>
       <li><a href="what-we-do.html" class="active" data-i18n="nav_what_we_do">What We Do</a></li>
       <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
-      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
-      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
-      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies" data-i18n="footer_cs_lnk">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights" data-i18n="footer_insights_lnk">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about" data-i18n="footer_about_lnk">About</a></li>
       <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
@@ -142,15 +142,15 @@
           </div>
           <div style="padding:1rem; background:var(--ink-3); border-radius:var(--radius-md);">
             <h4 style="font-size:0.9rem; margin-bottom:0.4rem;">RAG & Search</h4>
-            <p style="font-size:0.82rem;">Semantic search over your private data corpus.</p>
+            <p style="font-size:0.82rem;" data-i18n="ai_rag_p">Semantic search over your private data corpus.</p>
           </div>
           <div style="padding:1rem; background:var(--ink-3); border-radius:var(--radius-md);">
             <h4 style="font-size:0.9rem; margin-bottom:0.4rem;">MLOps</h4>
-            <p style="font-size:0.82rem;">Model training, versioning, and monitoring in production.</p>
+            <p style="font-size:0.82rem;" data-i18n="ai_mlops_p">Model training, versioning, and monitoring in production.</p>
           </div>
           <div style="padding:1rem; background:var(--ink-3); border-radius:var(--radius-md);">
             <h4 style="font-size:0.9rem; margin-bottom:0.4rem;">Agents & Automation</h4>
-            <p style="font-size:0.82rem;">Autonomous agents that handle complex multi-step tasks.</p>
+            <p style="font-size:0.82rem;" data-i18n="ai_agents_p">Autonomous agents that handle complex multi-step tasks.</p>
           </div>
         </div>
       </div>
@@ -255,8 +255,8 @@
         <p class="partner-tagline" data-i18n="decisions_tagline">No-code process automation for regulated industries</p>
         <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.5rem;" data-i18n="decisions_p">A drag-and-drop workflow and rules engine built for complex, regulated processes — medical claims, insurance underwriting, mortgage approvals, and ERP automation. Replace brittle BPMN scripts with visual flows your operations team can own.</p>
         <div class="partner-features">
-          <div class="partner-feature"><i data-lucide="git-branch"></i><span>Visual workflow designer — no code required</span></div>
-          <div class="partner-feature"><i data-lucide="sliders"></i><span>Business rules engine with versioned logic</span></div>
+          <div class="partner-feature"><i data-lucide="git-branch"></i><span data-i18n="decisions_feat1">Visual workflow designer — no code required</span></div>
+          <div class="partner-feature"><i data-lucide="sliders"></i><span data-i18n="decisions_feat2">Business rules engine with versioned logic</span></div>
           <div class="partner-feature"><i data-lucide="plug"></i><span>Native SAP, Salesforce & Oracle connectors</span></div>
           <div class="partner-feature"><i data-lucide="users"></i><span>35+ certified Decisions developers</span></div>
         </div>
@@ -279,7 +279,7 @@
         <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.5rem;" data-i18n="pds_p">An AI-powered CCM platform that generates, manages, and delivers customer communications across 108 languages and every channel. Cuts document production costs by 40%+ while staying fully GDPR-compliant — trusted by Xerox, Gallagher, DKV, and Jack Henry.</p>
         <div class="partner-features">
           <div class="partner-feature"><i data-lucide="languages"></i><span>108 languages, AI-powered translation</span></div>
-          <div class="partner-feature"><i data-lucide="send"></i><span>Omnichannel: print, email, SMS, portal</span></div>
+          <div class="partner-feature"><i data-lucide="send"></i><span data-i18n="pds_feat2">Omnichannel: print, email, SMS, portal</span></div>
           <div class="partner-feature"><i data-lucide="shield-check"></i><span>GDPR-compliant by design</span></div>
           <div class="partner-feature"><i data-lucide="trending-down"></i><span>40%+ reduction in document production costs</span></div>
         </div>
@@ -337,19 +337,19 @@
           <li><a href="about.html">About</a></li>
           <li><a href="case-studies.html">Case Studies</a></li>
           <li><a href="blog.html">Insights</a></li>
-          <li><a href="about.html#team">Team</a></li>
-          <li><a href="about.html#principles">Principles</a></li>
+          <li><a href="about.html#team" data-i18n="footer_team_lnk">Team</a></li>
+          <li><a href="about.html#principles" data-i18n="footer_principles_lnk">Principles</a></li>
           <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5 data-i18n="footer_services">Services</h5>
         <ul>
-          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_products_lnk">Products</a></li>
           <li><a href="what-we-do.html">AI & ML</a></li>
-          <li><a href="what-we-do.html">Cloud</a></li>
-          <li><a href="what-we-do.html">Electronics</a></li>
-          <li><a href="what-we-do.html#partners">Partner Platforms</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_cloud_lnk">Cloud</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_elec_lnk">Electronics</a></li>
+          <li><a href="what-we-do.html#partners" data-i18n="footer_partner_lnk">Partner Platforms</a></li>
         </ul>
       </div>
       <div class="footer-col">

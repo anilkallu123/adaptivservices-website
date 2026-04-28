@@ -45,9 +45,9 @@
       <li><a href="index.html" data-i18n="nav_home">Home</a></li>
       <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
       <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
-      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
-      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
-      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies" data-i18n="footer_cs_lnk">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights" data-i18n="footer_insights_lnk">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about" data-i18n="footer_about_lnk">About</a></li>
       <li><a href="contact.html" class="nav-cta active" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
@@ -64,9 +64,9 @@
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="container">
-    <p class="eyebrow fade-up">Contact us</p>
+    <p class="eyebrow fade-up" data-i18n="contact_hero_eyebrow">Contact us</p>
     <h1 class="fade-up" data-i18n-html="contact_h1">Let's start a <span class="grad-text">conversation</span></h1>
-    <p class="lead fade-up">Tell us about your project, your problem, or your ambition. We'll respond within one business day — and if we're not the right fit, we'll say so honestly.</p>
+    <p class="lead fade-up" data-i18n="contact_hero_lead">Tell us about your project, your problem, or your ambition. We'll respond within one business day — and if we're not the right fit, we'll say so honestly.</p>
   </div>
 </section>
 
@@ -78,8 +78,8 @@
 
       <!-- Form -->
       <div class="contact-form fade-up">
-        <h3 style="margin-bottom:0.5rem;">Send us a message</h3>
-        <p style="font-size:0.88rem; margin-bottom:2rem;">We typically respond within one business day.</p>
+        <h3 style="margin-bottom:0.5rem;" data-i18n="contact_send_h3">Send us a message</h3>
+        <p style="font-size:0.88rem; margin-bottom:2rem;" data-i18n="contact_send_p">We typically respond within one business day.</p>
         <form action="https://api.web3forms.com/submit" method="POST" onsubmit="handleSubmit(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
           <input type="hidden" name="subject" value="New enquiry — Adaptiv AS"/>
@@ -87,7 +87,7 @@
           <input type="hidden" name="redirect" value="false"/>
           <div class="form-row">
             <div class="form-group">
-              <label for="name">Your name *</label>
+              <label for="name" data-i18n="contact_name_lbl">Your name *</label>
               <input type="text" id="name" placeholder="Ola Nordmann" required/>
             </div>
             <div class="form-group">
@@ -96,11 +96,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="email">Email address *</label>
+            <label for="email" data-i18n="contact_email_lbl">Email address *</label>
             <input type="email" id="email" placeholder="ola@company.no" required/>
           </div>
           <div class="form-group">
-            <label for="topic">What's this about?</label>
+            <label for="topic" data-i18n="contact_topic_lbl">What's this about?</label>
             <select id="topic">
               <option value="">Select a topic</option>
               <option>Product development</option>
@@ -114,10 +114,10 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="message">Tell us more *</label>
+            <label for="message" data-i18n="contact_msg_lbl">Tell us more *</label>
             <textarea id="message" placeholder="Describe your project, challenge, or ambition. The more detail the better — we'll make the first meeting count." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send message →</button>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;" data-i18n="contact_send_btn">Send message →</button>
         </form>
         <div id="form-success" style="display:none; margin-top:1.5rem; padding:1.25rem; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.25); border-radius:var(--radius-md); color:var(--cyan); font-size:0.9rem;">
           Message sent — we'll be in touch within one business day.
@@ -127,7 +127,7 @@
       <!-- Contact info -->
       <div class="fade-up">
         <div style="margin-bottom:2.5rem;">
-          <p class="eyebrow">Direct contact</p>
+          <p class="eyebrow" data-i18n="contact_direct">Direct contact</p>
           <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
             <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
               <div style="width:40px; height:40px; border-radius:10px; background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">✉️</div>
@@ -140,7 +140,7 @@
               <div style="width:40px; height:40px; border-radius:10px; background:rgba(123,79,255,0.1); border:1px solid rgba(123,79,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📅</div>
               <div style="flex:1;">
                 <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Book a call</div>
-                <a href="https://calendly.com/anilkallu/30min" target="_blank" rel="noopener" style="color:var(--text-primary); font-weight:500;">30-min discovery call →</a>
+                <a href="https://calendly.com/anilkallu/30min" target="_blank" rel="noopener" style="color:var(--text-primary); font-weight:500;" data-i18n="contact_book_call">30-min discovery call →</a>
               </div>
             </div>
             <div class="card" style="padding:1.25rem; display:flex; align-items:center; gap:1rem;">
@@ -161,27 +161,27 @@
         </div>
 
         <div>
-          <p class="eyebrow">What to expect</p>
+          <p class="eyebrow" data-i18n="contact_expect">What to expect</p>
           <div class="process-steps" style="margin-top:1rem;">
             <div class="process-step">
               <div class="process-step-num">01</div>
               <div class="process-step-body">
-                <h4>We respond within 1 day</h4>
-                <p style="font-size:0.88rem;">Always a real engineer, never a sales script.</p>
+                <h4 data-i18n="contact_step1_h4">We respond within 1 day</h4>
+                <p style="font-size:0.88rem;" data-i18n="contact_step1_p">Always a real engineer, never a sales script.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="process-step-num">02</div>
               <div class="process-step-body">
-                <h4>30-minute discovery call</h4>
-                <p style="font-size:0.88rem;">We listen more than we talk. No pitch deck.</p>
+                <h4 data-i18n="contact_step2_h4">30-minute discovery call</h4>
+                <p style="font-size:0.88rem;" data-i18n="contact_step2_p">We listen more than we talk. No pitch deck.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="process-step-num">03</div>
               <div class="process-step-body">
-                <h4>Honest proposal or referral</h4>
-                <p style="font-size:0.88rem;">If we're the right fit — we'll say so and how. If not — we'll point you somewhere better.</p>
+                <h4 data-i18n="contact_step3_h4">Honest proposal or referral</h4>
+                <p style="font-size:0.88rem;" data-i18n="contact_step3_p">If we're the right fit — we'll say so and how. If not — we'll point you somewhere better.</p>
               </div>
             </div>
           </div>
@@ -217,18 +217,18 @@
           <li><a href="about.html">About</a></li>
           <li><a href="case-studies.html">Case Studies</a></li>
           <li><a href="blog.html">Insights</a></li>
-          <li><a href="about.html#team">Team</a></li>
-          <li><a href="about.html#principles">Principles</a></li>
+          <li><a href="about.html#team" data-i18n="footer_team_lnk">Team</a></li>
+          <li><a href="about.html#principles" data-i18n="footer_principles_lnk">Principles</a></li>
           <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5 data-i18n="footer_services">Services</h5>
         <ul>
-          <li><a href="what-we-do.html">Products</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_products_lnk">Products</a></li>
           <li><a href="what-we-do.html">AI & ML</a></li>
-          <li><a href="what-we-do.html">Cloud</a></li>
-          <li><a href="what-we-do.html">Electronics</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_cloud_lnk">Cloud</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_elec_lnk">Electronics</a></li>
         </ul>
       </div>
       <div class="footer-col">
