@@ -192,6 +192,15 @@
         </a>
         <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
+          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletter-msg"></div>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
@@ -233,5 +242,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
+  <script src="js/consent.js"></script>
 </body>
 </html>
