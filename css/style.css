@@ -455,6 +455,28 @@ p { color: var(--text-secondary); line-height: 1.75; }
   margin-bottom: 3rem;
 }
 .footer-brand p { font-size: 0.9rem; margin-top: 1rem; max-width: 280px; }
+.footer-coords {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+}
+.footer-coords-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  flex-shrink: 0;
+}
+.footer-built {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
 .footer-col h5 {
   font-family: var(--font-mono);
   font-size: 0.72rem;
