@@ -43,6 +43,7 @@
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -128,32 +129,32 @@
     </div>
     <div class="grid-3">
       <div class="card fade-up">
-        <div class="card-icon">🚀</div>
+        <div class="card-icon"><i data-lucide="sparkles"></i></div>
         <h3>Products</h3>
         <p>Opinionated software products designed around real workflows — not feature lists. We ship, we iterate, we own the outcome.</p>
       </div>
       <div class="card fade-up">
-        <div class="card-icon">🧠</div>
+        <div class="card-icon"><i data-lucide="bot"></i></div>
         <h3>AI & Machine Learning</h3>
         <p>From LLM integrations to bespoke ML pipelines — practical AI that makes operations smarter, not just flashier.</p>
       </div>
       <div class="card fade-up">
-        <div class="card-icon">☁️</div>
+        <div class="card-icon"><i data-lucide="cloud"></i></div>
         <h3>Cloud & Infrastructure</h3>
         <p>Azure, OCI, hybrid architectures. We design platforms that scale without drama and cost without surprises.</p>
       </div>
       <div class="card fade-up">
-        <div class="card-icon">🔩</div>
+        <div class="card-icon"><i data-lucide="cpu"></i></div>
         <h3>Custom Electronics</h3>
         <p>From concept through prototype to production — hardware that connects the physical and digital worlds.</p>
       </div>
       <div class="card fade-up">
-        <div class="card-icon">👥</div>
+        <div class="card-icon"><i data-lucide="users"></i></div>
         <h3>Talent & Staffing</h3>
         <p>Senior engineers and architects on demand. No CVs, no wasted time — the right person, ready to contribute from day one.</p>
       </div>
       <div class="card fade-up">
-        <div class="card-icon">🔐</div>
+        <div class="card-icon"><i data-lucide="shield-check"></i></div>
         <h3>Security</h3>
         <p>Security that is designed in, not bolted on. Threat modelling, compliance, and incident response for regulated industries.</p>
       </div>
@@ -168,22 +169,22 @@
   <div class="container">
     <div class="feature-strip fade-up">
       <div class="feature-strip-item">
-        <div class="icon">⚡</div>
+        <div class="icon"><i data-lucide="zap"></i></div>
         <h4>Move fast</h4>
         <p>Working prototypes in weeks, not quarters</p>
       </div>
       <div class="feature-strip-item">
-        <div class="icon">🎯</div>
+        <div class="icon"><i data-lucide="target"></i></div>
         <h4>Stay focused</h4>
         <p>Every decision tied to a real business outcome</p>
       </div>
       <div class="feature-strip-item">
-        <div class="icon">🔭</div>
+        <div class="icon"><i data-lucide="telescope"></i></div>
         <h4>Think long</h4>
         <p>Architectures that survive the next five years</p>
       </div>
       <div class="feature-strip-item">
-        <div class="icon">🤝</div>
+        <div class="icon"><i data-lucide="handshake"></i></div>
         <h4>Own it together</h4>
         <p>Partners, not vendors — we share the risk</p>
       </div>
@@ -203,32 +204,32 @@
     </div>
     <div class="grid-3 fade-up">
       <div class="sector-card">
-        <div class="sector-icon">🏥</div>
+        <div class="sector-icon"><i data-lucide="activity"></i></div>
         <h3>Health & Life Sciences</h3>
         <p>Clinical systems, patient data platforms, and AI-assisted diagnostics for Norwegian and Nordic healthcare.</p>
       </div>
       <div class="sector-card">
-        <div class="sector-icon">⚡</div>
+        <div class="sector-icon"><i data-lucide="zap"></i></div>
         <h3>Energy & Utilities</h3>
         <p>Grid intelligence, offshore systems, and clean energy infrastructure management at scale.</p>
       </div>
       <div class="sector-card">
-        <div class="sector-icon">🏛️</div>
+        <div class="sector-icon"><i data-lucide="landmark"></i></div>
         <h3>Public Sector</h3>
         <p>Digital services that work for citizens — built to the security and compliance standards government demands.</p>
       </div>
       <div class="sector-card">
-        <div class="sector-icon">🏭</div>
+        <div class="sector-icon"><i data-lucide="factory"></i></div>
         <h3>Industrial & Manufacturing</h3>
         <p>IoT, edge compute, and process automation for Norway's industrial backbone.</p>
       </div>
       <div class="sector-card">
-        <div class="sector-icon">🚢</div>
+        <div class="sector-icon"><i data-lucide="ship"></i></div>
         <h3>Maritime & Logistics</h3>
         <p>Fleet intelligence, port operations, and supply chain visibility for a connected maritime economy.</p>
       </div>
       <div class="sector-card">
-        <div class="sector-icon">💡</div>
+        <div class="sector-icon"><i data-lucide="lightbulb"></i></div>
         <h3>Your sector</h3>
         <p>We haven't listed yours? Good. That usually means the opportunity is biggest. Let's talk.</p>
       </div>
@@ -336,10 +337,10 @@
 </footer>
 
 <script>
+lucide.createIcons();
 function toggleNav() {
   document.querySelector('.nav-links').classList.toggle('open');
 }
-// Fade-up on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });

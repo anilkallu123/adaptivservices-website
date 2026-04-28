@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -88,32 +89,32 @@
       </div>
       <div class="grid-3 fade-up">
         <div class="card">
-          <div class="card-icon">🎯</div>
+          <div class="card-icon"><i data-lucide="target"></i></div>
           <h3>Outcomes over outputs</h3>
           <p>We measure success by what changed in your business, not by what we delivered into a Jira board. If the outcome didn't land, the project didn't succeed — regardless of what was shipped.</p>
         </div>
         <div class="card">
-          <div class="card-icon">🔭</div>
+          <div class="card-icon"><i data-lucide="telescope"></i></div>
           <h3>Think in years, ship in weeks</h3>
           <p>Architecture decisions are 5-year bets. Deployment cadence is weekly. We hold both simultaneously — and don't let short-term pressure compromise long-term integrity.</p>
         </div>
         <div class="card">
-          <div class="card-icon">🤝</div>
+          <div class="card-icon"><i data-lucide="handshake"></i></div>
           <h3>Share the risk</h3>
           <p>We take equity in ambitious projects. We offer outcome-based fees. We don't hide behind fixed-scope contracts when the real problem is still being discovered.</p>
         </div>
         <div class="card">
-          <div class="card-icon">🔍</div>
+          <div class="card-icon"><i data-lucide="search"></i></div>
           <h3>Honest by default</h3>
           <p>We tell clients when their idea won't work, when a cheaper approach exists, and when we are not the right fit. The short-term discomfort is worth the long-term trust.</p>
         </div>
         <div class="card">
-          <div class="card-icon">⚡</div>
+          <div class="card-icon"><i data-lucide="zap"></i></div>
           <h3>Bias to action</h3>
           <p>A working prototype beats a perfect specification. We default to building the thing, learning from it, and iterating — not planning for an imaginary future state.</p>
         </div>
         <div class="card">
-          <div class="card-icon">🌍</div>
+          <div class="card-icon"><i data-lucide="globe"></i></div>
           <h3>Norwegian-built, globally-capable</h3>
           <p>We are proud to be a Norwegian company. We build to Norwegian standards, compliance requirements, and cultural norms — but our ambition is not limited by borders.</p>
         </div>
@@ -345,6 +346,7 @@
 </footer>
 
 <script>
+lucide.createIcons();
 function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });

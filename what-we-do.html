@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -178,7 +179,7 @@
     </div>
     <div class="grid-3 fade-up">
       <div class="card">
-        <div class="card-icon">🔩</div>
+        <div class="card-icon"><i data-lucide="cpu"></i></div>
         <h3>Custom Electronics</h3>
         <p style="margin-bottom:1rem;">Concept through prototype to production. Embedded systems, IoT devices, sensor platforms, and industrial control hardware designed and manufactured to spec.</p>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
@@ -188,7 +189,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-icon">👥</div>
+        <div class="card-icon"><i data-lucide="users"></i></div>
         <h3>Talent & Staffing</h3>
         <p style="margin-bottom:1rem;">Senior engineers and architects on demand. We don't do bulk CV matching — we match on depth of domain expertise and immediate contribution potential.</p>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
@@ -198,7 +199,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-icon">🔐</div>
+        <div class="card-icon"><i data-lucide="shield-check"></i></div>
         <h3>Security</h3>
         <p style="margin-bottom:1rem;">Security designed in, not bolted on. Threat modelling, penetration testing, compliance (NIS2, GDPR, ISO 27001), and incident response for regulated industries.</p>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
@@ -272,6 +273,7 @@
 </footer>
 
 <script>
+lucide.createIcons();
 function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
