@@ -442,6 +442,63 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .cta-band h2 { margin-bottom: 1rem; }
 .cta-band p { font-size: 1.05rem; max-width: 480px; margin: 0 auto 2rem; }
 
+/* ── Partner Cards ── */
+.partner-card {
+  background: var(--ink-2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+.partner-card:hover { border-color: rgba(var(--cyan-rgb, 99,235,218), 0.3); }
+.partner-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.partner-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: rgba(99,235,218,0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+.partner-by {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.partner-by strong { color: var(--text-secondary); }
+.partner-product {
+  font-size: 1.35rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+}
+.partner-tagline {
+  font-size: 0.85rem;
+  color: var(--cyan);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.partner-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.partner-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.partner-feature svg { width: 15px; height: 15px; stroke: var(--cyan); flex-shrink: 0; }
+
 /* ── Footer ── */
 .footer {
   background: var(--ink-1);
