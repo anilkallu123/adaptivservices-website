@@ -2,7 +2,7 @@
  * Adaptiv AS — Cookie Consent + Analytics Loader
  * Replace POSTHOG_KEY with your project key from app.posthog.com (EU cloud: eu.posthog.com)
  */
-const POSTHOG_KEY  = '';          // e.g. 'phc_XXXXXXXXXXXXXXXXXXXX'
+const POSTHOG_KEY  = 'phc_nZeQhvSVDzQzmDmL6QauMKCyugAxcTduevy65pQWJBZw';
 const POSTHOG_HOST = 'https://eu.i.posthog.com';
 
 const CONSENT_KEY = 'adaptiv_cookie_consent';
