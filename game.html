@@ -538,7 +538,8 @@ let hi = parseInt(localStorage.getItem('vs_hi') || '0');
 let frame = 0, shootCooldown = 0, waveTimer = 0;
 
 // ── Entities ──────────────────────────────────
-let player, bullets, enemyBullets, enemies, particles, powerups, stars;
+let player = {x:80,y:H/2,w:46,h:28,speed:4.5,shield:0,rapid:0,triple:0,flash:0};
+let bullets = [], enemyBullets = [], enemies = [], particles = [], powerups = [], stars = [];
 
 function initStars() {
   stars = Array.from({length: 120}, () => ({
