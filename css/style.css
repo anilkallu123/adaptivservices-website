@@ -442,6 +442,44 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .cta-band h2 { margin-bottom: 1rem; }
 .cta-band p { font-size: 1.05rem; max-width: 480px; margin: 0 auto 2rem; }
 
+/* ── Language Toggle ── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.75rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 0.25rem 0.4rem;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+.lang-btn:hover { color: var(--text-primary); }
+.lang-btn.active {
+  color: var(--cyan);
+  background: rgba(99,235,218,0.1);
+}
+.lang-sep {
+  color: rgba(255,255,255,0.15);
+  font-size: 0.65rem;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .lang-toggle { margin-left: 0; }
+}
+
 /* ── Cookie Consent Banner ── */
 #cookie-banner {
   position: fixed;

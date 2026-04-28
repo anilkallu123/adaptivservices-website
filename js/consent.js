@@ -16,17 +16,24 @@ function loadPostHog() {
 
 /* ── Inject cookie banner ── */
 function injectBanner() {
+  const lang = localStorage.getItem('adaptiv_lang') || 'en';
+  const isNo = lang === 'no';
+  const title   = isNo ? 'Informasjonskapsel-innstillinger' : 'Cookie preferences';
+  const body    = isNo ? 'Vi bruker analyse-informasjonskapsler for å forstå hvordan besøkende bruker dette nettstedet og forbedre det. Du kan godta eller avslå.' : 'We use analytics cookies to understand how visitors use this site and improve it. You can accept or decline.';
+  const decline = isNo ? 'Avslå'  : 'Decline';
+  const accept  = isNo ? 'Godta'  : 'Accept';
+
   const el = document.createElement('div');
   el.id = 'cookie-banner';
   el.innerHTML = `
     <div class="cookie-inner">
       <div class="cookie-text">
-        <strong>Cookie preferences</strong>
-        <span>We use analytics cookies to understand how visitors use this site and improve it. You can accept or decline.</span>
+        <strong>${title}</strong>
+        <span>${body}</span>
       </div>
       <div class="cookie-actions">
-        <button class="cookie-btn cookie-decline" onclick="setConsent('declined')">Decline</button>
-        <button class="cookie-btn cookie-accept" onclick="setConsent('accepted')">Accept</button>
+        <button class="cookie-btn cookie-decline" onclick="setConsent('declined')">${decline}</button>
+        <button class="cookie-btn cookie-accept" onclick="setConsent('accepted')">${accept}</button>
       </div>
     </div>`;
   document.body.appendChild(el);

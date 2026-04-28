@@ -42,17 +42,22 @@
       <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="what-we-do.html">What We Do</a></li>
-      <li><a href="sectors.html">Sectors</a></li>
-      <li><a href="case-studies.html">Case Studies</a></li>
-      <li><a href="blog.html">Insights</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="nav-cta active">Get in touch</a></li>
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
+      <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" class="nav-cta active" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    </div>
   </div>
 </nav>
 
@@ -60,7 +65,7 @@
   <div class="page-hero-bg"></div>
   <div class="container">
     <p class="eyebrow fade-up">Contact us</p>
-    <h1 class="fade-up">Let's start a <span class="grad-text">conversation</span></h1>
+    <h1 class="fade-up" data-i18n-html="contact_h1">Let's start a <span class="grad-text">conversation</span></h1>
     <p class="lead fade-up">Tell us about your project, your problem, or your ambition. We'll respond within one business day — and if we're not the right fit, we'll say so honestly.</p>
   </div>
 </section>
@@ -86,7 +91,7 @@
               <input type="text" id="name" placeholder="Ola Nordmann" required/>
             </div>
             <div class="form-group">
-              <label for="company">Company</label>
+              <label for="company" data-i18n="footer_company">Company</label>
               <input type="text" id="company" placeholder="Acme AS"/>
             </div>
           </div>
@@ -194,15 +199,15 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
-        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;" data-i18n="footer_nl_label">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
           <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
-          <button type="submit">Subscribe</button>
+          <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
         </form>
         <div id="newsletter-msg"></div>
       </div>
@@ -214,11 +219,11 @@
           <li><a href="blog.html">Insights</a></li>
           <li><a href="about.html#team">Team</a></li>
           <li><a href="about.html#principles">Principles</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Services</h5>
+        <h5 data-i18n="footer_services">Services</h5>
         <ul>
           <li><a href="what-we-do.html">Products</a></li>
           <li><a href="what-we-do.html">AI & ML</a></li>
@@ -235,7 +240,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span><span class="footer-built">Designed and built in Oslo</span>
+      <span data-i18n="footer_copyright">© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span><span class="footer-built" data-i18n="footer_built">Designed and built in Oslo</span>
     </div>
   </div>
 </footer>
@@ -264,6 +269,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
+  <script src="js/i18n.js"></script>
   <script src="js/consent.js"></script>
 </body>
 </html>

@@ -44,26 +44,31 @@
       <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="what-we-do.html">What We Do</a></li>
-      <li><a href="sectors.html">Sectors</a></li>
-      <li><a href="case-studies.html">Case Studies</a></li>
-      <li><a href="blog.html">Insights</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
+      <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" class="active" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    </div>
   </div>
 </nav>
 
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="container">
-    <p class="eyebrow fade-up">Our story</p>
-    <h1 class="fade-up">Built by engineers<br/><span class="grad-text">for engineers</span></h1>
-    <p class="lead fade-up">Adaptiv AS was founded in Oslo in 2026 by veteran engineers who were tired of watching great opportunities get buried under slow procurement cycles, overcautious consultancies, and underambitious roadmaps.</p>
+    <p class="eyebrow fade-up" data-i18n="about_hero_eyebrow">Our story</p>
+    <h1 class="fade-up" data-i18n-html="about_hero_h1">Built by engineers<br/><span class="grad-text">for engineers</span></h1>
+    <p class="lead fade-up" data-i18n="about_hero_lead">Adaptiv AS was founded in Oslo in 2026 by veteran engineers who were tired of watching great opportunities get buried under slow procurement cycles, overcautious consultancies, and underambitious roadmaps.</p>
   </div>
 </section>
 
@@ -74,11 +79,11 @@
   <div class="container">
     <div class="grid-2" style="gap:4rem; align-items:center; margin-bottom:5rem;">
       <div class="fade-up">
-        <p class="eyebrow">Our thesis</p>
-        <h2>Norway deserves <span class="grad-text">more ambition</span></h2>
-        <p style="margin-bottom:1rem;">Norway has world-class infrastructure, a highly educated workforce, strong public institutions, and capital. What it lacks is enough technology companies willing to take on genuinely hard problems at scale.</p>
-        <p style="margin-bottom:1rem;">Too many Norwegian IT vendors are comfortable with the same body-shopping model: put warm bodies in seats, bill by the hour, deliver mediocre outcomes, renew the contract. We are not that company.</p>
-        <p>We are outcome-driven. We build things that work. We share the risk. And we have the technical depth to execute on ideas that other companies won't take on.</p>
+        <p class="eyebrow" data-i18n="about_thesis_eyebrow">Our thesis</p>
+        <h2 data-i18n-html="about_thesis_h2">Norway deserves <span class="grad-text">more ambition</span></h2>
+        <p style="margin-bottom:1rem;" data-i18n="about_thesis_p1">Norway has world-class infrastructure, a highly educated workforce, strong public institutions, and capital. What it lacks is enough technology companies willing to take on genuinely hard problems at scale.</p>
+        <p style="margin-bottom:1rem;" data-i18n="about_thesis_p2">Too many Norwegian IT vendors are comfortable with the same body-shopping model: put warm bodies in seats, bill by the hour, deliver mediocre outcomes, renew the contract. We are not that company.</p>
+        <p data-i18n="about_thesis_p3">We are outcome-driven. We build things that work. We share the risk. And we have the technical depth to execute on ideas that other companies won't take on.</p>
       </div>
       <div class="fade-up">
         <div style="display:grid; gap:1rem;">
@@ -99,40 +104,40 @@
     <!-- PRINCIPLES -->
     <div id="principles">
       <div class="section-header center fade-up">
-        <p class="eyebrow">How we work</p>
-        <h2>Operating <span class="grad-text">principles</span></h2>
-        <p>These are not values on a wall. They are the rules we actually use to make decisions.</p>
+        <p class="eyebrow" data-i18n="about_principles_eyebrow">How we work</p>
+        <h2 data-i18n-html="about_principles_h2">Operating <span class="grad-text">principles</span></h2>
+        <p data-i18n="about_principles_lead">These are not values on a wall. They are the rules we actually use to make decisions.</p>
       </div>
       <div class="grid-3 fade-up">
         <div class="card">
           <div class="card-icon"><i data-lucide="target"></i></div>
-          <h3>Outcomes over outputs</h3>
-          <p>We measure success by what changed in your business, not by what we delivered into a Jira board. If the outcome didn't land, the project didn't succeed — regardless of what was shipped.</p>
+          <h3 data-i18n="p1_h3">Outcomes over outputs</h3>
+          <p data-i18n="p1_p">We measure success by what changed in your business, not by what we delivered into a Jira board. If the outcome didn't land, the project didn't succeed — regardless of what was shipped.</p>
         </div>
         <div class="card">
           <div class="card-icon"><i data-lucide="telescope"></i></div>
-          <h3>Think in years, ship in weeks</h3>
-          <p>Architecture decisions are 5-year bets. Deployment cadence is weekly. We hold both simultaneously — and don't let short-term pressure compromise long-term integrity.</p>
+          <h3 data-i18n="p2_h3">Think in years, ship in weeks</h3>
+          <p data-i18n="p2_p">Architecture decisions are 5-year bets. Deployment cadence is weekly. We hold both simultaneously — and don't let short-term pressure compromise long-term integrity.</p>
         </div>
         <div class="card">
           <div class="card-icon"><i data-lucide="handshake"></i></div>
-          <h3>Share the risk</h3>
-          <p>We take equity in ambitious projects. We offer outcome-based fees. We don't hide behind fixed-scope contracts when the real problem is still being discovered.</p>
+          <h3 data-i18n="p3_h3">Share the risk</h3>
+          <p data-i18n="p3_p">We take equity in ambitious projects. We offer outcome-based fees. We don't hide behind fixed-scope contracts when the real problem is still being discovered.</p>
         </div>
         <div class="card">
           <div class="card-icon"><i data-lucide="search"></i></div>
-          <h3>Honest by default</h3>
-          <p>We tell clients when their idea won't work, when a cheaper approach exists, and when we are not the right fit. The short-term discomfort is worth the long-term trust.</p>
+          <h3 data-i18n="p4_h3">Honest by default</h3>
+          <p data-i18n="p4_p">We tell clients when their idea won't work, when a cheaper approach exists, and when we are not the right fit. The short-term discomfort is worth the long-term trust.</p>
         </div>
         <div class="card">
           <div class="card-icon"><i data-lucide="zap"></i></div>
-          <h3>Bias to action</h3>
-          <p>A working prototype beats a perfect specification. We default to building the thing, learning from it, and iterating — not planning for an imaginary future state.</p>
+          <h3 data-i18n="p5_h3">Bias to action</h3>
+          <p data-i18n="p5_p">A working prototype beats a perfect specification. We default to building the thing, learning from it, and iterating — not planning for an imaginary future state.</p>
         </div>
         <div class="card">
           <div class="card-icon"><i data-lucide="globe"></i></div>
-          <h3>Norwegian-built, globally-capable</h3>
-          <p>We are proud to be a Norwegian company. We build to Norwegian standards, compliance requirements, and cultural norms — but our ambition is not limited by borders.</p>
+          <h3 data-i18n="p6_h3">Norwegian-built, globally-capable</h3>
+          <p data-i18n="p6_p">We are proud to be a Norwegian company. We build to Norwegian standards, compliance requirements, and cultural norms — but our ambition is not limited by borders.</p>
         </div>
       </div>
     </div>
@@ -142,9 +147,9 @@
     <!-- FOUNDER -->
     <div id="team">
       <div class="section-header center fade-up">
-        <p class="eyebrow">The team</p>
-        <h2>Veteran engineers. <span class="grad-text">Zero ego.</span></h2>
-        <p>We hire people who have shipped things before — and who are hungry to ship things again.</p>
+        <p class="eyebrow" data-i18n="about_team_eyebrow">The team</p>
+        <h2 data-i18n-html="about_team_h2">Veteran engineers. <span class="grad-text">Zero ego.</span></h2>
+        <p data-i18n="about_team_lead">We hire people who have shipped things before — and who are hungry to ship things again.</p>
       </div>
 
       <!-- Founder spotlight -->
@@ -166,7 +171,7 @@
               <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
                 <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                   <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">15+</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Years experience</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;" data-i18n="anil_stat1_lbl">Years experience</div>
                 </div>
                 <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                   <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">30+</div>
@@ -209,15 +214,15 @@
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
               <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                 <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">20+</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Years ERP experience</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;" data-i18n="swapna_stat1_lbl">Years ERP experience</div>
               </div>
               <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                 <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">8</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Countries supported</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;" data-i18n="swapna_stat2_lbl">Countries supported</div>
               </div>
               <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                 <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">10+</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Live system integrations</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;" data-i18n="swapna_stat3_lbl">Live system integrations</div>
               </div>
             </div>
             <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
@@ -255,11 +260,11 @@
               </div>
               <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                 <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">€5M+</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Annual programme value</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;" data-i18n="chandra_stat2_lbl">Annual programme value</div>
               </div>
               <div style="background: var(--ink-3); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
                 <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">20%</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Azure cost reduction</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;" data-i18n="chandra_stat3_lbl">Azure cost reduction</div>
               </div>
             </div>
             <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
@@ -281,7 +286,7 @@
           <div class="team-avatar">👩‍💼</div>
           <div class="team-info">
             <h4>Open role</h4>
-            <div class="role">Head of Product</div>
+            <div class="role" data-i18n="role_hop">Head of Product</div>
             <p>We're looking for a product leader who has taken 0→1 products to market in complex B2B environments. Sound like you?</p>
           </div>
         </div>
@@ -289,15 +294,15 @@
           <div class="team-avatar">👩‍🔬</div>
           <div class="team-info">
             <h4>Open role</h4>
-            <div class="role">AI / ML Lead</div>
+            <div class="role" data-i18n="role_ai">AI / ML Lead</div>
             <p>We need someone who has put real ML systems into production — not just notebooks. FAANG-level thinking, startup-level execution.</p>
           </div>
         </div>
       </div>
 
       <div style="text-align:center;">
-        <p style="font-size:0.9rem; margin-bottom:1rem;">Think you belong here? We're always looking for exceptional engineers.</p>
-        <a href="contact.html" class="btn btn-ghost">Reach out →</a>
+        <p style="font-size:0.9rem; margin-bottom:1rem;" data-i18n="about_join_p">Think you belong here? We're always looking for exceptional engineers.</p>
+        <a href="contact.html" class="btn btn-ghost" data-i18n="about_join_btn">Reach out →</a>
       </div>
     </div>
   </div>
@@ -309,10 +314,10 @@
   <div class="container">
     <div class="cta-band fade-up">
       <div class="cta-band-halo"></div>
-      <p class="eyebrow">Let's build together</p>
-      <h2>Ambitious problems need <span class="grad-text">ambitious partners</span></h2>
-      <p>If you're building something hard and need engineers who have done it before — we should talk.</p>
-      <a href="contact.html" class="btn btn-primary btn-lg">Get in touch →</a>
+      <p class="eyebrow" data-i18n="about_cta_eyebrow">Let's build together</p>
+      <h2 data-i18n-html="about_cta_h2">Ambitious problems need <span class="grad-text">ambitious partners</span></h2>
+      <p data-i18n="about_cta_p">If you're building something hard and need engineers who have done it before — we should talk.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg" data-i18n="about_cta_btn">Get in touch →</a>
     </div>
   </div>
 </section>
@@ -325,31 +330,31 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
-        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;" data-i18n="footer_nl_label">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
           <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
-          <button type="submit">Subscribe</button>
+          <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
         </form>
         <div id="newsletter-msg"></div>
       </div>
       <div class="footer-col">
-        <h5>Company</h5>
+        <h5 data-i18n="footer_company">Company</h5>
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="case-studies.html">Case Studies</a></li>
           <li><a href="blog.html">Insights</a></li>
           <li><a href="about.html#team">Team</a></li>
           <li><a href="about.html#principles">Principles</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Services</h5>
+        <h5 data-i18n="footer_services">Services</h5>
         <ul>
           <li><a href="what-we-do.html">Products</a></li>
           <li><a href="what-we-do.html">AI & ML</a></li>
@@ -366,7 +371,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span><span class="footer-built">Designed and built in Oslo</span>
+      <span data-i18n="footer_copyright">© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span><span class="footer-built" data-i18n="footer_built">Designed and built in Oslo</span>
     </div>
   </div>
 </footer>
@@ -379,6 +384,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
+  <script src="js/i18n.js"></script>
   <script src="js/consent.js"></script>
 </body>
 </html>

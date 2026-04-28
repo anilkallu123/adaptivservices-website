@@ -57,17 +57,22 @@
       <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="what-we-do.html">What We Do</a></li>
-      <li><a href="sectors.html">Sectors</a></li>
-      <li><a href="case-studies.html">Case Studies</a></li>
-      <li><a href="blog.html">Insights</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+      <li><a href="index.html" class="active" data-i18n="nav_home">Home</a></li>
+      <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
+      <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    </div>
   </div>
 </nav>
 
@@ -80,12 +85,12 @@
   </div>
   <div class="container">
     <div class="hero-content">
-      <p class="eyebrow">Built in Norway · For Norway · Est. 2026</p>
-      <h1>Sovereign software<br/>for Norway's hardest<br/><span class="grad-text">digital problems.</span></h1>
-      <p class="lead">We design, build, and operate the products, AI systems, and cloud platforms that public-sector and regulated industries can't buy off the shelf — senior engineers, sovereign-grade delivery, zero-downtime track record.</p>
+      <p class="eyebrow" data-i18n="hero_eyebrow">Built in Norway · For Norway · Est. 2026</p>
+      <h1 data-i18n-html="hero_h1">Sovereign software<br/>for Norway's hardest<br/><span class="grad-text">digital problems.</span></h1>
+      <p class="lead" data-i18n="hero_lead">We design, build, and operate the products, AI systems, and cloud platforms that public-sector and regulated industries can't buy off the shelf — senior engineers, sovereign-grade delivery, zero-downtime track record.</p>
       <div class="hero-actions">
-        <a href="https://calendly.com/anilkallu/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a 30-min discovery call</a>
-        <a href="case-studies.html" class="btn btn-ghost btn-lg">See case studies</a>
+        <a href="https://calendly.com/anilkallu/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg" data-i18n="hero_cta_primary">Book a 30-min discovery call</a>
+        <a href="case-studies.html" class="btn btn-ghost btn-lg" data-i18n="hero_cta_ghost">See case studies</a>
       </div>
       <div class="hero-trust">
         <span>✓ DIFI compliant</span>
@@ -95,26 +100,26 @@
       <div class="hero-stat-row">
         <div class="hero-stat">
           <h3>15+</h3>
-          <p>Years enterprise delivery</p>
+          <p data-i18n="hero_stat1_lbl">Years enterprise delivery</p>
         </div>
         <div class="hero-stat">
           <h3>30+</h3>
-          <p>Zero-downtime migrations</p>
+          <p data-i18n="hero_stat2_lbl">Zero-downtime migrations</p>
         </div>
         <div class="hero-stat">
           <h3>100%</h3>
-          <p>Norwegian-owned</p>
+          <p data-i18n="hero_stat3_lbl">Norwegian-owned</p>
         </div>
         <div class="hero-stat">
           <h3>Oslo</h3>
-          <p>Founded 2026</p>
+          <p data-i18n="hero_stat4_lbl">Founded 2026</p>
         </div>
       </div>
     </div>
   </div>
   <div class="scroll-indicator">
     <div class="scroll-mouse"></div>
-    <span>scroll</span>
+    <span data-i18n="scroll_txt">scroll</span>
   </div>
 </section>
 
@@ -122,7 +127,7 @@
 <section class="trust-strip">
   <div class="container">
     <div class="trust-strip-inner">
-      <span class="trust-strip-label">Delivered for</span>
+      <span class="trust-strip-label" data-i18n="trust_label">Delivered for</span>
       <div class="trust-strip-names">
         <span>Skatteetaten</span>
         <span>HSØ</span>
@@ -131,7 +136,7 @@
         <span>DNB Markets</span>
         <span>Høegh LNG</span>
       </div>
-      <a href="case-studies.html" class="trust-strip-link">See all <i data-lucide="arrow-right"></i></a>
+      <a href="case-studies.html" class="trust-strip-link" data-i18n="trust_see_all">See all <i data-lucide="arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -142,40 +147,40 @@
 <section class="section">
   <div class="container">
     <div class="section-header fade-up">
-      <p class="eyebrow">What we build</p>
-      <h2>Six pillars. <span class="grad-text">Unlimited scope.</span></h2>
-      <p>We don't specialise in one thing. We are builders — and we bring the full stack to every problem we take on.</p>
+      <p class="eyebrow" data-i18n="caps_eyebrow">What we build</p>
+      <h2 data-i18n-html="caps_h2">Six pillars. <span class="grad-text">Unlimited scope.</span></h2>
+      <p data-i18n="caps_lead">We don't specialise in one thing. We are builders — and we bring the full stack to every problem we take on.</p>
     </div>
     <div class="grid-3">
       <div class="card fade-up">
         <div class="card-icon"><i data-lucide="sparkles"></i></div>
-        <h3>Products</h3>
-        <p>Opinionated software products designed around real workflows — not feature lists. We ship, we iterate, we own the outcome.</p>
+        <h3 data-i18n="card_products_h3">Products</h3>
+        <p data-i18n="card_products_p">Opinionated software products designed around real workflows — not feature lists. We ship, we iterate, we own the outcome.</p>
       </div>
       <div class="card fade-up">
         <div class="card-icon"><i data-lucide="bot"></i></div>
         <h3>AI & Machine Learning</h3>
-        <p>From LLM integrations to bespoke ML pipelines — practical AI that makes operations smarter, not just flashier.</p>
+        <p data-i18n="card_ai_p">From LLM integrations to bespoke ML pipelines — practical AI that makes operations smarter, not just flashier.</p>
       </div>
       <div class="card fade-up">
         <div class="card-icon"><i data-lucide="cloud"></i></div>
         <h3>Cloud & Infrastructure</h3>
-        <p>Azure, OCI, hybrid architectures. We design platforms that scale without drama and cost without surprises.</p>
+        <p data-i18n="card_cloud_p">Azure, OCI, hybrid architectures. We design platforms that scale without drama and cost without surprises.</p>
       </div>
       <div class="card fade-up">
         <div class="card-icon"><i data-lucide="cpu"></i></div>
-        <h3>Custom Electronics</h3>
-        <p>From concept through prototype to production — hardware that connects the physical and digital worlds.</p>
+        <h3 data-i18n="card_elec_h3">Custom Electronics</h3>
+        <p data-i18n="card_elec_p">From concept through prototype to production — hardware that connects the physical and digital worlds.</p>
       </div>
       <div class="card fade-up">
         <div class="card-icon"><i data-lucide="users"></i></div>
         <h3>Talent & Staffing</h3>
-        <p>Senior engineers and architects on demand. No CVs, no wasted time — the right person, ready to contribute from day one.</p>
+        <p data-i18n="card_talent_p">Senior engineers and architects on demand. No CVs, no wasted time — the right person, ready to contribute from day one.</p>
       </div>
       <div class="card fade-up">
         <div class="card-icon"><i data-lucide="shield-check"></i></div>
-        <h3>Security</h3>
-        <p>Security that is designed in, not bolted on. Threat modelling, compliance, and incident response for regulated industries.</p>
+        <h3 data-i18n="card_sec_h3">Security</h3>
+        <p data-i18n="card_sec_p">Security that is designed in, not bolted on. Threat modelling, compliance, and incident response for regulated industries.</p>
       </div>
     </div>
   </div>
@@ -189,23 +194,23 @@
     <div class="feature-strip fade-up">
       <div class="feature-strip-item">
         <div class="icon"><i data-lucide="zap"></i></div>
-        <h4>Move fast</h4>
-        <p>Working prototypes in weeks, not quarters</p>
+        <h4 data-i18n="fs_fast_h4">Move fast</h4>
+        <p data-i18n="fs_fast_p">Working prototypes in weeks, not quarters</p>
       </div>
       <div class="feature-strip-item">
         <div class="icon"><i data-lucide="target"></i></div>
-        <h4>Stay focused</h4>
-        <p>Every decision tied to a real business outcome</p>
+        <h4 data-i18n="fs_focus_h4">Stay focused</h4>
+        <p data-i18n="fs_focus_p">Every decision tied to a real business outcome</p>
       </div>
       <div class="feature-strip-item">
         <div class="icon"><i data-lucide="telescope"></i></div>
-        <h4>Think long</h4>
-        <p>Architectures that survive the next five years</p>
+        <h4 data-i18n="fs_think_h4">Think long</h4>
+        <p data-i18n="fs_think_p">Architectures that survive the next five years</p>
       </div>
       <div class="feature-strip-item">
         <div class="icon"><i data-lucide="handshake"></i></div>
-        <h4>Own it together</h4>
-        <p>Partners, not vendors — we share the risk</p>
+        <h4 data-i18n="fs_own_h4">Own it together</h4>
+        <p data-i18n="fs_own_p">Partners, not vendors — we share the risk</p>
       </div>
     </div>
   </div>
@@ -217,16 +222,16 @@
 <section class="section sectors-section">
   <div class="container">
     <div class="section-header center fade-up" style="margin-bottom: 3rem;">
-      <p class="eyebrow">Industries</p>
-      <h2>We go where the <span class="grad-text">problems are hardest</span></h2>
-      <p>Drawn to industries where transformation is overdue, stakes are high, and incumbents move slowly.</p>
+      <p class="eyebrow" data-i18n="sectors_eyebrow">Industries</p>
+      <h2 data-i18n-html="sectors_h2">We go where the <span class="grad-text">problems are hardest</span></h2>
+      <p data-i18n="sectors_lead">Drawn to industries where transformation is overdue, stakes are high, and incumbents move slowly.</p>
     </div>
     <div class="sectors-layout fade-up">
 
       <!-- Left rail: tabs -->
       <div class="sectors-rail">
         <button class="sector-tab active" onclick="setSector(0)">
-          <i data-lucide="landmark"></i><span>Public Sector</span>
+          <i data-lucide="landmark"></i><span data-i18n="sector_public">Public Sector</span>
         </button>
         <button class="sector-tab" onclick="setSector(1)">
           <i data-lucide="activity"></i><span>Health & Life Sciences</span>
@@ -235,13 +240,13 @@
           <i data-lucide="zap"></i><span>Energy & Utilities</span>
         </button>
         <button class="sector-tab" onclick="setSector(3)">
-          <i data-lucide="factory"></i><span>Industrial</span>
+          <i data-lucide="factory"></i><span data-i18n="sector_industrial">Industrial</span>
         </button>
         <button class="sector-tab" onclick="setSector(4)">
           <i data-lucide="ship"></i><span>Maritime & Logistics</span>
         </button>
         <div class="sector-tab-note">
-          Don't see yours? That usually means the opportunity is biggest. <a href="contact.html">Let's talk →</a>
+          Don't see yours? That usually means the opportunity is biggest. <a href="contact.html" data-i18n="sector_note_link">Let's talk →</a>
         </div>
       </div>
 
@@ -349,9 +354,9 @@
 <section class="section">
   <div class="container">
     <div class="section-header center fade-up">
-      <p class="eyebrow">Proof of work</p>
-      <h2>Results, not <span class="grad-text">promises</span></h2>
-      <p>Selected outcomes from 15+ years of enterprise delivery across Norway and Europe.</p>
+      <p class="eyebrow" data-i18n="proof_eyebrow">Proof of work</p>
+      <h2 data-i18n-html="proof_h2">Results, not <span class="grad-text">promises</span></h2>
+      <p data-i18n="proof_lead">Selected outcomes from 15+ years of enterprise delivery across Norway and Europe.</p>
     </div>
     <div class="grid-3 fade-up">
       <div class="card">
@@ -374,7 +379,7 @@
       </div>
     </div>
     <div style="text-align:center; margin-top:2.5rem;">
-      <a href="case-studies.html" class="btn btn-ghost">See all case studies →</a>
+      <a href="case-studies.html" class="btn btn-ghost" data-i18n="cs_see_all">See all case studies →</a>
     </div>
   </div>
 </section>
@@ -386,10 +391,10 @@
   <div class="container">
     <div class="cta-band fade-up">
       <div class="cta-band-halo"></div>
-      <p class="eyebrow">Ready to build?</p>
-      <h2>Big ideas need <span class="grad-text">serious engineers</span></h2>
-      <p>Whether you have a product spec, a vague problem, or just an ambition — we can find the shape of the solution together.</p>
-      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+      <p class="eyebrow" data-i18n="home_cta_eyebrow">Ready to build?</p>
+      <h2 data-i18n-html="home_cta_h2">Big ideas need <span class="grad-text">serious engineers</span></h2>
+      <p data-i18n="home_cta_p">Whether you have a product spec, a vague problem, or just an ambition — we can find the shape of the solution together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg" data-i18n="home_cta_btn">Start a conversation →</a>
     </div>
   </div>
 </section>
@@ -403,31 +408,31 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
-        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;" data-i18n="footer_nl_label">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
           <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
-          <button type="submit">Subscribe</button>
+          <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
         </form>
         <div id="newsletter-msg"></div>
       </div>
       <div class="footer-col">
-        <h5>Company</h5>
+        <h5 data-i18n="footer_company">Company</h5>
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="case-studies.html">Case Studies</a></li>
           <li><a href="blog.html">Insights</a></li>
           <li><a href="about.html#team">Team</a></li>
           <li><a href="about.html#principles">Principles</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Services</h5>
+        <h5 data-i18n="footer_services">Services</h5>
         <ul>
           <li><a href="what-we-do.html">Products</a></li>
           <li><a href="what-we-do.html">AI & ML</a></li>
@@ -444,7 +449,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span><span class="footer-built">Designed and built in Oslo</span>
+      <span data-i18n="footer_copyright">© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span><span class="footer-built" data-i18n="footer_built">Designed and built in Oslo</span>
     </div>
   </div>
 </footer>
@@ -463,6 +468,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
+  <script src="js/i18n.js"></script>
   <script src="js/consent.js"></script>
 </body>
 </html>
