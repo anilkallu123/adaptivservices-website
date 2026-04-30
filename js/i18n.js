@@ -367,7 +367,7 @@ const T = {
 
     /* ── Home hero ── */
     hero_eyebrow:     'Bygget i Norge · For Norge · Stiftet 2026',
-    hero_h1:          'Suveren programvare<br/>for Norges hardeste<br/><span class="grad-text">digitale problemer.</span>',
+    hero_h1:          'Suveren teknologi<br/>for Norges hardeste<br/><span class="grad-text">digitale problemer.</span>',
     hero_lead:        'Vi designer, bygger og drifter produktene, KI-systemene og skyplattformene som offentlig sektor og regulerte bransjer ikke kan kjøpe av hylla — seniorkonsulenter, suveren leveranse, nullnedetids-historikk.',
     hero_cta_primary: 'Book en 30-minutters samtale',
     hero_cta_ghost:   'Se referanseprosjekter',

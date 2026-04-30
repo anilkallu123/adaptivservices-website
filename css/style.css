@@ -338,13 +338,24 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 780px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 5rem;
+  align-items: center;
+}
+.hero-left { min-width: 0; }
+.hero-right {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(8px);
 }
 .hero h1 { margin-bottom: 1.5rem; }
 .hero p.lead {
   font-size: 1.2rem;
   color: var(--text-secondary);
-  max-width: 560px;
+  max-width: 520px;
   margin-bottom: 2.5rem;
 }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -359,21 +370,25 @@ p { color: var(--text-secondary); line-height: 1.75; }
   color: rgba(255,255,255,0.5);
 }
 .hero-stat-row {
-  display: flex;
-  gap: 3rem;
-  margin-top: 4rem;
-  padding-top: 3rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 1.5rem;
+}
+.hero-stat {
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  text-align: center;
 }
 .hero-stat h3 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.hero-stat p { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+.hero-stat p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
 
 /* ── Section headers ── */
 .section-header { max-width: 640px; margin-bottom: 3.5rem; }
@@ -1006,7 +1021,9 @@ p { color: var(--text-secondary); line-height: 1.75; }
 @media (max-width: 900px) {
   .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .hero-stat-row { gap: 2rem; }
+  .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-right { padding: 1.5rem; }
+  .hero-stat-row { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .feature-strip { flex-wrap: wrap; }
   .feature-strip-item { flex: 1 1 40%; }
   .cta-band { padding: 2.5rem 2rem; }
