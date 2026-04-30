@@ -1112,3 +1112,37 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .cs-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .cs-stat-lbl { font-size: 0.82rem; color: var(--text-muted); margin-left: 0.4rem; }
 .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── Case Studies: business context strip ── */
+.cs-context {
+  display: flex;
+  gap: 2.5rem;
+  padding: 1rem 0 1.25rem;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap;
+}
+.cs-context-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.cs-context-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.cs-tag {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.11);
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.04);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.cs-tag-process { border-color: rgba(123,79,255,0.3); color: rgba(180,150,255,0.85); background: rgba(123,79,255,0.07); }
+.cs-tag-scale   { border-color: rgba(0,212,255,0.25); color: rgba(130,220,255,0.85); background: rgba(0,212,255,0.06); }
