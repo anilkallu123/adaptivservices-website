@@ -1067,3 +1067,18 @@ p { color: var(--text-secondary); line-height: 1.75; }
     margin-bottom: 1.25rem;
   }
 }
+
+/* ── Case Studies page ── */
+.card-mb { margin-bottom: 2rem; }
+.cs-card-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.cs-title { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.cs-subtitle { font-size: 0.9rem; color: var(--text-muted); }
+.cs-badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.cs-boxes { margin-bottom: 1.5rem; }
+.cs-box { background: var(--ink-3); border-radius: var(--radius-md); padding: 1.25rem; }
+.cs-box-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.cs-box p { font-size: 0.88rem; }
+.cs-stat-row { display: flex; gap: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
+.cs-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cs-stat-lbl { font-size: 0.82rem; color: var(--text-muted); margin-left: 0.4rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }

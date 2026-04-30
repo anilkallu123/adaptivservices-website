@@ -44,9 +44,9 @@
       <li><a href="index.html" data-i18n="nav_home">Home</a></li>
       <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
       <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
-      <li><a href="case-studies.html" class="active" data-i18n="nav_case_studies" data-i18n="footer_cs_lnk">Case Studies</a></li>
-      <li><a href="blog.html" data-i18n="nav_insights" data-i18n="footer_insights_lnk">Insights</a></li>
-      <li><a href="about.html" data-i18n="nav_about" data-i18n="footer_about_lnk">About</a></li>
+      <li><a href="case-studies.html" class="active" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
       <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
@@ -75,141 +75,141 @@
   <div class="container">
 
     <!-- Case 1 -->
-    <div class="card-grad fade-up" style="margin-bottom: 2rem;">
+    <div class="card-grad fade-up card-mb">
       <div class="card-grad-inner">
-        <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+        <div class="cs-card-header">
           <div>
             <p class="eyebrow" data-i18n="cs1_eyebrow">01 — Public Sector / Cloud Migration</p>
-            <h2 style="font-size:1.6rem; margin-bottom:0.5rem;" data-i18n="cs1_title">Oracle ExaDB 19c → 26ai Migration</h2>
-            <p style="font-size:0.9rem; color:var(--text-muted);" data-i18n="cs1_subtitle">Norwegian Tax Authority (Skatteetaten) · Azure / Oracle Cloud</p>
+            <h2 class="cs-title" data-i18n="cs1_title">Oracle ExaDB 19c → 26ai Migration</h2>
+            <p class="cs-subtitle" data-i18n="cs1_subtitle">Norwegian Tax Authority (Skatteetaten) · Azure / Oracle Cloud</p>
           </div>
-          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <div class="cs-badge-row">
             <span class="badge badge-cyan">Oracle ExaDB</span>
             <span class="badge badge-grad">Azure</span>
             <span class="badge badge-magenta">Zero downtime</span>
           </div>
         </div>
-        <div class="grid-3" style="margin-bottom:1.5rem;">
-          <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_challenge">Challenge</div>
-            <p style="font-size:0.88rem;" data-i18n="cs1_challenge_p">Legacy Oracle 19c database running critical national tax processing — required migration to ExaDB 26ai on Azure without any downtime or data loss.</p>
+        <div class="grid-3 cs-boxes">
+          <div class="cs-box">
+            <div class="cs-box-label" data-i18n="cs_challenge">Challenge</div>
+            <p data-i18n="cs1_challenge_p">Legacy Oracle 19c database running critical national tax processing — required migration to ExaDB 26ai on Azure without any downtime or data loss.</p>
           </div>
-          <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_approach">Approach</div>
-            <p style="font-size:0.88rem;" data-i18n="cs1_approach_p">Designed a Data Pump export pipeline with parallel streams, OCI Object Storage staging, and automated cutover orchestration using Azure VM run-commands.</p>
+          <div class="cs-box">
+            <div class="cs-box-label" data-i18n="cs_approach">Approach</div>
+            <p data-i18n="cs1_approach_p">Designed a Data Pump export pipeline with parallel streams, OCI Object Storage staging, and automated cutover orchestration using Azure VM run-commands.</p>
           </div>
-          <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_outcome">Outcome</div>
-            <p style="font-size:0.88rem;" data-i18n="cs1_outcome_p">Zero-downtime migration completed. Full schema and data integrity verified. Processing performance improved 40% on the new ExaDB 26ai cluster.</p>
+          <div class="cs-box">
+            <div class="cs-box-label" data-i18n="cs_outcome">Outcome</div>
+            <p data-i18n="cs1_outcome_p">Zero-downtime migration completed. Full schema and data integrity verified. Processing performance improved 40% on the new ExaDB 26ai cluster.</p>
           </div>
         </div>
-        <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
-          <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">0</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs1_stat1_lbl">Minutes downtime</span></div>
-          <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">40%</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs1_stat2_lbl">Performance uplift</span></div>
-          <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">100%</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs1_stat3_lbl">Data integrity verified</span></div>
+        <div class="cs-stat-row">
+          <div><span class="cs-stat-num">0</span><span class="cs-stat-lbl" data-i18n="cs1_stat1_lbl">Minutes downtime</span></div>
+          <div><span class="cs-stat-num">40%</span><span class="cs-stat-lbl" data-i18n="cs1_stat2_lbl">Performance uplift</span></div>
+          <div><span class="cs-stat-num">100%</span><span class="cs-stat-lbl" data-i18n="cs1_stat3_lbl">Data integrity verified</span></div>
         </div>
       </div>
     </div>
 
     <!-- Case 2 -->
-    <div class="card fade-up" style="margin-bottom: 2rem;">
-      <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+    <div class="card fade-up card-mb">
+      <div class="cs-card-header">
         <div>
           <p class="eyebrow" data-i18n="cs2_eyebrow">02 — Healthcare / Data Platform</p>
-          <h2 style="font-size:1.6rem; margin-bottom:0.5rem;" data-i18n="cs2_title">National Health Data Platform</h2>
-          <p style="font-size:0.9rem; color:var(--text-muted);" data-i18n="cs2_subtitle">Norwegian Health Authority · Azure · DIPS Arena</p>
+          <h2 class="cs-title" data-i18n="cs2_title">National Health Data Platform</h2>
+          <p class="cs-subtitle" data-i18n="cs2_subtitle">Norwegian Health Authority · Azure · DIPS Arena</p>
         </div>
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <div class="cs-badge-row">
           <span class="badge badge-cyan">Azure</span>
           <span class="badge badge-grad">Data Engineering</span>
           <span class="badge badge-magenta">Healthcare</span>
         </div>
       </div>
-      <div class="grid-3" style="margin-bottom:1.5rem;">
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_challenge">Challenge</div>
-          <p style="font-size:0.88rem;" data-i18n="cs2_challenge_p">Clinical data siloed across disparate hospital systems — no unified view for analytics, reporting, or AI-assisted clinical decision support.</p>
+      <div class="grid-3 cs-boxes">
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_challenge">Challenge</div>
+          <p data-i18n="cs2_challenge_p">Clinical data siloed across disparate hospital systems — no unified view for analytics, reporting, or AI-assisted clinical decision support.</p>
         </div>
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_approach">Approach</div>
-          <p style="font-size:0.88rem;" data-i18n="cs2_approach_p">Built an Azure-native data lakehouse with medallion architecture. FHIR-compliant ingestion pipelines, dbt transformations, and a semantic layer for BI and ML consumption.</p>
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_approach">Approach</div>
+          <p data-i18n="cs2_approach_p">Built an Azure-native data lakehouse with medallion architecture. FHIR-compliant ingestion pipelines, dbt transformations, and a semantic layer for BI and ML consumption.</p>
         </div>
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_outcome">Outcome</div>
-          <p style="font-size:0.88rem;" data-i18n="cs2_outcome_p">Unified clinical data platform serving multiple hospital trusts. Enabled first national-scale analytics on patient pathway data, cutting reporting cycle from weeks to hours.</p>
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_outcome">Outcome</div>
+          <p data-i18n="cs2_outcome_p">Unified clinical data platform serving multiple hospital trusts. Enabled first national-scale analytics on patient pathway data, cutting reporting cycle from weeks to hours.</p>
         </div>
       </div>
-      <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
-        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Weeks→Hours</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs2_stat1_lbl">Reporting cycle</span></div>
-        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">FHIR</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs2_stat2_lbl">Compliant pipelines</span></div>
+      <div class="cs-stat-row">
+        <div><span class="cs-stat-num">Weeks→Hours</span><span class="cs-stat-lbl" data-i18n="cs2_stat1_lbl">Reporting cycle</span></div>
+        <div><span class="cs-stat-num">FHIR</span><span class="cs-stat-lbl" data-i18n="cs2_stat2_lbl">Compliant pipelines</span></div>
       </div>
     </div>
 
     <!-- Case 3 -->
-    <div class="card fade-up" style="margin-bottom: 2rem;">
-      <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+    <div class="card fade-up card-mb">
+      <div class="cs-card-header">
         <div>
           <p class="eyebrow" data-i18n="cs3_eyebrow">03 — ERP / Manufacturing</p>
-          <h2 style="font-size:1.6rem; margin-bottom:0.5rem;" data-i18n="cs3_title">D365 F&O Enterprise Programme — Alfa Laval</h2>
-          <p style="font-size:0.9rem; color:var(--text-muted);" data-i18n="cs3_subtitle">Alfa Laval · Microsoft Dynamics 365 · Europe-wide</p>
+          <h2 class="cs-title" data-i18n="cs3_title">D365 F&O Enterprise Programme — Alfa Laval</h2>
+          <p class="cs-subtitle" data-i18n="cs3_subtitle">Alfa Laval · Microsoft Dynamics 365 · Europe-wide</p>
         </div>
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <div class="cs-badge-row">
           <span class="badge badge-cyan">D365 F&O</span>
           <span class="badge badge-grad">Azure Integration</span>
           <span class="badge badge-magenta">Multi-country</span>
         </div>
       </div>
-      <div class="grid-3" style="margin-bottom:1.5rem;">
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_challenge">Challenge</div>
-          <p style="font-size:0.88rem;" data-i18n="cs3_challenge_p">One of the largest D365 implementations in Europe — upgrading global ERP across multiple legal entities, countries, and thousands of users while maintaining business continuity.</p>
+      <div class="grid-3 cs-boxes">
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_challenge">Challenge</div>
+          <p data-i18n="cs3_challenge_p">One of the largest D365 implementations in Europe — upgrading global ERP across multiple legal entities, countries, and thousands of users while maintaining business continuity.</p>
         </div>
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_approach">Approach</div>
-          <p style="font-size:0.88rem;" data-i18n="cs3_approach_p">Phased country rollout with parallel-run periods. X++ customisations for local compliance. Azure Data Factory integration layer connecting D365 to supply chain and logistics systems.</p>
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_approach">Approach</div>
+          <p data-i18n="cs3_approach_p">Phased country rollout with parallel-run periods. X++ customisations for local compliance. Azure Data Factory integration layer connecting D365 to supply chain and logistics systems.</p>
         </div>
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_outcome">Outcome</div>
-          <p style="font-size:0.88rem;" data-i18n="cs3_outcome_p">Full ERP consolidation across all European entities. Standardised financial reporting, unified supply chain visibility, and 30% reduction in month-end close cycle time.</p>
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_outcome">Outcome</div>
+          <p data-i18n="cs3_outcome_p">Full ERP consolidation across all European entities. Standardised financial reporting, unified supply chain visibility, and 30% reduction in month-end close cycle time.</p>
         </div>
       </div>
-      <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
-        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">30%</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs3_stat1_lbl">Faster month-end close</span></div>
-        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Europe-wide</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs3_stat2_lbl">ERP consolidation</span></div>
+      <div class="cs-stat-row">
+        <div><span class="cs-stat-num">30%</span><span class="cs-stat-lbl" data-i18n="cs3_stat1_lbl">Faster month-end close</span></div>
+        <div><span class="cs-stat-num">Europe-wide</span><span class="cs-stat-lbl" data-i18n="cs3_stat2_lbl">ERP consolidation</span></div>
       </div>
     </div>
 
     <!-- Case 4 -->
-    <div class="card fade-up" style="margin-bottom: 2rem;">
-      <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+    <div class="card fade-up card-mb">
+      <div class="cs-card-header">
         <div>
           <p class="eyebrow" data-i18n="cs4_eyebrow">04 — AI / Developer Tooling</p>
-          <h2 style="font-size:1.6rem; margin-bottom:0.5rem;" data-i18n="cs4_title">Nexus — Multi-Model AI Coding Agent</h2>
-          <p style="font-size:0.9rem; color:var(--text-muted);" data-i18n="cs4_subtitle">Adaptiv AS internal · Claude · GPT-4 · Gemini</p>
+          <h2 class="cs-title" data-i18n="cs4_title">Nexus — Multi-Model AI Coding Agent</h2>
+          <p class="cs-subtitle" data-i18n="cs4_subtitle">Adaptiv AS internal · Claude · GPT-4 · Gemini</p>
         </div>
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <div class="cs-badge-row">
           <span class="badge badge-cyan">AI / LLM</span>
           <span class="badge badge-grad">Python · Streamlit</span>
           <span class="badge badge-magenta">Open Source</span>
         </div>
       </div>
-      <div class="grid-3" style="margin-bottom:1.5rem;">
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_challenge">Challenge</div>
-          <p style="font-size:0.88rem;" data-i18n="cs4_challenge_p">AI coding assistants are expensive and single-model — no intelligent routing across Claude, GPT-4, and Gemini based on task type and cost optimisation.</p>
+      <div class="grid-3 cs-boxes">
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_challenge">Challenge</div>
+          <p data-i18n="cs4_challenge_p">AI coding assistants are expensive and single-model — no intelligent routing across Claude, GPT-4, and Gemini based on task type and cost optimisation.</p>
         </div>
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_approach">Approach</div>
-          <p style="font-size:0.88rem;" data-i18n="cs4_approach_p">Built a keyword-based routing layer that dispatches tasks to the optimal model — free models preferred on ties, paid models for quality-critical operations. Streaming Streamlit UI.</p>
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_approach">Approach</div>
+          <p data-i18n="cs4_approach_p">Built a keyword-based routing layer that dispatches tasks to the optimal model — free models preferred on ties, paid models for quality-critical operations. Streaming Streamlit UI.</p>
         </div>
-        <div style="background:var(--ink-3); border-radius:var(--radius-md); padding:1.25rem;">
-          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;" data-i18n="cs_outcome">Outcome</div>
-          <p style="font-size:0.88rem;" data-i18n="cs4_outcome_p">70%+ of tasks handled by free models without quality loss. Full tool suite: browser automation, GitHub, database migration, code execution, and memory.</p>
+        <div class="cs-box">
+          <div class="cs-box-label" data-i18n="cs_outcome">Outcome</div>
+          <p data-i18n="cs4_outcome_p">70%+ of tasks handled by free models without quality loss. Full tool suite: browser automation, GitHub, database migration, code execution, and memory.</p>
         </div>
       </div>
-      <div style="display:flex; gap:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);">
-        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">70%+</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs4_stat1_lbl">Cost routed to free models</span></div>
-        <div><span style="font-family:var(--font-display); font-weight:800; font-size:1.4rem; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">4</span><span style="font-size:0.82rem; color:var(--text-muted); margin-left:0.4rem;" data-i18n="cs4_stat2_lbl">AI models integrated</span></div>
+      <div class="cs-stat-row">
+        <div><span class="cs-stat-num">70%+</span><span class="cs-stat-lbl" data-i18n="cs4_stat1_lbl">Cost routed to free models</span></div>
+        <div><span class="cs-stat-num">4</span><span class="cs-stat-lbl" data-i18n="cs4_stat2_lbl">AI models integrated</span></div>
       </div>
     </div>
 
@@ -225,7 +225,7 @@
       <p class="eyebrow" data-i18n="cs_your_h2">Your project next</p>
       <h2 data-i18n-html="cs_cta_h2">Tell us what you're <span class="grad-text">trying to solve</span></h2>
       <p data-i18n="cs_your_p">Every case study above started with a conversation. Yours can too.</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <div class="cta-actions">
         <a href="contact.html" class="btn btn-primary btn-lg" data-i18n="cs_start_btn">Start a conversation →</a>
         <a href="https://calendly.com/anilkallu/30min" target="_blank" rel="noopener" class="btn btn-ghost btn-lg" data-i18n="cs_book_btn">Book a 30-min call</a>
       </div>
@@ -259,6 +259,8 @@
           <li><a href="about.html">About</a></li>
           <li><a href="case-studies.html">Case Studies</a></li>
           <li><a href="blog.html">Insights</a></li>
+          <li><a href="about.html#team" data-i18n="footer_team_lnk">Team</a></li>
+          <li><a href="about.html#principles" data-i18n="footer_principles_lnk">Principles</a></li>
           <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
         </ul>
       </div>
