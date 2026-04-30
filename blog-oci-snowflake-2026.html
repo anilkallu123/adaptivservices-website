@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oracle + Snowflake in 2026: The Data Stack Truce — Adaptiv AS</title>
+  <meta name="description" content="How OCI GoldenGate, Snowflake Openflow, and Oracle 26ai are reshaping enterprise data architecture. A practitioner's view from inside an Exadata migration."/>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta property="og:title" content="Oracle + Snowflake in 2026: The Data Stack Truce"/>
+  <meta property="og:description" content="How OCI GoldenGate, Snowflake Openflow, and Oracle 26ai are reshaping enterprise data architecture."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/blog-oci-snowflake-2026"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <link rel="canonical" href="https://www.adaptivservices.com/blog-oci-snowflake-2026"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Oracle + Snowflake in 2026: The Data Stack Truce Nobody Predicted",
+    "datePublished": "2026-04-30",
+    "author": { "@type": "Person", "name": "Anil Kallu" },
+    "publisher": { "@type": "Organization", "name": "Adaptiv AS", "url": "https://www.adaptivservices.com" },
+    "url": "https://www.adaptivservices.com/blog-oci-snowflake-2026",
+    "description": "How OCI GoldenGate, Snowflake Openflow, and Oracle 26ai are reshaping enterprise data architecture."
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    /* ── Article layout ── */
+    .article-hero {
+      padding: calc(var(--nav-h) + 5rem) 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(123,79,255,0.13) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 40% at 80% 30%, rgba(0,212,255,0.07) 0%, transparent 60%);
+    }
+    .article-hero .container { position: relative; z-index: 1; max-width: 860px; }
+
+    .article-meta-bar {
+      display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--text-muted); letter-spacing: 0.06em;
+    }
+    .article-meta-bar .sep { opacity: 0.3; }
+
+    .article-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.1; margin-bottom: 1.5rem;
+    }
+    .article-hero .lead {
+      font-size: 1.1rem; color: var(--text-secondary);
+      line-height: 1.8; max-width: 680px;
+    }
+
+    /* ── Sticky TOC + body layout ── */
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 4rem;
+      align-items: start;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+    .article-body { min-width: 0; }
+    .article-sidebar { position: sticky; top: calc(var(--nav-h) + 2rem); }
+
+    /* TOC */
+    .toc {
+      background: var(--ink-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .toc-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--font-mono); font-size: 0.68rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+    .toc ul { padding: 1rem 0; }
+    .toc ul li a {
+      display: block; padding: 0.45rem 1.25rem;
+      font-size: 0.82rem; color: var(--text-muted);
+      transition: color 0.2s, padding-left 0.2s;
+      line-height: 1.4;
+    }
+    .toc ul li a:hover { color: var(--cyan); padding-left: 1.6rem; }
+    .toc ul li.toc-active a { color: var(--cyan); border-left: 2px solid var(--cyan); }
+
+    /* Author card */
+    .author-card {
+      margin-top: 1.5rem;
+      background: var(--ink-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+    }
+    .author-card .author-label {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--text-muted); margin-bottom: 0.75rem;
+    }
+    .author-card .author-name {
+      font-weight: 700; font-family: var(--font-display);
+      font-size: 0.95rem; margin-bottom: 0.25rem;
+    }
+    .author-card .author-role {
+      font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem;
+    }
+    .author-card a {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--cyan); letter-spacing: 0.04em;
+    }
+
+    /* ── Article content ── */
+    .prose { color: var(--text-secondary); line-height: 1.85; }
+    .prose h2 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      color: var(--text-primary);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .prose h3 {
+      font-size: 1.15rem; color: var(--text-primary);
+      margin: 2rem 0 0.75rem;
+    }
+    .prose p { margin-bottom: 1.35rem; }
+    .prose ul, .prose ol {
+      margin: 0 0 1.35rem 1.5rem;
+    }
+    .prose li { margin-bottom: 0.5rem; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+    .prose a { color: var(--cyan); text-decoration: underline; text-decoration-color: rgba(0,212,255,0.3); }
+    .prose a:hover { text-decoration-color: var(--cyan); }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 1.75rem 2rem;
+      border-left: 3px solid transparent;
+      border-image: var(--grad) 1;
+      background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, rgba(123,79,255,0.06) 100%);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .pull-quote p {
+      font-size: 1.15rem; font-style: italic;
+      color: var(--text-primary); line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Tech callout box */
+    .callout {
+      margin: 2rem 0;
+      background: var(--ink-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .callout-header {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.8rem 1.25rem;
+      background: rgba(0,212,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--font-mono); font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--cyan);
+    }
+    .callout-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan); flex-shrink: 0;
+    }
+    .callout-dot.indigo { background: var(--indigo); }
+    .callout-dot.magenta { background: var(--magenta); }
+    .callout-body { padding: 1.25rem; }
+    .callout-body p { margin: 0; font-size: 0.9rem; }
+
+    /* Architecture diagram (text-based) */
+    .arch-diagram {
+      margin: 2rem 0;
+      background: var(--ink-1);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      font-family: var(--font-mono); font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 2;
+      overflow-x: auto;
+    }
+    .arch-diagram .arch-label {
+      font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .arch-node { color: var(--text-primary); font-weight: 600; }
+    .arch-cyan { color: var(--cyan); }
+    .arch-indigo { color: var(--indigo); }
+    .arch-magenta { color: var(--magenta); }
+    .arch-arrow { color: var(--text-muted); }
+
+    /* Stat row */
+    .stat-strip {
+      display: flex; gap: 0; margin: 2.5rem 0;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md); overflow: hidden;
+    }
+    .stat-strip-item {
+      flex: 1; padding: 1.5rem 1.25rem; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      background: var(--ink-2);
+    }
+    .stat-strip-item:last-child { border-right: none; }
+    .stat-strip-num {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.8rem;
+      background: var(--grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin-bottom: 0.4rem;
+    }
+    .stat-strip-lbl {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* Share bar */
+    .share-bar {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+    .share-label {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+    .share-tag {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      padding: 0.3rem 0.75rem; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .share-tag:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* Related articles */
+    .related-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 1.5rem;
+    }
+    .related-card {
+      background: var(--ink-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .related-card:hover { border-color: rgba(123,79,255,0.35); transform: translateY(-3px); }
+    .related-card-top { height: 4px; background: var(--grad); }
+    .related-card-body { padding: 1.25rem; }
+    .related-card-body h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+    .related-card-body p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.25rem 4rem; }
+      .article-sidebar { position: static; display: none; }
+      .related-grid { grid-template-columns: 1fr; }
+      .stat-strip { flex-direction: column; }
+      .stat-strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .stat-strip-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
+      <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" class="active" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Article Hero ── -->
+<section class="article-hero">
+  <div class="article-hero-bg"></div>
+  <div class="container">
+    <div class="article-meta-bar fade-up">
+      <span class="badge badge-cyan" style="font-size:0.68rem;">Oracle / Cloud</span>
+      <span class="badge" style="font-size:0.68rem; background:rgba(123,79,255,0.12); color:var(--indigo); border:1px solid rgba(123,79,255,0.25);">Snowflake</span>
+      <span class="sep">·</span>
+      <span>30 Apr 2026</span>
+      <span class="sep">·</span>
+      <span>9 min read</span>
+      <span class="sep">·</span>
+      <span>Anil Kallu</span>
+    </div>
+    <h1 class="fade-up">
+      Oracle + Snowflake in 2026:<br/>
+      The <span class="grad-text">Data Stack Truce</span><br/>Nobody Predicted
+    </h1>
+    <p class="lead fade-up">How OCI GoldenGate, Snowflake Openflow, and Oracle AI Database 26ai are reshaping enterprise data architecture — and what it means if you're running Oracle in production today.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Article Layout ── -->
+<div class="article-layout">
+
+  <!-- ── Body ── -->
+  <article class="article-body prose fade-up">
+
+    <!-- Key numbers strip -->
+    <div class="stat-strip">
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">GA</div>
+        <div class="stat-strip-lbl">Openflow Oracle connector<br/>Feb 2026</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">&lt;5s</div>
+        <div class="stat-strip-lbl">End-to-end CDC<br/>latency</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">26ai</div>
+        <div class="stat-strip-lbl">Oracle DB target<br/>on OCI &amp; AWS</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">0</div>
+        <div class="stat-strip-lbl">Agents to install<br/>or manage</div>
+      </div>
+    </div>
+
+    <!-- Intro -->
+    <p>For years, Oracle and Snowflake were positioned as adversaries. One was the entrenched data vault — reliable, expensive, and surrounded by a licensing moat. The other was the modern analytics layer — fast, elastic, and built for the cloud-native era. The question enterprise data teams asked was always binary: <em>migrate away from Oracle, or stay?</em></p>
+
+    <p>In 2026, that framing is obsolete. The two platforms have converged on a shared answer: <strong>they're better together</strong>. And the engineering shipped in the last six months makes that more than a marketing claim.</p>
+
+    <!-- S1 -->
+    <h2 id="openflow">Snowflake Openflow for Oracle: Why This Is Different</h2>
+
+    <p>On 27 February 2026, Snowflake made the <a href="https://docs.snowflake.com/en/release-notes/2026/other/2026-02-27-openflow-oracle-ga" target="_blank" rel="noopener">Openflow Connector for Oracle generally available</a>. Not a beta. Not a preview. GA, with production SLAs.</p>
+
+    <p>On the surface it sounds like another ETL connector. It isn't. Here's what makes it architecturally significant:</p>
+
+    <ul>
+      <li><strong>No agents.</strong> There is nothing to install, patch, or monitor on your Oracle hosts. The connector runs entirely within Snowflake's managed infrastructure.</li>
+      <li><strong>Oracle's own CDC technology, licensed to Snowflake.</strong> The connector embeds Oracle's XStream API — the same change data capture engine Oracle uses internally — to read logical change records (LCRs) from Oracle redo logs. You're not reverse-engineering the redo stream with a third-party tool; you're consuming it through the officially supported interface.</li>
+      <li><strong>Near-real-time, not batch.</strong> Committed changes land in Snowflake target tables via Snowpipe Streaming with end-to-end latency measured in seconds, not minutes or hours.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot"></div>Supported Oracle versions</div>
+      <div class="callout-body">
+        <p>Oracle Database 12c R2 (12.2), 18c, 19c, 21c, 23ai, and 26ai — running on-premises, on Oracle Exadata, in OCI (VM/Bare Metal), and on AWS RDS Custom for Oracle. If you're on a supported version, you're covered without a schema migration first.</p>
+      </div>
+    </div>
+
+    <p>The practical implication: you no longer need Attunity, Fivetran, Qlik Replicate, or a custom Kafka pipeline to get Oracle changes into Snowflake. A connector that is maintained by Snowflake, uses Oracle-licensed CDC, and requires zero infrastructure sits between your redo logs and your Snowflake tables.</p>
+
+    <div class="pull-quote">
+      <p>"The separation of storage + transaction (Oracle) from analytics + AI (Snowflake) is becoming the default enterprise pattern. CDC-first, Iceberg-open, no vendor lock-in on the query layer."</p>
+    </div>
+
+    <!-- Architecture diagram -->
+    <div class="arch-diagram">
+      <div class="arch-label">Reference architecture — Oracle → Snowflake via Openflow CDC</div>
+      <div>
+        <span class="arch-node arch-cyan">Oracle DB (19c / 26ai)</span><br/>
+        <span class="arch-arrow">   │  XStream XOut server</span><br/>
+        <span class="arch-arrow">   │  reads redo logs (LCRs)</span><br/>
+        <span class="arch-arrow">   ▼</span><br/>
+        <span class="arch-node arch-indigo">Snowflake Openflow Connector</span>  <span class="arch-arrow">← managed by Snowflake, no agent</span><br/>
+        <span class="arch-arrow">   │  Snowpipe Streaming</span><br/>
+        <span class="arch-arrow">   │  &lt; 5s end-to-end latency</span><br/>
+        <span class="arch-arrow">   ▼</span><br/>
+        <span class="arch-node arch-magenta">Snowflake Target Tables</span><br/>
+        <span class="arch-arrow">   │</span><br/>
+        <span class="arch-arrow">   ├─ Cortex AI / Semantic Views</span><br/>
+        <span class="arch-arrow">   ├─ Apache Iceberg (open format)</span><br/>
+        <span class="arch-arrow">   └─ Snowflake Intelligence / ML</span>
+      </div>
+    </div>
+
+    <!-- S2 -->
+    <h2 id="goldengate">OCI GoldenGate + Snowflake: The Other Direction</h2>
+
+    <p>Openflow tells half the story. The other half comes from Oracle's side: <strong>OCI GoldenGate now supports Snowflake as a target in all OCI regions</strong>, with both internal staging (within Snowflake) and external staging (Amazon S3 or Azure Blob Storage).</p>
+
+    <p>GoldenGate is Oracle's own real-time data replication engine — a mature, battle-tested platform that enterprises have used for heterogeneous replication for two decades. The fact that Oracle is actively maintaining Snowflake as a first-class GoldenGate target says something important: <strong>Oracle is not trying to force everything onto Autonomous Database</strong>. They're meeting enterprise architects where they actually are.</p>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot indigo"></div>When to use GoldenGate vs Openflow</div>
+      <div class="callout-body">
+        <p><strong>Openflow</strong> — if you want zero-infrastructure simplicity, are already in Snowflake's managed ecosystem, and want Snowflake to own the pipeline SLA.<br/><br/>
+        <strong>OCI GoldenGate</strong> — if you need bidirectional replication, are running complex fan-out topologies across multiple targets (Oracle → Snowflake + Oracle → another Oracle), or need fine-grained transformation logic in the pipeline. GoldenGate also supports Oracle → Snowflake → back to Oracle patterns for phased migrations.</p>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <h2 id="oci-ai">OCI Is Not Standing Still</h2>
+
+    <p>While the Snowflake story dominates the integration narrative, OCI's own trajectory in 2026 is worth understanding — especially if you're architecting around Oracle as a platform, not just a database.</p>
+
+    <h3>Oracle AI Database 26ai on OCI</h3>
+    <p>Oracle Database 26ai is now generally available on OCI, including on Exadata Cloud@Customer. The vector search capabilities are native to the database engine — not a bolt-on — which means Oracle APEX, PL/SQL, and existing application layers can query vector embeddings without any middleware. For Norwegian enterprises running DIPS, SAP, or custom Oracle APEX applications, this is potentially significant: AI-augmented querying without a platform change.</p>
+
+    <h3>Multicloud: Oracle Database@AWS and @Google</h3>
+    <p>Oracle Database@AWS is now live in Frankfurt, Tokyo, and Ohio — joining the original US East and US West regions. This means European enterprises can run Oracle Database in AWS infrastructure under their existing Oracle licensing, with private, low-latency connectivity between OCI and AWS via <a href="https://hyperframeresearch.com/2026/04/17/oracle-reshapes-the-multicloud-landscape-through-frictionless-aws-connectivity-and-open-standards/" target="_blank" rel="noopener">Oracle Interconnect ↔ AWS Interconnect</a>.</p>
+    <p>Oracle AI Database@Google Cloud similarly expanded with native Gemini Enterprise integration — Oracle's APEX can now surface Gemini responses inline, directly from the database layer.</p>
+
+    <!-- S4 -->
+    <h2 id="snowflake-ai">Snowflake's AI Layer Is Maturing Fast</h2>
+
+    <p>The Openflow connector is not the only reason to pay attention to Snowflake in 2026. While Oracle is strengthening the data-in layer, Snowflake is building serious capability on top of the data once it arrives.</p>
+
+    <ul>
+      <li><strong>Semantic View Autopilot (GA)</strong> — AI-powered automation that builds and governs semantic views over your data. Reduces the manual overhead of curating a semantic layer for BI tools and LLM queries.</li>
+      <li><strong>Snowflake Postgres (preview → GA soon)</strong> — transactional, analytical, and AI capabilities on a single platform, eliminating pipelines between OLTP and OLAP. Interesting if you're building new applications rather than migrating Oracle.</li>
+      <li><strong>Online Feature Store + Online Model Inference (GA)</strong> — sub-millisecond feature serving for real-time ML inference, directly integrated with Snowflake tables. No separate feature store infrastructure.</li>
+      <li><strong>Cortex Code AI suggestions</strong> — context-aware SQL completions as you type in Snowsight. Smaller feature, but meaningful productivity gain for analysts.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot magenta"></div>What Snowflake Intelligence means for Oracle data</div>
+      <div class="callout-body">
+        <p>Snowflake Intelligence (conversational analytics over your data) now has resource budgets to control credit spend. More importantly, once your Oracle operational data is streaming into Snowflake via Openflow, Cortex AI, Semantic Views, and Snowflake Intelligence all operate over live, near-real-time operational data — not yesterday's batch export. That gap between analytical insight and operational reality effectively disappears.</p>
+      </div>
+    </div>
+
+    <!-- S5 -->
+    <h2 id="architect">What This Means If You're Running Oracle Today</h2>
+
+    <p>I'm writing this from inside an active ExaDB 19c → 26ai migration. The decisions we're making about data architecture are directly shaped by what's gone GA in 2026.</p>
+
+    <p>Three months ago, the architecture choice felt binary: consolidate all analytics workloads into Oracle (ADB, APEX analytics, 26ai vector search) or break them out to a separate platform. Both had significant trade-offs.</p>
+
+    <p>Today the pattern is cleaner:</p>
+
+    <ul>
+      <li><strong>Oracle stays as the system of record</strong> — OLTP, PL/SQL business logic, compliance, audit, ERP integration, and now AI vector search via 26ai.</li>
+      <li><strong>Snowflake becomes the analytics and AI layer</strong> — Cortex, Semantic Views, Iceberg open format, cross-cloud federation, Snowflake Intelligence.</li>
+      <li><strong>Openflow or GoldenGate bridges them</strong> — in seconds, not hours, without a separate ETL platform.</li>
+    </ul>
+
+    <p>If you're still running nightly bulk exports between your Oracle estate and your data platform — with all the data quality issues, schema drift, and 8-hour-stale analytics that implies — the engineering case for moving to CDC-first is now airtight. The tooling is GA, the latency is seconds, and you don't need to manage any additional infrastructure.</p>
+
+    <div class="pull-quote">
+      <p>"The question enterprise teams asked was always binary: migrate away from Oracle, or stay? In 2026, that's the wrong question."</p>
+    </div>
+
+    <!-- Conclusion -->
+    <h2 id="conclusion">The Bottom Line</h2>
+
+    <p>The Oracle–Snowflake relationship has quietly shifted from competition to complementarity. Oracle is investing in OCI infrastructure, multicloud reach, and database AI. Snowflake is investing in data ingestion, semantic intelligence, and open formats. The Openflow connector and OCI GoldenGate integration are the technical expression of that convergence.</p>
+
+    <p>For enterprise architects in Norway and Europe, this removes a major constraint: you no longer have to choose your database platform based on where you want to do analytics. Run Oracle where Oracle is best. Run Snowflake where Snowflake is best. And let production-grade, near-real-time CDC do the rest.</p>
+
+    <!-- Tags / Share -->
+    <div class="share-bar">
+      <span class="share-label">Topics</span>
+      <span class="share-tag">#OracleCloud</span>
+      <span class="share-tag">#Snowflake</span>
+      <span class="share-tag">#DataEngineering</span>
+      <span class="share-tag">#OCI</span>
+      <span class="share-tag">#Exadata</span>
+      <span class="share-tag">#CDCPipelines</span>
+      <span class="share-tag">#CloudMigration</span>
+    </div>
+
+    <!-- Related -->
+    <h3 style="color:var(--text-primary); margin-bottom:0.5rem;">Related Insights</h3>
+    <div class="related-grid">
+      <a href="blog.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Oracle ExaDB 19c to 26ai: What Actually Works in Production</h4>
+          <p>Data Pump parallel streams, OCI Object Storage staging, and cutover without a maintenance window.</p>
+        </div>
+      </a>
+      <a href="blog.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Azure DaaS: Building a Data Platform Landing Zone from Scratch</h4>
+          <p>Terraform, ArgoCD GitOps, AKS, and identity — as a reusable template for Norwegian enterprises.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band fade-up" style="margin-top:4rem;">
+      <div class="cta-band-halo"></div>
+      <p class="eyebrow">Work with us</p>
+      <h2>Running Oracle in production?<br/><span class="grad-text">Let's talk architecture.</span></h2>
+      <p style="max-width:480px; margin:0 auto 2rem;">Whether you're planning a migration, designing a CDC pipeline, or evaluating OCI vs Azure — we'll give you an honest assessment, not a sales deck.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+    </div>
+
+  </article>
+
+  <!-- ── Sidebar ── -->
+  <aside class="article-sidebar">
+    <nav class="toc">
+      <div class="toc-header">Contents</div>
+      <ul>
+        <li><a href="#openflow">Snowflake Openflow for Oracle</a></li>
+        <li><a href="#goldengate">OCI GoldenGate + Snowflake</a></li>
+        <li><a href="#oci-ai">OCI Is Not Standing Still</a></li>
+        <li><a href="#snowflake-ai">Snowflake's AI Layer</a></li>
+        <li><a href="#architect">What This Means For You</a></li>
+        <li><a href="#conclusion">The Bottom Line</a></li>
+      </ul>
+    </nav>
+    <div class="author-card">
+      <div class="author-label">Written by</div>
+      <div class="author-name">Anil Kallu</div>
+      <div class="author-role">Founder, Adaptiv AS · Oracle &amp; Cloud Architect</div>
+      <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn →</a>
+    </div>
+  </aside>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;" data-i18n="footer_nl_label">Technical insights</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
+          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
+          <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
+        </form>
+        <div id="newsletter-msg"></div>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="footer_company">Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="about.html#team" data-i18n="footer_team_lnk">Team</a></li>
+          <li><a href="about.html#principles" data-i18n="footer_principles_lnk">Principles</a></li>
+          <li><a href="contact.html" data-i18n="footer_contact_h5">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="footer_services">Services</h5>
+        <ul>
+          <li><a href="what-we-do.html" data-i18n="footer_products_lnk">Products</a></li>
+          <li><a href="what-we-do.html">AI &amp; ML</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_cloud_lnk">Cloud</a></li>
+          <li><a href="what-we-do.html" data-i18n="footer_elec_lnk">Electronics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">Oslo, Norway</a></li>
+          <li><a href="game.html">🐇 Bunny Run</a></li>
+          <li><a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copyright">© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span>
+      <span class="footer-built" data-i18n="footer_built">Designed and built in Oslo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+
+/* Scroll-spy for TOC */
+(function() {
+  const headings = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc ul li');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(li => li.classList.remove('toc-active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.closest('li').classList.add('toc-active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  headings.forEach(h => obs.observe(h));
+})();
+
+/* Fade-in observer */
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+/* Newsletter */
+async function handleNewsletter(e) {
+  e.preventDefault();
+  const msg = document.getElementById('newsletter-msg');
+  const data = new FormData(e.target);
+  const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+  const json = await res.json();
+  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.style.cssText = 'font-size:0.8rem;color:var(--cyan);margin-top:0.5rem;';
+  if (json.success) e.target.reset();
+}
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/consent.js"></script>
+</body>
+</html>
