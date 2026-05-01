@@ -6,8 +6,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+/* ── Light theme overrides ── */
+[data-theme="light"] {
+  --ink-0: #f5f4f1;
+  --ink-1: #eeecea;
+  --ink-2: #e6e4e0;
+  --ink-3: #d8d5d0;
+  --ink-4: #c8c4bc;
+  --ink-5: #b8b3aa;
+  --text-primary: #1a1c2e;
+  --text-secondary: #3d4060;
+  --text-muted: #6b7099;
+  --nav-bg: rgba(245,244,241,0.92);
+  --nav-border: rgba(0,0,0,0.08);
+}
+
 /* ── Tokens ── */
 :root {
+  --nav-bg: rgba(7,8,15,0.72);
+  --nav-border: rgba(255,255,255,0.08);
   --ink-0: #07080F;
   --ink-1: #0D0F1C;
   --ink-2: #13152A;
@@ -97,9 +114,9 @@ p { color: var(--text-secondary); line-height: 1.75; }
   z-index: 100;
   display: flex;
   align-items: center;
-  background: rgba(7, 8, 15, 0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--nav-border);
   transition: background 0.3s;
 }
 .nav-inner {
@@ -521,6 +538,34 @@ p { color: var(--text-secondary); line-height: 1.75; }
 @media (max-width: 640px) {
   .lang-toggle { margin-left: 0; }
 }
+
+/* ── Theme Toggle ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-left: 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.1); }
+[data-theme="light"] .theme-toggle {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.12);
+}
+[data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.09); }
+.theme-toggle svg { stroke: var(--text-secondary); transition: stroke 0.2s; }
+.theme-toggle:hover svg { stroke: var(--text-primary); }
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
 
 /* ── Cookie Consent Banner ── */
 #cookie-banner {
