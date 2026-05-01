@@ -42,6 +42,7 @@
 
   --max-w: 1200px;
   --nav-h: 72px;
+  --label-color: #7B4FFF;
 }
 
 /* ── Logo theme switching ── */
@@ -104,7 +105,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cyan);
+  color: var(--label-color);
   margin-bottom: 1rem;
 }
 
@@ -827,7 +828,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--cyan);
+  color: var(--label-color);
   flex-shrink: 0;
   z-index: 1;
 }
