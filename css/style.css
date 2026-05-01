@@ -44,6 +44,12 @@
   --nav-h: 72px;
 }
 
+/* ── Logo theme switching ── */
+.logo-for-light { display: none; }
+.logo-for-dark  { display: block; }
+[data-theme="light"] .logo-for-light { display: block; }
+[data-theme="light"] .logo-for-dark  { display: none; }
+
 /* ── Light theme overrides ── */
 [data-theme="light"] {
   --ink-0: #f5f4f1;
@@ -57,6 +63,10 @@
   --text-muted: #6b7099;
   --nav-bg: rgba(245,244,241,0.92);
   --nav-border: rgba(0,0,0,0.08);
+}
+[data-theme="light"] .card-icon {
+  color: #4f28c8;
+  border-color: rgba(79,40,200,0.3);
 }
 
 /* ── Reset ── */
