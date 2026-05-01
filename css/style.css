@@ -218,16 +218,24 @@ p { color: var(--text-secondary); line-height: 1.75; }
   border: none;
 }
 .btn-primary {
-  background: var(--grad);
+  background: linear-gradient(135deg, #7B4FFF 0%, #C23FBD 100%);
   color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
 }
-.btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(123,79,255,0.4); }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(123,79,255,0.45); }
 .btn-ghost {
   background: transparent;
   color: var(--text-primary);
   border: 1px solid rgba(255,255,255,0.15);
 }
 .btn-ghost:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
+[data-theme="light"] .btn-ghost {
+  border-color: rgba(0,0,0,0.15);
+}
+[data-theme="light"] .btn-ghost:hover {
+  border-color: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.04);
+}
 .btn-lg { padding: 1rem 2.5rem; font-size: 1.05rem; border-radius: var(--radius-md); }
 
 /* ── Cards ── */
