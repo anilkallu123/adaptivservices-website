@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oracle Database@AWS vs Oracle Database@Azure: A Practitioner's Comparison — Adaptiv AS</title>
+  <meta name="description" content="Both are Oracle Exadata in a hyperscaler AZ. But the Terraform providers, networking models, and commercial structures are meaningfully different. A practitioner who has delivered both compares them."/>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta property="og:title" content="Oracle Database@AWS vs Oracle Database@Azure: A Practitioner's Comparison"/>
+  <meta property="og:description" content="Both are Oracle Exadata in a hyperscaler. But the Terraform providers, networking, and commercial models differ. A practitioner who delivered both compares them."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/blog-oracle-db-aws-vs-azure"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <link rel="canonical" href="https://www.adaptivservices.com/blog-oracle-db-aws-vs-azure"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Oracle Database@AWS vs Oracle Database@Azure: A Practitioner's Comparison",
+    "datePublished": "2026-06-06",
+    "author": { "@type": "Person", "name": "Anil Kallu" },
+    "publisher": { "@type": "Organization", "name": "Adaptiv AS", "url": "https://www.adaptivservices.com" },
+    "url": "https://www.adaptivservices.com/blog-oracle-db-aws-vs-azure"
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .article-hero { padding: calc(var(--nav-h) + 5rem) 0 4rem; position: relative; overflow: hidden; }
+    .article-hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(123,79,255,0.13) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 30%, rgba(0,212,255,0.07) 0%, transparent 60%); }
+    .article-hero .container { position: relative; z-index: 1; max-width: 860px; }
+    .article-meta-bar { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 2rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+    .article-meta-bar .sep { opacity: 0.3; }
+    .article-hero h1 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.1; margin-bottom: 1.5rem; }
+    .article-hero .lead { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; max-width: 680px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 240px; gap: 4rem; align-items: start; max-width: var(--max-w); margin: 0 auto; padding: 0 2rem 6rem; }
+    .article-body { min-width: 0; }
+    .article-sidebar { position: sticky; top: calc(var(--nav-h) + 2rem); }
+    .toc { background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); overflow: hidden; }
+    .toc-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
+    .toc ul { padding: 1rem 0; }
+    .toc ul li a { display: block; padding: 0.45rem 1.25rem; font-size: 0.82rem; color: var(--text-muted); transition: color 0.2s, padding-left 0.2s; line-height: 1.4; }
+    .toc ul li a:hover { color: var(--label-color); padding-left: 1.6rem; }
+    .toc ul li.toc-active a { color: var(--label-color); border-left: 2px solid var(--cyan); }
+    .author-card { margin-top: 1.5rem; background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); padding: 1.25rem; }
+    .author-card .author-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .author-card .author-name { font-weight: 700; font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .author-card .author-role { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .author-card a { font-family: var(--font-mono); font-size: 0.72rem; color: var(--label-color); letter-spacing: 0.04em; }
+    .prose { color: var(--text-secondary); line-height: 1.85; }
+    .prose h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--text-primary); margin: 3rem 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .prose h3 { font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 0.75rem; }
+    .prose p { margin-bottom: 1.35rem; }
+    .prose ul, .prose ol { margin: 0 0 1.35rem 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+    .prose a { color: var(--label-color); text-decoration: underline; text-decoration-color: rgba(0,212,255,0.3); }
+    .pull-quote { margin: 2.5rem 0; padding: 1.75rem 2rem; border-left: 3px solid transparent; border-image: var(--grad) 1; background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, rgba(123,79,255,0.06) 100%); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+    .pull-quote p { font-size: 1.15rem; font-style: italic; color: var(--text-primary); line-height: 1.65; margin: 0; }
+    .callout { margin: 2rem 0; background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; }
+    .callout-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.25rem; background: rgba(0,212,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--label-color); }
+    .callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+    .callout-dot.indigo { background: var(--indigo); }
+    .callout-dot.magenta { background: var(--magenta); }
+    .callout-body { padding: 1.25rem; }
+    .callout-body p { margin: 0; font-size: 0.9rem; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.85rem; }
+    .comparison-table th { background: var(--ink-2); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); vertical-align: top; }
+    .comparison-table tr:first-child td:first-child { color: var(--label-color); font-weight: 600; }
+    .share-bar { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); margin: 3rem 0; flex-wrap: wrap; }
+    .share-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .share-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); transition: border-color 0.2s, color 0.2s; }
+    .share-tag:hover { border-color: var(--label-color); color: var(--label-color); }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+    .related-card { background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; transition: border-color 0.25s, transform 0.25s; text-decoration: none; }
+    .related-card:hover { border-color: rgba(123,79,255,0.35); transform: translateY(-3px); }
+    .related-card-top { height: 4px; background: var(--grad); }
+    .related-card-body { padding: 1.25rem; }
+    .related-card-body h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+    .related-card-body p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+    @media (max-width: 900px) { .article-layout { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.25rem 4rem; } .article-sidebar { position: static; display: none; } .related-grid { grid-template-columns: 1fr; } }
+  </style>
+<script>(function(){var t=localStorage.getItem('adaptiv-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_light.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-light"/>
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="what-we-do.html">What We Do</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="blog.html" class="active">Insights</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-bg"></div>
+  <div class="container">
+    <div class="article-meta-bar fade-up">
+      <span class="badge badge-cyan" style="font-size:0.68rem;">Oracle / Multicloud</span>
+      <span class="badge" style="font-size:0.68rem; background:rgba(123,79,255,0.12); color:var(--indigo); border:1px solid rgba(123,79,255,0.25);">Series · Part 5 of 6</span>
+      <span class="sep">·</span>
+      <span>06 Jun 2026</span>
+      <span class="sep">·</span>
+      <span>10 min read</span>
+      <span class="sep">·</span>
+      <span>Anil Kallu</span>
+    </div>
+    <h1 class="fade-up">
+      Oracle Database@AWS<br/>vs Oracle Database@Azure:<br/>
+      <span class="grad-text">A Practitioner's Comparison</span>
+    </h1>
+    <p class="lead fade-up">Architecturally identical concepts. Meaningfully different implementations. I've delivered both in production — here's where they diverge in Terraform, networking, commercial model, and which workloads land where.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="article-layout">
+  <article class="article-body prose fade-up">
+
+    <p>I'm in a position that's still uncommon: I've delivered Oracle Database@Azure in production (DIPS AS — Norway's national EHR, one of the earliest ODBAA deployments in Northern Europe) and I've built the Terraform module library for Oracle Database@AWS. That combination — hands-on ODBAA production delivery plus AWS module development — is why this comparison exists as a practitioner article rather than a spec-sheet comparison.</p>
+
+    <p>The short version: they're architecturally identical at the Oracle level (same Exadata hardware, same database software, same Oracle management plane), and meaningfully different at the provider level. The differences that matter are in Terraform tooling, networking model, key management integration, and commercial structure. The choice between them should be driven by your existing cloud footprint — not by any technical superiority of one over the other.</p>
+
+    <h2 id="architecture">What's the Same</h2>
+
+    <p>Both services run genuine Oracle Exadata hardware inside a hyperscaler Availability Zone, managed by Oracle, accessed over a private low-latency network peering from your application VPC or VNet. Both expose the full Oracle Exadata feature set: RAC, Active Data Guard, smart scan, TDE, Oracle MAA. Both are provisioned in two phases — hyperscaler networking and infrastructure, then Oracle database layer via the OCI provider.</p>
+
+    <p>If you know how to operate Oracle Exadata, you know how to operate the database layer on both. The DBA experience — AWR, ASM, RAC administration, Data Guard failover — is identical. The hyperscaler wrapper is different; the database is the same.</p>
+
+    <h2 id="terraform">Terraform Provider Differences</h2>
+
+    <p>This is where the implementation diverges most significantly for infrastructure engineers.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr><th>Dimension</th><th>Oracle DB@AWS</th><th>Oracle DB@Azure (ODBAA)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Phase 1 provider</td><td><code>hashicorp/aws >= 6.15</code> — first-class <code>aws_odb_*</code> resources</td><td><code>hashicorp/azurerm</code> + <code>hashicorp/azapi</code> — azurerm is catching up; AzAPI handles resources not yet in azurerm</td></tr>
+        <tr><td>Resource naming</td><td><code>aws_odb_network</code>, <code>aws_odb_cloud_exadata_infrastructure</code>, <code>aws_odb_cloud_vm_cluster</code></td><td><code>azurerm_oracle_exascale_database_storage_vault</code> (storage), <code>azapi_resource</code> type <code>Oracle.Database/exadbVmClusters</code> (cluster)</td></tr>
+        <tr><td>AZ pinning mechanism</td><td><code>availability_zone_id</code> (physical AZ ID, e.g. <code>use1-az4</code>)</td><td>Location + zone combination; Azure zones are consistent within a subscription (no account-scoped naming)</td></tr>
+        <tr><td>Provider version constraint</td><td>Hard minimum: AWS 6.15. Major version jump from 5.x. Breaking change.</td><td>No hard minimum on azurerm; AzAPI resource type strings change with API version — must pin <code>api_version</code></td></tr>
+        <tr><td>Stability</td><td>Stable first-class resources — schema and behaviour documented in Terraform registry</td><td>AzAPI resources are accurate but more verbose; azurerm coverage for ODBAA resources is improving but incomplete as of mid-2026</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot"></div>The AzAPI vs azurerm choice for ODBAA</div>
+      <div class="callout-body">
+        <p>For Oracle Database@Azure, the storage vault uses <code>azurerm_oracle_exascale_database_storage_vault</code> (now in azurerm), while the VM cluster uses <code>azapi_resource</code> with type <code>Oracle.Database/exadbVmClusters</code>. Use azurerm for standard Azure resources (VNet, Key Vault, subnets) and AzAPI for the cluster resource. Pin the <code>api_version</code> on AzAPI resources — type strings change with API versions and an unpinned resource will drift.</p>
+      </div>
+    </div>
+
+    <h2 id="networking">Networking Model</h2>
+
+    <p>Both use private, low-latency peering between the application network and the Oracle network. The mechanism differs.</p>
+
+    <p><strong>On AWS:</strong> the ODB network is a dedicated networking construct with its own namespace (<code>aws_odb_network</code>), separate from your VPC. The peering connection (<code>aws_odb_network_peering_connection</code>, prefix <code>odbpcx-</code>) has its own lifecycle — it's not a standard VPC peering resource and doesn't appear in the standard VPC peering console view. Route table updates to point application subnets at the ODB network are required explicitly.</p>
+
+    <p><strong>On Azure:</strong> ODBAA uses subnet delegation — a specific subnet in your VNet is delegated to <code>Oracle.Database/networkAttachments</code>. The Exadata infrastructure attaches to this delegated subnet. No separate peering construct; the database is addressable from the VNet directly via the delegated subnet's IP space. This is arguably simpler to reason about for Azure-native teams — the database lives in a subnet, like everything else.</p>
+
+    <p>Both models achieve the same outcome: sub-millisecond latency between application tier and database, fully private, no public internet traversal.</p>
+
+    <h2 id="key-management">Key Management</h2>
+
+    <p><strong>On AWS:</strong> TDE wallet keys are managed in AWS KMS. The VM cluster resource references a KMS key ARN at creation time. Key rotation follows standard AWS KMS rotation policies. This is a natural fit for enterprises that already have AWS KMS governance — Oracle TDE keys become first-class citizens in the existing key management model.</p>
+
+    <p><strong>On Azure:</strong> TDE keys are managed in Azure Key Vault. The ODBAA cluster references a Key Vault URI. Key Vault RBAC and access policies govern TDE key access. Again, a natural fit for Azure-first enterprises — TDE keys live alongside all other secrets and keys in Key Vault, with the same rotation and audit mechanisms.</p>
+
+    <p>Both approaches eliminate the need for a standalone Oracle Wallet management process. Choose based on where your existing key management governance lives.</p>
+
+    <h2 id="commercial">Commercial Model Differences</h2>
+
+    <p>Both services bill jointly — Oracle charges for database software and managed service; the hyperscaler charges for infrastructure. The billing relationship differs:</p>
+
+    <ul>
+      <li><strong>AWS:</strong> ODB charges appear on the AWS bill. May count toward existing AWS EDP commitments (subject to negotiation). Single invoice, AWS Cost Explorer visibility across ODB and all other AWS services.</li>
+      <li><strong>Azure:</strong> ODBAA charges appear on the Azure bill. May count toward Azure MACC (Microsoft Azure Consumption Commitment) in some configurations. Azure Cost Management visibility across ODBAA and all other Azure services.</li>
+    </ul>
+
+    <p>Both support LicenseIncluded and BYOL. The BYOL mechanics — Oracle LMS verification, ULA scope, per-processor vs ECPU mapping — are the same regardless of hyperscaler. The Exadata sizing units differ slightly: AWS uses compute count and CPU core count; Azure uses ECPU (Elastic CPU) in the range 8–200, multiples of 4.</p>
+
+    <h2 id="which-when">Which to Choose and When</h2>
+
+    <div class="pull-quote">
+      <p>"The choice between ODB@AWS and ODBAA should be driven by your existing cloud footprint. If your application tier is AWS-first, choose ODB. If it's Azure-first, choose ODBAA. Running both because different workloads are on different clouds is a legitimate pattern — it's what the Oracle multicloud strategy is designed to support."</p>
+    </div>
+
+    <p>Three scenarios where the answer is clear:</p>
+
+    <ul>
+      <li><strong>Azure-first enterprise running Oracle EBS or JD Edwards:</strong> ODBAA. The application tier is in Azure, the DBAs already manage Azure Key Vault, and the Terraform team knows azurerm. ODB would add AWS to an Azure shop for no benefit.</li>
+      <li><strong>AWS-first enterprise with Oracle APEX application in EKS:</strong> ODB. Application is in AWS, sub-millisecond Oracle access is required, and the team doesn't want a second cloud relationship. ODBAA would require Azure infrastructure for a purely AWS workload.</li>
+      <li><strong>Enterprise running Oracle on on-premise Exadata, migrating to cloud:</strong> whichever hyperscaler the rest of the workload is moving to. Don't let the Oracle database choice drive the hyperscaler selection — let the hyperscaler selection (driven by application, data, and team considerations) drive the Oracle deployment model.</li>
+    </ul>
+
+    <p>In Part 6 — the final article in this series — we cover Oracle licensing on ODB: BYOL vs LicenseIncluded, ULA implications, and how to model the cost before you commit to the architecture.</p>
+
+    <div class="share-bar">
+      <span class="share-label">Topics</span>
+      <span class="share-tag">#OracleCloud</span>
+      <span class="share-tag">#AWS</span>
+      <span class="share-tag">#Azure</span>
+      <span class="share-tag">#MultiCloud</span>
+      <span class="share-tag">#Exadata</span>
+      <span class="share-tag">#Terraform</span>
+    </div>
+
+    <h3 style="color:var(--text-primary); margin-bottom:0.5rem;">Series: Oracle Database@AWS</h3>
+    <div class="related-grid">
+      <a href="blog-oracle-db-aws-migration-methodology.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Part 4: Migration Methodology and Gotchas</h4>
+          <p>Data Pump vs GoldenGate, AWR sizing, and the four phases of an ODB migration.</p>
+        </div>
+      </a>
+      <a href="blog-oracle-db-aws-licensing.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Part 6: Licensing — BYOL vs LicenseIncluded</h4>
+          <p>ULA implications, per-processor mapping, and cost modelling before you commit.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="cta-band fade-up" style="margin-top:4rem;">
+      <div class="cta-band-halo"></div>
+      <p class="eyebrow">Work with us</p>
+      <h2>AWS-first or Azure-first — <span class="grad-text">we've delivered both.</span></h2>
+      <p style="max-width:480px; margin:0 auto 2rem;">We're one of the few practices with production delivery on both Oracle Database@AWS and Oracle Database@Azure. If you're evaluating which path fits your estate, let's have that conversation before you commit.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+    </div>
+
+  </article>
+
+  <aside class="article-sidebar">
+    <nav class="toc">
+      <div class="toc-header">Contents</div>
+      <ul>
+        <li><a href="#architecture">What's the Same</a></li>
+        <li><a href="#terraform">Terraform Provider Differences</a></li>
+        <li><a href="#networking">Networking Model</a></li>
+        <li><a href="#key-management">Key Management</a></li>
+        <li><a href="#commercial">Commercial Model</a></li>
+        <li><a href="#which-when">Which to Choose</a></li>
+      </ul>
+    </nav>
+    <div class="author-card">
+      <div class="author-label">Written by</div>
+      <div class="author-name">Anil Kallu</div>
+      <div class="author-role">Founder, Adaptiv AS · Oracle &amp; Cloud Architect</div>
+      <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn →</a>
+    </div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/icon_light.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-light"/>
+          <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
+          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletter-msg"></div>
+      </div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="what-we-do.html">Oracle Cloud</a></li><li><a href="what-we-do.html">AI &amp; ML</a></li><li><a href="what-we-do.html">Cloud</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="#">Irving, TX / Oslo, Norway</a></li><li><a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span>
+      <span class="footer-built">Designed and built in Oslo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+(function() {
+  const headings = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc ul li');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(li => li.classList.remove('toc-active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.closest('li').classList.add('toc-active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  headings.forEach(h => obs.observe(h));
+})();
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+async function handleNewsletter(e) {
+  e.preventDefault();
+  const msg = document.getElementById('newsletter-msg');
+  const data = new FormData(e.target);
+  const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+  const json = await res.json();
+  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
+  if (json.success) e.target.reset();
+}
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/consent.js"></script>
+<script>
+function toggleTheme() {
+  var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('adaptiv-theme', next); } catch(e) {}
+}
+</script>
+</body>
+</html>
