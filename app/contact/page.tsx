@@ -1,6 +1,5 @@
 'use client'
 
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Calendar, Mail, MapPin, ArrowRight } from 'lucide-react'
 import { FadeUp } from '@/components/motion'
