@@ -19,13 +19,11 @@ const links = [
 export function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [dark, setDark] = useState(true)
+  const [dark, setDark] = useState(() => {
+    if (typeof window === 'undefined') return true
+    try { return localStorage.getItem('adaptiv-theme') !== 'light' } catch { return true }
+  })
   const pathname = usePathname()
-
-  useEffect(() => {
-    const stored = localStorage.getItem('adaptiv-theme')
-    setDark(stored !== 'light')
-  }, [])
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)

@@ -17,30 +17,26 @@ export const metadata: Metadata = {
   verification: { google: '5JGYeCutkY7bv3_o2tsQJbnwP-GjEpWy7FeJOXhxWOo' },
 }
 
+const ldJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Adaptiv AS',
+  url: 'https://www.adaptivservices.com',
+  logo: 'https://www.adaptivservices.com/assets/icon_dark.png',
+  description: 'Norwegian IT venture specialising in cloud architecture, AI engineering, Oracle migrations, D365 ERP, and custom electronics.',
+  foundingDate: '2026',
+  address: { '@type': 'PostalAddress', addressLocality: 'Oslo', addressCountry: 'NO' },
+  contactPoint: { '@type': 'ContactPoint', email: 'sales@adaptivservices.com', contactType: 'sales' },
+  sameAs: ['https://www.linkedin.com/in/anilkallu/', 'https://github.com/anilkallu123'],
+}).replace(/<\//g, '<\\/')
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <ThemeScript />
         <link rel="icon" type="image/png" href="/assets/favicon.png" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Adaptiv AS',
-              url: 'https://www.adaptivservices.com',
-              logo: 'https://www.adaptivservices.com/assets/icon_dark.png',
-              description: 'Norwegian IT venture specialising in cloud architecture, AI engineering, Oracle migrations, D365 ERP, and custom electronics.',
-              foundingDate: '2026',
-              address: { '@type': 'PostalAddress', addressLocality: 'Oslo', addressCountry: 'NO' },
-              contactPoint: { '@type': 'ContactPoint', email: 'sales@adaptivservices.com', contactType: 'sales' },
-              sameAs: ['https://www.linkedin.com/in/anilkallu/', 'https://github.com/anilkallu123'],
-            }),
-          }}
-        />
-        {/* Vercel Analytics loaded via next/script */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson }} />
       </head>
       <body>
         <Nav />

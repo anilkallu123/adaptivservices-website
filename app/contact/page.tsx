@@ -12,13 +12,40 @@ const CHANNELS = [
   { icon: MapPin, label: 'Oslo office', desc: 'Meetings by appointment', href: '#', cta: 'Oslo, Norway' },
 ]
 
+const WEB3FORMS_KEY = '712edce1-c81a-45ad-89c0-bf3c07fac508'
+
 export default function Contact() {
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSent(true)
+    setSubmitting(true)
+    setError('')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New contact form submission — ${form.name}`,
+          from_name: 'Adaptiv Contact Form',
+          ...form,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSent(true)
+      } else {
+        setError('Submission failed. Please email us directly at sales@adaptivservices.com')
+      }
+    } catch {
+      setError('Network error. Please email us directly at sales@adaptivservices.com')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -85,12 +112,18 @@ export default function Contact() {
                       style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)' }}
                     />
                   </div>
+                  {error && (
+                    <p className="text-sm text-red-400 rounded-xl px-4 py-2.5" style={{ background: 'rgba(239,68,68,0.1)' }}>
+                      {error}
+                    </p>
+                  )}
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+                    disabled={submitting}
+                    className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90 disabled:opacity-60"
                     style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
                   >
-                    Send message <ArrowRight size={16} />
+                    {submitting ? 'Sending…' : <><span>Send message</span> <ArrowRight size={16} /></>}
                   </button>
                 </form>
               )}
