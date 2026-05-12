@@ -20,7 +20,7 @@ export default function Sectors() {
               We go where the<br /><span className="grad-text">problems are hardest.</span>
             </h1>
             <p className="text-lg text-muted max-w-xl">
-              Drawn to industries where transformation is overdue, stakes are high, and incumbents move slowly.
+              Five sectors where we have deep delivery history — and where the consequences of poor engineering are real.
             </p>
           </FadeUp>
         </div>

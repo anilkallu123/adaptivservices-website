@@ -130,10 +130,10 @@ export default function Home() {
           <FadeUp className="text-center mb-16">
             <p className="eyebrow mb-3">What we build</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              Six pillars. <span className="grad-text">Unlimited scope.</span>
+              Everything you need. <span className="grad-text">Nothing you don&apos;t.</span>
             </h2>
             <p className="text-muted max-w-lg mx-auto">
-              We don&apos;t specialise in one thing. We are builders — and we bring the full stack to every problem.
+              Six integrated capabilities — so you work with one team instead of six vendors.
             </p>
           </FadeUp>
 
@@ -180,10 +180,10 @@ export default function Home() {
           <FadeUp className="text-center mb-14">
             <p className="eyebrow mb-3">Industries</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              We go where the <span className="grad-text">problems are hardest</span>
+              Industries where <span className="grad-text">stakes are highest</span>
             </h2>
             <p className="text-muted max-w-lg mx-auto">
-              Drawn to industries where transformation is overdue, stakes are high, and incumbents move slowly.
+              We operate in sectors where getting it wrong isn&apos;t an option — public services, healthcare, energy, and industrial.
             </p>
           </FadeUp>
 
@@ -251,10 +251,10 @@ export default function Home() {
           <FadeUp className="text-center mb-14">
             <p className="eyebrow mb-3">Proof of work</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              Results, not <span className="grad-text">promises</span>
+              What we&apos;ve <span className="grad-text">actually delivered</span>
             </h2>
             <p className="text-muted max-w-lg mx-auto">
-              Selected outcomes from 15+ years of enterprise delivery across Norway and Europe.
+              Three of the engagements we&apos;re most proud of — national-scale, measurable, and verifiable.
             </p>
           </FadeUp>
 
@@ -303,7 +303,7 @@ export default function Home() {
                   Big ideas need <span className="grad-text">serious engineers</span>
                 </h2>
                 <p className="text-muted max-w-md mx-auto mb-8">
-                  Whether you have a product spec, a vague problem, or just an ambition — we can find the shape of the solution together.
+                  Bring the problem. We&apos;ll bring the architecture, the team, and the delivery track record to match.
                 </p>
                 <Link
                   href="/contact"

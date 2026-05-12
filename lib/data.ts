@@ -12,12 +12,12 @@ export const STATS = [
 ]
 
 export const CAPABILITIES = [
-  { icon: Sparkles, title: 'Products', body: 'Opinionated software designed around real workflows — not feature lists. We ship, iterate, and own the outcome.' },
-  { icon: Bot, title: 'AI & Machine Learning', body: 'From LLM integrations to bespoke ML pipelines — practical AI that makes operations smarter, not flashier.' },
-  { icon: Cloud, title: 'Cloud & Infrastructure', body: 'Azure, OCI, hybrid architectures. Platforms that scale without drama and cost without surprises.' },
-  { icon: Cpu, title: 'Custom Electronics', body: 'From concept through prototype to production — hardware that connects the physical and digital worlds.' },
-  { icon: Users, title: 'Talent & Staffing', body: 'Senior engineers on demand. No CVs, no wasted time — the right person, ready to contribute from day one.' },
-  { icon: ShieldCheck, title: 'Security', body: 'Security designed in, not bolted on. Threat modelling, compliance, and incident response for regulated industries.' },
+  { icon: Sparkles, title: 'Products', body: 'Software built around real workflows — not feature lists. We ship, iterate, and own the outcome.' },
+  { icon: Bot, title: 'AI & Machine Learning', body: 'LLM integrations to bespoke ML pipelines. Practical AI that adds signal, not noise.' },
+  { icon: Cloud, title: 'Cloud & Infrastructure', body: 'Azure, OCI, hybrid. Platforms that scale without drama and cost without surprises.' },
+  { icon: Cpu, title: 'Custom Electronics', body: 'Concept to production-ready hardware — bridging the physical and digital.' },
+  { icon: Users, title: 'Talent & Staffing', body: 'Senior engineers on demand. No CVs, no ramp-up — contributing from day one.' },
+  { icon: ShieldCheck, title: 'Security', body: 'Designed in, not bolted on. Threat modelling and compliance for regulated industries.' },
 ]
 
 export const FEATURES = [
@@ -36,7 +36,7 @@ export const SECTORS = [
   },
   {
     icon: Activity, color: '#00D4FF', label: 'Health & Life Sciences', stat: '4.2M records/h ingested',
-    desc: "Clinical systems, FHIR-compliant data lakes, AI-assisted diagnostics. Norway's health data deserves infrastructure matching its sensitivity.",
+    desc: 'Clinical systems, FHIR-compliant data lakes, AI-assisted diagnostics. Critical infrastructure for some of the most sensitive data in the country.',
     clients: ['HSØ', 'Sykehuspartner', 'DIPS AS'],
     clientsStr: 'HSØ · Sykehuspartner · DIPS AS',
   },
@@ -48,13 +48,13 @@ export const SECTORS = [
   },
   {
     icon: Factory, color: '#FF8A65', label: 'Industrial', stat: '30% faster month-end close',
-    desc: "ERP, IoT, edge compute, process automation. Norway's industrial backbone deserves systems that move as fast as it does.",
+    desc: 'ERP, IoT, edge compute, process automation. Complex operations running on systems that were built for a different era — we change that.',
     clients: ['Alfa Laval', 'Norsk Hydro', 'Yara'],
     clientsStr: 'Alfa Laval · Norsk Hydro · Yara',
   },
   {
     icon: Ship, color: '#5A4BFF', label: 'Maritime & Logistics', stat: 'Fleet-wide visibility',
-    desc: "Vessel telematics, port operations, supply-chain visibility. Norway is a maritime nation — we build systems that match that heritage.",
+    desc: 'Vessel telematics, port operations, supply-chain visibility. High-stakes logistics where a missed signal or a slow system costs real money.',
     clients: ['Høegh LNG', 'Wallenius Wilhelmsen', 'DFDS'],
     clientsStr: 'Høegh LNG · Wallenius Wilhelmsen · DFDS',
   },
