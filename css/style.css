@@ -19,7 +19,7 @@
 
   --text-primary: #F0F2FF;
   --text-secondary: #A8ADCF;
-  --text-muted: #6B7099;
+  --text-muted: #8B90B8;
   --text-accent: #00D4FF;
 
   --grad: linear-gradient(135deg, #00D4FF 0%, #7B4FFF 45%, #FF2D9B 78%, #FF8A65 100%);
@@ -61,7 +61,7 @@
   --ink-5: #b8b3aa;
   --text-primary: #1a1c2e;
   --text-secondary: #3d4060;
-  --text-muted: #6b7099;
+  --text-muted: #595c80;
   --nav-bg: rgba(245,244,241,0.92);
   --nav-border: rgba(0,0,0,0.08);
 }
