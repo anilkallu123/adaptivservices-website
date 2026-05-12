@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface-2: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --text: #f0f0f5;
+    --text-muted: #8B90B8;
+    --label: #7B4FFF;
+    --grad-from: #7B4FFF;
+    --grad-to: #00D4FF;
+  }
+
+  .light {
+    --bg: #f8f8fc;
+    --surface: #ffffff;
+    --surface-2: #f0f0f8;
+    --border: rgba(0,0,0,0.08);
+    --text: #0a0a1a;
+    --text-muted: #595c80;
+    --label: #6b3fe0;
+    --grad-from: #7B4FFF;
+    --grad-to: #00D4FF;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .grad-text {
+    background: linear-gradient(135deg, var(--grad-from) 0%, var(--grad-to) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .surface-2 {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--label);
+  }
+}
