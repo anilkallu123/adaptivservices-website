@@ -3,6 +3,8 @@ import './globals.css'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { ThemeScript } from '@/components/theme-script'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
   title: { default: 'Adaptiv AS — Build What Matters', template: '%s | Adaptiv AS' },
@@ -39,9 +41,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson }} />
       </head>
       <body>
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )

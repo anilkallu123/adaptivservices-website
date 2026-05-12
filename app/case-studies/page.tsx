@@ -1,36 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { FadeUp, StaggerGrid } from '@/components/motion'
+import { FadeUp } from '@/components/motion'
+import { CASES } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Case Studies',
   description: 'Real outcomes from 15+ years of enterprise delivery across Norway and Europe.',
 }
-
-const CASES = [
-  {
-    label: 'Public Sector · Cloud', color: '#7B4FFF',
-    title: 'Oracle ExaDB Migration — Skatteetaten',
-    stat: '40% performance uplift',
-    body: 'Zero-downtime migration of national tax database from Oracle 19c to 26ai on ExaDB@Azure. Delivered under DIFI compliance with NSM ICT controls throughout.',
-    outcomes: ['Zero downtime during migration', '40% query performance uplift', 'Full NSM ICT compliance', 'Automated rollback capability'],
-  },
-  {
-    label: 'Healthcare · Data Platform', color: '#00D4FF',
-    title: 'National Health Data Platform — HSØ',
-    stat: 'Weeks → hours reporting',
-    body: 'FHIR-compliant Azure data lakehouse serving multiple hospital trusts. Reduced reporting cycles from weeks to hours while maintaining strict data sovereignty requirements.',
-    outcomes: ['FHIR R4 compliant architecture', 'Reporting: weeks → hours', '4.2M records/hour throughput', 'Multi-trust data governance'],
-  },
-  {
-    label: 'ERP · Manufacturing', color: '#FF8A65',
-    title: 'D365 F&O — Alfa Laval Europe',
-    stat: '30% faster month-end close',
-    body: "One of Europe's largest D365 Finance & Operations implementations, spanning 8 countries and replacing 5 legacy ERP systems in a 24-month programme.",
-    outcomes: ['8-country rollout', '30% faster month-end close', '5 legacy systems retired', '1,200+ users onboarded'],
-  },
-]
 
 export default function CaseStudies() {
   return (

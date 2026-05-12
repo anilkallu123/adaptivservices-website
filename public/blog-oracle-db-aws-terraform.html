@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Two-Phase Terraform Delivery Model for Oracle Database@AWS — Adaptiv AS</title>
+  <meta name="description" content="How to provision Oracle Database@AWS end-to-end using the AWS and OCI Terraform providers — the two-phase pattern, key gotchas, and a productised module structure."/>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta property="og:title" content="The Two-Phase Terraform Delivery Model for Oracle Database@AWS"/>
+  <meta property="og:description" content="How to provision Oracle DB@AWS end-to-end with AWS and OCI Terraform providers — the two-phase pattern, gotchas, and module structure."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/blog-oracle-db-aws-terraform"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <link rel="canonical" href="https://www.adaptivservices.com/blog-oracle-db-aws-terraform"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Two-Phase Terraform Delivery Model for Oracle Database@AWS",
+    "datePublished": "2026-05-23",
+    "author": { "@type": "Person", "name": "Anil Kallu" },
+    "publisher": { "@type": "Organization", "name": "Adaptiv AS", "url": "https://www.adaptivservices.com" },
+    "url": "https://www.adaptivservices.com/blog-oracle-db-aws-terraform"
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .article-hero { padding: calc(var(--nav-h) + 5rem) 0 4rem; position: relative; overflow: hidden; }
+    .article-hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(123,79,255,0.13) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 30%, rgba(0,212,255,0.07) 0%, transparent 60%); }
+    .article-hero .container { position: relative; z-index: 1; max-width: 860px; }
+    .article-meta-bar { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 2rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+    .article-meta-bar .sep { opacity: 0.3; }
+    .article-hero h1 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.1; margin-bottom: 1.5rem; }
+    .article-hero .lead { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; max-width: 680px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 240px; gap: 4rem; align-items: start; max-width: var(--max-w); margin: 0 auto; padding: 0 2rem 6rem; }
+    .article-body { min-width: 0; }
+    .article-sidebar { position: sticky; top: calc(var(--nav-h) + 2rem); }
+    .toc { background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); overflow: hidden; }
+    .toc-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
+    .toc ul { padding: 1rem 0; }
+    .toc ul li a { display: block; padding: 0.45rem 1.25rem; font-size: 0.82rem; color: var(--text-muted); transition: color 0.2s, padding-left 0.2s; line-height: 1.4; }
+    .toc ul li a:hover { color: var(--label-color); padding-left: 1.6rem; }
+    .toc ul li.toc-active a { color: var(--label-color); border-left: 2px solid var(--cyan); }
+    .author-card { margin-top: 1.5rem; background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); padding: 1.25rem; }
+    .author-card .author-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .author-card .author-name { font-weight: 700; font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .author-card .author-role { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .author-card a { font-family: var(--font-mono); font-size: 0.72rem; color: var(--label-color); letter-spacing: 0.04em; }
+    .prose { color: var(--text-secondary); line-height: 1.85; }
+    .prose h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--text-primary); margin: 3rem 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .prose h3 { font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 0.75rem; }
+    .prose p { margin-bottom: 1.35rem; }
+    .prose ul, .prose ol { margin: 0 0 1.35rem 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+    .prose a { color: var(--label-color); text-decoration: underline; text-decoration-color: rgba(0,212,255,0.3); }
+    .pull-quote { margin: 2.5rem 0; padding: 1.75rem 2rem; border-left: 3px solid transparent; border-image: var(--grad) 1; background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, rgba(123,79,255,0.06) 100%); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+    .pull-quote p { font-size: 1.15rem; font-style: italic; color: var(--text-primary); line-height: 1.65; margin: 0; }
+    .callout { margin: 2rem 0; background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; }
+    .callout-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.25rem; background: rgba(0,212,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--label-color); }
+    .callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+    .callout-dot.indigo { background: var(--indigo); }
+    .callout-dot.magenta { background: var(--magenta); }
+    .callout-body { padding: 1.25rem; }
+    .callout-body p { margin: 0; font-size: 0.9rem; }
+    .arch-diagram { margin: 2rem 0; background: var(--ink-1); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 2rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); line-height: 2; overflow-x: auto; }
+    .arch-diagram .arch-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1rem; }
+    .arch-node { color: var(--text-primary); font-weight: 600; }
+    .arch-cyan { color: var(--label-color); }
+    .arch-indigo { color: var(--indigo); }
+    .arch-magenta { color: var(--magenta); }
+    .arch-arrow { color: var(--text-muted); }
+    .code-block { margin: 2rem 0; background: var(--ink-1); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); overflow: hidden; }
+    .code-block-header { display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 1.25rem; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .code-block pre { padding: 1.5rem; margin: 0; overflow-x: auto; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7; color: var(--text-secondary); }
+    .code-block pre .kw { color: var(--indigo); }
+    .code-block pre .str { color: var(--label-color); }
+    .code-block pre .cm { color: var(--text-muted); font-style: italic; }
+    .code-block pre .attr { color: #e0a070; }
+    .stat-strip { display: flex; gap: 0; margin: 2.5rem 0; border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; }
+    .stat-strip-item { flex: 1; padding: 1.5rem 1.25rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); background: var(--ink-2); }
+    .stat-strip-item:last-child { border-right: none; }
+    .stat-strip-num { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.4rem; }
+    .stat-strip-lbl { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .share-bar { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); margin: 3rem 0; flex-wrap: wrap; }
+    .share-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .share-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); transition: border-color 0.2s, color 0.2s; }
+    .share-tag:hover { border-color: var(--label-color); color: var(--label-color); }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+    .related-card { background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; transition: border-color 0.25s, transform 0.25s; text-decoration: none; }
+    .related-card:hover { border-color: rgba(123,79,255,0.35); transform: translateY(-3px); }
+    .related-card-top { height: 4px; background: var(--grad); }
+    .related-card-body { padding: 1.25rem; }
+    .related-card-body h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+    .related-card-body p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+    @media (max-width: 900px) { .article-layout { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.25rem 4rem; } .article-sidebar { position: static; display: none; } .related-grid { grid-template-columns: 1fr; } .stat-strip { flex-direction: column; } .stat-strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); } .stat-strip-item:last-child { border-bottom: none; } }
+  </style>
+<script>(function(){var t=localStorage.getItem('adaptiv-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_light.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-light"/>
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="what-we-do.html" data-i18n="nav_what_we_do">What We Do</a></li>
+      <li><a href="sectors.html" data-i18n="nav_sectors">Sectors</a></li>
+      <li><a href="case-studies.html" data-i18n="nav_case_studies">Case Studies</a></li>
+      <li><a href="blog.html" class="active" data-i18n="nav_insights">Insights</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" class="nav-cta" data-i18n="nav_cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-bg"></div>
+  <div class="container">
+    <div class="article-meta-bar fade-up">
+      <span class="badge badge-cyan" style="font-size:0.68rem;">Oracle / AWS</span>
+      <span class="badge" style="font-size:0.68rem; background:rgba(123,79,255,0.12); color:var(--indigo); border:1px solid rgba(123,79,255,0.25);">Series · Part 3 of 6</span>
+      <span class="sep">·</span>
+      <span>23 May 2026</span>
+      <span class="sep">·</span>
+      <span>11 min read</span>
+      <span class="sep">·</span>
+      <span>Anil Kallu</span>
+    </div>
+    <h1 class="fade-up">
+      The Two-Phase<br/>
+      <span class="grad-text">Terraform Delivery Model</span><br/>for Oracle Database@AWS
+    </h1>
+    <p class="lead fade-up">ODB provisioning spans two providers and two control planes. Here's the module pattern that makes it repeatable — and the gotchas that will burn you if you skip the preflight checks.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="article-layout">
+  <article class="article-body prose fade-up">
+
+    <div class="stat-strip">
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">2</div>
+        <div class="stat-strip-lbl">Terraform providers<br/>AWS + OCI</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">6.15</div>
+        <div class="stat-strip-lbl">Min hashicorp/aws<br/>provider version</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">1.12</div>
+        <div class="stat-strip-lbl">Min Terraform<br/>CLI version</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">6h</div>
+        <div class="stat-strip-lbl">Timeout to set on<br/>infra create</div>
+      </div>
+    </div>
+
+    <p>The architectural split in Oracle Database@AWS — AWS-managed infrastructure, Oracle-managed database layer — has a direct consequence for how you provision it. You can't do it with a single Terraform provider. You need the AWS provider for the ODB network and Exadata infrastructure, and you need the OCI provider for the DB Home, CDB, and PDBs. The handoff between them is the <code>vm_cluster_ocid</code> that Phase 1 outputs.</p>
+
+    <p>This two-phase pattern is how we productise ODB for consulting delivery. Instead of a bespoke infrastructure build for each customer, you get a parameterised Terraform call — swap the customer's variable values and the entire stack reproduces consistently. This article walks through both phases, the module structure, and the five gotchas that will cause a failed or rolled-back provisioning run if you don't handle them up front.</p>
+
+    <h2 id="phase1">Phase 1 — The AWS Layer</h2>
+
+    <p>Phase 1 provisions everything that lives in your AWS account and is visible from the AWS console. The resources are:</p>
+
+    <ul>
+      <li><strong>ODB network</strong> (<code>aws_odb_network</code>) — a dedicated network construct, AZ-pinned, that hosts the Exadata infrastructure. This is not a VPC; it's a separate networking primitive.</li>
+      <li><strong>ODB network peering connection</strong> (<code>aws_odb_network_peering_connection</code>) — connects the ODB network to your application VPC. Resources inside the app VPC route to Oracle via this peering. Prefix: <code>odbpcx-</code>.</li>
+      <li><strong>Exadata infrastructure</strong> (<code>aws_odb_cloud_exadata_infrastructure</code>) — the physical Exadata hardware reservation. This is the resource that takes 4–6 hours to create.</li>
+      <li><strong>VM cluster</strong> (<code>aws_odb_cloud_vm_cluster</code>) — the Oracle RAC cluster running on the Exadata infrastructure. This outputs the <code>vm_cluster_ocid</code> needed by Phase 2.</li>
+      <li><strong>KMS key + Secrets Manager secret</strong> — TDE wallet encryption key and database credentials store, integrated with AWS-native key management.</li>
+    </ul>
+
+    <div class="arch-diagram">
+      <div class="arch-label">Phase 1 — Terraform resource dependency graph (AWS provider)</div>
+      <div>
+<span class="arch-node arch-cyan">aws_kms_key</span>  <span class="arch-arrow">+</span>  <span class="arch-node arch-cyan">aws_secretsmanager_secret</span><br/>
+<span class="arch-arrow">         ↓                              ↓</span><br/>
+<span class="arch-node arch-indigo">aws_odb_network</span>  <span class="arch-arrow">──────────────────────</span><br/>
+<span class="arch-arrow">         ↓</span><br/>
+<span class="arch-node arch-indigo">aws_odb_network_peering_connection</span>  <span class="arch-arrow">→  App VPC</span><br/>
+<span class="arch-arrow">         ↓</span><br/>
+<span class="arch-node arch-indigo">aws_odb_cloud_exadata_infrastructure</span>  <span class="arch-arrow">  [4–6h create]</span><br/>
+<span class="arch-arrow">         ↓</span><br/>
+<span class="arch-node arch-magenta">aws_odb_cloud_vm_cluster</span><br/>
+<span class="arch-arrow">         ↓</span><br/>
+<span class="arch-node arch-magenta">output: vm_cluster_ocid</span>  <span class="arch-arrow">→  Phase 2 input</span>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>main.tf — Phase 1 skeleton (AWS provider)</span></div>
+      <pre><span class="cm"># Requires: hashicorp/aws >= 6.15, Terraform >= 1.12.0</span>
+
+<span class="kw">terraform</span> {
+  required_providers {
+    aws = {
+      source  = <span class="str">"hashicorp/aws"</span>
+      version = <span class="str">">= 6.15.0"</span>
+    }
+  }
+  required_version = <span class="str">">= 1.12.0"</span>
+}
+
+<span class="cm"># ODB network — AZ-pinned to physical AZ ID, not AZ name</span>
+<span class="kw">resource</span> <span class="str">"aws_odb_network"</span> <span class="str">"this"</span> {
+  <span class="attr">display_name</span>          = var.odb_network_name
+  <span class="attr">availability_zone_id</span>  = var.az_id  <span class="cm"># e.g. "use1-az4"</span>
+  <span class="attr">client_subnet_cidr</span>    = var.client_subnet_cidr
+  <span class="attr">backup_subnet_cidr</span>    = var.backup_subnet_cidr
+}
+
+<span class="cm"># Peering to application VPC</span>
+<span class="kw">resource</span> <span class="str">"aws_odb_network_peering_connection"</span> <span class="str">"this"</span> {
+  <span class="attr">odb_network_id</span>     = aws_odb_network.this.id
+  <span class="attr">vpc_id</span>             = var.app_vpc_id
+  <span class="attr">peer_network_cidrs</span> = [var.app_vpc_cidr]
+  <span class="attr">vpc_route_table_id</span> = var.app_route_table_id
+}
+
+<span class="cm"># Exadata infrastructure — the 4-6h resource</span>
+<span class="kw">resource</span> <span class="str">"aws_odb_cloud_exadata_infrastructure"</span> <span class="str">"this"</span> {
+  <span class="attr">display_name</span>          = var.exadata_infra_name
+  <span class="attr">availability_zone_id</span>  = var.az_id
+  <span class="attr">shape</span>                 = var.exadata_shape  <span class="cm"># e.g. "Exadata.X9M"</span>
+  <span class="attr">compute_count</span>         = var.compute_count
+  <span class="attr">storage_count</span>         = var.storage_count
+
+  <span class="attr">timeouts</span> {
+    create = <span class="str">"6h"</span>  <span class="cm"># ALWAYS set this — default is too short</span>
+    delete = <span class="str">"6h"</span>
+  }
+}
+
+<span class="cm"># VM cluster — outputs vm_cluster_ocid for Phase 2</span>
+<span class="kw">resource</span> <span class="str">"aws_odb_cloud_vm_cluster"</span> <span class="str">"this"</span> {
+  <span class="attr">display_name</span>                   = var.vm_cluster_name
+  <span class="attr">cloud_exadata_infrastructure_id</span> = aws_odb_cloud_exadata_infrastructure.this.id
+  <span class="attr">odb_network_id</span>                 = aws_odb_network.this.id
+  <span class="attr">cpu_core_count</span>                 = var.cpu_core_count
+  <span class="attr">data_storage_size_in_tbs</span>       = var.data_storage_tbs
+  <span class="attr">gi_version</span>                     = var.gi_version
+  <span class="attr">grid_image_id</span>                  = var.grid_image_ocid  <span class="cm"># see gotcha #3 — attribute is grid_image_id, not grid_image_ocid</span>
+  <span class="attr">ssh_public_keys</span>                = [var.ssh_public_key]
+  <span class="attr">license_model</span>                  = var.license_model  <span class="cm"># LicenseIncluded or BringYourOwnLicense</span>
+  <span class="attr">kms_key_id</span>                     = aws_kms_key.tde.arn
+}
+
+<span class="kw">output</span> <span class="str">"vm_cluster_ocid"</span> {
+  value = aws_odb_cloud_vm_cluster.this.ocid
+}</pre>
+    </div>
+
+    <h2 id="phase2">Phase 2 — The Oracle Layer</h2>
+
+    <p>Phase 2 uses the OCI Terraform provider and takes the <code>vm_cluster_ocid</code> from Phase 1 as its entry point. It provisions the database software layer: DB Home (the Oracle Database software installation), CDB (Container Database), and one or more PDBs (Pluggable Databases).</p>
+
+    <p>The key insight here is the separation of concerns. Phase 1 provisions hardware and networking — things that change infrequently and are managed by AWS infrastructure teams. Phase 2 provisions database objects — things that change more frequently and are managed by DBAs or application teams. Keeping them in separate Terraform states means a database schema change or PDB addition doesn't require re-planning the Exadata infrastructure stack.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>main.tf — Phase 2 skeleton (OCI provider)</span></div>
+      <pre><span class="cm"># Phase 2 takes vm_cluster_ocid as input from Phase 1 output</span>
+
+<span class="kw">terraform</span> {
+  required_providers {
+    oci = {
+      source  = <span class="str">"oracle/oci"</span>
+      version = <span class="str">">= 5.0.0"</span>
+    }
+  }
+}
+
+<span class="cm"># DB Home — Oracle Database software installation on the VM cluster</span>
+<span class="kw">resource</span> <span class="str">"oci_database_db_home"</span> <span class="str">"this"</span> {
+  <span class="attr">vm_cluster_id</span> = var.vm_cluster_ocid  <span class="cm"># from Phase 1 output</span>
+  <span class="attr">display_name</span>  = var.db_home_name
+  <span class="attr">db_version</span>    = var.db_version  <span class="cm"># e.g. "19.21.0.0"</span>
+  <span class="attr">source</span>        = <span class="str">"VM_CLUSTER_NEW"</span>
+
+  <span class="attr">database</span> {
+    <span class="attr">db_name</span>       = var.db_name
+    <span class="attr">pdb_name</span>      = var.initial_pdb_name
+    <span class="attr">admin_password</span> = var.db_admin_password
+    <span class="attr">db_workload</span>   = <span class="str">"OLTP"</span>
+    <span class="attr">character_set</span>  = <span class="str">"AL32UTF8"</span>
+    <span class="attr">ncharacter_set</span> = <span class="str">"AL16UTF16"</span>
+    <span class="attr">tde_wallet_password</span> = var.tde_wallet_password
+  }
+}
+
+<span class="cm"># Additional PDB per application/tenant</span>
+<span class="kw">resource</span> <span class="str">"oci_database_pluggable_database"</span> <span class="str">"app"</span> {
+  <span class="attr">container_database_id</span> = oci_database_db_home.this.database[0].id
+  <span class="attr">pdb_name</span>              = var.app_pdb_name
+  <span class="attr">pdb_admin_password</span>    = var.pdb_admin_password
+  <span class="attr">tde_wallet_password</span>   = var.tde_wallet_password
+  <span class="attr">should_pdb_admin_account_be_locked</span> = false
+}</pre>
+    </div>
+
+    <h2 id="gotchas">The Five Gotchas</h2>
+
+    <p>These are the issues that will burn provisioning runs if you don't handle them before you run <code>terraform apply</code>.</p>
+
+    <h3>1. AWS provider version pinning</h3>
+    <p>The ODB resources require <code>hashicorp/aws >= 6.15</code>. This is a major version jump from 5.x, and it is not backward-compatible. Many enterprise Terraform codebases are pinned to 4.x or 5.x for stability. Upgrading the provider version for ODB while leaving other infrastructure on the old version requires either a separate Terraform workspace/state for ODB, or a full provider upgrade with regression testing across the existing codebase. Do not underestimate this — it's the most common delivery delay in ODB projects.</p>
+
+    <h3>2. AZ pinning on physical AZ ID</h3>
+    <p>The ODB network, app VPC subnets used for peering, and Exadata infrastructure must all be in the same physical AZ ID — not the same AZ name. AZ names are account-scoped aliases; the same physical AZ may have different names in different AWS accounts. Resolve the physical AZ ID before starting: <code>aws ec2 describe-availability-zones --region &lt;region&gt;</code>. Bake the AZ ID directly into your variable definitions, not the name.</p>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot indigo"></div>AZ ID resolution command</div>
+      <div class="callout-body">
+        <p><code>aws ec2 describe-availability-zones --region us-east-1 --query 'AvailabilityZones[*].[ZoneName,ZoneId]' --output table</code> — run this in each AWS account that will host ODB resources. The ZoneId (e.g., <code>use1-az4</code>) is what goes into your Terraform variables, not the ZoneName.</p>
+      </div>
+    </div>
+
+    <h3>3. grid_image_ocid has no enumeration API</h3>
+    <p>The <code>grid_image_ocid</code> parameter on the VM cluster resource specifies the Oracle Grid Infrastructure image version. There is currently no AWS API to list valid values for your region and shape combination. The only reliable method is to retrieve it from an existing ODB VM cluster in the same region: <code>aws odb describe-cloud-vm-clusters --region &lt;region&gt;</code>. Document the OCID in your module's variable definitions with a clear comment — it changes with Grid Infrastructure patch releases and will cause a forced replacement if updated without a planned maintenance window.</p>
+
+    <h3>4. Timeout on Exadata infrastructure create</h3>
+    <p>Always set <code>timeouts { create = "6h" }</code> on <code>aws_odb_cloud_exadata_infrastructure</code>. The Terraform provider's default timeout is shorter than the actual provisioning time in some regions. A timeout during infrastructure creation leaves a partially provisioned resource in a state that requires Oracle support to clean up — it doesn't roll back cleanly. The 6-hour timeout is the safe value; it simply lets the provider wait without error.</p>
+
+    <h3>5. State separation between phases</h3>
+    <p>Keep Phase 1 and Phase 2 in separate Terraform state files — either different workspaces or different backend paths. Phase 1 (Exadata infrastructure) has a 4–6 hour provisioning cycle and should never be in the same plan-apply cycle as Phase 2 (DB Home, PDB). If you combine them, a PDB addition or DB Home change will trigger a plan that includes the Exadata infrastructure in scope — creating risk of accidental destruction of the physical layer when you intended to only change the database software layer.</p>
+
+    <div class="pull-quote">
+      <p>"The two-phase pattern is how you turn ODB from a bespoke infrastructure build into a repeatable, productised delivery. Each customer gets a parameterised call — not a hand-built environment."</p>
+    </div>
+
+    <h2 id="module-structure">Module Structure for Consulting Delivery</h2>
+
+    <p>For consulting delivery, we structure ODB as two reusable Terraform modules — one per phase — with a thin customer-specific root module that wires them together via output/variable chaining.</p>
+
+    <div class="arch-diagram">
+      <div class="arch-label">Module structure — consulting delivery pattern</div>
+      <div>
+<span class="arch-node arch-cyan">modules/oracle-db-aws-infra/</span>  <span class="arch-arrow">← Phase 1 module</span><br/>
+<span class="arch-arrow">  ├── main.tf       (ODB network, Exadata infra, VM cluster, KMS)</span><br/>
+<span class="arch-arrow">  ├── variables.tf  (az_id, shape, cpu_count, storage_tbs, ...)</span><br/>
+<span class="arch-arrow">  └── outputs.tf    (vm_cluster_ocid, odb_network_id, peering_id)</span><br/>
+<br/>
+<span class="arch-node arch-indigo">modules/oracle-db-aws-database/</span>  <span class="arch-arrow">← Phase 2 module</span><br/>
+<span class="arch-arrow">  ├── main.tf       (DB Home, CDB, PDB)</span><br/>
+<span class="arch-arrow">  ├── variables.tf  (vm_cluster_ocid, db_version, pdb_names, ...)</span><br/>
+<span class="arch-arrow">  └── outputs.tf    (db_home_id, pdb_connection_strings)</span><br/>
+<br/>
+<span class="arch-node arch-magenta">customers/acme-corp/</span>  <span class="arch-arrow">← customer root module</span><br/>
+<span class="arch-arrow">  ├── main.tf       (calls both modules, wires outputs → inputs)</span><br/>
+<span class="arch-arrow">  ├── terraform.tfvars  (customer-specific values)</span><br/>
+<span class="arch-arrow">  └── backend.tf    (separate state per phase)</span>
+      </div>
+    </div>
+
+    <p>The module library is published to GitHub under <a href="https://github.com/anilkallu123/terraform-aws-oracle-database" target="_blank" rel="noopener">anilkallu123/terraform-aws-oracle-database</a> — open source, versioned with release-please, with terraform-docs generated reference. Companion modules for Azure and GCP follow the same two-phase pattern.</p>
+
+    <h2 id="ci">CI/CD Considerations</h2>
+
+    <p>Running ODB provisioning in CI has one significant constraint: the 4–6 hour Exadata infrastructure creation time. This is not a pipeline step you run on every PR. The practical pattern:</p>
+
+    <ul>
+      <li>Phase 1 (infra) runs on a separate, manually-triggered pipeline — or a scheduled job during approved maintenance windows. It writes state to a shared remote backend.</li>
+      <li>Phase 2 (database) runs on a standard PR-gated pipeline. It reads the Phase 1 state as a remote state data source and plans only the database layer changes.</li>
+      <li>Plan output for Phase 2 must explicitly show that no Phase 1 resources are in scope before merge approval is granted.</li>
+    </ul>
+
+    <p>In Part 4, we cover the migration methodology — how you get your existing Oracle data into ODB once the infrastructure is provisioned, and when to use Data Pump vs GoldenGate for cutover.</p>
+
+    <div class="share-bar">
+      <span class="share-label">Topics</span>
+      <span class="share-tag">#Terraform</span>
+      <span class="share-tag">#OracleCloud</span>
+      <span class="share-tag">#AWS</span>
+      <span class="share-tag">#InfrastructureAsCode</span>
+      <span class="share-tag">#Exadata</span>
+      <span class="share-tag">#DevOps</span>
+    </div>
+
+    <h3 style="color:var(--text-primary); margin-bottom:0.5rem;">Series: Oracle Database@AWS</h3>
+    <div class="related-grid">
+      <a href="blog-oracle-db-aws-when-to-use.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Part 2: When ODB Is the Right Answer</h4>
+          <p>Decision framework by workload type, industry, and licensing position.</p>
+        </div>
+      </a>
+      <a href="blog-oracle-db-aws-migration-methodology.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Part 4: Migration Methodology and Gotchas</h4>
+          <p>Data Pump vs GoldenGate, AWR sizing, and the four phases of an ODB migration.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="cta-band fade-up" style="margin-top:4rem;">
+      <div class="cta-band-halo"></div>
+      <p class="eyebrow">Work with us</p>
+      <h2>Want the Terraform modules?<br/><span class="grad-text">They're already built.</span></h2>
+      <p style="max-width:480px; margin:0 auto 2rem;">The two-phase ODB module library exists, is versioned on GitHub, and has been used in production. If you want to deploy ODB without building the IaC from scratch, let's talk.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+    </div>
+
+  </article>
+
+  <aside class="article-sidebar">
+    <nav class="toc">
+      <div class="toc-header">Contents</div>
+      <ul>
+        <li><a href="#phase1">Phase 1 — AWS Layer</a></li>
+        <li><a href="#phase2">Phase 2 — Oracle Layer</a></li>
+        <li><a href="#gotchas">The Five Gotchas</a></li>
+        <li><a href="#module-structure">Module Structure</a></li>
+        <li><a href="#ci">CI/CD Considerations</a></li>
+      </ul>
+    </nav>
+    <div class="author-card">
+      <div class="author-label">Written by</div>
+      <div class="author-name">Anil Kallu</div>
+      <div class="author-role">Founder, Adaptiv AS · Oracle &amp; Cloud Architect</div>
+      <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn →</a>
+    </div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/icon_light.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-light"/>
+          <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
+          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
+          <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
+        </form>
+        <div id="newsletter-msg"></div>
+      </div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="what-we-do.html">Oracle Cloud</a></li><li><a href="what-we-do.html">AI &amp; ML</a></li><li><a href="what-we-do.html">Cloud</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="#">Irving, TX / Oslo, Norway</a></li><li><a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span>
+      <span class="footer-built">Designed and built in Oslo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+(function() {
+  const headings = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc ul li');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(li => li.classList.remove('toc-active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.closest('li').classList.add('toc-active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  headings.forEach(h => obs.observe(h));
+})();
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+async function handleNewsletter(e) {
+  e.preventDefault();
+  const msg = document.getElementById('newsletter-msg');
+  const data = new FormData(e.target);
+  const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+  const json = await res.json();
+  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
+  if (json.success) e.target.reset();
+}
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/consent.js"></script>
+<script>
+function toggleTheme() {
+  var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('adaptiv-theme', next); } catch(e) {}
+}
+</script>
+</body>
+</html>

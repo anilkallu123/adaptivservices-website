@@ -1,8 +1,6 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { NewsletterForm } from '@/components/newsletter-form'
 
 export function Footer() {
   return (
@@ -63,26 +61,7 @@ export function Footer() {
           <div>
             <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">Stay in touch</h5>
             <p className="text-sm text-muted mb-3">Technical insights from Oslo.</p>
-            <form className="flex gap-2" onSubmit={e => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 px-3 py-2 rounded-lg text-sm outline-none focus:ring-1"
-                style={{
-                  background: 'var(--surface-2)',
-                  border: '1px solid var(--border)',
-                  color: 'var(--text)',
-                  '--tw-ring-color': '#7B4FFF',
-                } as React.CSSProperties}
-              />
-              <button
-                type="submit"
-                className="px-3 py-2 rounded-lg text-white transition-opacity hover:opacity-90"
-                style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
-              >
-                <ArrowRight size={14} />
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 

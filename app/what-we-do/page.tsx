@@ -1,45 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Sparkles, Bot, Cloud, Cpu, Users, ShieldCheck, ArrowRight } from 'lucide-react'
-import { FadeUp, StaggerGrid } from '@/components/motion'
+import { ArrowRight } from 'lucide-react'
+import { FadeUp } from '@/components/motion'
+import { SERVICES } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'What We Do',
   description: 'Six capability pillars: products, AI, cloud, electronics, talent, and security.',
 }
-
-const SERVICES = [
-  {
-    icon: Sparkles, color: '#7B4FFF', title: 'Products',
-    body: 'Opinionated software designed around real workflows — not feature lists. We build end-to-end: from discovery through design, engineering, and long-term maintenance.',
-    points: ['Custom product development', 'UX research & design', 'Iterative delivery', 'Post-launch ownership'],
-  },
-  {
-    icon: Bot, color: '#00D4FF', title: 'AI & Machine Learning',
-    body: 'From LLM integrations to bespoke ML pipelines — practical AI that makes operations smarter, not just flashier.',
-    points: ['LLM integration & fine-tuning', 'RAG architectures', 'ML pipeline engineering', 'AI-assisted diagnostics'],
-  },
-  {
-    icon: Cloud, color: '#FF2D9B', title: 'Cloud & Infrastructure',
-    body: 'Azure, OCI, and hybrid architectures. We design platforms that scale without drama and cost without surprises.',
-    points: ['Azure & OCI architecture', 'Zero-downtime migrations', 'IaC with Terraform', 'FinOps & cost optimisation'],
-  },
-  {
-    icon: Cpu, color: '#FF8A65', title: 'Custom Electronics',
-    body: 'From concept through prototype to production — hardware that connects the physical and digital worlds.',
-    points: ['PCB design & prototyping', 'Embedded firmware', 'IoT edge systems', 'CE & UKCA certification support'],
-  },
-  {
-    icon: Users, color: '#5A4BFF', title: 'Talent & Staffing',
-    body: 'Senior engineers and architects on demand. No CVs, no wasted time — the right person, ready to contribute from day one.',
-    points: ['Staff augmentation', 'Team embedding', 'Tech lead as a service', 'Architecture consulting'],
-  },
-  {
-    icon: ShieldCheck, color: '#22c55e', title: 'Security',
-    body: 'Security designed in, not bolted on. Threat modelling, compliance, and incident response for regulated industries.',
-    points: ['NSM ICT framework compliance', 'Threat modelling', 'Penetration testing', 'Incident response planning'],
-  },
-]
 
 export default function WhatWeDo() {
   return (

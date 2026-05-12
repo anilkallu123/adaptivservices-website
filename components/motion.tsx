@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
@@ -54,9 +55,11 @@ export function StaggerGrid({ children, className, childClassName, stagger = 0.0
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
+  const items = React.Children.toArray(children)
+
   return (
     <div ref={ref} className={className}>
-      {children.map((child, i) => (
+      {items.map((child, i) => (
         <motion.div
           key={i}
           initial={{ opacity: 0, y: 24 }}

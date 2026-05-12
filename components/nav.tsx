@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import Image from 'next/image'
+import { useTheme } from '@/components/theme-provider'
 
 const links = [
   { href: '/', label: 'Home' },
@@ -19,10 +20,8 @@ const links = [
 export function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [dark, setDark] = useState(() => {
-    if (typeof window === 'undefined') return true
-    try { return localStorage.getItem('adaptiv-theme') !== 'light' } catch { return true }
-  })
+  const { theme, toggle: toggleTheme } = useTheme()
+  const dark = theme === 'dark'
   const pathname = usePathname()
 
   useEffect(() => {
@@ -30,13 +29,6 @@ export function Nav() {
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
-
-  function toggleTheme() {
-    const next = !dark
-    setDark(next)
-    document.documentElement.classList.toggle('light', !next)
-    localStorage.setItem('adaptiv-theme', next ? 'dark' : 'light')
-  }
 
   return (
     <header

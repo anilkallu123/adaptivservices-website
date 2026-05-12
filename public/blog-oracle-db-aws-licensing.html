@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oracle Licensing on ODB: BYOL vs LicenseIncluded, ULA Implications — Adaptiv AS</title>
+  <meta name="description" content="The licensing decision on Oracle Database@AWS determines whether ODB is cost-competitive or prohibitively expensive. Here's how to model it before you commit."/>
+  <link rel="icon" type="image/png" href="assets/favicon.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta property="og:title" content="Oracle Licensing on ODB: BYOL vs LicenseIncluded, ULA Implications"/>
+  <meta property="og:description" content="The licensing decision determines whether ODB is cost-competitive. How to model it before you commit."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://www.adaptivservices.com/blog-oracle-db-aws-licensing"/>
+  <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
+  <link rel="canonical" href="https://www.adaptivservices.com/blog-oracle-db-aws-licensing"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Oracle Licensing on ODB: BYOL vs LicenseIncluded, ULA Implications",
+    "datePublished": "2026-06-13",
+    "author": { "@type": "Person", "name": "Anil Kallu" },
+    "publisher": { "@type": "Organization", "name": "Adaptiv AS", "url": "https://www.adaptivservices.com" },
+    "url": "https://www.adaptivservices.com/blog-oracle-db-aws-licensing"
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .article-hero { padding: calc(var(--nav-h) + 5rem) 0 4rem; position: relative; overflow: hidden; }
+    .article-hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(123,79,255,0.13) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 30%, rgba(0,212,255,0.07) 0%, transparent 60%); }
+    .article-hero .container { position: relative; z-index: 1; max-width: 860px; }
+    .article-meta-bar { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 2rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+    .article-meta-bar .sep { opacity: 0.3; }
+    .article-hero h1 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.1; margin-bottom: 1.5rem; }
+    .article-hero .lead { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; max-width: 680px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 240px; gap: 4rem; align-items: start; max-width: var(--max-w); margin: 0 auto; padding: 0 2rem 6rem; }
+    .article-body { min-width: 0; }
+    .article-sidebar { position: sticky; top: calc(var(--nav-h) + 2rem); }
+    .toc { background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); overflow: hidden; }
+    .toc-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
+    .toc ul { padding: 1rem 0; }
+    .toc ul li a { display: block; padding: 0.45rem 1.25rem; font-size: 0.82rem; color: var(--text-muted); transition: color 0.2s, padding-left 0.2s; line-height: 1.4; }
+    .toc ul li a:hover { color: var(--label-color); padding-left: 1.6rem; }
+    .toc ul li.toc-active a { color: var(--label-color); border-left: 2px solid var(--cyan); }
+    .author-card { margin-top: 1.5rem; background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); padding: 1.25rem; }
+    .author-card .author-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .author-card .author-name { font-weight: 700; font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .author-card .author-role { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .author-card a { font-family: var(--font-mono); font-size: 0.72rem; color: var(--label-color); letter-spacing: 0.04em; }
+    .prose { color: var(--text-secondary); line-height: 1.85; }
+    .prose h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--text-primary); margin: 3rem 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .prose h3 { font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 0.75rem; }
+    .prose p { margin-bottom: 1.35rem; }
+    .prose ul, .prose ol { margin: 0 0 1.35rem 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+    .prose a { color: var(--label-color); text-decoration: underline; text-decoration-color: rgba(0,212,255,0.3); }
+    .pull-quote { margin: 2.5rem 0; padding: 1.75rem 2rem; border-left: 3px solid transparent; border-image: var(--grad) 1; background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, rgba(123,79,255,0.06) 100%); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+    .pull-quote p { font-size: 1.15rem; font-style: italic; color: var(--text-primary); line-height: 1.65; margin: 0; }
+    .callout { margin: 2rem 0; background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; }
+    .callout-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.25rem; background: rgba(0,212,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--label-color); }
+    .callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+    .callout-dot.indigo { background: var(--indigo); }
+    .callout-dot.magenta { background: var(--magenta); }
+    .callout-body { padding: 1.25rem; }
+    .callout-body p { margin: 0; font-size: 0.9rem; }
+    .stat-strip { display: flex; gap: 0; margin: 2.5rem 0; border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; }
+    .stat-strip-item { flex: 1; padding: 1.5rem 1.25rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); background: var(--ink-2); }
+    .stat-strip-item:last-child { border-right: none; }
+    .stat-strip-num { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.4rem; }
+    .stat-strip-lbl { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.85rem; }
+    .comparison-table th { background: var(--ink-2); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); vertical-align: top; }
+    .share-bar { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); margin: 3rem 0; flex-wrap: wrap; }
+    .share-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .share-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); transition: border-color 0.2s, color 0.2s; }
+    .share-tag:hover { border-color: var(--label-color); color: var(--label-color); }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+    .related-card { background: var(--ink-2); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); overflow: hidden; transition: border-color 0.25s, transform 0.25s; text-decoration: none; }
+    .related-card:hover { border-color: rgba(123,79,255,0.35); transform: translateY(-3px); }
+    .related-card-top { height: 4px; background: var(--grad); }
+    .related-card-body { padding: 1.25rem; }
+    .related-card-body h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+    .related-card-body p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+    @media (max-width: 900px) { .article-layout { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.25rem 4rem; } .article-sidebar { position: static; display: none; } .related-grid { grid-template-columns: 1fr; } .stat-strip { flex-direction: column; } .stat-strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); } .stat-strip-item:last-child { border-bottom: none; } }
+  </style>
+<script>(function(){var t=localStorage.getItem('adaptiv-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icon_light.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-light"/>
+      <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
+      <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="what-we-do.html">What We Do</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="blog.html" class="active">Insights</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
+    <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-bg"></div>
+  <div class="container">
+    <div class="article-meta-bar fade-up">
+      <span class="badge badge-cyan" style="font-size:0.68rem;">Oracle / AWS</span>
+      <span class="badge" style="font-size:0.68rem; background:rgba(123,79,255,0.12); color:var(--indigo); border:1px solid rgba(123,79,255,0.25);">Series · Part 6 of 6</span>
+      <span class="sep">·</span>
+      <span>13 Jun 2026</span>
+      <span class="sep">·</span>
+      <span>9 min read</span>
+      <span class="sep">·</span>
+      <span>Anil Kallu</span>
+    </div>
+    <h1 class="fade-up">
+      Oracle Licensing on ODB:<br/>
+      <span class="grad-text">BYOL vs LicenseIncluded,</span><br/>ULA Implications
+    </h1>
+    <p class="lead fade-up">The licensing decision on Oracle Database@AWS can make ODB cost-competitive with on-premise Exadata — or make it the most expensive Oracle deployment you've ever run. Here's how to model it before you commit.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="article-layout">
+  <article class="article-body prose fade-up">
+
+    <div class="stat-strip">
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">2</div>
+        <div class="stat-strip-lbl">License models:<br/>BYOL or Included</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">ULA</div>
+        <div class="stat-strip-lbl">Can cover ODB<br/>BYOL if scoped</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">OCPU</div>
+        <div class="stat-strip-lbl">Billing unit on<br/>ODB VM cluster</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-strip-num">LMS</div>
+        <div class="stat-strip-lbl">Oracle verification<br/>required for BYOL</div>
+      </div>
+    </div>
+
+    <p>This is the final article in a six-part series on Oracle Database@AWS. Parts 1–5 covered architecture, decision framework, Terraform delivery, migration methodology, and the AWS/Azure comparison. This article covers the dimension that most directly determines whether ODB is financially viable for your organisation: Oracle licensing.</p>
+
+    <p>The licensing decision is not a technical one — it's a commercial one with technical inputs. And it's one that most infrastructure teams get wrong, because they make it without involving Oracle License Management or their Oracle account team until it's too late to change the architecture.</p>
+
+    <h2 id="two-models">The Two License Models</h2>
+
+    <h3>LicenseIncluded</h3>
+    <p>Oracle Database Enterprise Edition, Exadata software, and all standard options are bundled into the hourly ODB charge. You pay Oracle and AWS jointly for the full stack: hardware, infrastructure management, database software, and licensing. No separate Oracle contract required beyond the service agreement.</p>
+    <p><strong>When it makes sense:</strong> you don't have existing Oracle EE per-processor licensing, you're not on a ULA, or you want to eliminate Oracle licensing as a procurement variable. LicenseIncluded is the fastest path to a running ODB cluster — no LMS verification, no license count negotiation.</p>
+    <p><strong>The cost reality:</strong> LicenseIncluded is materially more expensive than BYOL at scale. For a production VM cluster running 32 OCPUs, the licensing component of the hourly charge is significant. Model the 3-year TCO before committing.</p>
+
+    <h3>BringYourOwnLicense (BYOL)</h3>
+    <p>You supply Oracle Database EE per-processor licensing — verified by Oracle License Management Services (LMS). The ODB charge covers hardware infrastructure and managed service only. Database software licensing is your responsibility and separate cost.</p>
+    <p><strong>When it makes sense:</strong> you have existing Oracle EE per-processor licensing from an on-premise Exadata deployment, you're on an active ULA that covers cloud deployments, or you're decommissioning on-premise Oracle hardware and want to redeploy those licenses on ODB.</p>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot"></div>BYOL licensing metric on ODB</div>
+      <div class="callout-body">
+        <p>ODB uses OCPU (Oracle CPU) as the billing unit. One OCPU = two physical processor cores on Exadata X9M hardware. For licensing purposes, Oracle maps OCPUs to per-processor licenses using the Oracle Processor Core Factor Table. For Intel Xeon processors (Exadata X9M), the core factor is 0.5 — so two physical cores (one OCPU) = one processor license. Verify the core factor for your specific Exadata shape with Oracle LMS before committing to a license count.</p>
+      </div>
+    </div>
+
+    <h2 id="ula">ULA Implications</h2>
+
+    <p>The Unlimited License Agreement is where ODB licensing gets commercially interesting — and where the risk of getting it wrong is highest.</p>
+
+    <p>A ULA grants unlimited deployment rights for covered Oracle products during the ULA term (typically 3 years), followed by a certification process where Oracle LMS counts your actual deployment and converts it to perpetual per-processor licenses. The key question for ODB: <strong>does your ULA cover Oracle Database@AWS deployments?</strong></p>
+
+    <p>The answer depends entirely on the ULA contract language. ULAs executed before July 2025 (when ODB went GA) typically did not name Oracle Database@AWS as a covered deployment target — it didn't exist. For those ULAs, BYOL on ODB may require an amendment or separate agreement.</p>
+
+    <p>ULAs executed or renewed after July 2025 should explicitly name Oracle Database@AWS if your roadmap includes ODB. Failing to include it means ODB deployments don't count against your ULA, which may sound advantageous but creates a compliance exposure: you're deploying Oracle EE without a license that covers that specific deployment target.</p>
+
+    <div class="callout">
+      <div class="callout-header"><div class="callout-dot indigo"></div>Before your next ULA renewal</div>
+      <div class="callout-body">
+        <p>If ODB is on your roadmap, include these explicitly in your ULA negotiation: Oracle Database Enterprise Edition on Oracle Database@AWS, Oracle Database Enterprise Edition on Oracle Database@Azure (if relevant), all Oracle options you plan to use on ODB (Partitioning, Advanced Compression, Diagnostics Pack, Tuning Pack, Active Data Guard, RAC). Get the deployment targets in the contract — don't rely on implied coverage.</p>
+      </div>
+    </div>
+
+    <h2 id="options">Oracle Options Licensing</h2>
+
+    <p>Enterprise Edition database licensing covers the core database engine. Oracle options — the add-on packs and features — require separate licensing. On ODB, the following are commonly required and must be explicitly licensed under BYOL:</p>
+
+    <ul>
+      <li><strong>Oracle Active Data Guard</strong> — required for the Data Guard standby in a high-availability configuration. Not included in base EE licensing. Per-processor, same factor as EE.</li>
+      <li><strong>Oracle Partitioning</strong> — if the schema uses range, list, or hash partitioning. Per-processor.</li>
+      <li><strong>Oracle Advanced Compression</strong> — if using hybrid columnar compression or OLTP compression. Per-processor.</li>
+      <li><strong>Oracle Diagnostics Pack + Tuning Pack</strong> — required for AWR, ADDM, SQL Tuning Advisor. These are used routinely in production operations. Per-processor, licensed as a pack.</li>
+      <li><strong>Oracle Database Vault</strong> — if using Vault for privileged access control. Per-processor.</li>
+    </ul>
+
+    <p>The LicenseIncluded model bundles all of these. Under BYOL, you must license each option separately. Run your AWR analysis during Discovery (Part 4) to identify which options are currently in use — this becomes your options licensing requirement list.</p>
+
+    <h2 id="cost-model">Cost Modelling Before You Commit</h2>
+
+    <p>Do this analysis before signing any ODB commitment. Three numbers to compare:</p>
+
+    <h3>Option A: LicenseIncluded on ODB</h3>
+    <p>Take the Oracle published hourly rate for ODB LicenseIncluded for your shape and OCPU count, multiply by 8,760 hours, multiply by 3 years. Add infrastructure charges (Exadata storage, networking). This is your 3-year LicenseIncluded cost.</p>
+
+    <h3>Option B: BYOL on ODB</h3>
+    <p>Take the Oracle published hourly rate for ODB BYOL for your shape and OCPU count, multiply by 8,760 × 3. Add the annualised cost of your Oracle EE per-processor licenses (if you're purchasing or renewing) × 3. If you're deploying ULA licenses, the marginal cost of the licenses themselves is near-zero — just the BYOL infrastructure rate.</p>
+
+    <h3>Option C: Stay on-premise Exadata or move to OCI ExaCS</h3>
+    <p>Your current on-premise TCO (hardware amortisation, maintenance, data centre costs, staff) or OCI ExaCS pricing. This is your baseline — ODB needs to compare favourably to it.</p>
+
+    <div class="pull-quote">
+      <p>"The most common ODB cost model mistake: comparing ODB LicenseIncluded to on-premise Exadata without accounting for the data centre cost elimination, the managed service premium you're no longer paying for hardware ops, and the AWS EDP credit offset. The headline rate looks expensive; the full TCO often doesn't."</p>
+    </div>
+
+    <h2 id="negotiation">Commercial Leverage Points</h2>
+
+    <p>Oracle has commercial incentives to grow ODB adoption. That creates real negotiating room that most enterprises don't use.</p>
+
+    <ul>
+      <li><strong>ODB deployment as ULA exit credit:</strong> if you're approaching ULA certification and planning to exit, ODB deployment counts can be used to set a favourable perpetual license count. More ODB OCPUs at certification = more perpetual licenses without additional cost.</li>
+      <li><strong>Renewal timing:</strong> if you're within 12 months of an Oracle support renewal, ODB adoption is a negotiating chip. Oracle sales teams have commercial targets for ODB revenue — that's your leverage.</li>
+      <li><strong>Committed consumption:</strong> like AWS EDP, Oracle cloud services (including ODB) often have volume discount structures for committed annual consumption. Ask your Oracle account team explicitly — the published rates are the floor, not the ceiling.</li>
+      <li><strong>AWS EDP credit:</strong> confirm with your AWS account team whether ODB charges count toward your EDP minimum commitment. Not guaranteed, but increasingly common in enterprise agreements as ODB adoption grows.</li>
+    </ul>
+
+    <h2 id="conclusion">Closing the Series</h2>
+
+    <p>This is the sixth and final article in the Oracle Database@AWS series. We've covered what ODB is, when to use it, how to provision it with Terraform, how to migrate to it, how it compares to Oracle Database@Azure, and how to model the licensing cost before committing.</p>
+
+    <p>The consistent theme across all six articles: ODB is a specific solution to a specific problem. It's not the default Oracle deployment model for AWS. It's the right answer when you genuinely need full Exadata capability inside an AWS Availability Zone, you can't operate a separate OCI tenancy, and your licensing position makes the economics work.</p>
+
+    <p>When all of those conditions align — and for a growing class of enterprises in healthcare, oil and gas, and financial services, they do — ODB is the most technically complete Oracle deployment available in any hyperscaler.</p>
+
+    <div class="share-bar">
+      <span class="share-label">Topics</span>
+      <span class="share-tag">#OracleLicensing</span>
+      <span class="share-tag">#OracleCloud</span>
+      <span class="share-tag">#AWS</span>
+      <span class="share-tag">#ULA</span>
+      <span class="share-tag">#Exadata</span>
+      <span class="share-tag">#CloudCostOptimization</span>
+    </div>
+
+    <h3 style="color:var(--text-primary); margin-bottom:0.5rem;">Series: Oracle Database@AWS</h3>
+    <div class="related-grid">
+      <a href="blog-oracle-db-aws-what-it-is.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Part 1: What Oracle DB@AWS Actually Is</h4>
+          <p>Architecture, commercial model, and the distinction from RDS and EC2.</p>
+        </div>
+      </a>
+      <a href="blog-oracle-db-aws-vs-azure.html" class="related-card">
+        <div class="related-card-top"></div>
+        <div class="related-card-body">
+          <h4>Part 5: Oracle DB@AWS vs Oracle DB@Azure</h4>
+          <p>Terraform, networking, and commercial model comparison from a practitioner.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="cta-band fade-up" style="margin-top:4rem;">
+      <div class="cta-band-halo"></div>
+      <p class="eyebrow">Work with us</p>
+      <h2>Need a licensing model before you commit?<br/><span class="grad-text">We've done this before.</span></h2>
+      <p style="max-width:480px; margin:0 auto 2rem;">We can model your 3-year ODB TCO across LicenseIncluded, BYOL, and the OCI alternative — before you're locked into a contract. Unbiased, numbers-first, no Oracle referral relationship.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
+    </div>
+
+  </article>
+
+  <aside class="article-sidebar">
+    <nav class="toc">
+      <div class="toc-header">Contents</div>
+      <ul>
+        <li><a href="#two-models">The Two License Models</a></li>
+        <li><a href="#ula">ULA Implications</a></li>
+        <li><a href="#options">Oracle Options Licensing</a></li>
+        <li><a href="#cost-model">Cost Modelling</a></li>
+        <li><a href="#negotiation">Commercial Leverage</a></li>
+        <li><a href="#conclusion">Closing the Series</a></li>
+      </ul>
+    </nav>
+    <div class="author-card">
+      <div class="author-label">Written by</div>
+      <div class="author-name">Anil Kallu</div>
+      <div class="author-role">Founder, Adaptiv AS · Oracle &amp; Cloud Architect</div>
+      <a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn →</a>
+    </div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/icon_light.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-light"/>
+          <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
+          <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
+        </a>
+        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
+        <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
+          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletter-msg"></div>
+      </div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="what-we-do.html">Oracle Cloud</a></li><li><a href="what-we-do.html">AI &amp; ML</a></li><li><a href="what-we-do.html">Cloud</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="#">Irving, TX / Oslo, Norway</a></li><li><a href="https://www.linkedin.com/in/anilkallu/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span>
+      <span class="footer-built">Designed and built in Oslo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+(function() {
+  const headings = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc ul li');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(li => li.classList.remove('toc-active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.closest('li').classList.add('toc-active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  headings.forEach(h => obs.observe(h));
+})();
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+async function handleNewsletter(e) {
+  e.preventDefault();
+  const msg = document.getElementById('newsletter-msg');
+  const data = new FormData(e.target);
+  const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+  const json = await res.json();
+  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
+  if (json.success) e.target.reset();
+}
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/consent.js"></script>
+<script>
+function toggleTheme() {
+  var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('adaptiv-theme', next); } catch(e) {}
+}
+</script>
+</body>
+</html>

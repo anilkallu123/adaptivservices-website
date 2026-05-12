@@ -1,40 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Landmark, Activity, Zap, Factory, Ship, ArrowRight } from 'lucide-react'
-import { FadeUp, StaggerGrid } from '@/components/motion'
+import { ArrowRight } from 'lucide-react'
+import { FadeUp } from '@/components/motion'
+import { SECTORS } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Sectors',
   description: 'Industries we serve: public sector, health, energy, industrial, maritime.',
 }
-
-const SECTORS = [
-  {
-    icon: Landmark, color: '#7B4FFF', title: 'Public Sector', stat: '27 systems delivered',
-    body: 'Tax, health, defence, transport, civic services. NSM ICT framework and DIFI standards by default — compliance is the floor, not the ceiling.',
-    clients: ['Skatteetaten', 'Helsedirektoratet', 'DSB', 'Bymiljøetaten'],
-  },
-  {
-    icon: Activity, color: '#00D4FF', title: 'Health & Life Sciences', stat: '4.2M records/h',
-    body: 'Clinical systems, FHIR-compliant data lakes, AI-assisted diagnostics. Norway\'s health data deserves infrastructure matching its sensitivity.',
-    clients: ['HSØ', 'Sykehuspartner', 'DIPS AS'],
-  },
-  {
-    icon: Zap, color: '#FF2D9B', title: 'Energy & Utilities', stat: 'Real-time edge control',
-    body: 'Grid intelligence, offshore systems, renewables management. Real-time control where downtime is measured in megawatts.',
-    clients: ['Statnett', 'Equinor', 'Hafslund Nett'],
-  },
-  {
-    icon: Factory, color: '#FF8A65', title: 'Industrial', stat: '30% faster month-end',
-    body: 'ERP, IoT, edge compute, process automation. Norway\'s industrial backbone deserves systems that move as fast as it does.',
-    clients: ['Alfa Laval', 'Norsk Hydro', 'Yara'],
-  },
-  {
-    icon: Ship, color: '#5A4BFF', title: 'Maritime & Logistics', stat: 'Fleet-wide visibility',
-    body: 'Vessel telematics, port operations, supply-chain visibility. Norway is a maritime nation — we build systems that match that heritage.',
-    clients: ['Høegh LNG', 'Wallenius Wilhelmsen', 'DFDS'],
-  },
-]
 
 export default function Sectors() {
   return (
@@ -56,7 +29,7 @@ export default function Sectors() {
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-6 space-y-4">
           {SECTORS.map((s, i) => (
-            <FadeUp key={s.title} delay={i * 0.06}>
+            <FadeUp key={s.label} delay={i * 0.06}>
               <div className="rounded-2xl p-8"
                 style={{ background: 'var(--surface)', border: `1px solid ${s.color}22` }}>
                 <div className="flex items-start gap-5 mb-5">
@@ -66,10 +39,10 @@ export default function Sectors() {
                   </div>
                   <div>
                     <div className="text-xs font-mono text-muted mb-1">{s.stat}</div>
-                    <h2 className="text-xl font-bold" style={{ color: 'var(--text)' }}>{s.title}</h2>
+                    <h2 className="text-xl font-bold" style={{ color: 'var(--text)' }}>{s.label}</h2>
                   </div>
                 </div>
-                <p className="text-muted leading-relaxed mb-5 max-w-2xl">{s.body}</p>
+                <p className="text-muted leading-relaxed mb-5 max-w-2xl">{s.desc}</p>
                 <div className="flex flex-wrap gap-2 mb-5">
                   {s.clients.map(c => (
                     <span key={c} className="text-xs font-medium px-3 py-1 rounded-full"
