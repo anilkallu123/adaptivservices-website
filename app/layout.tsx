@@ -4,6 +4,7 @@ import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { ThemeScript } from '@/components/theme-script'
 import { ThemeProvider } from '@/components/theme-provider'
+import { LangProvider } from '@/components/lang-provider'
 import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
@@ -41,11 +42,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson }} />
       </head>
       <body>
-        <ThemeProvider>
-          <Nav />
-          <main>{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <LangProvider>
+          <ThemeProvider>
+            <Nav />
+            <main>{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </LangProvider>
         <Analytics />
       </body>
     </html>

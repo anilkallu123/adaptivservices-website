@@ -1,26 +1,25 @@
-import type { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeUp, StaggerGrid } from '@/components/motion'
 import { POSTS } from '@/lib/data'
-
-export const metadata: Metadata = {
-  title: 'Insights',
-  description: 'Technical insights on cloud architecture, Oracle migrations, AI, and more.',
-}
+import { useLang } from '@/components/lang-provider'
+import { UI } from '@/lib/i18n'
 
 export default function Blog() {
+  const { lang } = useLang()
   return (
     <>
       <section className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp>
-            <p className="eyebrow mb-4">Insights</p>
+            <p className="eyebrow mb-4">{UI.blog_eyebrow[lang]}</p>
             <h1 className="text-5xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              Technical writing<br /><span className="grad-text">from the trenches.</span>
+              {UI.blog_h1_1[lang]}<br /><span className="grad-text">{UI.blog_h1_2[lang]}</span>
             </h1>
             <p className="text-lg text-muted max-w-xl">
-              Practical guides, architecture decisions, and hard-won lessons from production systems.
+              {UI.blog_lead[lang]}
             </p>
           </FadeUp>
         </div>
@@ -46,7 +45,7 @@ export default function Blog() {
                 <h2 className="font-semibold leading-snug mb-3 flex-1" style={{ color: 'var(--text)', fontSize: '0.95rem' }}>{p.title}</h2>
                 <p className="text-sm text-muted leading-relaxed mb-4">{p.excerpt}</p>
                 <span className="text-xs font-mono text-muted group-hover:text-[var(--text)] transition-colors flex items-center gap-1">
-                  Read article <ArrowRight size={11} />
+                  {UI.blog_read[lang]} <ArrowRight size={11} />
                 </span>
               </Link>
             ))}

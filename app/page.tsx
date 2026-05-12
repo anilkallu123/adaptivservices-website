@@ -6,10 +6,13 @@ import { ArrowRight } from 'lucide-react'
 import { FadeUp, StaggerGrid } from '@/components/motion'
 import { useState } from 'react'
 import { track } from '@vercel/analytics'
-import { STATS, CAPABILITIES, FEATURES, SECTORS, CASES } from '@/lib/data'
+import { useLang } from '@/components/lang-provider'
+import { UI } from '@/lib/i18n'
+import { STATS, CAPABILITIES, FEATURES, SECTORS, CASES, loc } from '@/lib/data'
 
 export default function Home() {
   const [activeSector, setActiveSector] = useState(0)
+  const { lang } = useLang()
 
   return (
     <>
@@ -26,7 +29,7 @@ export default function Home() {
             <div>
               <motion.p className="eyebrow mb-5"
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                Built in Norway · For Norway · Est. 2026
+                {UI.hero_eyebrow[lang]}
               </motion.p>
 
               <motion.h1
@@ -34,17 +37,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
                 style={{ color: 'var(--text)' }}
               >
-                Sovereign software<br />
-                for Norway&apos;s most critical<br />
-                <span className="grad-text">digital problems.</span>
+                {UI.hero_h1_line1[lang]}<br />
+                {UI.hero_h1_line2[lang]}<br />
+                <span className="grad-text">{UI.hero_h1_line3[lang]}</span>
               </motion.h1>
 
               <motion.p
                 className="text-lg text-muted leading-relaxed mb-10 max-w-xl"
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
               >
-                We design, build, and operate the products, AI systems, and cloud platforms that
-                public-sector and regulated industries can&apos;t buy off the shelf.
+                {UI.hero_lead[lang]}
               </motion.p>
 
               <motion.div
@@ -58,7 +60,7 @@ export default function Home() {
                   className="px-6 py-3 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-xl"
                   style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)', boxShadow: '0 8px 32px rgba(123,79,255,0.35)' }}
                 >
-                  Book a 30-min discovery call
+                  {UI.hero_cta_primary[lang]}
                 </Link>
                 <Link
                   href="/case-studies"
@@ -66,7 +68,7 @@ export default function Home() {
                   className="px-6 py-3 rounded-xl font-medium transition-all hover:bg-white/5"
                   style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
                 >
-                  See case studies
+                  {UI.hero_cta_ghost[lang]}
                 </Link>
               </motion.div>
 
@@ -74,7 +76,7 @@ export default function Home() {
                 className="flex flex-wrap gap-4 text-xs font-mono text-muted"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
               >
-                {['✓ DIFI compliant', '✓ NSM ICT framework', '✓ NO Org. 937 171 250'].map(t => (
+                {[UI.hero_compliance[lang], UI.hero_nsm[lang], UI.hero_org[lang]].map(t => (
                   <span key={t}>{t}</span>
                 ))}
               </motion.div>
@@ -90,7 +92,7 @@ export default function Home() {
                   style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                 >
                   <div className="text-3xl font-bold grad-text mb-1">{s.value}</div>
-                  <div className="text-sm text-muted">{s.label}</div>
+                  <div className="text-sm text-muted">{UI[s.labelKey][lang]}</div>
                 </motion.div>
               ))}
             </div>
@@ -105,21 +107,21 @@ export default function Home() {
           >
             <div className="w-0.5 h-2 rounded-full bg-[var(--text-muted)]" />
           </motion.div>
-          <span>scroll</span>
+          <span>{UI.hero_scroll[lang]}</span>
         </div>
       </section>
 
       {/* TRUST STRIP */}
       <div className="border-y" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-4">
-          <span className="text-xs font-mono text-muted">Delivered for</span>
+          <span className="text-xs font-mono text-muted">{UI.hero_trust_label[lang]}</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {['Skatteetaten', 'HSØ', 'Sykehuspartner', 'DNV GL', 'DNB Markets', 'Høegh LNG'].map(n => (
               <span key={n} className="text-sm font-medium" style={{ color: 'var(--text)' }}>{n}</span>
             ))}
           </div>
           <Link href="/case-studies" className="ml-auto text-xs font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1">
-            See all <ArrowRight size={12} />
+            {UI.hero_trust_all[lang]} <ArrowRight size={12} />
           </Link>
         </div>
       </div>
@@ -128,19 +130,17 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp className="text-center mb-16">
-            <p className="eyebrow mb-3">What we build</p>
+            <p className="eyebrow mb-3">{UI.caps_eyebrow[lang]}</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              Everything you need. <span className="grad-text">Nothing you don&apos;t.</span>
+              {UI.caps_h2_1[lang]} <span className="grad-text">{UI.caps_h2_2[lang]}</span>
             </h2>
-            <p className="text-muted max-w-lg mx-auto">
-              Six integrated capabilities — so you work with one team instead of six vendors.
-            </p>
+            <p className="text-muted max-w-lg mx-auto">{UI.caps_lead[lang]}</p>
           </FadeUp>
 
           <StaggerGrid className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {CAPABILITIES.map(c => (
               <div
-                key={c.title}
+                key={c.title.en}
                 className="rounded-2xl p-6 group hover:border-purple-500/40 transition-all duration-300 hover:shadow-lg"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
               >
@@ -148,8 +148,8 @@ export default function Home() {
                   style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
                   <c.icon size={18} style={{ color: '#7B4FFF' }} />
                 </div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--text)' }}>{c.title}</h3>
-                <p className="text-sm text-muted leading-relaxed">{c.body}</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
+                <p className="text-sm text-muted leading-relaxed">{loc(c.body, lang)}</p>
               </div>
             ))}
           </StaggerGrid>
@@ -161,13 +161,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <StaggerGrid className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {FEATURES.map(f => (
-              <div key={f.title} className="flex flex-col gap-3">
+              <div key={f.titleKey} className="flex flex-col gap-3">
                 <div className="w-9 h-9 rounded-lg flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.15),rgba(0,212,255,0.15))' }}>
                   <f.icon size={16} style={{ color: '#7B4FFF' }} />
                 </div>
-                <h4 className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{f.title}</h4>
-                <p className="text-xs text-muted leading-relaxed">{f.body}</p>
+                <h4 className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{UI[f.titleKey][lang]}</h4>
+                <p className="text-xs text-muted leading-relaxed">{UI[f.bodyKey][lang]}</p>
               </div>
             ))}
           </StaggerGrid>
@@ -178,21 +178,19 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp className="text-center mb-14">
-            <p className="eyebrow mb-3">Industries</p>
+            <p className="eyebrow mb-3">{UI.sectors_eyebrow[lang]}</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              Industries where <span className="grad-text">stakes are highest</span>
+              {UI.sectors_h2_1[lang]} <span className="grad-text">{UI.sectors_h2_2[lang]}</span>
             </h2>
-            <p className="text-muted max-w-lg mx-auto">
-              We operate in sectors where getting it wrong isn&apos;t an option — public services, healthcare, energy, and industrial.
-            </p>
+            <p className="text-muted max-w-lg mx-auto">{UI.sectors_lead[lang]}</p>
           </FadeUp>
 
           <div className="grid lg:grid-cols-[220px_1fr] gap-6">
             <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
               {SECTORS.map((s, i) => (
                 <button
-                  key={s.label}
-                  onClick={() => { setActiveSector(i); track('sector_tab', { label: s.label }) }}
+                  key={s.label.en}
+                  onClick={() => { setActiveSector(i); track('sector_tab', { label: s.label.en }) }}
                   className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium whitespace-nowrap transition-all text-left ${
                     activeSector === i ? 'text-white' : 'text-muted hover:text-[var(--text)]'
                   }`}
@@ -202,12 +200,12 @@ export default function Home() {
                   }}
                 >
                   <s.icon size={15} style={{ color: activeSector === i ? s.color : 'inherit', flexShrink: 0 }} />
-                  {s.label}
+                  {loc(s.label, lang)}
                 </button>
               ))}
               <p className="text-xs text-muted px-4 pt-2 hidden lg:block">
-                Don&apos;t see yours?{' '}
-                <Link href="/contact" className="underline underline-offset-2 hover:text-[var(--text)]">Let&apos;s talk →</Link>
+                {UI.sectors_no_match[lang]}{' '}
+                <Link href="/contact" className="underline underline-offset-2 hover:text-[var(--text)]">{UI.sectors_talk[lang]}</Link>
               </p>
             </div>
 
@@ -228,17 +226,17 @@ export default function Home() {
                   {(() => { const Icon = SECTORS[activeSector].icon; return <Icon size={20} className="text-white" /> })()}
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-muted mb-1">{SECTORS[activeSector].stat}</div>
-                  <h3 className="text-xl font-bold" style={{ color: 'var(--text)' }}>{SECTORS[activeSector].label}</h3>
+                  <div className="text-xs font-mono text-muted mb-1">{loc(SECTORS[activeSector].stat, lang)}</div>
+                  <h3 className="text-xl font-bold" style={{ color: 'var(--text)' }}>{loc(SECTORS[activeSector].label, lang)}</h3>
                 </div>
               </div>
-              <p className="text-muted leading-relaxed mb-6">{SECTORS[activeSector].desc}</p>
+              <p className="text-muted leading-relaxed mb-6">{loc(SECTORS[activeSector].desc, lang)}</p>
               <div className="rounded-xl px-4 py-3 mb-6" style={{ background: 'var(--surface-2)' }}>
-                <div className="text-xs font-mono text-muted mb-1">Trusted by</div>
+                <div className="text-xs font-mono text-muted mb-1">{UI.sectors_trusted[lang]}</div>
                 <div className="text-sm font-medium" style={{ color: 'var(--text)' }}>{SECTORS[activeSector].clientsStr}</div>
               </div>
               <Link href="/sectors" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors">
-                Explore this sector <ArrowRight size={14} />
+                {UI.sectors_explore[lang]} <ArrowRight size={14} />
               </Link>
             </motion.div>
           </div>
@@ -249,27 +247,25 @@ export default function Home() {
       <section className="py-24 border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp className="text-center mb-14">
-            <p className="eyebrow mb-3">Proof of work</p>
+            <p className="eyebrow mb-3">{UI.proof_eyebrow[lang]}</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              What we&apos;ve <span className="grad-text">actually delivered</span>
+              {UI.proof_h2_1[lang]} <span className="grad-text">{UI.proof_h2_2[lang]}</span>
             </h2>
-            <p className="text-muted max-w-lg mx-auto">
-              Three of the engagements we&apos;re most proud of — national-scale, measurable, and verifiable.
-            </p>
+            <p className="text-muted max-w-lg mx-auto">{UI.proof_lead[lang]}</p>
           </FadeUp>
 
           <StaggerGrid className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {CASES.map(c => (
               <div
-                key={c.title}
+                key={c.title.en}
                 className="rounded-2xl p-6 group hover:border-purple-500/30 transition-all duration-300"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
               >
-                <div className="text-xs font-mono text-muted mb-3">{c.label}</div>
-                <h3 className="font-semibold mb-2 text-[0.95rem]" style={{ color: 'var(--text)' }}>{c.title}</h3>
-                <p className="text-sm text-muted leading-relaxed mb-4">{c.body}</p>
+                <div className="text-xs font-mono text-muted mb-3">{loc(c.label, lang)}</div>
+                <h3 className="font-semibold mb-2 text-[0.95rem]" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
+                <p className="text-sm text-muted leading-relaxed mb-4">{loc(c.body, lang)}</p>
                 <Link href="/case-studies" className="text-xs font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1">
-                  Read case study <ArrowRight size={11} />
+                  {UI.cs_read[lang]} <ArrowRight size={11} />
                 </Link>
               </div>
             ))}
@@ -281,7 +277,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5"
               style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
             >
-              See all case studies <ArrowRight size={14} />
+              {UI.cs_see_all[lang]} <ArrowRight size={14} />
             </Link>
           </div>
         </div>
@@ -298,20 +294,18 @@ export default function Home() {
                   style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }} />
               </div>
               <div className="relative">
-                <p className="eyebrow mb-4">Ready to build?</p>
+                <p className="eyebrow mb-4">{UI.cta_eyebrow[lang]}</p>
                 <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-                  Big ideas need <span className="grad-text">serious engineers</span>
+                  {UI.cta_h2_1[lang]} <span className="grad-text">{UI.cta_h2_2[lang]}</span>
                 </h2>
-                <p className="text-muted max-w-md mx-auto mb-8">
-                  Bring the problem. We&apos;ll bring the architecture, the team, and the delivery track record to match.
-                </p>
+                <p className="text-muted max-w-md mx-auto mb-8">{UI.cta_lead[lang]}</p>
                 <Link
                   href="/contact"
                   onClick={() => track('cta_click', { label: 'bottom_cta' })}
                   className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-xl"
                   style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)', boxShadow: '0 8px 32px rgba(123,79,255,0.3)' }}
                 >
-                  Start a conversation <ArrowRight size={16} />
+                  {UI.cta_btn[lang]} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>

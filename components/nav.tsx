@@ -7,20 +7,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import Image from 'next/image'
 import { useTheme } from '@/components/theme-provider'
-
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/what-we-do', label: 'What We Do' },
-  { href: '/sectors', label: 'Sectors' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/blog', label: 'Insights' },
-  { href: '/about', label: 'About' },
-]
+import { useLang } from '@/components/lang-provider'
+import { UI } from '@/lib/i18n'
 
 export function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { theme, toggle: toggleTheme } = useTheme()
+  const { lang, toggle: toggleLang } = useLang()
   const dark = theme === 'dark'
   const pathname = usePathname()
 
@@ -29,6 +23,15 @@ export function Nav() {
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
+
+  const links = [
+    { href: '/',            label: UI.nav_home[lang] },
+    { href: '/what-we-do', label: UI.nav_what_we_do[lang] },
+    { href: '/sectors',    label: UI.nav_sectors[lang] },
+    { href: '/case-studies', label: UI.nav_case_studies[lang] },
+    { href: '/blog',       label: UI.nav_insights[lang] },
+    { href: '/about',      label: UI.nav_about[lang] },
+  ]
 
   return (
     <header
@@ -70,12 +73,21 @@ export function Nav() {
             className="ml-3 px-4 py-1.5 rounded-lg text-sm font-medium text-white transition-all"
             style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
           >
-            Get in touch
+            {UI.nav_cta[lang]}
           </Link>
         </nav>
 
         {/* Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
+          {/* Language toggle */}
+          <button
+            onClick={toggleLang}
+            className="px-2.5 py-1.5 rounded-lg text-xs font-mono font-semibold text-muted hover:text-[var(--text)] transition-colors"
+            aria-label="Toggle language"
+          >
+            {lang === 'no' ? 'EN' : 'NO'}
+          </button>
+          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg text-muted hover:text-[var(--text)] transition-colors"
@@ -122,7 +134,7 @@ export function Nav() {
               className="mt-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white text-center"
               style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
             >
-              Get in touch
+              {UI.nav_cta[lang]}
             </Link>
           </motion.div>
         )}

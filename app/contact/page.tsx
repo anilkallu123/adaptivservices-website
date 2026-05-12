@@ -4,20 +4,29 @@ import Link from 'next/link'
 import { Calendar, Mail, MapPin, ArrowRight } from 'lucide-react'
 import { FadeUp } from '@/components/motion'
 import { useState } from 'react'
-
-const CHANNELS = [
-  { icon: Calendar, label: 'Book a call', desc: '30-min discovery — no sales pitch', href: 'https://calendly.com/anilkallu/30min', cta: 'Book on Calendly' },
-  { icon: Mail, label: 'Email us', desc: 'For project enquiries and partnerships', href: 'mailto:sales@adaptivservices.com', cta: 'sales@adaptivservices.com' },
-  { icon: MapPin, label: 'Oslo office', desc: 'Meetings by appointment', href: '#', cta: 'Oslo, Norway' },
-]
+import { useLang } from '@/components/lang-provider'
+import { UI } from '@/lib/i18n'
 
 const WEB3FORMS_KEY = '712edce1-c81a-45ad-89c0-bf3c07fac508'
 
 export default function Contact() {
+  const { lang } = useLang()
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
+
+  const CHANNELS = [
+    { icon: Calendar, label: UI.contact_book[lang],   desc: UI.contact_book_desc[lang], href: 'https://calendly.com/anilkallu/30min', cta: UI.contact_book_cta[lang] },
+    { icon: Mail,     label: UI.contact_email_ch[lang],desc: UI.contact_email_desc[lang], href: 'mailto:sales@adaptivservices.com', cta: 'sales@adaptivservices.com' },
+    { icon: MapPin,   label: UI.contact_oslo[lang],   desc: UI.contact_oslo_desc[lang], href: '#', cta: UI.contact_oslo_cta[lang] },
+  ]
+
+  const FIELDS = [
+    { key: 'name',    label: UI.contact_name[lang],      type: 'text',  placeholder: UI.contact_name_ph[lang],  required: true },
+    { key: 'email',   label: UI.contact_email_lbl[lang], type: 'email', placeholder: UI.contact_email_ph[lang], required: true },
+    { key: 'company', label: UI.contact_company[lang],   type: 'text',  placeholder: UI.contact_co_ph[lang],    required: false },
+  ]
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -52,12 +61,12 @@ export default function Contact() {
       <section className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp>
-            <p className="eyebrow mb-4">Get in touch</p>
+            <p className="eyebrow mb-4">{UI.contact_eyebrow[lang]}</p>
             <h1 className="text-5xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              Let&apos;s build something<br /><span className="grad-text">worth building.</span>
+              {UI.contact_h1_1[lang]}<br /><span className="grad-text">{UI.contact_h1_2[lang]}</span>
             </h1>
             <p className="text-lg text-muted max-w-xl">
-              Whether you have a spec, a vague problem, or just an ambition — reach out and we&apos;ll find the shape of the solution together.
+              {UI.contact_lead[lang]}
             </p>
           </FadeUp>
         </div>
@@ -71,39 +80,31 @@ export default function Contact() {
               {sent ? (
                 <div className="py-12 text-center">
                   <div className="text-4xl mb-4">✓</div>
-                  <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text)' }}>Message received</h3>
-                  <p className="text-muted">We&apos;ll get back to you within one business day.</p>
+                  <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text)' }}>{UI.contact_sent_h3[lang]}</h3>
+                  <p className="text-muted">{UI.contact_sent_p[lang]}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <h2 className="text-xl font-semibold mb-6" style={{ color: 'var(--text)' }}>Send a message</h2>
-                  {[
-                    { key: 'name', label: 'Name', type: 'text', placeholder: 'Ola Nordmann' },
-                    { key: 'email', label: 'Email', type: 'email', placeholder: 'ola@company.no' },
-                    { key: 'company', label: 'Company', type: 'text', placeholder: 'Acme AS' },
-                  ].map(f => (
+                  <h2 className="text-xl font-semibold mb-6" style={{ color: 'var(--text)' }}>{UI.contact_form_h2[lang]}</h2>
+                  {FIELDS.map(f => (
                     <div key={f.key}>
                       <label className="block text-xs font-mono text-muted mb-1.5">{f.label}</label>
                       <input
                         type={f.type}
                         placeholder={f.placeholder}
-                        required={f.key !== 'company'}
+                        required={f.required}
                         value={form[f.key as keyof typeof form]}
                         onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))}
                         className="w-full px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-1"
-                        style={{
-                          background: 'var(--surface-2)',
-                          border: '1px solid var(--border)',
-                          color: 'var(--text)',
-                        }}
+                        style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)' }}
                       />
                     </div>
                   ))}
                   <div>
-                    <label className="block text-xs font-mono text-muted mb-1.5">Message</label>
+                    <label className="block text-xs font-mono text-muted mb-1.5">{UI.contact_message[lang]}</label>
                     <textarea
                       rows={4}
-                      placeholder="Tell us about your project or challenge..."
+                      placeholder={UI.contact_msg_ph[lang]}
                       required
                       value={form.message}
                       onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
@@ -122,7 +123,7 @@ export default function Contact() {
                     className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90 disabled:opacity-60"
                     style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
                   >
-                    {submitting ? 'Sending…' : <><span>Send message</span> <ArrowRight size={16} /></>}
+                    {submitting ? UI.contact_sending[lang] : <><span>{UI.contact_send[lang]}</span> <ArrowRight size={16} /></>}
                   </button>
                 </form>
               )}
