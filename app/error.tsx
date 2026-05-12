@@ -25,7 +25,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           <button
             onClick={reset}
             className="px-5 py-2.5 rounded-xl font-medium text-white"
-            style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
+            style={{ background: 'var(--btn-gradient)' }}
           >
             Try again
           </button>

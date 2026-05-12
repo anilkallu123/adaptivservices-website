@@ -52,7 +52,7 @@ export function NewsletterForm() {
         type="submit"
         disabled={state === 'submitting'}
         className="px-3 py-2 rounded-lg text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-        style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
+        style={{ background: 'var(--btn-gradient)' }}
       >
         <ArrowRight size={14} />
       </button>

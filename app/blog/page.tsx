@@ -32,12 +32,12 @@ export default function Blog() {
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="rounded-2xl p-6 flex flex-col group hover:border-purple-500/30 transition-all"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                className="rounded-2xl p-6 flex flex-col group hover:shadow-lg hover:shadow-purple-500/[0.07] hover:-translate-y-0.5 transition-all duration-200"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderLeft: '3px solid rgba(123,79,255,0.35)' }}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-xs font-mono px-2.5 py-1 rounded-full"
-                    style={{ background: 'rgba(123,79,255,0.15)', color: '#7B4FFF' }}>
+                    style={{ background: 'rgba(123,79,255,0.15)', color: 'var(--label)' }}>
                     {p.tag}
                   </span>
                   <span className="text-xs text-muted font-mono">{p.date}</span>

@@ -2,11 +2,12 @@ import {
   Sparkles, Bot, Cloud, Cpu, Users, ShieldCheck,
   Zap, Target, Telescope, Handshake,
   Landmark, Activity, Factory, Ship,
+  Heart, Globe,
 } from 'lucide-react'
 import type { Lang } from '@/components/lang-provider'
 
 export const STATS = [
-  { value: '15+',  labelKey: 'stat_years' as const },
+  { value: '20+',  labelKey: 'stat_years' as const },
   { value: '30+',  labelKey: 'stat_migrations' as const },
   { value: '100%', labelKey: 'stat_owned' as const },
   { value: 'Oslo', labelKey: 'stat_founded' as const },
@@ -184,18 +185,22 @@ export const SERVICES = [
 
 export const PRINCIPLES = [
   {
+    icon: Target,
     title: { en: 'Outcome over output',  no: 'Resultat over leveranse' },
     body:  { en: "We measure success in business results, not lines of code or delivered tickets.", no: 'Vi måler suksess i forretningsresultater, ikke kodelinjer eller leverte oppgaver.' },
   },
   {
+    icon: Zap,
     title: { en: 'Speed with depth',    no: 'Fart med dybde' },
     body:  { en: "Fast delivery without technical debt. We move quickly because we know what we're doing.", no: 'Rask leveranse uten teknisk gjeld. Vi beveger oss raskt fordi vi vet hva vi gjør.' },
   },
   {
+    icon: Heart,
     title: { en: 'Radical ownership',   no: 'Radikalt eierskap' },
     body:  { en: "When we take on a problem, we own it — from first conversation to production and beyond.", no: 'Når vi tar på oss et problem, eier vi det — fra første samtale til produksjon og videre.' },
   },
   {
+    icon: Globe,
     title: { en: 'Sovereign by default', no: 'Suveren som standard' },
     body:  { en: "Norwegian data, Norwegian infrastructure, Norwegian compliance. Not an afterthought — the foundation.", no: 'Norske data, norsk infrastruktur, norsk etterlevelse. Ikke en ettertanke — fundamentet.' },
   },

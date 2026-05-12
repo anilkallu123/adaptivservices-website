@@ -58,7 +58,7 @@ export default function Home() {
                   target="_blank" rel="noopener"
                   onClick={() => track('cta_click', { label: 'hero_book_call' })}
                   className="px-6 py-3 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-xl"
-                  style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)', boxShadow: '0 8px 32px rgba(123,79,255,0.35)' }}
+                  style={{ background: 'var(--btn-gradient)', boxShadow: '0 8px 32px rgba(123,79,255,0.35)' }}
                 >
                   {UI.hero_cta_primary[lang]}
                 </Link>
@@ -91,7 +91,7 @@ export default function Home() {
                   className="rounded-2xl p-6"
                   style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                 >
-                  <div className="text-3xl font-bold grad-text mb-1">{s.value}</div>
+                  <div className="text-3xl font-bold mb-1" style={{ color: 'var(--label)' }}>{s.value}</div>
                   <div className="text-sm text-muted">{UI[s.labelKey][lang]}</div>
                 </motion.div>
               ))}
@@ -114,7 +114,7 @@ export default function Home() {
       {/* TRUST STRIP */}
       <div className="border-y" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-4">
-          <span className="text-xs font-mono text-muted">{UI.hero_trust_label[lang]}</span>
+          <span className="text-xs text-muted">{UI.hero_trust_label[lang]}</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {['Skatteetaten', 'HSØ', 'Sykehuspartner', 'DNV GL', 'DNB Markets', 'Høegh LNG'].map(n => (
               <span key={n} className="text-sm font-medium" style={{ color: 'var(--text)' }}>{n}</span>
@@ -132,7 +132,7 @@ export default function Home() {
           <FadeUp className="text-center mb-16">
             <p className="eyebrow mb-3">{UI.caps_eyebrow[lang]}</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              {UI.caps_h2_1[lang]} <span className="grad-text">{UI.caps_h2_2[lang]}</span>
+              {UI.caps_h2_1[lang]} {UI.caps_h2_2[lang]}
             </h2>
             <p className="text-muted max-w-lg mx-auto">{UI.caps_lead[lang]}</p>
           </FadeUp>
@@ -141,15 +141,18 @@ export default function Home() {
             {CAPABILITIES.map(c => (
               <div
                 key={c.title.en}
-                className="rounded-2xl p-6 group hover:border-purple-500/40 transition-all duration-300 hover:shadow-lg"
+                className="rounded-2xl overflow-hidden group hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/[0.07] hover:-translate-y-0.5 transition-all duration-200"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
               >
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110"
-                  style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
-                  <c.icon size={18} style={{ color: '#7B4FFF' }} />
+                <div className="h-px w-full opacity-60" style={{ background: 'linear-gradient(90deg,#7B4FFF,#00D4FF)' }} />
+                <div className="p-6">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110"
+                    style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
+                    <c.icon size={18} style={{ color: 'var(--label)' }} />
+                  </div>
+                  <h3 className="font-semibold mb-2" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{loc(c.body, lang)}</p>
                 </div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
-                <p className="text-sm text-muted leading-relaxed">{loc(c.body, lang)}</p>
               </div>
             ))}
           </StaggerGrid>
@@ -164,7 +167,7 @@ export default function Home() {
               <div key={f.titleKey} className="flex flex-col gap-3">
                 <div className="w-9 h-9 rounded-lg flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.15),rgba(0,212,255,0.15))' }}>
-                  <f.icon size={16} style={{ color: '#7B4FFF' }} />
+                  <f.icon size={16} style={{ color: 'var(--label)' }} />
                 </div>
                 <h4 className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{UI[f.titleKey][lang]}</h4>
                 <p className="text-xs text-muted leading-relaxed">{UI[f.bodyKey][lang]}</p>
@@ -175,12 +178,12 @@ export default function Home() {
       </div>
 
       {/* SECTORS */}
-      <section className="py-24">
+      <section className="py-32">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp className="text-center mb-14">
             <p className="eyebrow mb-3">{UI.sectors_eyebrow[lang]}</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              {UI.sectors_h2_1[lang]} <span className="grad-text">{UI.sectors_h2_2[lang]}</span>
+              {UI.sectors_h2_1[lang]} {UI.sectors_h2_2[lang]}
             </h2>
             <p className="text-muted max-w-lg mx-auto">{UI.sectors_lead[lang]}</p>
           </FadeUp>
@@ -233,7 +236,7 @@ export default function Home() {
               <p className="text-muted leading-relaxed mb-6">{loc(SECTORS[activeSector].desc, lang)}</p>
               <div className="rounded-xl px-4 py-3 mb-6" style={{ background: 'var(--surface-2)' }}>
                 <div className="text-xs font-mono text-muted mb-1">{UI.sectors_trusted[lang]}</div>
-                <div className="text-sm font-medium" style={{ color: 'var(--text)' }}>{SECTORS[activeSector].clientsStr}</div>
+                <div className="text-sm" style={{ color: 'var(--text)' }}>{SECTORS[activeSector].clientsStr}</div>
               </div>
               <Link href="/sectors" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors">
                 {UI.sectors_explore[lang]} <ArrowRight size={14} />
@@ -249,7 +252,7 @@ export default function Home() {
           <FadeUp className="text-center mb-14">
             <p className="eyebrow mb-3">{UI.proof_eyebrow[lang]}</p>
             <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-              {UI.proof_h2_1[lang]} <span className="grad-text">{UI.proof_h2_2[lang]}</span>
+              {UI.proof_h2_1[lang]} {UI.proof_h2_2[lang]}
             </h2>
             <p className="text-muted max-w-lg mx-auto">{UI.proof_lead[lang]}</p>
           </FadeUp>
@@ -258,10 +261,13 @@ export default function Home() {
             {CASES.map(c => (
               <div
                 key={c.title.en}
-                className="rounded-2xl p-6 group hover:border-purple-500/30 transition-all duration-300"
+                className="rounded-2xl p-6 group hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/[0.07] hover:-translate-y-0.5 transition-all duration-200"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
               >
-                <div className="text-xs font-mono text-muted mb-3">{loc(c.label, lang)}</div>
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <div className="text-xs text-muted">{loc(c.label, lang)}</div>
+                  <div className="text-base font-bold flex-shrink-0" style={{ color: 'var(--label)' }}>{c.stat}</div>
+                </div>
                 <h3 className="font-semibold mb-2 text-[0.95rem]" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
                 <p className="text-sm text-muted leading-relaxed mb-4">{loc(c.body, lang)}</p>
                 <Link href="/case-studies" className="text-xs font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1">
@@ -284,26 +290,26 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp>
             <div className="relative rounded-3xl overflow-hidden p-12 text-center"
               style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full opacity-20 blur-[80px]"
-                  style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }} />
+                  style={{ background: 'var(--btn-gradient)' }} />
               </div>
               <div className="relative">
                 <p className="eyebrow mb-4">{UI.cta_eyebrow[lang]}</p>
                 <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: 'var(--text)' }}>
-                  {UI.cta_h2_1[lang]} <span className="grad-text">{UI.cta_h2_2[lang]}</span>
+                  {UI.cta_h2_1[lang]} {UI.cta_h2_2[lang]}
                 </h2>
                 <p className="text-muted max-w-md mx-auto mb-8">{UI.cta_lead[lang]}</p>
                 <Link
                   href="/contact"
                   onClick={() => track('cta_click', { label: 'bottom_cta' })}
                   className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-xl"
-                  style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)', boxShadow: '0 8px 32px rgba(123,79,255,0.3)' }}
+                  style={{ background: 'var(--btn-gradient)', boxShadow: '0 8px 32px rgba(123,79,255,0.3)' }}
                 >
                   {UI.cta_btn[lang]} <ArrowRight size={16} />
                 </Link>

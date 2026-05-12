@@ -71,7 +71,7 @@ export function Nav() {
           <Link
             href="/contact"
             className="ml-3 px-4 py-1.5 rounded-lg text-sm font-medium text-white transition-all"
-            style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
+            style={{ background: 'var(--btn-gradient)' }}
           >
             {UI.nav_cta[lang]}
           </Link>
@@ -132,7 +132,7 @@ export function Nav() {
               href="/contact"
               onClick={() => setOpen(false)}
               className="mt-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white text-center"
-              style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
+              style={{ background: 'var(--btn-gradient)' }}
             >
               {UI.nav_cta[lang]}
             </Link>

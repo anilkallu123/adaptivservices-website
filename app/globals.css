@@ -12,21 +12,23 @@
     --border: rgba(255,255,255,0.07);
     --text: #f0f0f5;
     --text-muted: #8B90B8;
-    --label: #7B4FFF;
+    --label: #9370FF;
     --grad-from: #7B4FFF;
     --grad-to: #00D4FF;
+    --btn-gradient: linear-gradient(135deg, #7B4FFF, #0055CC);
   }
 
   .light {
-    --bg: #f8f8fc;
+    --bg: #f4f4f9;
     --surface: #ffffff;
-    --surface-2: #f0f0f8;
-    --border: rgba(0,0,0,0.08);
+    --surface-2: #eeeef6;
+    --border: rgba(0,0,0,0.11);
     --text: #0a0a1a;
     --text-muted: #595c80;
     --label: #6b3fe0;
     --grad-from: #7B4FFF;
     --grad-to: #00D4FF;
+    --btn-gradient: linear-gradient(135deg, #7B4FFF, #0055CC);
   }
 
   * {
@@ -48,6 +50,14 @@
 @layer utilities {
   .grad-text {
     background: linear-gradient(135deg, var(--grad-from) 0%, var(--grad-to) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Light mode: swap cyan endpoint for dark accessible blue (cyan #00D4FF fails on white) */
+  .light .grad-text {
+    background: linear-gradient(135deg, #6b3fe0 0%, #0055AA 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

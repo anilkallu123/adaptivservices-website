@@ -16,7 +16,7 @@ export default function NotFound() {
           <Link
             href="/"
             className="px-5 py-2.5 rounded-xl font-medium text-white flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
+            style={{ background: 'var(--btn-gradient)' }}
           >
             Go home <ArrowRight size={14} />
           </Link>

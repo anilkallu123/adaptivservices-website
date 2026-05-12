@@ -29,8 +29,8 @@ export default function Sectors() {
         <div className="max-w-7xl mx-auto px-6 space-y-4">
           {SECTORS.map((s, i) => (
             <FadeUp key={s.label.en} delay={i * 0.06}>
-              <div className="rounded-2xl p-8"
-                style={{ background: 'var(--surface)', border: `1px solid ${s.color}22` }}>
+              <div className="rounded-2xl p-8 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
+                style={{ background: 'var(--surface)', border: `1px solid ${s.color}33` }}>
                 <div className="flex items-start gap-5 mb-5">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                     style={{ background: s.color, boxShadow: `0 8px 24px ${s.color}44` }}>

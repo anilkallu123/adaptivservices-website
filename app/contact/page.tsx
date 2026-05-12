@@ -121,7 +121,7 @@ export default function Contact() {
                     type="submit"
                     disabled={submitting}
                     className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90 disabled:opacity-60"
-                    style={{ background: 'linear-gradient(135deg,#7B4FFF,#00D4FF)' }}
+                    style={{ background: 'var(--btn-gradient)' }}
                   >
                     {submitting ? UI.contact_sending[lang] : <><span>{UI.contact_send[lang]}</span> <ArrowRight size={16} /></>}
                   </button>
@@ -138,17 +138,17 @@ export default function Contact() {
                   href={c.href}
                   target={c.href.startsWith('http') ? '_blank' : undefined}
                   rel={c.href.startsWith('http') ? 'noopener' : undefined}
-                  className="flex items-start gap-5 rounded-2xl p-6 group hover:border-purple-500/30 transition-all"
+                  className="flex items-start gap-5 rounded-2xl p-6 group hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/[0.07] hover:-translate-y-0.5 transition-all duration-200"
                   style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                 >
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                     style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
-                    <c.icon size={18} style={{ color: '#7B4FFF' }} />
+                    <c.icon size={18} style={{ color: 'var(--label)' }} />
                   </div>
                   <div>
                     <div className="font-semibold mb-0.5" style={{ color: 'var(--text)' }}>{c.label}</div>
                     <div className="text-sm text-muted mb-1">{c.desc}</div>
-                    <div className="text-xs font-mono" style={{ color: '#7B4FFF' }}>{c.cta}</div>
+                    <div className="text-xs font-mono" style={{ color: 'var(--label)' }}>{c.cta}</div>
                   </div>
                 </Link>
               </FadeUp>
