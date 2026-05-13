@@ -88,27 +88,27 @@ export default function Contact() {
                   <h2 className="text-xl font-semibold mb-6" style={{ color: 'var(--text)' }}>{UI.contact_form_h2[lang]}</h2>
                   {FIELDS.map(f => (
                     <div key={f.key}>
-                      <label className="block text-xs font-mono text-muted mb-1.5">{f.label}</label>
+                      <label className="block text-sm font-mono text-muted mb-1.5">{f.label}</label>
                       <input
                         type={f.type}
                         placeholder={f.placeholder}
                         required={f.required}
                         value={form[f.key as keyof typeof form]}
                         onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))}
-                        className="w-full px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-1"
+                        className="w-full px-4 py-2.5 rounded-xl text-base outline-none focus:ring-1"
                         style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)' }}
                       />
                     </div>
                   ))}
                   <div>
-                    <label className="block text-xs font-mono text-muted mb-1.5">{UI.contact_message[lang]}</label>
+                    <label className="block text-sm font-mono text-muted mb-1.5">{UI.contact_message[lang]}</label>
                     <textarea
                       rows={4}
                       placeholder={UI.contact_msg_ph[lang]}
                       required
                       value={form.message}
                       onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                      className="w-full px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-1 resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl text-base outline-none focus:ring-1 resize-none"
                       style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)' }}
                     />
                   </div>
@@ -143,12 +143,12 @@ export default function Contact() {
                 >
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                     style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
-                    <c.icon size={18} style={{ color: 'var(--label)' }} />
+                    <c.icon size={20} style={{ color: 'var(--label)' }} />
                   </div>
                   <div>
                     <div className="font-semibold mb-0.5" style={{ color: 'var(--text)' }}>{c.label}</div>
                     <div className="text-sm text-muted mb-1">{c.desc}</div>
-                    <div className="text-xs font-mono" style={{ color: 'var(--label)' }}>{c.cta}</div>
+                    <div className="text-sm font-mono" style={{ color: 'var(--label)' }}>{c.cta}</div>
                   </div>
                 </Link>
               </FadeUp>

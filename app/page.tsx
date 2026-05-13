@@ -73,7 +73,7 @@ export default function Home() {
               </motion.div>
 
               <motion.div
-                className="flex flex-wrap gap-4 text-xs font-mono text-muted"
+                className="flex flex-wrap gap-4 text-sm font-mono text-muted"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
               >
                 {[UI.hero_compliance[lang], UI.hero_nsm[lang], UI.hero_org[lang]].map(t => (
@@ -99,7 +99,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs text-muted font-mono">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-sm text-muted font-mono">
           <motion.div
             animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
             className="w-5 h-8 rounded-full border flex items-start justify-center pt-1.5"
@@ -114,13 +114,13 @@ export default function Home() {
       {/* TRUST STRIP */}
       <div className="border-y" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-4">
-          <span className="text-xs text-muted">{UI.hero_trust_label[lang]}</span>
+          <span className="text-sm text-muted">{UI.hero_trust_label[lang]}</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {['Skatteetaten', 'HSØ', 'Sykehuspartner', 'DNV GL', 'DNB Markets', 'Høegh LNG'].map(n => (
               <span key={n} className="text-sm font-medium" style={{ color: 'var(--text)' }}>{n}</span>
             ))}
           </div>
-          <Link href="/case-studies" className="ml-auto text-xs font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1">
+          <Link href="/case-studies" className="ml-auto text-sm font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1 min-h-[44px]">
             {UI.hero_trust_all[lang]} <ArrowRight size={12} />
           </Link>
         </div>
@@ -148,7 +148,7 @@ export default function Home() {
                 <div className="p-6">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110"
                     style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
-                    <c.icon size={18} style={{ color: 'var(--label)' }} />
+                    <c.icon size={20} style={{ color: 'var(--label)' }} />
                   </div>
                   <h3 className="font-semibold mb-2" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
                   <p className="text-sm text-muted leading-relaxed">{loc(c.body, lang)}</p>
@@ -165,12 +165,12 @@ export default function Home() {
           <StaggerGrid className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {FEATURES.map(f => (
               <div key={f.titleKey} className="flex flex-col gap-3">
-                <div className="w-9 h-9 rounded-lg flex items-center justify-center"
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.15),rgba(0,212,255,0.15))' }}>
-                  <f.icon size={16} style={{ color: 'var(--label)' }} />
+                  <f.icon size={20} style={{ color: 'var(--label)' }} />
                 </div>
                 <h4 className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{UI[f.titleKey][lang]}</h4>
-                <p className="text-xs text-muted leading-relaxed">{UI[f.bodyKey][lang]}</p>
+                <p className="text-sm text-muted leading-relaxed">{UI[f.bodyKey][lang]}</p>
               </div>
             ))}
           </StaggerGrid>
@@ -206,7 +206,7 @@ export default function Home() {
                   {loc(s.label, lang)}
                 </button>
               ))}
-              <p className="text-xs text-muted px-4 pt-2 hidden lg:block">
+              <p className="text-sm text-muted px-4 pt-2 hidden lg:block">
                 {UI.sectors_no_match[lang]}{' '}
                 <Link href="/contact" className="underline underline-offset-2 hover:text-[var(--text)]">{UI.sectors_talk[lang]}</Link>
               </p>
@@ -229,13 +229,13 @@ export default function Home() {
                   {(() => { const Icon = SECTORS[activeSector].icon; return <Icon size={20} className="text-white" /> })()}
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-muted mb-1">{loc(SECTORS[activeSector].stat, lang)}</div>
+                  <div className="text-sm font-mono text-muted mb-1">{loc(SECTORS[activeSector].stat, lang)}</div>
                   <h3 className="text-xl font-bold" style={{ color: 'var(--text)' }}>{loc(SECTORS[activeSector].label, lang)}</h3>
                 </div>
               </div>
               <p className="text-muted leading-relaxed mb-6">{loc(SECTORS[activeSector].desc, lang)}</p>
               <div className="rounded-xl px-4 py-3 mb-6" style={{ background: 'var(--surface-2)' }}>
-                <div className="text-xs font-mono text-muted mb-1">{UI.sectors_trusted[lang]}</div>
+                <div className="text-sm font-mono text-muted mb-1">{UI.sectors_trusted[lang]}</div>
                 <div className="text-sm" style={{ color: 'var(--text)' }}>{SECTORS[activeSector].clientsStr}</div>
               </div>
               <Link href="/sectors" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors">
@@ -270,8 +270,8 @@ export default function Home() {
                 </div>
                 <h3 className="font-semibold mb-2 text-[0.95rem]" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
                 <p className="text-sm text-muted leading-relaxed mb-4">{loc(c.body, lang)}</p>
-                <Link href="/case-studies" className="text-xs font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1">
-                  {UI.cs_read[lang]} <ArrowRight size={11} />
+                <Link href="/case-studies" className="text-sm font-mono text-muted hover:text-[var(--text)] transition-colors flex items-center gap-1 min-h-[44px]">
+                  {UI.cs_read[lang]} <ArrowRight size={14} />
                 </Link>
               </div>
             ))}

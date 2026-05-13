@@ -45,10 +45,10 @@ export default function About() {
               <div key={p.title.en} className="rounded-2xl p-7 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/[0.06] hover:-translate-y-0.5 transition-all duration-200" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
                   style={{ background: 'linear-gradient(135deg,rgba(123,79,255,0.2),rgba(0,212,255,0.2))' }}>
-                  <p.icon size={18} style={{ color: 'var(--label)' }} />
+                  <p.icon size={20} style={{ color: 'var(--label)' }} />
                 </div>
                 <h3 className="font-semibold mb-2" style={{ color: 'var(--text)' }}>{loc(p.title, lang)}</h3>
-                <p className="text-sm text-muted leading-relaxed">{loc(p.body, lang)}</p>
+                <p className="text-base text-muted leading-relaxed">{loc(p.body, lang)}</p>
               </div>
             ))}
           </StaggerGrid>
@@ -80,7 +80,7 @@ export default function About() {
                 <div className="flex-1 min-w-0">
                   <div className="mb-1">
                     <h3 className="text-2xl font-bold" style={{ color: 'var(--text)' }}>Anil Kallu</h3>
-                    <p className="text-sm font-mono" style={{ color: 'var(--label)' }}>{UI.about_founder_role[lang]}</p>
+                    <p className="text-base font-mono" style={{ color: 'var(--label)' }}>{UI.about_founder_role[lang]}</p>
                   </div>
 
                   <p className="text-muted leading-relaxed mt-4 mb-6 max-w-2xl">
@@ -89,7 +89,7 @@ export default function About() {
 
                   <div className="flex flex-wrap gap-2 mb-6">
                     {FOUNDER_TAGS.map(t => (
-                      <span key={t.label} className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full"
+                      <span key={t.label} className="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full"
                         style={{ background: 'var(--surface-2)', color: 'var(--text)', border: '1px solid var(--border)' }}>
                         <t.icon size={12} style={{ color: 'var(--label)' }} />
                         {t.label}
@@ -101,7 +101,7 @@ export default function About() {
                     href="https://linkedin.com/in/anilkallu"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium transition-colors text-muted hover:text-[var(--text)]"
+                    className="inline-flex items-center gap-2 text-sm font-medium transition-colors text-muted hover:text-[var(--text)] min-h-[44px]"
                   >
                     <Linkedin size={16} style={{ color: 'var(--label)' }} />
                     {UI.about_founder_linkedin[lang]}

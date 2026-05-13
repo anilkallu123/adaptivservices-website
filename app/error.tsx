@@ -24,14 +24,14 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <div className="flex gap-3 justify-center">
           <button
             onClick={reset}
-            className="px-5 py-2.5 rounded-xl font-medium text-white"
+            className="px-5 py-3 rounded-xl font-medium text-white"
             style={{ background: 'var(--btn-gradient)' }}
           >
             Try again
           </button>
           <Link
             href="/"
-            className="px-5 py-2.5 rounded-xl font-medium transition-colors hover:bg-white/5"
+            className="px-5 py-3 rounded-xl font-medium transition-colors hover:bg-white/5"
             style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
           >
             Go home

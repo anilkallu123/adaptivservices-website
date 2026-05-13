@@ -15,14 +15,14 @@ export default function NotFound() {
         <div className="flex gap-3 justify-center">
           <Link
             href="/"
-            className="px-5 py-2.5 rounded-xl font-medium text-white flex items-center gap-2"
+            className="px-5 py-3 rounded-xl font-medium text-white flex items-center gap-2"
             style={{ background: 'var(--btn-gradient)' }}
           >
             Go home <ArrowRight size={14} />
           </Link>
           <Link
             href="/blog"
-            className="px-5 py-2.5 rounded-xl font-medium transition-colors hover:bg-white/5"
+            className="px-5 py-3 rounded-xl font-medium transition-colors hover:bg-white/5"
             style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
           >
             Read insights

@@ -37,20 +37,20 @@ export default function Sectors() {
                     <s.icon size={20} className="text-white" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono text-muted mb-1">{loc(s.stat, lang)}</div>
+                    <div className="text-sm font-mono text-muted mb-1">{loc(s.stat, lang)}</div>
                     <h2 className="text-xl font-bold" style={{ color: 'var(--text)' }}>{loc(s.label, lang)}</h2>
                   </div>
                 </div>
                 <p className="text-muted leading-relaxed mb-5 max-w-2xl">{loc(s.desc, lang)}</p>
                 <div className="flex flex-wrap gap-2 mb-5">
                   {s.clients.map(c => (
-                    <span key={c} className="text-xs font-medium px-3 py-1 rounded-full"
+                    <span key={c} className="text-sm font-medium px-3 py-1 rounded-full"
                       style={{ background: 'var(--surface-2)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
                       {c}
                     </span>
                   ))}
                 </div>
-                <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors">
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors min-h-[44px]">
                   {UI.sectors_page_discuss[lang]} <ArrowRight size={14} />
                 </Link>
               </div>

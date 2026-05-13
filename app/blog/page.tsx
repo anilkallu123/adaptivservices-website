@@ -36,16 +36,16 @@ export default function Blog() {
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderLeft: '3px solid rgba(123,79,255,0.35)' }}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xs font-mono px-2.5 py-1 rounded-full"
+                  <span className="text-sm font-mono px-2.5 py-1 rounded-full"
                     style={{ background: 'rgba(123,79,255,0.15)', color: 'var(--label)' }}>
                     {p.tag}
                   </span>
-                  <span className="text-xs text-muted font-mono">{p.date}</span>
+                  <span className="text-sm text-muted font-mono">{p.date}</span>
                 </div>
                 <h2 className="font-semibold leading-snug mb-3 flex-1" style={{ color: 'var(--text)', fontSize: '0.95rem' }}>{p.title}</h2>
-                <p className="text-sm text-muted leading-relaxed mb-4">{p.excerpt}</p>
-                <span className="text-xs font-mono text-muted group-hover:text-[var(--text)] transition-colors flex items-center gap-1">
-                  {UI.blog_read[lang]} <ArrowRight size={11} />
+                <p className="text-base text-muted leading-relaxed mb-4">{p.excerpt}</p>
+                <span className="text-sm font-mono text-muted group-hover:text-[var(--text)] transition-colors flex items-center gap-1 min-h-[44px]">
+                  {UI.blog_read[lang]} <ArrowRight size={14} />
                 </span>
               </Link>
             ))}

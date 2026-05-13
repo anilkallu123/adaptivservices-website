@@ -32,7 +32,7 @@ export default function CaseStudies() {
               <div className="rounded-2xl p-8 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200" style={{ background: 'var(--surface)', border: `1px solid ${c.color}33` }}>
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                   <div>
-                    <span className="text-xs font-mono px-2.5 py-1 rounded-full mb-3 inline-block"
+                    <span className="text-sm font-mono px-2.5 py-1 rounded-full mb-3 inline-block"
                       style={{ background: `${c.color}18`, color: c.color }}>
                       {loc(c.label, lang)}
                     </span>
@@ -43,7 +43,7 @@ export default function CaseStudies() {
                 <p className="text-muted leading-relaxed mb-6 max-w-2xl">{loc(c.body, lang)}</p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                   {c.outcomes[lang].map(o => (
-                    <div key={o} className="rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2"
+                    <div key={o} className="rounded-xl px-4 py-3 text-base font-medium flex items-center gap-2"
                       style={{ background: 'var(--surface-2)', color: 'var(--text)' }}>
                       <span style={{ color: c.color }}>✓</span> {o}
                     </div>

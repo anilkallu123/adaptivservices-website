@@ -35,14 +35,14 @@ export default function WhatWeDo() {
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center"
                       style={{ background: `${s.color}22` }}>
-                      <s.icon size={18} style={{ color: s.color }} />
+                      <s.icon size={20} style={{ color: s.color }} />
                     </div>
                     <h2 className="text-xl font-semibold" style={{ color: 'var(--text)' }}>{loc(s.title, lang)}</h2>
                   </div>
                   <p className="text-muted leading-relaxed mb-5 max-w-xl">{loc(s.body, lang)}</p>
                   <div className="flex flex-wrap gap-2">
                     {s.points[lang].map(p => (
-                      <span key={p} className="text-xs font-mono px-3 py-1 rounded-full"
+                      <span key={p} className="text-sm font-mono px-3 py-1 rounded-full"
                         style={{ background: `${s.color}15`, color: s.color, border: `1px solid ${s.color}30` }}>
                         {p}
                       </span>
@@ -51,7 +51,7 @@ export default function WhatWeDo() {
                 </div>
                 <Link
                   href="/contact"
-                  className="flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors whitespace-nowrap"
+                  className="flex items-center gap-1.5 text-sm font-medium text-muted hover:text-[var(--text)] transition-colors whitespace-nowrap min-h-[44px]"
                 >
                   {UI.wwd_start[lang]} <ArrowRight size={14} />
                 </Link>
