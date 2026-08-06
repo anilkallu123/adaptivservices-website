@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Migrating to Oracle Database@AWS: Methodology and Gotchas — Adaptiv AS</title>
-  <meta name="description" content="Four phases for migrating an Oracle workload to Oracle DB@AWS — discovery, design, delivery, and cutover. When to use Data Pump vs GoldenGate, and what breaks silently."/>
+  <title>Migrating to Oracle Database@AWS: Methodology and Gotchas, Adaptiv AS</title>
+  <meta name="description" content="Four phases for migrating an Oracle workload to Oracle DB@AWS, discovery, design, delivery, and cutover. When to use Data Pump vs GoldenGate, and what breaks silently."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
   <meta property="og:title" content="Migrating to Oracle Database@AWS: Methodology and Gotchas"/>
@@ -112,8 +112,6 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
     <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -139,7 +137,7 @@
       Oracle Database@AWS:<br/>
       <span class="grad-text">Methodology and Gotchas</span>
     </h1>
-    <p class="lead fade-up">Infrastructure provisioned. Now the hard part: getting your data there. Four phases from AWR analysis to live cutover — and the things that break silently if you skip the discovery work.</p>
+    <p class="lead fade-up">Infrastructure provisioned. Now the hard part: getting your data there. Four phases from AWR analysis to live cutover, and the things that break silently if you skip the discovery work.</p>
   </div>
 </section>
 
@@ -148,11 +146,11 @@
 <div class="article-layout">
   <article class="article-body prose fade-up">
 
-    <p>Parts 1–3 covered what Oracle Database@AWS is, when to use it, and how to provision it with Terraform. This article covers the migration itself — how you move an existing Oracle workload onto ODB without a data loss event, an unexpected outage, or a performance regression that your AWR didn't predict.</p>
+    <p>Parts 1–3 covered what Oracle Database@AWS is, when to use it, and how to provision it with Terraform. This article covers the migration itself, how you move an existing Oracle workload onto ODB without a data loss event, an unexpected outage, or a performance regression that your AWR didn't predict.</p>
 
     <p>The methodology has four phases. Discovery and Design are where migrations succeed or fail. Most teams understand that intellectually but still compress them in practice. We'll cover what that compression costs.</p>
 
-    <h2 id="phase1">Phase 1 — Discovery</h2>
+    <h2 id="phase1">Phase 1, Discovery</h2>
 
     <div class="phase-block">
       <div class="phase-header">
@@ -165,15 +163,15 @@
       <div class="phase-body">
         <p>Discovery produces four artefacts: an AWR analysis, a schema inventory, a licensing audit, and a network topology map. All four are required inputs to Design. Missing any one of them produces a Design phase that will need to revisit Discovery mid-execution.</p>
         <ul>
-          <li><strong>AWR analysis</strong> — baseline performance profile: top SQL by elapsed time and CPU, I/O pattern (reads vs writes, sequential vs random), wait event profile, and smart scan eligibility. The AWR baseline is also your post-migration acceptance criterion — if smart scan utilisation on ODB doesn't exceed the baseline, something is wrong with the storage cell configuration or AZ alignment.</li>
-          <li><strong>Schema inventory</strong> — all schemas, object counts, data volumes, and dependencies (DB links, external tables, directory objects, scheduler jobs, DBMS_SCHEDULER chains). External dependencies — anything that reaches outside the database — must be resolved before cutover.</li>
-          <li><strong>Licensing audit</strong> — which Oracle options are in use (Partitioning, Advanced Compression, Diagnostics Pack, Tuning Pack, etc.), which are licensed, and what the licensing model will be on ODB (LicenseIncluded or BYOL). The audit must be done now, not at contract renewal time.</li>
-          <li><strong>Network topology</strong> — what connects to the database (application tiers, ETL servers, reporting tools, DB links to other databases), where they're deployed, and whether they'll be in the same AZ as the ODB network after migration.</li>
+          <li><strong>AWR analysis</strong>, baseline performance profile: top SQL by elapsed time and CPU, I/O pattern (reads vs writes, sequential vs random), wait event profile, and smart scan eligibility. The AWR baseline is also your post-migration acceptance criterion, if smart scan utilisation on ODB doesn't exceed the baseline, something is wrong with the storage cell configuration or AZ alignment.</li>
+          <li><strong>Schema inventory</strong>, all schemas, object counts, data volumes, and dependencies (DB links, external tables, directory objects, scheduler jobs, DBMS_SCHEDULER chains). External dependencies, anything that reaches outside the database, must be resolved before cutover.</li>
+          <li><strong>Licensing audit</strong>, which Oracle options are in use (Partitioning, Advanced Compression, Diagnostics Pack, Tuning Pack, etc.), which are licensed, and what the licensing model will be on ODB (LicenseIncluded or BYOL). The audit must be done now, not at contract renewal time.</li>
+          <li><strong>Network topology</strong>, what connects to the database (application tiers, ETL servers, reporting tools, DB links to other databases), where they're deployed, and whether they'll be in the same AZ as the ODB network after migration.</li>
         </ul>
       </div>
     </div>
 
-    <h2 id="phase2">Phase 2 — Design</h2>
+    <h2 id="phase2">Phase 2, Design</h2>
 
     <div class="phase-block">
       <div class="phase-header">
@@ -186,16 +184,16 @@
       <div class="phase-body">
         <p>Design produces the ODB sizing specification, AZ alignment plan, TDE key management strategy, cutover approach, and rollback plan.</p>
         <ul>
-          <li><strong>ODB sizing</strong> — VM cluster compute count (number of RAC nodes), CPU core count (OCPU, billed per enabled core), data storage in TB. Size from AWR peak workload, not average. For Exadata shapes, minimum data storage is 2TB, scalable in 2TB increments.</li>
-          <li><strong>AZ alignment</strong> — confirm the physical AZ ID for the ODB network matches the AZ where the application tier will live. If the app tier is being migrated to AWS simultaneously, the AZ alignment must be coordinated across both workstreams.</li>
-          <li><strong>TDE key management</strong> — decide between AWS KMS-managed TDE keys or Oracle Wallet-managed keys. KMS integration is recommended for enterprises with existing AWS KMS governance — it means TDE key rotation follows the same process as all other AWS key management.</li>
-          <li><strong>Cutover approach</strong> — Data Pump or GoldenGate. This decision drives the cutover window requirement. See below.</li>
-          <li><strong>Rollback plan</strong> — ODB provisioning is not reversible quickly. Define the rollback point (usually: application connection strings still pointing at source), the rollback trigger conditions (error rate, latency threshold, data integrity check failure), and the team responsible for calling it.</li>
+          <li><strong>ODB sizing</strong>, VM cluster compute count (number of RAC nodes), CPU core count (OCPU, billed per enabled core), data storage in TB. Size from AWR peak workload, not average. For Exadata shapes, minimum data storage is 2TB, scalable in 2TB increments.</li>
+          <li><strong>AZ alignment</strong>, confirm the physical AZ ID for the ODB network matches the AZ where the application tier will live. If the app tier is being migrated to AWS simultaneously, the AZ alignment must be coordinated across both workstreams.</li>
+          <li><strong>TDE key management</strong>, decide between AWS KMS-managed TDE keys or Oracle Wallet-managed keys. KMS integration is recommended for enterprises with existing AWS KMS governance, it means TDE key rotation follows the same process as all other AWS key management.</li>
+          <li><strong>Cutover approach</strong>, Data Pump or GoldenGate. This decision drives the cutover window requirement. See below.</li>
+          <li><strong>Rollback plan</strong>, ODB provisioning is not reversible quickly. Define the rollback point (usually: application connection strings still pointing at source), the rollback trigger conditions (error rate, latency threshold, data integrity check failure), and the team responsible for calling it.</li>
         </ul>
       </div>
     </div>
 
-    <h2 id="datapump-vs-gg">Data Pump vs GoldenGate — Making the Call</h2>
+    <h2 id="datapump-vs-gg">Data Pump vs GoldenGate, Making the Call</h2>
 
     <p>This is the decision that most directly determines your cutover risk and your maintenance window requirement.</p>
 
@@ -204,22 +202,22 @@
         <tr><th>Factor</th><th>Data Pump</th><th>GoldenGate CDC</th></tr>
       </thead>
       <tbody>
-        <tr><td>Cutover window</td><td>Proportional to data volume — plan 2–4 hours per TB at parallel=4</td><td>Near-zero — cutover is a connection string flip after sync</td></tr>
-        <tr><td>Complexity</td><td>Low — well-understood tooling, scriptable</td><td>High — GoldenGate setup, Extract/Replicat configuration, lag monitoring</td></tr>
+        <tr><td>Cutover window</td><td>Proportional to data volume, plan 2–4 hours per TB at parallel=4</td><td>Near-zero, cutover is a connection string flip after sync</td></tr>
+        <tr><td>Complexity</td><td>Low, well-understood tooling, scriptable</td><td>High, GoldenGate setup, Extract/Replicat configuration, lag monitoring</td></tr>
         <tr><td>Cost</td><td>No additional licensing beyond ODB</td><td>OCI GoldenGate or GoldenGate on-premise license required</td></tr>
         <tr><td>Right for</td><td>Schemas &lt;5TB, planned maintenance windows acceptable, batch workloads</td><td>OLTP systems, 24/7 applications, schemas &gt;5TB, zero-downtime requirement</td></tr>
-        <tr><td>Pitfall</td><td>Long-running transactions at cutover time leave the target inconsistent</td><td>Supplemental logging must be enabled on source before migration begins — can't add it at cutover time</td></tr>
+        <tr><td>Pitfall</td><td>Long-running transactions at cutover time leave the target inconsistent</td><td>Supplemental logging must be enabled on source before migration begins, can't add it at cutover time</td></tr>
       </tbody>
     </table>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot"></div>GoldenGate prerequisite that burns teams</div>
       <div class="callout-body">
-        <p>If you're using GoldenGate CDC, supplemental logging must be enabled on the source database <em>before</em> the initial data load begins — not at cutover time. Enabling it after the initial load means the Replicat process cannot reconstruct the full change history for rows that changed between the initial load and the CDC start point. Enable <code>ALTER DATABASE ADD SUPPLEMENTAL LOG DATA</code> and schema-level supplemental logging during Discovery, not Design. It has near-zero performance impact on OLTP workloads.</p>
+        <p>If you're using GoldenGate CDC, supplemental logging must be enabled on the source database <em>before</em> the initial data load begins, not at cutover time. Enabling it after the initial load means the Replicat process cannot reconstruct the full change history for rows that changed between the initial load and the CDC start point. Enable <code>ALTER DATABASE ADD SUPPLEMENTAL LOG DATA</code> and schema-level supplemental logging during Discovery, not Design. It has near-zero performance impact on OLTP workloads.</p>
       </div>
     </div>
 
-    <h2 id="phase3">Phase 3 — Delivery</h2>
+    <h2 id="phase3">Phase 3, Delivery</h2>
 
     <div class="phase-block">
       <div class="phase-header">
@@ -232,15 +230,15 @@
       <div class="phase-body">
         <p>Delivery is the Terraform provisioning phase. Following the two-phase pattern from Part 3:</p>
         <ul>
-          <li>Phase 1 Terraform apply — ODB network, Exadata infrastructure (4–6h), VM cluster, KMS keys. Validate network peering connectivity from the application VPC before proceeding.</li>
-          <li>Phase 2 Terraform apply — DB Home, CDB, PDB(s). Run schema creation scripts and verify connectivity from application hosts.</li>
-          <li>Performance baseline run — run the AWR workload against the empty ODB target to validate smart scan is functioning (check <code>V$SYSSTAT</code> for <code>cell physical IO interconnect bytes returned by smart scan</code>). Non-zero value confirms smart scan is active.</li>
+          <li>Phase 1 Terraform apply, ODB network, Exadata infrastructure (4–6h), VM cluster, KMS keys. Validate network peering connectivity from the application VPC before proceeding.</li>
+          <li>Phase 2 Terraform apply, DB Home, CDB, PDB(s). Run schema creation scripts and verify connectivity from application hosts.</li>
+          <li>Performance baseline run, run the AWR workload against the empty ODB target to validate smart scan is functioning (check <code>V$SYSSTAT</code> for <code>cell physical IO interconnect bytes returned by smart scan</code>). Non-zero value confirms smart scan is active.</li>
           <li>If using GoldenGate: configure Extract on source, run initial data load, configure Replicat on ODB, verify lag is below threshold before declaring readiness for cutover.</li>
         </ul>
       </div>
     </div>
 
-    <h2 id="phase4">Phase 4 — Migration and Cutover</h2>
+    <h2 id="phase4">Phase 4, Migration and Cutover</h2>
 
     <div class="phase-block">
       <div class="phase-header">
@@ -256,29 +254,29 @@
           <li>Freeze application writes (put application in maintenance mode or redirect to read-only fallback)</li>
           <li>Run final incremental Data Pump export of changed data since the initial load</li>
           <li>Import incremental dump to ODB target</li>
-          <li>Run integrity check — row counts per table, sequence current values, constraint violations</li>
+          <li>Run integrity check, row counts per table, sequence current values, constraint violations</li>
           <li>Update application connection strings to ODB endpoint</li>
-          <li>Smoke test against ODB — verify application writes and reads</li>
+          <li>Smoke test against ODB, verify application writes and reads</li>
           <li>Remove maintenance mode</li>
-          <li>Monitor AWR on ODB for first 24 hours — compare to baseline profile</li>
+          <li>Monitor AWR on ODB for first 24 hours, compare to baseline profile</li>
         </ul>
-        <p>For GoldenGate: the cutover is a connection string flip once GoldenGate lag is at zero. No maintenance window required. Post-cutover, run GoldenGate reverse replication back to the source for rollback readiness — drop it after 48 hours of stable operation.</p>
+        <p>For GoldenGate: the cutover is a connection string flip once GoldenGate lag is at zero. No maintenance window required. Post-cutover, run GoldenGate reverse replication back to the source for rollback readiness, drop it after 48 hours of stable operation.</p>
       </div>
     </div>
 
     <div class="pull-quote">
-      <p>"The AWR comparison after go-live is not a formality. Smart scan utilisation, I/O wait profile, and top SQL elapsed time should all match or improve vs the source baseline. A regression in any of these signals a configuration problem — not a performance characteristic of ODB."</p>
+      <p>"The AWR comparison after go-live is not a formality. Smart scan utilisation, I/O wait profile, and top SQL elapsed time should all match or improve vs the source baseline. A regression in any of these signals a configuration problem, not a performance characteristic of ODB."</p>
     </div>
 
     <h2 id="silent-failures">What Breaks Silently</h2>
 
-    <p>These are the issues that don't produce loud errors during cutover — they surface 48–72 hours later in production.</p>
+    <p>These are the issues that don't produce loud errors during cutover, they surface 48–72 hours later in production.</p>
 
     <ul>
-      <li><strong>DB links to non-migrated schemas</strong> — if the migrated schema has DB links to databases that haven't been updated with the new ODB endpoint, queries that traverse those links succeed during testing (the link target hasn't changed) and fail in production when the link target changes as part of a subsequent migration phase. Audit all DB links in Discovery.</li>
-      <li><strong>Scheduler jobs with hardcoded hostnames</strong> — DBMS_SCHEDULER external jobs that reference the old hostname directly will continue to run against the old database after cutover. They won't fail immediately; they'll fail the first time they run after the old database is decommissioned.</li>
-      <li><strong>Sequence cache exhaustion on partial load</strong> — if the initial Data Pump load is interrupted and restarted, sequence values may advance beyond the exported high watermark. Applications that depend on sequence continuity (audit trails, correlation IDs) will have gaps. Always export sequences with <code>INCLUDE=SEQUENCE</code> and validate high watermark alignment post-import.</li>
-      <li><strong>Time zone misalignment</strong> — ODB default database time zone is UTC. Source databases in production environments often have regional time zone settings. <code>TIMESTAMP WITH LOCAL TIME ZONE</code> columns will store values correctly but display and compare differently if the application assumes a specific server time zone.</li>
+      <li><strong>DB links to non-migrated schemas</strong>, if the migrated schema has DB links to databases that haven't been updated with the new ODB endpoint, queries that traverse those links succeed during testing (the link target hasn't changed) and fail in production when the link target changes as part of a subsequent migration phase. Audit all DB links in Discovery.</li>
+      <li><strong>Scheduler jobs with hardcoded hostnames</strong>, DBMS_SCHEDULER external jobs that reference the old hostname directly will continue to run against the old database after cutover. They won't fail immediately; they'll fail the first time they run after the old database is decommissioned.</li>
+      <li><strong>Sequence cache exhaustion on partial load</strong>, if the initial Data Pump load is interrupted and restarted, sequence values may advance beyond the exported high watermark. Applications that depend on sequence continuity (audit trails, correlation IDs) will have gaps. Always export sequences with <code>INCLUDE=SEQUENCE</code> and validate high watermark alignment post-import.</li>
+      <li><strong>Time zone misalignment</strong>, ODB default database time zone is UTC. Source databases in production environments often have regional time zone settings. <code>TIMESTAMP WITH LOCAL TIME ZONE</code> columns will store values correctly but display and compare differently if the application assumes a specific server time zone.</li>
     </ul>
 
     <h2 id="post-golive">Post-Go-Live Validation</h2>
@@ -286,14 +284,14 @@
     <p>The migration is not complete at connection string flip. Run these validations during the first 24 hours:</p>
 
     <ul>
-      <li>AWR snapshot comparison — capture a 30-minute AWR snapshot on ODB under production load and compare elapsed time and I/O profile against the source baseline</li>
-      <li>Smart scan validation — confirm <code>cell physical IO interconnect bytes returned by smart scan</code> is non-zero and proportional to expected workload</li>
-      <li>Data Guard lag — if Active Data Guard standby is configured, verify lag is within RPO threshold</li>
-      <li>Application error rate — compare application error logs pre and post cutover; any new ORA- errors require immediate investigation</li>
-      <li>Connection pool behaviour — verify connection pool is connecting to ODB and not caching stale connections to the old database endpoint</li>
+      <li>AWR snapshot comparison, capture a 30-minute AWR snapshot on ODB under production load and compare elapsed time and I/O profile against the source baseline</li>
+      <li>Smart scan validation, confirm <code>cell physical IO interconnect bytes returned by smart scan</code> is non-zero and proportional to expected workload</li>
+      <li>Data Guard lag, if Active Data Guard standby is configured, verify lag is within RPO threshold</li>
+      <li>Application error rate, compare application error logs pre and post cutover; any new ORA- errors require immediate investigation</li>
+      <li>Connection pool behaviour, verify connection pool is connecting to ODB and not caching stale connections to the old database endpoint</li>
     </ul>
 
-    <p>In Part 5, we compare Oracle Database@AWS and Oracle Database@Azure — a practitioner who has delivered both in production, comparing the architecture, the tooling, and the commercial models.</p>
+    <p>In Part 5, we compare Oracle Database@AWS and Oracle Database@Azure, a practitioner who has delivered both in production, comparing the architecture, the tooling, and the commercial models.</p>
 
     <div class="share-bar">
       <span class="share-label">Topics</span>
@@ -327,7 +325,7 @@
       <div class="cta-band-halo"></div>
       <p class="eyebrow">Work with us</p>
       <h2>Planning an ODB migration?<br/><span class="grad-text">We've done it before.</span></h2>
-      <p style="max-width:480px; margin:0 auto 2rem;">From AWR analysis through live cutover — we've delivered Oracle migrations to ODB, OCI, and Azure. We'll give you a realistic timeline, not an optimistic one.</p>
+      <p style="max-width:480px; margin:0 auto 2rem;">From AWR analysis through live cutover, we've delivered Oracle migrations to ODB, OCI, and Azure. We'll give you a realistic timeline, not an optimistic one.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
     </div>
 
@@ -337,11 +335,11 @@
     <nav class="toc">
       <div class="toc-header">Contents</div>
       <ul>
-        <li><a href="#phase1">Phase 1 — Discovery</a></li>
-        <li><a href="#phase2">Phase 2 — Design</a></li>
+        <li><a href="#phase1">Phase 1, Discovery</a></li>
+        <li><a href="#phase2">Phase 2, Design</a></li>
         <li><a href="#datapump-vs-gg">Data Pump vs GoldenGate</a></li>
-        <li><a href="#phase3">Phase 3 — Delivery</a></li>
-        <li><a href="#phase4">Phase 4 — Cutover</a></li>
+        <li><a href="#phase3">Phase 3, Delivery</a></li>
+        <li><a href="#phase4">Phase 4, Cutover</a></li>
         <li><a href="#silent-failures">What Breaks Silently</a></li>
         <li><a href="#post-golive">Post-Go-Live Validation</a></li>
       </ul>
@@ -364,12 +362,12 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p>An ambitious Norwegian IT venture, building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
         <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
-          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="subject" value="New newsletter signup, Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
           <button type="submit">Subscribe</button>
@@ -413,7 +411,7 @@ async function handleNewsletter(e) {
   const data = new FormData(e.target);
   const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
   const json = await res.json();
-  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.textContent = json.success ? 'Subscribed, welcome aboard.' : 'Something went wrong. Try again.';
   msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
   if (json.success) e.target.reset();
 }

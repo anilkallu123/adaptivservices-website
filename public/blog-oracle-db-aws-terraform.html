@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Two-Phase Terraform Delivery Model for Oracle Database@AWS — Adaptiv AS</title>
-  <meta name="description" content="How to provision Oracle Database@AWS end-to-end using the AWS and OCI Terraform providers — the two-phase pattern, key gotchas, and a productised module structure."/>
+  <title>The Two-Phase Terraform Delivery Model for Oracle Database@AWS, Adaptiv AS</title>
+  <meta name="description" content="How to provision Oracle Database@AWS end-to-end using the AWS and OCI Terraform providers, the two-phase pattern, key gotchas, and a productised module structure."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
   <meta property="og:title" content="The Two-Phase Terraform Delivery Model for Oracle Database@AWS"/>
-  <meta property="og:description" content="How to provision Oracle DB@AWS end-to-end with AWS and OCI Terraform providers — the two-phase pattern, gotchas, and module structure."/>
+  <meta property="og:description" content="How to provision Oracle DB@AWS end-to-end with AWS and OCI Terraform providers, the two-phase pattern, gotchas, and module structure."/>
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="https://www.adaptivservices.com/blog-oracle-db-aws-terraform"/>
   <meta property="og:image" content="https://www.adaptivservices.com/assets/og-image.png"/>
@@ -120,8 +120,6 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
     <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -146,7 +144,7 @@
       The Two-Phase<br/>
       <span class="grad-text">Terraform Delivery Model</span><br/>for Oracle Database@AWS
     </h1>
-    <p class="lead fade-up">ODB provisioning spans two providers and two control planes. Here's the module pattern that makes it repeatable — and the gotchas that will burn you if you skip the preflight checks.</p>
+    <p class="lead fade-up">ODB provisioning spans two providers and two control planes. Here's the module pattern that makes it repeatable, and the gotchas that will burn you if you skip the preflight checks.</p>
   </div>
 </section>
 
@@ -174,24 +172,24 @@
       </div>
     </div>
 
-    <p>The architectural split in Oracle Database@AWS — AWS-managed infrastructure, Oracle-managed database layer — has a direct consequence for how you provision it. You can't do it with a single Terraform provider. You need the AWS provider for the ODB network and Exadata infrastructure, and you need the OCI provider for the DB Home, CDB, and PDBs. The handoff between them is the <code>vm_cluster_ocid</code> that Phase 1 outputs.</p>
+    <p>The architectural split in Oracle Database@AWS, AWS-managed infrastructure, Oracle-managed database layer, has a direct consequence for how you provision it. You can't do it with a single Terraform provider. You need the AWS provider for the ODB network and Exadata infrastructure, and you need the OCI provider for the DB Home, CDB, and PDBs. The handoff between them is the <code>vm_cluster_ocid</code> that Phase 1 outputs.</p>
 
-    <p>This two-phase pattern is how we productise ODB for consulting delivery. Instead of a bespoke infrastructure build for each customer, you get a parameterised Terraform call — swap the customer's variable values and the entire stack reproduces consistently. This article walks through both phases, the module structure, and the five gotchas that will cause a failed or rolled-back provisioning run if you don't handle them up front.</p>
+    <p>This two-phase pattern is how we productise ODB for consulting delivery. Instead of a bespoke infrastructure build for each customer, you get a parameterised Terraform call, swap the customer's variable values and the entire stack reproduces consistently. This article walks through both phases, the module structure, and the five gotchas that will cause a failed or rolled-back provisioning run if you don't handle them up front.</p>
 
-    <h2 id="phase1">Phase 1 — The AWS Layer</h2>
+    <h2 id="phase1">Phase 1, The AWS Layer</h2>
 
     <p>Phase 1 provisions everything that lives in your AWS account and is visible from the AWS console. The resources are:</p>
 
     <ul>
-      <li><strong>ODB network</strong> (<code>aws_odb_network</code>) — a dedicated network construct, AZ-pinned, that hosts the Exadata infrastructure. This is not a VPC; it's a separate networking primitive.</li>
-      <li><strong>ODB network peering connection</strong> (<code>aws_odb_network_peering_connection</code>) — connects the ODB network to your application VPC. Resources inside the app VPC route to Oracle via this peering. Prefix: <code>odbpcx-</code>.</li>
-      <li><strong>Exadata infrastructure</strong> (<code>aws_odb_cloud_exadata_infrastructure</code>) — the physical Exadata hardware reservation. This is the resource that takes 4–6 hours to create.</li>
-      <li><strong>VM cluster</strong> (<code>aws_odb_cloud_vm_cluster</code>) — the Oracle RAC cluster running on the Exadata infrastructure. This outputs the <code>vm_cluster_ocid</code> needed by Phase 2.</li>
-      <li><strong>KMS key + Secrets Manager secret</strong> — TDE wallet encryption key and database credentials store, integrated with AWS-native key management.</li>
+      <li><strong>ODB network</strong> (<code>aws_odb_network</code>), a dedicated network construct, AZ-pinned, that hosts the Exadata infrastructure. This is not a VPC; it's a separate networking primitive.</li>
+      <li><strong>ODB network peering connection</strong> (<code>aws_odb_network_peering_connection</code>), connects the ODB network to your application VPC. Resources inside the app VPC route to Oracle via this peering. Prefix: <code>odbpcx-</code>.</li>
+      <li><strong>Exadata infrastructure</strong> (<code>aws_odb_cloud_exadata_infrastructure</code>), the physical Exadata hardware reservation. This is the resource that takes 4–6 hours to create.</li>
+      <li><strong>VM cluster</strong> (<code>aws_odb_cloud_vm_cluster</code>), the Oracle RAC cluster running on the Exadata infrastructure. This outputs the <code>vm_cluster_ocid</code> needed by Phase 2.</li>
+      <li><strong>KMS key + Secrets Manager secret</strong>, TDE wallet encryption key and database credentials store, integrated with AWS-native key management.</li>
     </ul>
 
     <div class="arch-diagram">
-      <div class="arch-label">Phase 1 — Terraform resource dependency graph (AWS provider)</div>
+      <div class="arch-label">Phase 1, Terraform resource dependency graph (AWS provider)</div>
       <div>
 <span class="arch-node arch-cyan">aws_kms_key</span>  <span class="arch-arrow">+</span>  <span class="arch-node arch-cyan">aws_secretsmanager_secret</span><br/>
 <span class="arch-arrow">         ↓                              ↓</span><br/>
@@ -208,7 +206,7 @@
     </div>
 
     <div class="code-block">
-      <div class="code-block-header"><span>main.tf — Phase 1 skeleton (AWS provider)</span></div>
+      <div class="code-block-header"><span>main.tf, Phase 1 skeleton (AWS provider)</span></div>
       <pre><span class="cm"># Requires: hashicorp/aws >= 6.15, Terraform >= 1.12.0</span>
 
 <span class="kw">terraform</span> {
@@ -221,7 +219,7 @@
   required_version = <span class="str">">= 1.12.0"</span>
 }
 
-<span class="cm"># ODB network — AZ-pinned to physical AZ ID, not AZ name</span>
+<span class="cm"># ODB network, AZ-pinned to physical AZ ID, not AZ name</span>
 <span class="kw">resource</span> <span class="str">"aws_odb_network"</span> <span class="str">"this"</span> {
   <span class="attr">display_name</span>          = var.odb_network_name
   <span class="attr">availability_zone_id</span>  = var.az_id  <span class="cm"># e.g. "use1-az4"</span>
@@ -237,7 +235,7 @@
   <span class="attr">vpc_route_table_id</span> = var.app_route_table_id
 }
 
-<span class="cm"># Exadata infrastructure — the 4-6h resource</span>
+<span class="cm"># Exadata infrastructure, the 4-6h resource</span>
 <span class="kw">resource</span> <span class="str">"aws_odb_cloud_exadata_infrastructure"</span> <span class="str">"this"</span> {
   <span class="attr">display_name</span>          = var.exadata_infra_name
   <span class="attr">availability_zone_id</span>  = var.az_id
@@ -246,12 +244,12 @@
   <span class="attr">storage_count</span>         = var.storage_count
 
   <span class="attr">timeouts</span> {
-    create = <span class="str">"6h"</span>  <span class="cm"># ALWAYS set this — default is too short</span>
+    create = <span class="str">"6h"</span>  <span class="cm"># ALWAYS set this, default is too short</span>
     delete = <span class="str">"6h"</span>
   }
 }
 
-<span class="cm"># VM cluster — outputs vm_cluster_ocid for Phase 2</span>
+<span class="cm"># VM cluster, outputs vm_cluster_ocid for Phase 2</span>
 <span class="kw">resource</span> <span class="str">"aws_odb_cloud_vm_cluster"</span> <span class="str">"this"</span> {
   <span class="attr">display_name</span>                   = var.vm_cluster_name
   <span class="attr">cloud_exadata_infrastructure_id</span> = aws_odb_cloud_exadata_infrastructure.this.id
@@ -259,7 +257,7 @@
   <span class="attr">cpu_core_count</span>                 = var.cpu_core_count
   <span class="attr">data_storage_size_in_tbs</span>       = var.data_storage_tbs
   <span class="attr">gi_version</span>                     = var.gi_version
-  <span class="attr">grid_image_id</span>                  = var.grid_image_ocid  <span class="cm"># see gotcha #3 — attribute is grid_image_id, not grid_image_ocid</span>
+  <span class="attr">grid_image_id</span>                  = var.grid_image_ocid  <span class="cm"># see gotcha #3, attribute is grid_image_id, not grid_image_ocid</span>
   <span class="attr">ssh_public_keys</span>                = [var.ssh_public_key]
   <span class="attr">license_model</span>                  = var.license_model  <span class="cm"># LicenseIncluded or BringYourOwnLicense</span>
   <span class="attr">kms_key_id</span>                     = aws_kms_key.tde.arn
@@ -270,14 +268,14 @@
 }</pre>
     </div>
 
-    <h2 id="phase2">Phase 2 — The Oracle Layer</h2>
+    <h2 id="phase2">Phase 2, The Oracle Layer</h2>
 
     <p>Phase 2 uses the OCI Terraform provider and takes the <code>vm_cluster_ocid</code> from Phase 1 as its entry point. It provisions the database software layer: DB Home (the Oracle Database software installation), CDB (Container Database), and one or more PDBs (Pluggable Databases).</p>
 
-    <p>The key insight here is the separation of concerns. Phase 1 provisions hardware and networking — things that change infrequently and are managed by AWS infrastructure teams. Phase 2 provisions database objects — things that change more frequently and are managed by DBAs or application teams. Keeping them in separate Terraform states means a database schema change or PDB addition doesn't require re-planning the Exadata infrastructure stack.</p>
+    <p>The key insight here is the separation of concerns. Phase 1 provisions hardware and networking, things that change infrequently and are managed by AWS infrastructure teams. Phase 2 provisions database objects, things that change more frequently and are managed by DBAs or application teams. Keeping them in separate Terraform states means a database schema change or PDB addition doesn't require re-planning the Exadata infrastructure stack.</p>
 
     <div class="code-block">
-      <div class="code-block-header"><span>main.tf — Phase 2 skeleton (OCI provider)</span></div>
+      <div class="code-block-header"><span>main.tf, Phase 2 skeleton (OCI provider)</span></div>
       <pre><span class="cm"># Phase 2 takes vm_cluster_ocid as input from Phase 1 output</span>
 
 <span class="kw">terraform</span> {
@@ -289,7 +287,7 @@
   }
 }
 
-<span class="cm"># DB Home — Oracle Database software installation on the VM cluster</span>
+<span class="cm"># DB Home, Oracle Database software installation on the VM cluster</span>
 <span class="kw">resource</span> <span class="str">"oci_database_db_home"</span> <span class="str">"this"</span> {
   <span class="attr">vm_cluster_id</span> = var.vm_cluster_ocid  <span class="cm"># from Phase 1 output</span>
   <span class="attr">display_name</span>  = var.db_home_name
@@ -322,37 +320,37 @@
     <p>These are the issues that will burn provisioning runs if you don't handle them before you run <code>terraform apply</code>.</p>
 
     <h3>1. AWS provider version pinning</h3>
-    <p>The ODB resources require <code>hashicorp/aws >= 6.15</code>. This is a major version jump from 5.x, and it is not backward-compatible. Many enterprise Terraform codebases are pinned to 4.x or 5.x for stability. Upgrading the provider version for ODB while leaving other infrastructure on the old version requires either a separate Terraform workspace/state for ODB, or a full provider upgrade with regression testing across the existing codebase. Do not underestimate this — it's the most common delivery delay in ODB projects.</p>
+    <p>The ODB resources require <code>hashicorp/aws >= 6.15</code>. This is a major version jump from 5.x, and it is not backward-compatible. Many enterprise Terraform codebases are pinned to 4.x or 5.x for stability. Upgrading the provider version for ODB while leaving other infrastructure on the old version requires either a separate Terraform workspace/state for ODB, or a full provider upgrade with regression testing across the existing codebase. Do not underestimate this, it's the most common delivery delay in ODB projects.</p>
 
     <h3>2. AZ pinning on physical AZ ID</h3>
-    <p>The ODB network, app VPC subnets used for peering, and Exadata infrastructure must all be in the same physical AZ ID — not the same AZ name. AZ names are account-scoped aliases; the same physical AZ may have different names in different AWS accounts. Resolve the physical AZ ID before starting: <code>aws ec2 describe-availability-zones --region &lt;region&gt;</code>. Bake the AZ ID directly into your variable definitions, not the name.</p>
+    <p>The ODB network, app VPC subnets used for peering, and Exadata infrastructure must all be in the same physical AZ ID, not the same AZ name. AZ names are account-scoped aliases; the same physical AZ may have different names in different AWS accounts. Resolve the physical AZ ID before starting: <code>aws ec2 describe-availability-zones --region &lt;region&gt;</code>. Bake the AZ ID directly into your variable definitions, not the name.</p>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot indigo"></div>AZ ID resolution command</div>
       <div class="callout-body">
-        <p><code>aws ec2 describe-availability-zones --region us-east-1 --query 'AvailabilityZones[*].[ZoneName,ZoneId]' --output table</code> — run this in each AWS account that will host ODB resources. The ZoneId (e.g., <code>use1-az4</code>) is what goes into your Terraform variables, not the ZoneName.</p>
+        <p><code>aws ec2 describe-availability-zones --region us-east-1 --query 'AvailabilityZones[*].[ZoneName,ZoneId]' --output table</code>, run this in each AWS account that will host ODB resources. The ZoneId (e.g., <code>use1-az4</code>) is what goes into your Terraform variables, not the ZoneName.</p>
       </div>
     </div>
 
     <h3>3. grid_image_ocid has no enumeration API</h3>
-    <p>The <code>grid_image_ocid</code> parameter on the VM cluster resource specifies the Oracle Grid Infrastructure image version. There is currently no AWS API to list valid values for your region and shape combination. The only reliable method is to retrieve it from an existing ODB VM cluster in the same region: <code>aws odb describe-cloud-vm-clusters --region &lt;region&gt;</code>. Document the OCID in your module's variable definitions with a clear comment — it changes with Grid Infrastructure patch releases and will cause a forced replacement if updated without a planned maintenance window.</p>
+    <p>The <code>grid_image_ocid</code> parameter on the VM cluster resource specifies the Oracle Grid Infrastructure image version. There is currently no AWS API to list valid values for your region and shape combination. The only reliable method is to retrieve it from an existing ODB VM cluster in the same region: <code>aws odb describe-cloud-vm-clusters --region &lt;region&gt;</code>. Document the OCID in your module's variable definitions with a clear comment, it changes with Grid Infrastructure patch releases and will cause a forced replacement if updated without a planned maintenance window.</p>
 
     <h3>4. Timeout on Exadata infrastructure create</h3>
-    <p>Always set <code>timeouts { create = "6h" }</code> on <code>aws_odb_cloud_exadata_infrastructure</code>. The Terraform provider's default timeout is shorter than the actual provisioning time in some regions. A timeout during infrastructure creation leaves a partially provisioned resource in a state that requires Oracle support to clean up — it doesn't roll back cleanly. The 6-hour timeout is the safe value; it simply lets the provider wait without error.</p>
+    <p>Always set <code>timeouts { create = "6h" }</code> on <code>aws_odb_cloud_exadata_infrastructure</code>. The Terraform provider's default timeout is shorter than the actual provisioning time in some regions. A timeout during infrastructure creation leaves a partially provisioned resource in a state that requires Oracle support to clean up, it doesn't roll back cleanly. The 6-hour timeout is the safe value; it simply lets the provider wait without error.</p>
 
     <h3>5. State separation between phases</h3>
-    <p>Keep Phase 1 and Phase 2 in separate Terraform state files — either different workspaces or different backend paths. Phase 1 (Exadata infrastructure) has a 4–6 hour provisioning cycle and should never be in the same plan-apply cycle as Phase 2 (DB Home, PDB). If you combine them, a PDB addition or DB Home change will trigger a plan that includes the Exadata infrastructure in scope — creating risk of accidental destruction of the physical layer when you intended to only change the database software layer.</p>
+    <p>Keep Phase 1 and Phase 2 in separate Terraform state files, either different workspaces or different backend paths. Phase 1 (Exadata infrastructure) has a 4–6 hour provisioning cycle and should never be in the same plan-apply cycle as Phase 2 (DB Home, PDB). If you combine them, a PDB addition or DB Home change will trigger a plan that includes the Exadata infrastructure in scope, creating risk of accidental destruction of the physical layer when you intended to only change the database software layer.</p>
 
     <div class="pull-quote">
-      <p>"The two-phase pattern is how you turn ODB from a bespoke infrastructure build into a repeatable, productised delivery. Each customer gets a parameterised call — not a hand-built environment."</p>
+      <p>"The two-phase pattern is how you turn ODB from a bespoke infrastructure build into a repeatable, productised delivery. Each customer gets a parameterised call, not a hand-built environment."</p>
     </div>
 
     <h2 id="module-structure">Module Structure for Consulting Delivery</h2>
 
-    <p>For consulting delivery, we structure ODB as two reusable Terraform modules — one per phase — with a thin customer-specific root module that wires them together via output/variable chaining.</p>
+    <p>For consulting delivery, we structure ODB as two reusable Terraform modules, one per phase, with a thin customer-specific root module that wires them together via output/variable chaining.</p>
 
     <div class="arch-diagram">
-      <div class="arch-label">Module structure — consulting delivery pattern</div>
+      <div class="arch-label">Module structure, consulting delivery pattern</div>
       <div>
 <span class="arch-node arch-cyan">modules/oracle-db-aws-infra/</span>  <span class="arch-arrow">← Phase 1 module</span><br/>
 <span class="arch-arrow">  ├── main.tf       (ODB network, Exadata infra, VM cluster, KMS)</span><br/>
@@ -371,19 +369,19 @@
       </div>
     </div>
 
-    <p>The module library is published to GitHub under <a href="https://github.com/anilkallu123/terraform-aws-oracle-database" target="_blank" rel="noopener">anilkallu123/terraform-aws-oracle-database</a> — open source, versioned with release-please, with terraform-docs generated reference. Companion modules for Azure and GCP follow the same two-phase pattern.</p>
+    <p>The module library is published to GitHub under <a href="https://github.com/anilkallu123/terraform-aws-oracle-database" target="_blank" rel="noopener">anilkallu123/terraform-aws-oracle-database</a>, open source, versioned with release-please, with terraform-docs generated reference. Companion modules for Azure and GCP follow the same two-phase pattern.</p>
 
     <h2 id="ci">CI/CD Considerations</h2>
 
     <p>Running ODB provisioning in CI has one significant constraint: the 4–6 hour Exadata infrastructure creation time. This is not a pipeline step you run on every PR. The practical pattern:</p>
 
     <ul>
-      <li>Phase 1 (infra) runs on a separate, manually-triggered pipeline — or a scheduled job during approved maintenance windows. It writes state to a shared remote backend.</li>
+      <li>Phase 1 (infra) runs on a separate, manually-triggered pipeline, or a scheduled job during approved maintenance windows. It writes state to a shared remote backend.</li>
       <li>Phase 2 (database) runs on a standard PR-gated pipeline. It reads the Phase 1 state as a remote state data source and plans only the database layer changes.</li>
       <li>Plan output for Phase 2 must explicitly show that no Phase 1 resources are in scope before merge approval is granted.</li>
     </ul>
 
-    <p>In Part 4, we cover the migration methodology — how you get your existing Oracle data into ODB once the infrastructure is provisioned, and when to use Data Pump vs GoldenGate for cutover.</p>
+    <p>In Part 4, we cover the migration methodology, how you get your existing Oracle data into ODB once the infrastructure is provisioned, and when to use Data Pump vs GoldenGate for cutover.</p>
 
     <div class="share-bar">
       <span class="share-label">Topics</span>
@@ -427,8 +425,8 @@
     <nav class="toc">
       <div class="toc-header">Contents</div>
       <ul>
-        <li><a href="#phase1">Phase 1 — AWS Layer</a></li>
-        <li><a href="#phase2">Phase 2 — Oracle Layer</a></li>
+        <li><a href="#phase1">Phase 1, AWS Layer</a></li>
+        <li><a href="#phase2">Phase 2, Oracle Layer</a></li>
         <li><a href="#gotchas">The Five Gotchas</a></li>
         <li><a href="#module-structure">Module Structure</a></li>
         <li><a href="#ci">CI/CD Considerations</a></li>
@@ -452,12 +450,12 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture, building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
         <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
-          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="subject" value="New newsletter signup, Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
           <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
@@ -501,7 +499,7 @@ async function handleNewsletter(e) {
   const data = new FormData(e.target);
   const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
   const json = await res.json();
-  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.textContent = json.success ? 'Subscribed, welcome aboard.' : 'Something went wrong. Try again.';
   msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
   if (json.success) e.target.reset();
 }

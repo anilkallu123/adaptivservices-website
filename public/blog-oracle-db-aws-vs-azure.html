@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oracle Database@AWS vs Oracle Database@Azure: A Practitioner's Comparison — Adaptiv AS</title>
+  <title>Oracle Database@AWS vs Oracle Database@Azure: A Practitioner's Comparison, Adaptiv AS</title>
   <meta name="description" content="Both are Oracle Exadata in a hyperscaler AZ. But the Terraform providers, networking models, and commercial structures are meaningfully different. A practitioner who has delivered both compares them."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
@@ -105,8 +105,6 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
     <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -131,7 +129,7 @@
       Oracle Database@AWS<br/>vs Oracle Database@Azure:<br/>
       <span class="grad-text">A Practitioner's Comparison</span>
     </h1>
-    <p class="lead fade-up">Architecturally identical concepts. Meaningfully different implementations. I've delivered both in production — here's where they diverge in Terraform, networking, commercial model, and which workloads land where.</p>
+    <p class="lead fade-up">Architecturally identical concepts. Meaningfully different implementations. I've delivered both in production, here's where they diverge in Terraform, networking, commercial model, and which workloads land where.</p>
   </div>
 </section>
 
@@ -140,15 +138,15 @@
 <div class="article-layout">
   <article class="article-body prose fade-up">
 
-    <p>I'm in a position that's still uncommon: I've delivered Oracle Database@Azure in production (DIPS AS — Norway's national EHR, one of the earliest ODBAA deployments in Northern Europe) and I've built the Terraform module library for Oracle Database@AWS. That combination — hands-on ODBAA production delivery plus AWS module development — is why this comparison exists as a practitioner article rather than a spec-sheet comparison.</p>
+    <p>I'm in a position that's still uncommon: I've delivered Oracle Database@Azure in production (DIPS AS, Norway's national EHR, one of the earliest ODBAA deployments in Northern Europe) and I've built the Terraform module library for Oracle Database@AWS. That combination, hands-on ODBAA production delivery plus AWS module development, is why this comparison exists as a practitioner article rather than a spec-sheet comparison.</p>
 
-    <p>The short version: they're architecturally identical at the Oracle level (same Exadata hardware, same database software, same Oracle management plane), and meaningfully different at the provider level. The differences that matter are in Terraform tooling, networking model, key management integration, and commercial structure. The choice between them should be driven by your existing cloud footprint — not by any technical superiority of one over the other.</p>
+    <p>The short version: they're architecturally identical at the Oracle level (same Exadata hardware, same database software, same Oracle management plane), and meaningfully different at the provider level. The differences that matter are in Terraform tooling, networking model, key management integration, and commercial structure. The choice between them should be driven by your existing cloud footprint, not by any technical superiority of one over the other.</p>
 
     <h2 id="architecture">What's the Same</h2>
 
-    <p>Both services run genuine Oracle Exadata hardware inside a hyperscaler Availability Zone, managed by Oracle, accessed over a private low-latency network peering from your application VPC or VNet. Both expose the full Oracle Exadata feature set: RAC, Active Data Guard, smart scan, TDE, Oracle MAA. Both are provisioned in two phases — hyperscaler networking and infrastructure, then Oracle database layer via the OCI provider.</p>
+    <p>Both services run genuine Oracle Exadata hardware inside a hyperscaler Availability Zone, managed by Oracle, accessed over a private low-latency network peering from your application VPC or VNet. Both expose the full Oracle Exadata feature set: RAC, Active Data Guard, smart scan, TDE, Oracle MAA. Both are provisioned in two phases, hyperscaler networking and infrastructure, then Oracle database layer via the OCI provider.</p>
 
-    <p>If you know how to operate Oracle Exadata, you know how to operate the database layer on both. The DBA experience — AWR, ASM, RAC administration, Data Guard failover — is identical. The hyperscaler wrapper is different; the database is the same.</p>
+    <p>If you know how to operate Oracle Exadata, you know how to operate the database layer on both. The DBA experience, AWR, ASM, RAC administration, Data Guard failover, is identical. The hyperscaler wrapper is different; the database is the same.</p>
 
     <h2 id="terraform">Terraform Provider Differences</h2>
 
@@ -159,18 +157,18 @@
         <tr><th>Dimension</th><th>Oracle DB@AWS</th><th>Oracle DB@Azure (ODBAA)</th></tr>
       </thead>
       <tbody>
-        <tr><td>Phase 1 provider</td><td><code>hashicorp/aws >= 6.15</code> — first-class <code>aws_odb_*</code> resources</td><td><code>hashicorp/azurerm</code> + <code>hashicorp/azapi</code> — azurerm is catching up; AzAPI handles resources not yet in azurerm</td></tr>
+        <tr><td>Phase 1 provider</td><td><code>hashicorp/aws >= 6.15</code>, first-class <code>aws_odb_*</code> resources</td><td><code>hashicorp/azurerm</code> + <code>hashicorp/azapi</code>, azurerm is catching up; AzAPI handles resources not yet in azurerm</td></tr>
         <tr><td>Resource naming</td><td><code>aws_odb_network</code>, <code>aws_odb_cloud_exadata_infrastructure</code>, <code>aws_odb_cloud_vm_cluster</code></td><td><code>azurerm_oracle_exascale_database_storage_vault</code> (storage), <code>azapi_resource</code> type <code>Oracle.Database/exadbVmClusters</code> (cluster)</td></tr>
         <tr><td>AZ pinning mechanism</td><td><code>availability_zone_id</code> (physical AZ ID, e.g. <code>use1-az4</code>)</td><td>Location + zone combination; Azure zones are consistent within a subscription (no account-scoped naming)</td></tr>
-        <tr><td>Provider version constraint</td><td>Hard minimum: AWS 6.15. Major version jump from 5.x. Breaking change.</td><td>No hard minimum on azurerm; AzAPI resource type strings change with API version — must pin <code>api_version</code></td></tr>
-        <tr><td>Stability</td><td>Stable first-class resources — schema and behaviour documented in Terraform registry</td><td>AzAPI resources are accurate but more verbose; azurerm coverage for ODBAA resources is improving but incomplete as of mid-2026</td></tr>
+        <tr><td>Provider version constraint</td><td>Hard minimum: AWS 6.15. Major version jump from 5.x. Breaking change.</td><td>No hard minimum on azurerm; AzAPI resource type strings change with API version, must pin <code>api_version</code></td></tr>
+        <tr><td>Stability</td><td>Stable first-class resources, schema and behaviour documented in Terraform registry</td><td>AzAPI resources are accurate but more verbose; azurerm coverage for ODBAA resources is improving but incomplete as of mid-2026</td></tr>
       </tbody>
     </table>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot"></div>The AzAPI vs azurerm choice for ODBAA</div>
       <div class="callout-body">
-        <p>For Oracle Database@Azure, the storage vault uses <code>azurerm_oracle_exascale_database_storage_vault</code> (now in azurerm), while the VM cluster uses <code>azapi_resource</code> with type <code>Oracle.Database/exadbVmClusters</code>. Use azurerm for standard Azure resources (VNet, Key Vault, subnets) and AzAPI for the cluster resource. Pin the <code>api_version</code> on AzAPI resources — type strings change with API versions and an unpinned resource will drift.</p>
+        <p>For Oracle Database@Azure, the storage vault uses <code>azurerm_oracle_exascale_database_storage_vault</code> (now in azurerm), while the VM cluster uses <code>azapi_resource</code> with type <code>Oracle.Database/exadbVmClusters</code>. Use azurerm for standard Azure resources (VNet, Key Vault, subnets) and AzAPI for the cluster resource. Pin the <code>api_version</code> on AzAPI resources, type strings change with API versions and an unpinned resource will drift.</p>
       </div>
     </div>
 
@@ -178,35 +176,35 @@
 
     <p>Both use private, low-latency peering between the application network and the Oracle network. The mechanism differs.</p>
 
-    <p><strong>On AWS:</strong> the ODB network is a dedicated networking construct with its own namespace (<code>aws_odb_network</code>), separate from your VPC. The peering connection (<code>aws_odb_network_peering_connection</code>, prefix <code>odbpcx-</code>) has its own lifecycle — it's not a standard VPC peering resource and doesn't appear in the standard VPC peering console view. Route table updates to point application subnets at the ODB network are required explicitly.</p>
+    <p><strong>On AWS:</strong> the ODB network is a dedicated networking construct with its own namespace (<code>aws_odb_network</code>), separate from your VPC. The peering connection (<code>aws_odb_network_peering_connection</code>, prefix <code>odbpcx-</code>) has its own lifecycle, it's not a standard VPC peering resource and doesn't appear in the standard VPC peering console view. Route table updates to point application subnets at the ODB network are required explicitly.</p>
 
-    <p><strong>On Azure:</strong> ODBAA uses subnet delegation — a specific subnet in your VNet is delegated to <code>Oracle.Database/networkAttachments</code>. The Exadata infrastructure attaches to this delegated subnet. No separate peering construct; the database is addressable from the VNet directly via the delegated subnet's IP space. This is arguably simpler to reason about for Azure-native teams — the database lives in a subnet, like everything else.</p>
+    <p><strong>On Azure:</strong> ODBAA uses subnet delegation, a specific subnet in your VNet is delegated to <code>Oracle.Database/networkAttachments</code>. The Exadata infrastructure attaches to this delegated subnet. No separate peering construct; the database is addressable from the VNet directly via the delegated subnet's IP space. This is arguably simpler to reason about for Azure-native teams, the database lives in a subnet, like everything else.</p>
 
     <p>Both models achieve the same outcome: sub-millisecond latency between application tier and database, fully private, no public internet traversal.</p>
 
     <h2 id="key-management">Key Management</h2>
 
-    <p><strong>On AWS:</strong> TDE wallet keys are managed in AWS KMS. The VM cluster resource references a KMS key ARN at creation time. Key rotation follows standard AWS KMS rotation policies. This is a natural fit for enterprises that already have AWS KMS governance — Oracle TDE keys become first-class citizens in the existing key management model.</p>
+    <p><strong>On AWS:</strong> TDE wallet keys are managed in AWS KMS. The VM cluster resource references a KMS key ARN at creation time. Key rotation follows standard AWS KMS rotation policies. This is a natural fit for enterprises that already have AWS KMS governance, Oracle TDE keys become first-class citizens in the existing key management model.</p>
 
-    <p><strong>On Azure:</strong> TDE keys are managed in Azure Key Vault. The ODBAA cluster references a Key Vault URI. Key Vault RBAC and access policies govern TDE key access. Again, a natural fit for Azure-first enterprises — TDE keys live alongside all other secrets and keys in Key Vault, with the same rotation and audit mechanisms.</p>
+    <p><strong>On Azure:</strong> TDE keys are managed in Azure Key Vault. The ODBAA cluster references a Key Vault URI. Key Vault RBAC and access policies govern TDE key access. Again, a natural fit for Azure-first enterprises, TDE keys live alongside all other secrets and keys in Key Vault, with the same rotation and audit mechanisms.</p>
 
     <p>Both approaches eliminate the need for a standalone Oracle Wallet management process. Choose based on where your existing key management governance lives.</p>
 
     <h2 id="commercial">Commercial Model Differences</h2>
 
-    <p>Both services bill jointly — Oracle charges for database software and managed service; the hyperscaler charges for infrastructure. The billing relationship differs:</p>
+    <p>Both services bill jointly, Oracle charges for database software and managed service; the hyperscaler charges for infrastructure. The billing relationship differs:</p>
 
     <ul>
       <li><strong>AWS:</strong> ODB charges appear on the AWS bill. May count toward existing AWS EDP commitments (subject to negotiation). Single invoice, AWS Cost Explorer visibility across ODB and all other AWS services.</li>
       <li><strong>Azure:</strong> ODBAA charges appear on the Azure bill. May count toward Azure MACC (Microsoft Azure Consumption Commitment) in some configurations. Azure Cost Management visibility across ODBAA and all other Azure services.</li>
     </ul>
 
-    <p>Both support LicenseIncluded and BYOL. The BYOL mechanics — Oracle LMS verification, ULA scope, per-processor vs ECPU mapping — are the same regardless of hyperscaler. The Exadata sizing units differ slightly: AWS uses compute count and CPU core count; Azure uses ECPU (Elastic CPU) in the range 8–200, multiples of 4.</p>
+    <p>Both support LicenseIncluded and BYOL. The BYOL mechanics, Oracle LMS verification, ULA scope, per-processor vs ECPU mapping, are the same regardless of hyperscaler. The Exadata sizing units differ slightly: AWS uses compute count and CPU core count; Azure uses ECPU (Elastic CPU) in the range 8–200, multiples of 4.</p>
 
     <h2 id="which-when">Which to Choose and When</h2>
 
     <div class="pull-quote">
-      <p>"The choice between ODB@AWS and ODBAA should be driven by your existing cloud footprint. If your application tier is AWS-first, choose ODB. If it's Azure-first, choose ODBAA. Running both because different workloads are on different clouds is a legitimate pattern — it's what the Oracle multicloud strategy is designed to support."</p>
+      <p>"The choice between ODB@AWS and ODBAA should be driven by your existing cloud footprint. If your application tier is AWS-first, choose ODB. If it's Azure-first, choose ODBAA. Running both because different workloads are on different clouds is a legitimate pattern, it's what the Oracle multicloud strategy is designed to support."</p>
     </div>
 
     <p>Three scenarios where the answer is clear:</p>
@@ -214,10 +212,10 @@
     <ul>
       <li><strong>Azure-first enterprise running Oracle EBS or JD Edwards:</strong> ODBAA. The application tier is in Azure, the DBAs already manage Azure Key Vault, and the Terraform team knows azurerm. ODB would add AWS to an Azure shop for no benefit.</li>
       <li><strong>AWS-first enterprise with Oracle APEX application in EKS:</strong> ODB. Application is in AWS, sub-millisecond Oracle access is required, and the team doesn't want a second cloud relationship. ODBAA would require Azure infrastructure for a purely AWS workload.</li>
-      <li><strong>Enterprise running Oracle on on-premise Exadata, migrating to cloud:</strong> whichever hyperscaler the rest of the workload is moving to. Don't let the Oracle database choice drive the hyperscaler selection — let the hyperscaler selection (driven by application, data, and team considerations) drive the Oracle deployment model.</li>
+      <li><strong>Enterprise running Oracle on on-premise Exadata, migrating to cloud:</strong> whichever hyperscaler the rest of the workload is moving to. Don't let the Oracle database choice drive the hyperscaler selection, let the hyperscaler selection (driven by application, data, and team considerations) drive the Oracle deployment model.</li>
     </ul>
 
-    <p>In Part 6 — the final article in this series — we cover Oracle licensing on ODB: BYOL vs LicenseIncluded, ULA implications, and how to model the cost before you commit to the architecture.</p>
+    <p>In Part 6, the final article in this series, we cover Oracle licensing on ODB: BYOL vs LicenseIncluded, ULA implications, and how to model the cost before you commit to the architecture.</p>
 
     <div class="share-bar">
       <span class="share-label">Topics</span>
@@ -241,7 +239,7 @@
       <a href="blog-oracle-db-aws-licensing.html" class="related-card">
         <div class="related-card-top"></div>
         <div class="related-card-body">
-          <h4>Part 6: Licensing — BYOL vs LicenseIncluded</h4>
+          <h4>Part 6: Licensing, BYOL vs LicenseIncluded</h4>
           <p>ULA implications, per-processor mapping, and cost modelling before you commit.</p>
         </div>
       </a>
@@ -250,7 +248,7 @@
     <div class="cta-band fade-up" style="margin-top:4rem;">
       <div class="cta-band-halo"></div>
       <p class="eyebrow">Work with us</p>
-      <h2>AWS-first or Azure-first — <span class="grad-text">we've delivered both.</span></h2>
+      <h2>AWS-first or Azure-first, <span class="grad-text">we've delivered both.</span></h2>
       <p style="max-width:480px; margin:0 auto 2rem;">We're one of the few practices with production delivery on both Oracle Database@AWS and Oracle Database@Azure. If you're evaluating which path fits your estate, let's have that conversation before you commit.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
     </div>
@@ -287,12 +285,12 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p>An ambitious Norwegian IT venture, building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
         <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
-          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="subject" value="New newsletter signup, Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
           <button type="submit">Subscribe</button>
@@ -336,7 +334,7 @@ async function handleNewsletter(e) {
   const data = new FormData(e.target);
   const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
   const json = await res.json();
-  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.textContent = json.success ? 'Subscribed, welcome aboard.' : 'Something went wrong. Try again.';
   msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
   if (json.success) e.target.reset();
 }

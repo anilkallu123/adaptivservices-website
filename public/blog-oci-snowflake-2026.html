@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oracle + Snowflake in 2026: The Data Stack Truce — Adaptiv AS</title>
+  <title>Oracle + Snowflake in 2026: The Data Stack Truce, Adaptiv AS</title>
   <meta name="description" content="How OCI GoldenGate, Snowflake Openflow, and Oracle 26ai are reshaping enterprise data architecture. A practitioner's view from inside an Exadata migration."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
@@ -306,8 +306,6 @@
     </button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
     <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -341,7 +339,7 @@
       Oracle + Snowflake in 2026:<br/>
       The <span class="grad-text">Data Stack Truce</span><br/>Nobody Predicted
     </h1>
-    <p class="lead fade-up">How OCI GoldenGate, Snowflake Openflow, and Oracle AI Database 26ai are reshaping enterprise data architecture — and what it means if you're running Oracle in production today.</p>
+    <p class="lead fade-up">How OCI GoldenGate, Snowflake Openflow, and Oracle AI Database 26ai are reshaping enterprise data architecture, and what it means if you're running Oracle in production today.</p>
   </div>
 </section>
 
@@ -374,7 +372,7 @@
     </div>
 
     <!-- Intro -->
-    <p>For years, Oracle and Snowflake were positioned as adversaries. One was the entrenched data vault — reliable, expensive, and surrounded by a licensing moat. The other was the modern analytics layer — fast, elastic, and built for the cloud-native era. The question enterprise data teams asked was always binary: <em>migrate away from Oracle, or stay?</em></p>
+    <p>For years, Oracle and Snowflake were positioned as adversaries. One was the entrenched data vault, reliable, expensive, and surrounded by a licensing moat. The other was the modern analytics layer, fast, elastic, and built for the cloud-native era. The question enterprise data teams asked was always binary: <em>migrate away from Oracle, or stay?</em></p>
 
     <p>In 2026, that framing is obsolete. The two platforms have converged on a shared answer: <strong>they're better together</strong>. And the engineering shipped in the last six months makes that more than a marketing claim.</p>
 
@@ -387,14 +385,14 @@
 
     <ul>
       <li><strong>No agents.</strong> There is nothing to install, patch, or monitor on your Oracle hosts. The connector runs entirely within Snowflake's managed infrastructure.</li>
-      <li><strong>Oracle's own CDC technology, licensed to Snowflake.</strong> The connector embeds Oracle's XStream API — the same change data capture engine Oracle uses internally — to read logical change records (LCRs) from Oracle redo logs. You're not reverse-engineering the redo stream with a third-party tool; you're consuming it through the officially supported interface.</li>
+      <li><strong>Oracle's own CDC technology, licensed to Snowflake.</strong> The connector embeds Oracle's XStream API, the same change data capture engine Oracle uses internally, to read logical change records (LCRs) from Oracle redo logs. You're not reverse-engineering the redo stream with a third-party tool; you're consuming it through the officially supported interface.</li>
       <li><strong>Near-real-time, not batch.</strong> Committed changes land in Snowflake target tables via Snowpipe Streaming with end-to-end latency measured in seconds, not minutes or hours.</li>
     </ul>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot"></div>Supported Oracle versions</div>
       <div class="callout-body">
-        <p>Oracle Database 12c R2 (12.2), 18c, 19c, 21c, 23ai, and 26ai — running on-premises, on Oracle Exadata, in OCI (VM/Bare Metal), and on AWS RDS Custom for Oracle. If you're on a supported version, you're covered without a schema migration first.</p>
+        <p>Oracle Database 12c R2 (12.2), 18c, 19c, 21c, 23ai, and 26ai, running on-premises, on Oracle Exadata, in OCI (VM/Bare Metal), and on AWS RDS Custom for Oracle. If you're on a supported version, you're covered without a schema migration first.</p>
       </div>
     </div>
 
@@ -406,7 +404,7 @@
 
     <!-- Architecture diagram -->
     <div class="arch-diagram">
-      <div class="arch-label">Reference architecture — Oracle → Snowflake via Openflow CDC</div>
+      <div class="arch-label">Reference architecture, Oracle → Snowflake via Openflow CDC</div>
       <div>
         <span class="arch-node arch-cyan">Oracle DB (19c / 26ai)</span><br/>
         <span class="arch-arrow">   │  XStream XOut server</span><br/>
@@ -429,27 +427,27 @@
 
     <p>Openflow tells half the story. The other half comes from Oracle's side: <strong>OCI GoldenGate now supports Snowflake as a target in all OCI regions</strong>, with both internal staging (within Snowflake) and external staging (Amazon S3 or Azure Blob Storage).</p>
 
-    <p>GoldenGate is Oracle's own real-time data replication engine — a mature, battle-tested platform that enterprises have used for heterogeneous replication for two decades. The fact that Oracle is actively maintaining Snowflake as a first-class GoldenGate target says something important: <strong>Oracle is not trying to force everything onto Autonomous Database</strong>. They're meeting enterprise architects where they actually are.</p>
+    <p>GoldenGate is Oracle's own real-time data replication engine, a mature, battle-tested platform that enterprises have used for heterogeneous replication for two decades. The fact that Oracle is actively maintaining Snowflake as a first-class GoldenGate target says something important: <strong>Oracle is not trying to force everything onto Autonomous Database</strong>. They're meeting enterprise architects where they actually are.</p>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot indigo"></div>When to use GoldenGate vs Openflow</div>
       <div class="callout-body">
-        <p><strong>Openflow</strong> — if you want zero-infrastructure simplicity, are already in Snowflake's managed ecosystem, and want Snowflake to own the pipeline SLA.<br/><br/>
-        <strong>OCI GoldenGate</strong> — if you need bidirectional replication, are running complex fan-out topologies across multiple targets (Oracle → Snowflake + Oracle → another Oracle), or need fine-grained transformation logic in the pipeline. GoldenGate also supports Oracle → Snowflake → back to Oracle patterns for phased migrations.</p>
+        <p><strong>Openflow</strong>, if you want zero-infrastructure simplicity, are already in Snowflake's managed ecosystem, and want Snowflake to own the pipeline SLA.<br/><br/>
+        <strong>OCI GoldenGate</strong>, if you need bidirectional replication, are running complex fan-out topologies across multiple targets (Oracle → Snowflake + Oracle → another Oracle), or need fine-grained transformation logic in the pipeline. GoldenGate also supports Oracle → Snowflake → back to Oracle patterns for phased migrations.</p>
       </div>
     </div>
 
     <!-- S3 -->
     <h2 id="oci-ai">OCI Is Not Standing Still</h2>
 
-    <p>While the Snowflake story dominates the integration narrative, OCI's own trajectory in 2026 is worth understanding — especially if you're architecting around Oracle as a platform, not just a database.</p>
+    <p>While the Snowflake story dominates the integration narrative, OCI's own trajectory in 2026 is worth understanding, especially if you're architecting around Oracle as a platform, not just a database.</p>
 
     <h3>Oracle AI Database 26ai on OCI</h3>
-    <p>Oracle Database 26ai is now generally available on OCI, including on Exadata Cloud@Customer. The vector search capabilities are native to the database engine — not a bolt-on — which means Oracle APEX, PL/SQL, and existing application layers can query vector embeddings without any middleware. For Norwegian enterprises running DIPS, SAP, or custom Oracle APEX applications, this is potentially significant: AI-augmented querying without a platform change.</p>
+    <p>Oracle Database 26ai is now generally available on OCI, including on Exadata Cloud@Customer. The vector search capabilities are native to the database engine, not a bolt-on, which means Oracle APEX, PL/SQL, and existing application layers can query vector embeddings without any middleware. For Norwegian enterprises running DIPS, SAP, or custom Oracle APEX applications, this is potentially significant: AI-augmented querying without a platform change.</p>
 
     <h3>Multicloud: Oracle Database@AWS and @Google</h3>
-    <p>Oracle Database@AWS is now live in Frankfurt, Tokyo, and Ohio — joining the original US East and US West regions. This means European enterprises can run Oracle Database in AWS infrastructure under their existing Oracle licensing, with private, low-latency connectivity between OCI and AWS via <a href="https://hyperframeresearch.com/2026/04/17/oracle-reshapes-the-multicloud-landscape-through-frictionless-aws-connectivity-and-open-standards/" target="_blank" rel="noopener">Oracle Interconnect ↔ AWS Interconnect</a>.</p>
-    <p>Oracle AI Database@Google Cloud similarly expanded with native Gemini Enterprise integration — Oracle's APEX can now surface Gemini responses inline, directly from the database layer.</p>
+    <p>Oracle Database@AWS is now live in Frankfurt, Tokyo, and Ohio, joining the original US East and US West regions. This means European enterprises can run Oracle Database in AWS infrastructure under their existing Oracle licensing, with private, low-latency connectivity between OCI and AWS via <a href="https://hyperframeresearch.com/2026/04/17/oracle-reshapes-the-multicloud-landscape-through-frictionless-aws-connectivity-and-open-standards/" target="_blank" rel="noopener">Oracle Interconnect ↔ AWS Interconnect</a>.</p>
+    <p>Oracle AI Database@Google Cloud similarly expanded with native Gemini Enterprise integration, Oracle's APEX can now surface Gemini responses inline, directly from the database layer.</p>
 
     <!-- S4 -->
     <h2 id="snowflake-ai">Snowflake's AI Layer Is Maturing Fast</h2>
@@ -457,16 +455,16 @@
     <p>The Openflow connector is not the only reason to pay attention to Snowflake in 2026. While Oracle is strengthening the data-in layer, Snowflake is building serious capability on top of the data once it arrives.</p>
 
     <ul>
-      <li><strong>Semantic View Autopilot (GA)</strong> — AI-powered automation that builds and governs semantic views over your data. Reduces the manual overhead of curating a semantic layer for BI tools and LLM queries.</li>
-      <li><strong>Snowflake Postgres (preview → GA soon)</strong> — transactional, analytical, and AI capabilities on a single platform, eliminating pipelines between OLTP and OLAP. Interesting if you're building new applications rather than migrating Oracle.</li>
-      <li><strong>Online Feature Store + Online Model Inference (GA)</strong> — sub-millisecond feature serving for real-time ML inference, directly integrated with Snowflake tables. No separate feature store infrastructure.</li>
-      <li><strong>Cortex Code AI suggestions</strong> — context-aware SQL completions as you type in Snowsight. Smaller feature, but meaningful productivity gain for analysts.</li>
+      <li><strong>Semantic View Autopilot (GA)</strong>, AI-powered automation that builds and governs semantic views over your data. Reduces the manual overhead of curating a semantic layer for BI tools and LLM queries.</li>
+      <li><strong>Snowflake Postgres (preview → GA soon)</strong>, transactional, analytical, and AI capabilities on a single platform, eliminating pipelines between OLTP and OLAP. Interesting if you're building new applications rather than migrating Oracle.</li>
+      <li><strong>Online Feature Store + Online Model Inference (GA)</strong>, sub-millisecond feature serving for real-time ML inference, directly integrated with Snowflake tables. No separate feature store infrastructure.</li>
+      <li><strong>Cortex Code AI suggestions</strong>, context-aware SQL completions as you type in Snowsight. Smaller feature, but meaningful productivity gain for analysts.</li>
     </ul>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot magenta"></div>What Snowflake Intelligence means for Oracle data</div>
       <div class="callout-body">
-        <p>Snowflake Intelligence (conversational analytics over your data) now has resource budgets to control credit spend. More importantly, once your Oracle operational data is streaming into Snowflake via Openflow, Cortex AI, Semantic Views, and Snowflake Intelligence all operate over live, near-real-time operational data — not yesterday's batch export. That gap between analytical insight and operational reality effectively disappears.</p>
+        <p>Snowflake Intelligence (conversational analytics over your data) now has resource budgets to control credit spend. More importantly, once your Oracle operational data is streaming into Snowflake via Openflow, Cortex AI, Semantic Views, and Snowflake Intelligence all operate over live, near-real-time operational data, not yesterday's batch export. That gap between analytical insight and operational reality effectively disappears.</p>
       </div>
     </div>
 
@@ -480,12 +478,12 @@
     <p>Today the pattern is cleaner:</p>
 
     <ul>
-      <li><strong>Oracle stays as the system of record</strong> — OLTP, PL/SQL business logic, compliance, audit, ERP integration, and now AI vector search via 26ai.</li>
-      <li><strong>Snowflake becomes the analytics and AI layer</strong> — Cortex, Semantic Views, Iceberg open format, cross-cloud federation, Snowflake Intelligence.</li>
-      <li><strong>Openflow or GoldenGate bridges them</strong> — in seconds, not hours, without a separate ETL platform.</li>
+      <li><strong>Oracle stays as the system of record</strong>, OLTP, PL/SQL business logic, compliance, audit, ERP integration, and now AI vector search via 26ai.</li>
+      <li><strong>Snowflake becomes the analytics and AI layer</strong>, Cortex, Semantic Views, Iceberg open format, cross-cloud federation, Snowflake Intelligence.</li>
+      <li><strong>Openflow or GoldenGate bridges them</strong>, in seconds, not hours, without a separate ETL platform.</li>
     </ul>
 
-    <p>If you're still running nightly bulk exports between your Oracle estate and your data platform — with all the data quality issues, schema drift, and 8-hour-stale analytics that implies — the engineering case for moving to CDC-first is now airtight. The tooling is GA, the latency is seconds, and you don't need to manage any additional infrastructure.</p>
+    <p>If you're still running nightly bulk exports between your Oracle estate and your data platform, with all the data quality issues, schema drift, and 8-hour-stale analytics that implies, the engineering case for moving to CDC-first is now airtight. The tooling is GA, the latency is seconds, and you don't need to manage any additional infrastructure.</p>
 
     <div class="pull-quote">
       <p>"The question enterprise teams asked was always binary: migrate away from Oracle, or stay? In 2026, that's the wrong question."</p>
@@ -524,7 +522,7 @@
         <div class="related-card-top"></div>
         <div class="related-card-body">
           <h4>Azure DaaS: Building a Data Platform Landing Zone from Scratch</h4>
-          <p>Terraform, ArgoCD GitOps, AKS, and identity — as a reusable template for Norwegian enterprises.</p>
+          <p>Terraform, ArgoCD GitOps, AKS, and identity, as a reusable template for Norwegian enterprises.</p>
         </div>
       </a>
     </div>
@@ -534,7 +532,7 @@
       <div class="cta-band-halo"></div>
       <p class="eyebrow">Work with us</p>
       <h2>Running Oracle in production?<br/><span class="grad-text">Let's talk architecture.</span></h2>
-      <p style="max-width:480px; margin:0 auto 2rem;">Whether you're planning a migration, designing a CDC pipeline, or evaluating OCI vs Azure — we'll give you an honest assessment, not a sales deck.</p>
+      <p style="max-width:480px; margin:0 auto 2rem;">Whether you're planning a migration, designing a CDC pipeline, or evaluating OCI vs Azure, we'll give you an honest assessment, not a sales deck.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
     </div>
 
@@ -572,12 +570,12 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture, building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
         <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;" data-i18n="footer_nl_label">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
-          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="subject" value="New newsletter signup, Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
           <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
@@ -652,7 +650,7 @@ async function handleNewsletter(e) {
   const data = new FormData(e.target);
   const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
   const json = await res.json();
-  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.textContent = json.success ? 'Subscribed, welcome aboard.' : 'Something went wrong. Try again.';
   msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
   if (json.success) e.target.reset();
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oracle Licensing on ODB: BYOL vs LicenseIncluded, ULA Implications — Adaptiv AS</title>
+  <title>Oracle Licensing on ODB: BYOL vs LicenseIncluded, ULA Implications, Adaptiv AS</title>
   <meta name="description" content="The licensing decision on Oracle Database@AWS determines whether ODB is cost-competitive or prohibitively expensive. Here's how to model it before you commit."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
@@ -109,8 +109,6 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
     <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -135,7 +133,7 @@
       Oracle Licensing on ODB:<br/>
       <span class="grad-text">BYOL vs LicenseIncluded,</span><br/>ULA Implications
     </h1>
-    <p class="lead fade-up">The licensing decision on Oracle Database@AWS can make ODB cost-competitive with on-premise Exadata — or make it the most expensive Oracle deployment you've ever run. Here's how to model it before you commit.</p>
+    <p class="lead fade-up">The licensing decision on Oracle Database@AWS can make ODB cost-competitive with on-premise Exadata, or make it the most expensive Oracle deployment you've ever run. Here's how to model it before you commit.</p>
   </div>
 </section>
 
@@ -165,56 +163,56 @@
 
     <p>This is the final article in a six-part series on Oracle Database@AWS. Parts 1–5 covered architecture, decision framework, Terraform delivery, migration methodology, and the AWS/Azure comparison. This article covers the dimension that most directly determines whether ODB is financially viable for your organisation: Oracle licensing.</p>
 
-    <p>The licensing decision is not a technical one — it's a commercial one with technical inputs. And it's one that most infrastructure teams get wrong, because they make it without involving Oracle License Management or their Oracle account team until it's too late to change the architecture.</p>
+    <p>The licensing decision is not a technical one, it's a commercial one with technical inputs. And it's one that most infrastructure teams get wrong, because they make it without involving Oracle License Management or their Oracle account team until it's too late to change the architecture.</p>
 
     <h2 id="two-models">The Two License Models</h2>
 
     <h3>LicenseIncluded</h3>
     <p>Oracle Database Enterprise Edition, Exadata software, and all standard options are bundled into the hourly ODB charge. You pay Oracle and AWS jointly for the full stack: hardware, infrastructure management, database software, and licensing. No separate Oracle contract required beyond the service agreement.</p>
-    <p><strong>When it makes sense:</strong> you don't have existing Oracle EE per-processor licensing, you're not on a ULA, or you want to eliminate Oracle licensing as a procurement variable. LicenseIncluded is the fastest path to a running ODB cluster — no LMS verification, no license count negotiation.</p>
+    <p><strong>When it makes sense:</strong> you don't have existing Oracle EE per-processor licensing, you're not on a ULA, or you want to eliminate Oracle licensing as a procurement variable. LicenseIncluded is the fastest path to a running ODB cluster, no LMS verification, no license count negotiation.</p>
     <p><strong>The cost reality:</strong> LicenseIncluded is materially more expensive than BYOL at scale. For a production VM cluster running 32 OCPUs, the licensing component of the hourly charge is significant. Model the 3-year TCO before committing.</p>
 
     <h3>BringYourOwnLicense (BYOL)</h3>
-    <p>You supply Oracle Database EE per-processor licensing — verified by Oracle License Management Services (LMS). The ODB charge covers hardware infrastructure and managed service only. Database software licensing is your responsibility and separate cost.</p>
+    <p>You supply Oracle Database EE per-processor licensing, verified by Oracle License Management Services (LMS). The ODB charge covers hardware infrastructure and managed service only. Database software licensing is your responsibility and separate cost.</p>
     <p><strong>When it makes sense:</strong> you have existing Oracle EE per-processor licensing from an on-premise Exadata deployment, you're on an active ULA that covers cloud deployments, or you're decommissioning on-premise Oracle hardware and want to redeploy those licenses on ODB.</p>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot"></div>BYOL licensing metric on ODB</div>
       <div class="callout-body">
-        <p>ODB uses OCPU (Oracle CPU) as the billing unit. One OCPU = two physical processor cores on Exadata X9M hardware. For licensing purposes, Oracle maps OCPUs to per-processor licenses using the Oracle Processor Core Factor Table. For Intel Xeon processors (Exadata X9M), the core factor is 0.5 — so two physical cores (one OCPU) = one processor license. Verify the core factor for your specific Exadata shape with Oracle LMS before committing to a license count.</p>
+        <p>ODB uses OCPU (Oracle CPU) as the billing unit. One OCPU = two physical processor cores on Exadata X9M hardware. For licensing purposes, Oracle maps OCPUs to per-processor licenses using the Oracle Processor Core Factor Table. For Intel Xeon processors (Exadata X9M), the core factor is 0.5, so two physical cores (one OCPU) = one processor license. Verify the core factor for your specific Exadata shape with Oracle LMS before committing to a license count.</p>
       </div>
     </div>
 
     <h2 id="ula">ULA Implications</h2>
 
-    <p>The Unlimited License Agreement is where ODB licensing gets commercially interesting — and where the risk of getting it wrong is highest.</p>
+    <p>The Unlimited License Agreement is where ODB licensing gets commercially interesting, and where the risk of getting it wrong is highest.</p>
 
     <p>A ULA grants unlimited deployment rights for covered Oracle products during the ULA term (typically 3 years), followed by a certification process where Oracle LMS counts your actual deployment and converts it to perpetual per-processor licenses. The key question for ODB: <strong>does your ULA cover Oracle Database@AWS deployments?</strong></p>
 
-    <p>The answer depends entirely on the ULA contract language. ULAs executed before July 2025 (when ODB went GA) typically did not name Oracle Database@AWS as a covered deployment target — it didn't exist. For those ULAs, BYOL on ODB may require an amendment or separate agreement.</p>
+    <p>The answer depends entirely on the ULA contract language. ULAs executed before July 2025 (when ODB went GA) typically did not name Oracle Database@AWS as a covered deployment target, it didn't exist. For those ULAs, BYOL on ODB may require an amendment or separate agreement.</p>
 
     <p>ULAs executed or renewed after July 2025 should explicitly name Oracle Database@AWS if your roadmap includes ODB. Failing to include it means ODB deployments don't count against your ULA, which may sound advantageous but creates a compliance exposure: you're deploying Oracle EE without a license that covers that specific deployment target.</p>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot indigo"></div>Before your next ULA renewal</div>
       <div class="callout-body">
-        <p>If ODB is on your roadmap, include these explicitly in your ULA negotiation: Oracle Database Enterprise Edition on Oracle Database@AWS, Oracle Database Enterprise Edition on Oracle Database@Azure (if relevant), all Oracle options you plan to use on ODB (Partitioning, Advanced Compression, Diagnostics Pack, Tuning Pack, Active Data Guard, RAC). Get the deployment targets in the contract — don't rely on implied coverage.</p>
+        <p>If ODB is on your roadmap, include these explicitly in your ULA negotiation: Oracle Database Enterprise Edition on Oracle Database@AWS, Oracle Database Enterprise Edition on Oracle Database@Azure (if relevant), all Oracle options you plan to use on ODB (Partitioning, Advanced Compression, Diagnostics Pack, Tuning Pack, Active Data Guard, RAC). Get the deployment targets in the contract, don't rely on implied coverage.</p>
       </div>
     </div>
 
     <h2 id="options">Oracle Options Licensing</h2>
 
-    <p>Enterprise Edition database licensing covers the core database engine. Oracle options — the add-on packs and features — require separate licensing. On ODB, the following are commonly required and must be explicitly licensed under BYOL:</p>
+    <p>Enterprise Edition database licensing covers the core database engine. Oracle options, the add-on packs and features, require separate licensing. On ODB, the following are commonly required and must be explicitly licensed under BYOL:</p>
 
     <ul>
-      <li><strong>Oracle Active Data Guard</strong> — required for the Data Guard standby in a high-availability configuration. Not included in base EE licensing. Per-processor, same factor as EE.</li>
-      <li><strong>Oracle Partitioning</strong> — if the schema uses range, list, or hash partitioning. Per-processor.</li>
-      <li><strong>Oracle Advanced Compression</strong> — if using hybrid columnar compression or OLTP compression. Per-processor.</li>
-      <li><strong>Oracle Diagnostics Pack + Tuning Pack</strong> — required for AWR, ADDM, SQL Tuning Advisor. These are used routinely in production operations. Per-processor, licensed as a pack.</li>
-      <li><strong>Oracle Database Vault</strong> — if using Vault for privileged access control. Per-processor.</li>
+      <li><strong>Oracle Active Data Guard</strong>, required for the Data Guard standby in a high-availability configuration. Not included in base EE licensing. Per-processor, same factor as EE.</li>
+      <li><strong>Oracle Partitioning</strong>, if the schema uses range, list, or hash partitioning. Per-processor.</li>
+      <li><strong>Oracle Advanced Compression</strong>, if using hybrid columnar compression or OLTP compression. Per-processor.</li>
+      <li><strong>Oracle Diagnostics Pack + Tuning Pack</strong>, required for AWR, ADDM, SQL Tuning Advisor. These are used routinely in production operations. Per-processor, licensed as a pack.</li>
+      <li><strong>Oracle Database Vault</strong>, if using Vault for privileged access control. Per-processor.</li>
     </ul>
 
-    <p>The LicenseIncluded model bundles all of these. Under BYOL, you must license each option separately. Run your AWR analysis during Discovery (Part 4) to identify which options are currently in use — this becomes your options licensing requirement list.</p>
+    <p>The LicenseIncluded model bundles all of these. Under BYOL, you must license each option separately. Run your AWR analysis during Discovery (Part 4) to identify which options are currently in use, this becomes your options licensing requirement list.</p>
 
     <h2 id="cost-model">Cost Modelling Before You Commit</h2>
 
@@ -224,10 +222,10 @@
     <p>Take the Oracle published hourly rate for ODB LicenseIncluded for your shape and OCPU count, multiply by 8,760 hours, multiply by 3 years. Add infrastructure charges (Exadata storage, networking). This is your 3-year LicenseIncluded cost.</p>
 
     <h3>Option B: BYOL on ODB</h3>
-    <p>Take the Oracle published hourly rate for ODB BYOL for your shape and OCPU count, multiply by 8,760 × 3. Add the annualised cost of your Oracle EE per-processor licenses (if you're purchasing or renewing) × 3. If you're deploying ULA licenses, the marginal cost of the licenses themselves is near-zero — just the BYOL infrastructure rate.</p>
+    <p>Take the Oracle published hourly rate for ODB BYOL for your shape and OCPU count, multiply by 8,760 × 3. Add the annualised cost of your Oracle EE per-processor licenses (if you're purchasing or renewing) × 3. If you're deploying ULA licenses, the marginal cost of the licenses themselves is near-zero, just the BYOL infrastructure rate.</p>
 
     <h3>Option C: Stay on-premise Exadata or move to OCI ExaCS</h3>
-    <p>Your current on-premise TCO (hardware amortisation, maintenance, data centre costs, staff) or OCI ExaCS pricing. This is your baseline — ODB needs to compare favourably to it.</p>
+    <p>Your current on-premise TCO (hardware amortisation, maintenance, data centre costs, staff) or OCI ExaCS pricing. This is your baseline, ODB needs to compare favourably to it.</p>
 
     <div class="pull-quote">
       <p>"The most common ODB cost model mistake: comparing ODB LicenseIncluded to on-premise Exadata without accounting for the data centre cost elimination, the managed service premium you're no longer paying for hardware ops, and the AWS EDP credit offset. The headline rate looks expensive; the full TCO often doesn't."</p>
@@ -239,8 +237,8 @@
 
     <ul>
       <li><strong>ODB deployment as ULA exit credit:</strong> if you're approaching ULA certification and planning to exit, ODB deployment counts can be used to set a favourable perpetual license count. More ODB OCPUs at certification = more perpetual licenses without additional cost.</li>
-      <li><strong>Renewal timing:</strong> if you're within 12 months of an Oracle support renewal, ODB adoption is a negotiating chip. Oracle sales teams have commercial targets for ODB revenue — that's your leverage.</li>
-      <li><strong>Committed consumption:</strong> like AWS EDP, Oracle cloud services (including ODB) often have volume discount structures for committed annual consumption. Ask your Oracle account team explicitly — the published rates are the floor, not the ceiling.</li>
+      <li><strong>Renewal timing:</strong> if you're within 12 months of an Oracle support renewal, ODB adoption is a negotiating chip. Oracle sales teams have commercial targets for ODB revenue, that's your leverage.</li>
+      <li><strong>Committed consumption:</strong> like AWS EDP, Oracle cloud services (including ODB) often have volume discount structures for committed annual consumption. Ask your Oracle account team explicitly, the published rates are the floor, not the ceiling.</li>
       <li><strong>AWS EDP credit:</strong> confirm with your AWS account team whether ODB charges count toward your EDP minimum commitment. Not guaranteed, but increasingly common in enterprise agreements as ODB adoption grows.</li>
     </ul>
 
@@ -250,7 +248,7 @@
 
     <p>The consistent theme across all six articles: ODB is a specific solution to a specific problem. It's not the default Oracle deployment model for AWS. It's the right answer when you genuinely need full Exadata capability inside an AWS Availability Zone, you can't operate a separate OCI tenancy, and your licensing position makes the economics work.</p>
 
-    <p>When all of those conditions align — and for a growing class of enterprises in healthcare, oil and gas, and financial services, they do — ODB is the most technically complete Oracle deployment available in any hyperscaler.</p>
+    <p>When all of those conditions align, and for a growing class of enterprises in healthcare, oil and gas, and financial services, they do, ODB is the most technically complete Oracle deployment available in any hyperscaler.</p>
 
     <div class="share-bar">
       <span class="share-label">Topics</span>
@@ -284,7 +282,7 @@
       <div class="cta-band-halo"></div>
       <p class="eyebrow">Work with us</p>
       <h2>Need a licensing model before you commit?<br/><span class="grad-text">We've done this before.</span></h2>
-      <p style="max-width:480px; margin:0 auto 2rem;">We can model your 3-year ODB TCO across LicenseIncluded, BYOL, and the OCI alternative — before you're locked into a contract. Unbiased, numbers-first, no Oracle referral relationship.</p>
+      <p style="max-width:480px; margin:0 auto 2rem;">We can model your 3-year ODB TCO across LicenseIncluded, BYOL, and the OCI alternative, before you're locked into a contract. Unbiased, numbers-first, no Oracle referral relationship.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
     </div>
 
@@ -320,12 +318,12 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p>An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p>An ambitious Norwegian IT venture, building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
         <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
-          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="subject" value="New newsletter signup, Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
           <button type="submit">Subscribe</button>
@@ -369,7 +367,7 @@ async function handleNewsletter(e) {
   const data = new FormData(e.target);
   const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
   const json = await res.json();
-  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.textContent = json.success ? 'Subscribed, welcome aboard.' : 'Something went wrong. Try again.';
   msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
   if (json.success) e.target.reset();
 }

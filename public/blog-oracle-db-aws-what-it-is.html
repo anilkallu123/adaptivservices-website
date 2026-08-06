@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oracle Database@AWS: What It Actually Is (And What It Isn't) — Adaptiv AS</title>
-  <meta name="description" content="Oracle Database@AWS is not RDS for Oracle. It's genuine Exadata hardware running inside an AWS Availability Zone. Here's what that means architecturally — and why it matters."/>
+  <title>Oracle Database@AWS: What It Actually Is (And What It Isn't), Adaptiv AS</title>
+  <meta name="description" content="Oracle Database@AWS is not RDS for Oracle. It's genuine Exadata hardware running inside an AWS Availability Zone. Here's what that means architecturally, and why it matters."/>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="stylesheet" href="css/style.css"/>
   <meta property="og:title" content="Oracle Database@AWS: What It Actually Is (And What It Isn't)"/>
@@ -124,8 +124,6 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="no" onclick="switchLang('no')">NO</button>
     <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -150,7 +148,7 @@
       Oracle Database@AWS:<br/>
       What It <span class="grad-text">Actually Is</span><br/>(And What It Isn't)
     </h1>
-    <p class="lead fade-up">It's not RDS for Oracle. It's not Oracle on EC2. It's genuine Exadata hardware running inside an AWS Availability Zone — managed by Oracle, billed through AWS. Here's what that distinction means in practice.</p>
+    <p class="lead fade-up">It's not RDS for Oracle. It's not Oracle on EC2. It's genuine Exadata hardware running inside an AWS Availability Zone, managed by Oracle, billed through AWS. Here's what that distinction means in practice.</p>
   </div>
 </section>
 
@@ -179,9 +177,9 @@
       </div>
     </div>
 
-    <p>Every conversation I've had about Oracle Database@AWS starts with the same misconception: people assume it's a managed Oracle service on top of AWS infrastructure — like RDS for Oracle, but newer. It isn't. The architecture is fundamentally different, and getting that distinction wrong leads to bad sizing decisions, wrong cost models, and migration plans that don't hold up.</p>
+    <p>Every conversation I've had about Oracle Database@AWS starts with the same misconception: people assume it's a managed Oracle service on top of AWS infrastructure, like RDS for Oracle, but newer. It isn't. The architecture is fundamentally different, and getting that distinction wrong leads to bad sizing decisions, wrong cost models, and migration plans that don't hold up.</p>
 
-    <p>This is Part 1 of a six-part series on Oracle Database@AWS (ODB). We'll cover the full picture — from what it is and when to use it, through Terraform delivery, migration methodology, and licensing. This first article is about the architecture itself. Get this right and everything else follows.</p>
+    <p>This is Part 1 of a six-part series on Oracle Database@AWS (ODB). We'll cover the full picture, from what it is and when to use it, through Terraform delivery, migration methodology, and licensing. This first article is about the architecture itself. Get this right and everything else follows.</p>
 
     <h2 id="not-rds">What ODB Is Not</h2>
 
@@ -189,25 +187,25 @@
 
     <p><strong>Oracle Database@AWS is not Amazon RDS for Oracle.</strong> RDS for Oracle runs Oracle Database software on AWS-managed EC2 instances. You get automated backups, patching, and Multi-AZ failover, but you're running Oracle Standard Edition 2 or Enterprise Edition on virtualised compute. No Exadata smart scan. No Real Application Clusters (RAC). No Oracle Maximum Availability Architecture (MAA) guarantees. Storage is EBS, not Exadata Intelligent Storage Cells. It's Oracle on AWS infrastructure, managed by AWS.</p>
 
-    <p><strong>ODB is not Oracle on EC2 either.</strong> That's a self-managed deployment — you provision EC2 instances, install the Oracle Database software, configure ASM, manage patching yourself. Full control, full operational burden.</p>
+    <p><strong>ODB is not Oracle on EC2 either.</strong> That's a self-managed deployment, you provision EC2 instances, install the Oracle Database software, configure ASM, manage patching yourself. Full control, full operational burden.</p>
 
     <p><strong>And ODB is not Oracle Cloud Infrastructure.</strong> It's not a cross-cloud peering arrangement where your application in AWS connects to a database in OCI over Oracle Interconnect. The database physically runs inside an AWS Availability Zone.</p>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot"></div>The one-sentence definition</div>
       <div class="callout-body">
-        <p>Oracle Database@AWS is genuine Oracle Exadata hardware, physically located inside an AWS Availability Zone, running inside an OCI child site that Oracle manages — billed jointly through your AWS console.</p>
+        <p>Oracle Database@AWS is genuine Oracle Exadata hardware, physically located inside an AWS Availability Zone, running inside an OCI child site that Oracle manages, billed jointly through your AWS console.</p>
       </div>
     </div>
 
     <h2 id="architecture">The Architecture</h2>
 
-    <p>To understand ODB, you need to understand what "OCI child site" means in an AWS AZ. Oracle physically colocates Exadata infrastructure inside AWS data centres. That hardware runs an isolated OCI control plane — Oracle manages it, Oracle patches it, Oracle is responsible for its availability. From the customer's perspective, it appears in the AWS console as a set of resources under the <code>odb</code> service namespace.</p>
+    <p>To understand ODB, you need to understand what "OCI child site" means in an AWS AZ. Oracle physically colocates Exadata infrastructure inside AWS data centres. That hardware runs an isolated OCI control plane, Oracle manages it, Oracle patches it, Oracle is responsible for its availability. From the customer's perspective, it appears in the AWS console as a set of resources under the <code>odb</code> service namespace.</p>
 
-    <p>The networking model is what makes this work without public internet exposure. Your application VPC in AWS connects to the ODB network via an ODB network peering connection — a dedicated construct with the <code>odbpcx-</code> prefix, distinct from standard VPC peering. Traffic between your application tier and the Oracle database travels over this peering at sub-millisecond latency, entirely within the AWS AZ boundary.</p>
+    <p>The networking model is what makes this work without public internet exposure. Your application VPC in AWS connects to the ODB network via an ODB network peering connection, a dedicated construct with the <code>odbpcx-</code> prefix, distinct from standard VPC peering. Traffic between your application tier and the Oracle database travels over this peering at sub-millisecond latency, entirely within the AWS AZ boundary.</p>
 
     <div class="arch-diagram">
-      <div class="arch-label">Oracle Database@AWS — logical architecture</div>
+      <div class="arch-label">Oracle Database@AWS, logical architecture</div>
       <div>
 <span class="arch-node arch-cyan">AWS Account</span><br/>
 <span class="arch-arrow">├── App VPC  (EC2, EKS, Lambda, RDS, ...)</span><br/>
@@ -226,18 +224,18 @@
       </div>
     </div>
 
-    <p>There are two layers to every ODB deployment, and they use different tooling. The AWS layer — ODB network, Exadata infrastructure, VM cluster — is provisioned via the AWS Terraform provider (version >= 6.15). The Oracle layer — DB Home, CDB, PDB — is provisioned via the OCI Terraform provider, using the <code>vm_cluster_ocid</code> that the AWS layer outputs. This two-phase architecture is intentional and consequential. We cover it in detail in Part 3.</p>
+    <p>There are two layers to every ODB deployment, and they use different tooling. The AWS layer, ODB network, Exadata infrastructure, VM cluster, is provisioned via the AWS Terraform provider (version >= 6.15). The Oracle layer, DB Home, CDB, PDB, is provisioned via the OCI Terraform provider, using the <code>vm_cluster_ocid</code> that the AWS layer outputs. This two-phase architecture is intentional and consequential. We cover it in detail in Part 3.</p>
 
     <h2 id="exadata">Why Exadata Matters Here</h2>
 
-    <p>The reason this distinction matters is that Exadata is not just faster Oracle on better hardware. The Exadata architecture offloads SQL processing to the storage layer — the Intelligent Storage Cells run a subset of the SQL execution plan directly against the raw blocks, before data is sent to the database nodes. This is called smart scan, and for analytical queries, full-table scans, and large aggregations, it can reduce I/O by an order of magnitude.</p>
+    <p>The reason this distinction matters is that Exadata is not just faster Oracle on better hardware. The Exadata architecture offloads SQL processing to the storage layer, the Intelligent Storage Cells run a subset of the SQL execution plan directly against the raw blocks, before data is sent to the database nodes. This is called smart scan, and for analytical queries, full-table scans, and large aggregations, it can reduce I/O by an order of magnitude.</p>
 
     <p>You also get:</p>
     <ul>
-      <li><strong>Real Application Clusters (RAC)</strong> — active-active multi-node clustering with automatic workload distribution and node-level failover</li>
-      <li><strong>Oracle Active Data Guard</strong> — real-time standby replication with read offload on the standby, forming the basis of Oracle's Platinum MAA tier</li>
-      <li><strong>Transparent Data Encryption (TDE)</strong> — hardware-accelerated encryption at the storage cell level, with keys managed in AWS KMS or Secrets Manager</li>
-      <li><strong>Oracle Database Vault, Audit Vault</strong> — the full Enterprise Edition feature set, including all compliance-oriented capabilities required by healthcare and financial services regulations</li>
+      <li><strong>Real Application Clusters (RAC)</strong>, active-active multi-node clustering with automatic workload distribution and node-level failover</li>
+      <li><strong>Oracle Active Data Guard</strong>, real-time standby replication with read offload on the standby, forming the basis of Oracle's Platinum MAA tier</li>
+      <li><strong>Transparent Data Encryption (TDE)</strong>, hardware-accelerated encryption at the storage cell level, with keys managed in AWS KMS or Secrets Manager</li>
+      <li><strong>Oracle Database Vault, Audit Vault</strong>, the full Enterprise Edition feature set, including all compliance-oriented capabilities required by healthcare and financial services regulations</li>
     </ul>
 
     <p>None of these are available on RDS for Oracle. All of them are available on ODB, because the hardware is Exadata.</p>
@@ -251,18 +249,18 @@
     <p>The billing model is one of ODB's most practically significant features for AWS-first enterprises. Oracle Database@AWS charges appear on the AWS bill. This means:</p>
 
     <ul>
-      <li>Oracle costs can be applied against existing AWS Enterprise Discount Programme (EDP) commitments — subject to agreement with AWS</li>
+      <li>Oracle costs can be applied against existing AWS Enterprise Discount Programme (EDP) commitments, subject to agreement with AWS</li>
       <li>Finance teams have one vendor relationship for cloud spend, not a separate Oracle Cloud invoice</li>
       <li>AWS Cost Explorer, cost allocation tags, and chargeback models all work across ODB and native AWS services without custom reporting</li>
     </ul>
 
-    <p>The billing is joint — Oracle charges for the database software and managed service; AWS charges for the physical infrastructure. But from the customer's perspective, it comes through a single pane of glass.</p>
+    <p>The billing is joint, Oracle charges for the database software and managed service; AWS charges for the physical infrastructure. But from the customer's perspective, it comes through a single pane of glass.</p>
 
     <div class="callout">
       <div class="callout-header"><div class="callout-dot indigo"></div>License model options</div>
       <div class="callout-body">
-        <p><strong>LicenseIncluded</strong> — Oracle Database Enterprise Edition and Exadata software licensing are bundled into the hourly charge. No Oracle ULA or per-processor license required. Simpler to start, higher running cost.<br/><br/>
-        <strong>BringYourOwnLicense (BYOL)</strong> — you supply verified Oracle per-processor or ULA licensing. Lower running cost, but requires Oracle License Management Services (LMS) verification. Most applicable to enterprises already on full-use Exadata licensing.</p>
+        <p><strong>LicenseIncluded</strong>, Oracle Database Enterprise Edition and Exadata software licensing are bundled into the hourly charge. No Oracle ULA or per-processor license required. Simpler to start, higher running cost.<br/><br/>
+        <strong>BringYourOwnLicense (BYOL)</strong>, you supply verified Oracle per-processor or ULA licensing. Lower running cost, but requires Oracle License Management Services (LMS) verification. Most applicable to enterprises already on full-use Exadata licensing.</p>
       </div>
     </div>
 
@@ -270,16 +268,16 @@
 
     <p>ODB reached general availability in July 2025 in <strong>us-east-1</strong> and <strong>us-west-2</strong>. Since then, Oracle has added Frankfurt (eu-central-1), Tokyo (ap-northeast-1), and Ohio (us-east-2), with additional regions on the roadmap for APAC and additional EU coverage.</p>
 
-    <p>AZ pinning is strict — this is one of the most common configuration errors in early ODB deployments. The ODB network, all application VPC subnets that will peer with it, and the Exadata infrastructure must all be in the <strong>same physical AZ ID</strong> — not just the same AZ name. AZ names like <code>us-east-1a</code> are account-scoped; the physical AZ ID (e.g., <code>use1-az4</code>) is what matters. If these are misaligned, peering fails silently during provisioning — 4 to 6 hours into an infrastructure creation that then rolls back.</p>
+    <p>AZ pinning is strict, this is one of the most common configuration errors in early ODB deployments. The ODB network, all application VPC subnets that will peer with it, and the Exadata infrastructure must all be in the <strong>same physical AZ ID</strong>, not just the same AZ name. AZ names like <code>us-east-1a</code> are account-scoped; the physical AZ ID (e.g., <code>use1-az4</code>) is what matters. If these are misaligned, peering fails silently during provisioning, 4 to 6 hours into an infrastructure creation that then rolls back.</p>
 
     <div class="callout">
-      <div class="callout-header"><div class="callout-dot magenta"></div>AZ pinning — the most common early mistake</div>
+      <div class="callout-header"><div class="callout-dot magenta"></div>AZ pinning, the most common early mistake</div>
       <div class="callout-body">
         <p>Always resolve and confirm your physical AZ ID before you start. Use <code>aws ec2 describe-availability-zones --region us-east-1</code> to map AZ names to AZ IDs for your account. Bake the AZ ID (not the name) into your Terraform variable definitions. This single check prevents the most expensive provisioning failure in ODB deployments.</p>
       </div>
     </div>
 
-    <h2 id="comparison">ODB vs the Alternatives — at a Glance</h2>
+    <h2 id="comparison">ODB vs the Alternatives, at a Glance</h2>
 
     <table class="comparison-table">
       <thead>
@@ -332,9 +330,9 @@
 
     <h2 id="bottom-line">The Bottom Line</h2>
 
-    <p>Oracle Database@AWS occupies a specific position: it's for enterprises that need the full Oracle Exadata feature set — RAC, Data Guard, smart scan, MAA guarantees — but operate primarily on AWS and can't justify running a separate OCI tenancy for their database tier. It's not cheaper than RDS or EC2. It's not simpler to operate. It's the right answer when the requirements genuinely demand what only Exadata delivers.</p>
+    <p>Oracle Database@AWS occupies a specific position: it's for enterprises that need the full Oracle Exadata feature set, RAC, Data Guard, smart scan, MAA guarantees, but operate primarily on AWS and can't justify running a separate OCI tenancy for their database tier. It's not cheaper than RDS or EC2. It's not simpler to operate. It's the right answer when the requirements genuinely demand what only Exadata delivers.</p>
 
-    <p>In Part 2, we'll work through the decision framework — when ODB is the right answer and when it isn't, and which workloads in healthcare, oil and gas, and financial services tend to land where.</p>
+    <p>In Part 2, we'll work through the decision framework, when ODB is the right answer and when it isn't, and which workloads in healthcare, oil and gas, and financial services tend to land where.</p>
 
     <div class="share-bar">
       <span class="share-label">Topics</span>
@@ -352,7 +350,7 @@
         <div class="related-card-top"></div>
         <div class="related-card-body">
           <h4>Part 2: When ODB Is the Right Answer</h4>
-          <p>Decision framework — ODB vs EC2 vs RDS vs OCI, by workload type and industry.</p>
+          <p>Decision framework, ODB vs EC2 vs RDS vs OCI, by workload type and industry.</p>
         </div>
       </a>
       <a href="blog-oracle-db-aws-terraform.html" class="related-card">
@@ -368,7 +366,7 @@
       <div class="cta-band-halo"></div>
       <p class="eyebrow">Work with us</p>
       <h2>Planning an Oracle migration to AWS?<br/><span class="grad-text">Let's talk architecture.</span></h2>
-      <p style="max-width:480px; margin:0 auto 2rem;">We've delivered Oracle Database@AWS in production — from Terraform modules to live cutover. If you're evaluating ODB, we'll give you an honest assessment before you commit to the architecture.</p>
+      <p style="max-width:480px; margin:0 auto 2rem;">We've delivered Oracle Database@AWS in production, from Terraform modules to live cutover. If you're evaluating ODB, we'll give you an honest assessment before you commit to the architecture.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Start a conversation →</a>
     </div>
 
@@ -406,12 +404,12 @@
           <img src="assets/icon_dark.png" alt="Adaptiv AS" class="nav-logo-mark logo-for-dark"/>
           <span class="nav-wordmark"><span>Adaptiv</span> AS</span>
         </a>
-        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture — building products, platforms, and infrastructure for the businesses of tomorrow.</p>
+        <p data-i18n="footer_brand_p">An ambitious Norwegian IT venture, building products, platforms, and infrastructure for the businesses of tomorrow.</p>
         <div class="footer-coords"><span class="footer-coords-dot"></span><span>Oslo, Norway · 59.913°N, 10.752°E</span></div>
         <p style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem;" data-i18n="footer_nl_label">Technical insights</p>
         <form class="newsletter-form" onsubmit="handleNewsletter(event)">
           <input type="hidden" name="access_key" value="712edce1-c81a-45ad-89c0-bf3c07fac508"/>
-          <input type="hidden" name="subject" value="New newsletter signup — Adaptiv AS"/>
+          <input type="hidden" name="subject" value="New newsletter signup, Adaptiv AS"/>
           <input type="hidden" name="from_name" value="Adaptiv Newsletter"/>
           <input type="email" name="email" placeholder="your@email.com" required/>
           <button type="submit" data-i18n="footer_subscribe">Subscribe</button>
@@ -476,7 +474,7 @@ async function handleNewsletter(e) {
   const data = new FormData(e.target);
   const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
   const json = await res.json();
-  msg.textContent = json.success ? 'Subscribed — welcome aboard.' : 'Something went wrong. Try again.';
+  msg.textContent = json.success ? 'Subscribed, welcome aboard.' : 'Something went wrong. Try again.';
   msg.style.cssText = 'font-size:0.8rem;color:var(--label-color);margin-top:0.5rem;';
   if (json.success) e.target.reset();
 }
