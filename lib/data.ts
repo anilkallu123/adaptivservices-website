@@ -95,7 +95,7 @@ export const CASES = [
     label: { en: 'Public Sector · Cloud',    no: 'Offentlig sektor · Sky' },
     color: '#7B4FFF',
     title: { en: 'Oracle ExaDB Migration for Skatteetaten', no: 'Oracle ExaDB-migrasjon for Skatteetaten' },
-    stat: '40%',
+    stat: { en: '40%', no: '40%' },
     body:  { en: 'Zero-downtime migration of national tax database from Oracle 19c to 26ai on ExaDB@Azure. Delivered under DIFI compliance with NSM ICT controls throughout.', no: 'Null-nedetids-migrasjon av nasjonal skattedatabase fra Oracle 19c til 26ai på ExaDB@Azure. Levert med DIFI-samsvar og NSM IKT-kontroller gjennom hele prosessen.' },
     outcomes: {
       en: ['Zero downtime during migration', '40% query performance uplift', 'Full NSM ICT compliance', 'Automated rollback capability'],
@@ -106,7 +106,7 @@ export const CASES = [
     label: { en: 'Healthcare · Data Platform', no: 'Helsevesen · Dataplattform' },
     color: '#00D4FF',
     title: { en: 'National Health Data Platform for HSØ', no: 'Nasjonal helsedataplattform for HSØ' },
-    stat: 'Weeks → hours',
+    stat: { en: 'Weeks → hours', no: 'Uker → timer' },
     body:  { en: 'FHIR-compliant Azure data lakehouse serving multiple hospital trusts. Reduced reporting cycles from weeks to hours while maintaining strict data sovereignty requirements.', no: 'FHIR-kompatibel Azure-datainnsjø for flere helseforetak. Reduserte rapporteringssyklus fra uker til timer, med strenge krav til datasuvereniteten opprettholdt.' },
     outcomes: {
       en: ['FHIR R4 compliant architecture', 'Reporting: weeks → hours', '4.2M records/hour throughput', 'Multi-trust data governance'],
@@ -117,7 +117,7 @@ export const CASES = [
     label: { en: 'ERP · Manufacturing', no: 'ERP · Produksjon' },
     color: '#FF8A65',
     title: { en: 'D365 F&O for Alfa Laval Europe', no: 'D365 F&O for Alfa Laval Europa' },
-    stat: '30%',
+    stat: { en: '30%', no: '30%' },
     body:  { en: "One of Europe's largest D365 Finance & Operations implementations, spanning 8 countries and replacing 5 legacy ERP systems in a 24-month programme.", no: 'En av Europas største D365 Finance & Operations-implementeringer, over 8 land og erstatning av 5 eldre ERP-systemer i et 24-månedersprogram.' },
     outcomes: {
       en: ['8-country rollout', '30% faster month-end close', '5 legacy systems retired', '1,200+ users onboarded'],

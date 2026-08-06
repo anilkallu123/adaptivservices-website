@@ -88,8 +88,10 @@ export default function Contact() {
                   <h2 className="text-xl font-semibold mb-6" style={{ color: 'var(--text)' }}>{UI.contact_form_h2[lang]}</h2>
                   {FIELDS.map(f => (
                     <div key={f.key}>
-                      <label className="block text-sm font-mono text-muted mb-1.5">{f.label}</label>
+                      <label htmlFor={`cf-${f.key}`} className="block text-sm font-mono text-muted mb-1.5">{f.label}</label>
                       <input
+                        id={`cf-${f.key}`}
+                        name={f.key}
                         type={f.type}
                         placeholder={f.placeholder}
                         required={f.required}
@@ -101,8 +103,10 @@ export default function Contact() {
                     </div>
                   ))}
                   <div>
-                    <label className="block text-sm font-mono text-muted mb-1.5">{UI.contact_message[lang]}</label>
+                    <label htmlFor="cf-message" className="block text-sm font-mono text-muted mb-1.5">{UI.contact_message[lang]}</label>
                     <textarea
+                      id="cf-message"
+                      name="message"
                       rows={4}
                       placeholder={UI.contact_msg_ph[lang]}
                       required

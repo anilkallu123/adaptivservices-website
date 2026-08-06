@@ -38,7 +38,7 @@ export default function CaseStudies() {
                     </span>
                     <h2 className="text-2xl font-bold" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h2>
                   </div>
-                  <div className="text-2xl font-bold" style={{ color: 'var(--text)' }}>{c.stat}</div>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--text)' }}>{loc(c.stat, lang)}</div>
                 </div>
                 <p className="text-muted leading-relaxed mb-6 max-w-2xl">{loc(c.body, lang)}</p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">

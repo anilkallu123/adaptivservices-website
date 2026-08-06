@@ -113,8 +113,8 @@ export const UI = {
   about_principles_eyebrow: { en: 'What we believe', no: 'Hva vi tror på' },
   about_principles_h2: { en: 'Our principles',     no: 'Våre prinsipper' },
   about_founder_eyebrow: { en: 'The person behind it', no: 'Personen bak' },
-  about_founder_h2:      { en: 'Founder',              no: 'Grunder' },
-  about_founder_role:    { en: 'Founder & Principal Architect', no: 'Grunder og Sjefarkitekt' },
+  about_founder_h2:      { en: 'Founder',              no: 'Gründer' },
+  about_founder_role:    { en: 'Founder & Principal Architect', no: 'Gründer og sjefsarkitekt' },
   about_founder_bio:     {
     en: 'Anil has spent 20 years building enterprise software and cloud infrastructure for some of Norway\'s most demanding organisations, from national health data platforms to critical tax systems. He founded Adaptiv AS to bring senior-level architecture and delivery to organisations that need to move fast without cutting corners on compliance, sovereignty, or long-term maintainability.',
     no: 'Anil har brukt 20 år på å bygge enterprise-programvare og skyinfrastruktur for noen av Norges mest krevende organisasjoner, fra nasjonale helsedataplattformer til kritiske skattesystemer. Han stiftet Adaptiv AS for å bringe arkitektur og leveranse på seniornivå til organisasjoner som trenger å bevege seg raskt uten å ta snarveier på etterlevelse, suverenitet eller langsiktig vedlikeholdbarhet.',

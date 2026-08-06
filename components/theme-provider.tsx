@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 
 type Theme = 'dark' | 'light'
 
@@ -19,10 +19,18 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'dark'
-    try { return (localStorage.getItem('adaptiv-theme') as Theme) || 'dark' } catch { return 'dark' }
-  })
+  // Init to the SSR default ('dark'); read the stored value AFTER mount so the
+  // first client render matches the server (no hydration mismatch / React #418).
+  const [theme, setTheme] = useState<Theme>('dark')
+
+  useEffect(() => {
+    let stored: string | null = null
+    try { stored = localStorage.getItem('adaptiv-theme') } catch {}
+    if (stored === 'light' || stored === 'dark') {
+      setTheme(stored)
+      document.documentElement.classList.toggle('light', stored === 'light')
+    }
+  }, [])
 
   const toggle = useCallback(() => {
     setTheme(prev => {

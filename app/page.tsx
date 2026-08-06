@@ -266,7 +266,7 @@ export default function Home() {
               >
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div className="text-xs text-muted">{loc(c.label, lang)}</div>
-                  <div className="text-base font-bold flex-shrink-0" style={{ color: 'var(--label)' }}>{c.stat}</div>
+                  <div className="text-base font-bold flex-shrink-0" style={{ color: 'var(--label)' }}>{loc(c.stat, lang)}</div>
                 </div>
                 <h3 className="font-semibold mb-2 text-[0.95rem]" style={{ color: 'var(--text)' }}>{loc(c.title, lang)}</h3>
                 <p className="text-sm text-muted leading-relaxed mb-4">{loc(c.body, lang)}</p>

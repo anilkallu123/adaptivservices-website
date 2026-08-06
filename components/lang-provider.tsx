@@ -16,12 +16,17 @@ export function useLang() {
 }
 
 export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window === 'undefined') return 'no'
-    try { return (localStorage.getItem('adaptiv_lang') as Lang) || 'no' } catch { return 'no' }
-  })
+  // Init to the SSR default ('no'); read stored value AFTER mount so the first
+  // client render matches the server (no hydration mismatch / React #418/#423/#425).
+  const [lang, setLang] = useState<Lang>('no')
 
-  // Keep <html lang> in sync with the active language (SSR defaults to 'no')
+  useEffect(() => {
+    let stored: string | null = null
+    try { stored = localStorage.getItem('adaptiv_lang') } catch {}
+    if (stored === 'en' || stored === 'no') setLang(stored)
+  }, [])
+
+  // Keep <html lang> in sync with the active language
   useEffect(() => {
     document.documentElement.lang = lang
   }, [lang])
