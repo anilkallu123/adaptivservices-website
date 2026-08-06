@@ -38,7 +38,7 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `New contact form submission — ${form.name}`,
+          subject: `New contact form submission: ${form.name}`,
           from_name: 'Adaptiv Contact Form',
           ...form,
         }),

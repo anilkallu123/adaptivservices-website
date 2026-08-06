@@ -38,7 +38,7 @@ export function Nav() {
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled ? 'backdrop-blur-xl border-b' : ''
       }`}
-      style={{ background: scrolled ? 'rgba(10,10,15,0.85)' : 'transparent' }}
+      style={{ background: scrolled ? 'var(--nav-scrolled)' : 'transparent' }}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
@@ -59,7 +59,7 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className={`px-3.5 py-1.5 rounded-lg text-sm transition-colors ${
+              className={`px-4 py-2.5 rounded-lg text-sm min-h-[44px] flex items-center transition-colors ${
                 pathname === l.href
                   ? 'text-[var(--text)] bg-white/5'
                   : 'text-muted hover:text-[var(--text)]'
@@ -70,7 +70,7 @@ export function Nav() {
           ))}
           <Link
             href="/contact"
-            className="ml-3 px-4 py-1.5 rounded-lg text-sm font-medium text-white transition-all"
+            className="ml-4 px-5 py-2.5 rounded-lg text-sm font-medium text-white min-h-[44px] flex items-center transition-all hover:opacity-90"
             style={{ background: 'var(--btn-gradient)' }}
           >
             {UI.nav_cta[lang]}
@@ -82,7 +82,7 @@ export function Nav() {
           {/* Language toggle */}
           <button
             onClick={toggleLang}
-            className="px-2.5 py-1.5 rounded-lg text-xs font-mono font-semibold text-muted hover:text-[var(--text)] transition-colors"
+            className="w-11 h-11 flex items-center justify-center rounded-lg text-sm font-mono font-semibold text-muted hover:text-[var(--text)] transition-colors"
             aria-label="Toggle language"
           >
             {lang === 'no' ? 'EN' : 'NO'}
@@ -90,17 +90,17 @@ export function Nav() {
           {/* Theme toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg text-muted hover:text-[var(--text)] transition-colors"
+            className="w-11 h-11 flex items-center justify-center rounded-lg text-muted hover:text-[var(--text)] transition-colors"
             aria-label="Toggle theme"
           >
-            {dark ? <Sun size={16} /> : <Moon size={16} />}
+            {dark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <button
-            className="md:hidden p-2 rounded-lg text-muted hover:text-[var(--text)] transition-colors"
+            className="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-muted hover:text-[var(--text)] transition-colors"
             onClick={() => setOpen(o => !o)}
             aria-label="Toggle menu"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -121,7 +121,7 @@ export function Nav() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className={`px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                className={`px-4 py-3 rounded-lg text-base transition-colors min-h-[44px] flex items-center ${
                   pathname === l.href ? 'text-[var(--text)] bg-white/5' : 'text-muted'
                 }`}
               >
@@ -131,7 +131,7 @@ export function Nav() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="mt-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white text-center"
+              className="mt-2 px-4 py-3 rounded-lg text-base font-medium text-white text-center min-h-[44px] flex items-center justify-center"
               style={{ background: 'var(--btn-gradient)' }}
             >
               {UI.nav_cta[lang]}

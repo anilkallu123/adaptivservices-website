@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 
 interface FadeUpProps {
@@ -13,6 +13,9 @@ interface FadeUpProps {
 export function FadeUp({ children, delay = 0, className }: FadeUpProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const reduce = useReducedMotion()
+
+  if (reduce) return <div className={className}>{children}</div>
 
   return (
     <motion.div
@@ -30,6 +33,9 @@ export function FadeUp({ children, delay = 0, className }: FadeUpProps) {
 export function FadeIn({ children, delay = 0, className }: FadeUpProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
+  const reduce = useReducedMotion()
+
+  if (reduce) return <div className={className}>{children}</div>
 
   return (
     <motion.div
@@ -54,8 +60,19 @@ interface StaggerProps {
 export function StaggerGrid({ children, className, childClassName, stagger = 0.08 }: StaggerProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const reduce = useReducedMotion()
 
   const items = React.Children.toArray(children)
+
+  if (reduce) {
+    return (
+      <div className={className}>
+        {items.map((child, i) => (
+          <div key={i} className={childClassName}>{child}</div>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div ref={ref} className={className}>

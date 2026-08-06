@@ -27,7 +27,7 @@ export function Footer() {
               <span><span className="grad-text">Adaptiv</span> AS</span>
             </Link>
             <p className="text-sm text-muted leading-relaxed mb-5">
-              An ambitious Norwegian IT venture — building products, platforms, and infrastructure for tomorrow.
+              An ambitious Norwegian IT venture, building products, platforms, and infrastructure for tomorrow.
             </p>
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center gap-2 text-xs text-muted font-mono">
@@ -40,10 +40,10 @@ export function Footer() {
                 href="https://linkedin.com/company/adaptiv-as"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg text-muted hover:text-[var(--text)] transition-colors"
+                className="w-11 h-11 flex items-center justify-center rounded-lg text-muted hover:text-[var(--text)] transition-colors"
                 aria-label="Adaptiv AS on LinkedIn"
               >
-                <Linkedin size={16} />
+                <Linkedin size={20} />
               </a>
             </div>
           </div>

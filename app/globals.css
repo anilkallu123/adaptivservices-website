@@ -16,6 +16,7 @@
     --grad-from: #7B4FFF;
     --grad-to: #00D4FF;
     --btn-gradient: linear-gradient(135deg, #7B4FFF, #0055CC);
+    --nav-scrolled: rgba(10,10,15,0.85);
   }
 
   .light {
@@ -29,6 +30,7 @@
     --grad-from: #7B4FFF;
     --grad-to: #00D4FF;
     --btn-gradient: linear-gradient(135deg, #7B4FFF, #0055CC);
+    --nav-scrolled: rgba(244,244,249,0.85);
   }
 
   * {
@@ -38,6 +40,15 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
   }
 
   body {
@@ -79,10 +90,17 @@
 
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--label);
+  }
+
+  /* Prominent focus ring — meets WCAG 2.4.11 */
+  *:focus-visible {
+    outline: 2px solid var(--label);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }

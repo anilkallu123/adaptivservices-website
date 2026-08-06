@@ -38,7 +38,7 @@ export const UI = {
   caps_eyebrow:     { en: 'What we build',         no: 'Hva vi bygger' },
   caps_h2_1:        { en: 'Everything you need.',  no: 'Alt du trenger.' },
   caps_h2_2:        { en: "Nothing you don't.",    no: 'Ingenting du ikke trenger.' },
-  caps_lead:        { en: 'Six integrated capabilities — so you work with one team instead of six vendors.', no: 'Seks integrerte tjenester — slik at du jobber med ett team i stedet for seks leverandører.' },
+  caps_lead:        { en: 'Six integrated capabilities, so you work with one team instead of six vendors.', no: 'Seks integrerte tjenester, slik at du jobber med ett team i stedet for seks leverandører.' },
 
   /* ── Feature strip ── */
   fs_fast_h4:   { en: 'Move fast',       no: 'Beveg deg raskt' },
@@ -48,13 +48,13 @@ export const UI = {
   fs_think_h4:  { en: 'Think long',      no: 'Tenk langsiktig' },
   fs_think_p:   { en: 'Architectures that survive the next five years', no: 'Arkitekturer som overlever de neste fem årene' },
   fs_own_h4:    { en: 'Own it together', no: 'Eie det sammen' },
-  fs_own_p:     { en: 'Partners, not vendors — we share the risk', no: 'Partnere, ikke leverandører — vi deler risikoen' },
+  fs_own_p:     { en: 'Partners, not vendors. We share the risk', no: 'Partnere, ikke leverandører. Vi deler risikoen' },
 
   /* ── Sectors section ── */
   sectors_eyebrow:  { en: 'Industries',                       no: 'Bransjer' },
   sectors_h2_1:     { en: 'Industries where',                 no: 'Bransjer der' },
   sectors_h2_2:     { en: 'stakes are highest',               no: 'innsatsen er høyest' },
-  sectors_lead:     { en: "We operate in sectors where getting it wrong isn't an option — public services, healthcare, energy, and industrial.", no: 'Vi opererer i sektorer der feil ikke er et alternativ — offentlige tjenester, helse, energi og industri.' },
+  sectors_lead:     { en: "We operate in sectors where getting it wrong isn't an option, public services, healthcare, energy, and industrial.", no: 'Vi opererer i sektorer der feil ikke er et alternativ, offentlige tjenester, helse, energi og industri.' },
   sectors_trusted:  { en: 'Trusted by',                       no: 'Betrodd av' },
   sectors_explore:  { en: 'Explore this sector',              no: 'Utforsk denne sektoren' },
   sectors_no_match: { en: "Don't see yours?",                 no: 'Ser du ikke din bransje?' },
@@ -64,7 +64,7 @@ export const UI = {
   proof_eyebrow:    { en: 'Proof of work',  no: 'Bevis på arbeid' },
   proof_h2_1:       { en: "What we've",     no: 'Hva vi' },
   proof_h2_2:       { en: 'actually delivered', no: 'faktisk har levert' },
-  proof_lead:       { en: "Three of the engagements we're most proud of — national-scale, measurable, and verifiable.", no: 'Tre av oppdragene vi er mest stolte av — nasjonal skala, målbare og verifiserbare.' },
+  proof_lead:       { en: "Three of the engagements we're most proud of, national-scale, measurable, and verifiable.", no: 'Tre av oppdragene vi er mest stolte av, nasjonal skala, målbare og verifiserbare.' },
   cs_read:          { en: 'Read case study', no: 'Les casestudie' },
   cs_see_all:       { en: 'See all case studies', no: 'Se alle referanseprosjekter' },
 
@@ -79,14 +79,14 @@ export const UI = {
   wwd_eyebrow:  { en: 'Capabilities',                no: 'Tjenester' },
   wwd_h1_1:     { en: 'Six pillars.',                no: 'Seks pilarer.' },
   wwd_h1_2:     { en: 'Unlimited scope.',            no: 'Ubegrenset rekkevidde.' },
-  wwd_lead:     { en: "We don't specialise in one thing. We bring the full stack to every problem — from embedded hardware to AI-powered cloud platforms.", no: 'Vi spesialiserer oss ikke på én ting. Vi tar med hele stacken til hvert problem — fra innebygd maskinvare til KI-drevne skyplattformer.' },
+  wwd_lead:     { en: "We don't specialise in one thing. We bring the full stack to every problem, from embedded hardware to AI-powered cloud platforms.", no: 'Vi spesialiserer oss ikke på én ting. Vi tar med hele stacken til hvert problem, fra innebygd maskinvare til KI-drevne skyplattformer.' },
   wwd_start:    { en: 'Start a project',             no: 'Start et prosjekt' },
 
   /* ── Sectors page ── */
   sectors_page_eyebrow: { en: 'Industries',         no: 'Bransjer' },
   sectors_page_h1_1:    { en: 'We go where the',   no: 'Vi går dit' },
   sectors_page_h1_2:    { en: 'problems are hardest.', no: 'problemene er vanskeligst.' },
-  sectors_page_lead:    { en: 'Five sectors where we have deep delivery history — and where the consequences of poor engineering are real.', no: 'Fem sektorer der vi har dyp leveransehistorikk — og der konsekvensene av dårlig ingeniørarbeid er reelle.' },
+  sectors_page_lead:    { en: 'Five sectors where we have deep delivery history, and where the consequences of poor engineering are real.', no: 'Fem sektorer der vi har dyp leveransehistorikk, og der konsekvensene av dårlig ingeniørarbeid er reelle.' },
   sectors_page_discuss: { en: 'Discuss a project',  no: 'Diskuter et prosjekt' },
 
   /* ── Case Studies page ── */
@@ -109,15 +109,15 @@ export const UI = {
   about_eyebrow:   { en: 'About Adaptiv AS',        no: 'Om Adaptiv AS' },
   about_h1_1:      { en: 'Built by engineers,',     no: 'Bygget av ingeniører,' },
   about_h1_2:      { en: 'run by engineers.',       no: 'drevet av ingeniører.' },
-  about_lead:      { en: 'Adaptiv AS is a Norwegian IT venture founded in Oslo in 2026. We work at the intersection of cloud infrastructure, AI, and software product development — with a focus on industries where getting it wrong isn\'t an option.', no: 'Adaptiv AS er et norsk IT-selskap stiftet i Oslo i 2026. Vi jobber i skjæringspunktet mellom skyinfrastruktur, KI og programvareutvikling — med fokus på bransjer der feil ikke er et alternativ.' },
+  about_lead:      { en: 'Adaptiv AS is a Norwegian IT venture founded in Oslo in 2026. We work at the intersection of cloud infrastructure, AI, and software product development, with a focus on industries where getting it wrong isn\'t an option.', no: 'Adaptiv AS er et norsk IT-selskap stiftet i Oslo i 2026. Vi jobber i skjæringspunktet mellom skyinfrastruktur, KI og programvareutvikling, med fokus på bransjer der feil ikke er et alternativ.' },
   about_principles_eyebrow: { en: 'What we believe', no: 'Hva vi tror på' },
   about_principles_h2: { en: 'Our principles',     no: 'Våre prinsipper' },
   about_founder_eyebrow: { en: 'The person behind it', no: 'Personen bak' },
   about_founder_h2:      { en: 'Founder',              no: 'Grunder' },
   about_founder_role:    { en: 'Founder & Principal Architect', no: 'Grunder og Sjefarkitekt' },
   about_founder_bio:     {
-    en: 'Anil has spent 20 years building enterprise software and cloud infrastructure for some of Norway\'s most demanding organisations — from national health data platforms to critical tax systems. He founded Adaptiv AS to bring senior-level architecture and delivery to organisations that need to move fast without cutting corners on compliance, sovereignty, or long-term maintainability.',
-    no: 'Anil har brukt 20 år på å bygge enterprise-programvare og skyinfrastruktur for noen av Norges mest krevende organisasjoner — fra nasjonale helsedataplattformer til kritiske skattesystemer. Han stiftet Adaptiv AS for å bringe arkitektur og leveranse på seniornivå til organisasjoner som trenger å bevege seg raskt uten å ta snarveier på etterlevelse, suverenitet eller langsiktig vedlikeholdbarhet.',
+    en: 'Anil has spent 20 years building enterprise software and cloud infrastructure for some of Norway\'s most demanding organisations, from national health data platforms to critical tax systems. He founded Adaptiv AS to bring senior-level architecture and delivery to organisations that need to move fast without cutting corners on compliance, sovereignty, or long-term maintainability.',
+    no: 'Anil har brukt 20 år på å bygge enterprise-programvare og skyinfrastruktur for noen av Norges mest krevende organisasjoner, fra nasjonale helsedataplattformer til kritiske skattesystemer. Han stiftet Adaptiv AS for å bringe arkitektur og leveranse på seniornivå til organisasjoner som trenger å bevege seg raskt uten å ta snarveier på etterlevelse, suverenitet eller langsiktig vedlikeholdbarhet.',
   },
   about_founder_linkedin: { en: 'Connect on LinkedIn', no: 'Koble til på LinkedIn' },
   about_work_eyebrow: { en: 'Work with us',         no: 'Jobb med oss' },
@@ -130,7 +130,7 @@ export const UI = {
   contact_eyebrow:   { en: 'Get in touch',          no: 'Ta kontakt' },
   contact_h1_1:      { en: "Let's build something", no: 'La oss bygge noe' },
   contact_h1_2:      { en: 'worth building.',       no: 'verdt å bygge.' },
-  contact_lead:      { en: "Whether you have a spec, a vague problem, or just an ambition — reach out and we'll find the shape of the solution together.", no: 'Enten du har en spesifikasjon, et uklart problem eller bare en ambisjon — ta kontakt, så finner vi formen på løsningen sammen.' },
+  contact_lead:      { en: "Whether you have a spec, a vague problem, or just an ambition, reach out and we'll find the shape of the solution together.", no: 'Enten du har en spesifikasjon, et uklart problem eller bare en ambisjon, ta kontakt, så finner vi formen på løsningen sammen.' },
   contact_form_h2:   { en: 'Send a message',        no: 'Send en melding' },
   contact_name:      { en: 'Name',                  no: 'Navn' },
   contact_email_lbl: { en: 'Email',                 no: 'E-post' },
@@ -145,7 +145,7 @@ export const UI = {
   contact_sent_h3:   { en: 'Message received',      no: 'Melding mottatt' },
   contact_sent_p:    { en: "We'll get back to you within one business day.", no: 'Vi kommer tilbake til deg innen én virkedag.' },
   contact_book:      { en: 'Book a call',           no: 'Book en samtale' },
-  contact_book_desc: { en: '30-min discovery — no sales pitch', no: '30 min oppdagelse — ingen salgspitch' },
+  contact_book_desc: { en: '30-min discovery, no sales pitch', no: '30 min oppdagelse, ingen salgspitch' },
   contact_book_cta:  { en: 'Book on Calendly',      no: 'Book på Calendly' },
   contact_email_ch:  { en: 'Email us',              no: 'Send e-post' },
   contact_email_desc:{ en: 'For project enquiries and partnerships', no: 'For prosjektforespørsler og partnerskap' },
@@ -154,7 +154,7 @@ export const UI = {
   contact_oslo_cta:  { en: 'Oslo, Norway',          no: 'Oslo, Norge' },
 
   /* ── Footer ── */
-  footer_brand_p:    { en: 'An ambitious Norwegian IT venture — building products, platforms, and infrastructure for tomorrow.', no: 'Et ambisiøst norsk IT-selskap — bygger produkter, plattformer og infrastruktur for fremtiden.' },
+  footer_brand_p:    { en: 'An ambitious Norwegian IT venture, building products, platforms, and infrastructure for tomorrow.', no: 'Et ambisiøst norsk IT-selskap, bygger produkter, plattformer og infrastruktur for fremtiden.' },
   footer_company:    { en: 'Company',               no: 'Selskap' },
   footer_services:   { en: 'Services',              no: 'Tjenester' },
   footer_contact_h:  { en: 'Stay in touch',         no: 'Hold kontakten' },

@@ -8,7 +8,7 @@ import { LangProvider } from '@/components/lang-provider'
 import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
-  title: { default: 'Adaptiv AS — Build What Matters', template: '%s | Adaptiv AS' },
+  title: { default: 'Adaptiv AS: Build What Matters', template: '%s | Adaptiv AS' },
   description: 'Adaptiv AS is an ambitious Norwegian IT venture building products, platforms, and infrastructure for the businesses of tomorrow.',
   metadataBase: new URL('https://www.adaptivservices.com'),
   openGraph: {
@@ -44,8 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LangProvider>
           <ThemeProvider>
+            <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-3 focus:left-3 focus:px-4 focus:py-2 focus:rounded-lg" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>Skip to content</a>
             <Nav />
-            <main>{children}</main>
+            <main id="main">{children}</main>
             <Footer />
           </ThemeProvider>
         </LangProvider>

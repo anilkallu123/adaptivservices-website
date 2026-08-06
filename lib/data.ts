@@ -16,7 +16,7 @@ export const STATS = [
 export const CAPABILITIES = [
   {
     icon: Sparkles, title: { en: 'Products', no: 'Produkter' },
-    body: { en: 'Software built around real workflows — not feature lists. We ship, iterate, and own the outcome.', no: 'Programvare bygget rundt reelle arbeidsflyter — ikke funksjonslister. Vi leverer, itererer og eier resultatet.' },
+    body: { en: 'Software built around real workflows, not feature lists. We ship, iterate, and own the outcome.', no: 'Programvare bygget rundt reelle arbeidsflyter, ikke funksjonslister. Vi leverer, itererer og eier resultatet.' },
   },
   {
     icon: Bot, title: { en: 'AI & Machine Learning', no: 'KI og maskinlæring' },
@@ -28,11 +28,11 @@ export const CAPABILITIES = [
   },
   {
     icon: Cpu, title: { en: 'Custom Electronics', no: 'Tilpasset elektronikk' },
-    body: { en: 'Concept to production-ready hardware — bridging the physical and digital.', no: 'Konsept til produksjonsklar maskinvare — bro mellom det fysiske og digitale.' },
+    body: { en: 'Concept to production-ready hardware, bridging the physical and digital.', no: 'Konsept til produksjonsklar maskinvare, bro mellom det fysiske og digitale.' },
   },
   {
     icon: Users, title: { en: 'Talent & Staffing', no: 'Kompetanse og bemanning' },
-    body: { en: "Senior engineers on demand. No CVs, no ramp-up — contributing from day one.", no: 'Seniorkonsulenter på bestilling. Ingen CV-er, ingen oppstartstid — bidrar fra dag én.' },
+    body: { en: "Senior engineers on demand. No CVs, no ramp-up, contributing from day one.", no: 'Seniorkonsulenter på bestilling. Ingen CV-er, ingen oppstartstid, bidrar fra dag én.' },
   },
   {
     icon: ShieldCheck, title: { en: 'Security', no: 'Sikkerhet' },
@@ -52,7 +52,7 @@ export const SECTORS = [
     icon: Landmark, color: '#7B4FFF',
     label: { en: 'Public Sector',        no: 'Offentlig sektor' },
     stat:  { en: '27 systems delivered', no: '27 systemer levert' },
-    desc:  { en: 'Tax, health, defence, transport, civic services. NSM ICT framework and DIFI standards by default — compliance is the floor, not the ceiling.', no: 'Skatt, helse, forsvar, transport, innbyggertjenester. NSM IKT-rammeverk og Digitaliseringsdirektoratets standarder — etterlevelse er gulvet, ikke taket.' },
+    desc:  { en: 'Tax, health, defence, transport, civic services. NSM ICT framework and DIFI standards by default, compliance is the floor, not the ceiling.', no: 'Skatt, helse, forsvar, transport, innbyggertjenester. NSM IKT-rammeverk og Digitaliseringsdirektoratets standarder, etterlevelse er gulvet, ikke taket.' },
     clients: ['Skatteetaten', 'Helsedirektoratet', 'DSB', 'Bymiljøetaten'],
     clientsStr: 'Skatteetaten · Helsedirektoratet · DSB · Bymiljøetaten',
   },
@@ -76,7 +76,7 @@ export const SECTORS = [
     icon: Factory, color: '#FF8A65',
     label: { en: 'Industrial',                    no: 'Industri' },
     stat:  { en: '30% faster month-end close',    no: '30% raskere månedsavslutning' },
-    desc:  { en: 'ERP, IoT, edge compute, process automation. Complex operations running on systems that were built for a different era — we change that.', no: 'ERP, IoT, kant-databehandling, prosessautomatisering. Komplekse operasjoner på systemer bygget for en annen tid — det endrer vi.' },
+    desc:  { en: 'ERP, IoT, edge compute, process automation. Complex operations running on systems that were built for a different era, we change that.', no: 'ERP, IoT, kant-databehandling, prosessautomatisering. Komplekse operasjoner på systemer bygget for en annen tid, det endrer vi.' },
     clients: ['Alfa Laval', 'Norsk Hydro', 'Yara'],
     clientsStr: 'Alfa Laval · Norsk Hydro · Yara',
   },
@@ -94,7 +94,7 @@ export const CASES = [
   {
     label: { en: 'Public Sector · Cloud',    no: 'Offentlig sektor · Sky' },
     color: '#7B4FFF',
-    title: { en: 'Oracle ExaDB Migration — Skatteetaten', no: 'Oracle ExaDB-migrasjon — Skatteetaten' },
+    title: { en: 'Oracle ExaDB Migration for Skatteetaten', no: 'Oracle ExaDB-migrasjon for Skatteetaten' },
     stat: '40%',
     body:  { en: 'Zero-downtime migration of national tax database from Oracle 19c to 26ai on ExaDB@Azure. Delivered under DIFI compliance with NSM ICT controls throughout.', no: 'Null-nedetids-migrasjon av nasjonal skattedatabase fra Oracle 19c til 26ai på ExaDB@Azure. Levert med DIFI-samsvar og NSM IKT-kontroller gjennom hele prosessen.' },
     outcomes: {
@@ -105,7 +105,7 @@ export const CASES = [
   {
     label: { en: 'Healthcare · Data Platform', no: 'Helsevesen · Dataplattform' },
     color: '#00D4FF',
-    title: { en: 'National Health Data Platform — HSØ', no: 'Nasjonal helsedataplattform — HSØ' },
+    title: { en: 'National Health Data Platform for HSØ', no: 'Nasjonal helsedataplattform for HSØ' },
     stat: 'Weeks → hours',
     body:  { en: 'FHIR-compliant Azure data lakehouse serving multiple hospital trusts. Reduced reporting cycles from weeks to hours while maintaining strict data sovereignty requirements.', no: 'FHIR-kompatibel Azure-datainnsjø for flere helseforetak. Reduserte rapporteringssyklus fra uker til timer, med strenge krav til datasuvereniteten opprettholdt.' },
     outcomes: {
@@ -116,7 +116,7 @@ export const CASES = [
   {
     label: { en: 'ERP · Manufacturing', no: 'ERP · Produksjon' },
     color: '#FF8A65',
-    title: { en: 'D365 F&O — Alfa Laval Europe', no: 'D365 F&O — Alfa Laval Europa' },
+    title: { en: 'D365 F&O for Alfa Laval Europe', no: 'D365 F&O for Alfa Laval Europa' },
     stat: '30%',
     body:  { en: "One of Europe's largest D365 Finance & Operations implementations, spanning 8 countries and replacing 5 legacy ERP systems in a 24-month programme.", no: 'En av Europas største D365 Finance & Operations-implementeringer, over 8 land og erstatning av 5 eldre ERP-systemer i et 24-månedersprogram.' },
     outcomes: {
@@ -139,7 +139,7 @@ export const SERVICES = [
   {
     icon: Bot, color: '#00D4FF',
     title: { en: 'AI & Machine Learning', no: 'KI og maskinlæring' },
-    body:  { en: 'From LLM integrations to bespoke ML pipelines — practical AI that makes operations smarter, not just flashier.', no: 'Fra LLM-integrasjoner til skreddersydde ML-pipelines — praktisk KI som gjør operasjoner smartere, ikke bare mer imponerende.' },
+    body:  { en: 'From LLM integrations to bespoke ML pipelines, practical AI that makes operations smarter, not just flashier.', no: 'Fra LLM-integrasjoner til skreddersydde ML-pipelines, praktisk KI som gjør operasjoner smartere, ikke bare mer imponerende.' },
     points: {
       en: ['LLM integration & fine-tuning', 'RAG architectures', 'ML pipeline engineering', 'AI-assisted diagnostics'],
       no: ['LLM-integrasjon og finjustering', 'RAG-arkitekturer', 'ML-pipeline-utvikling', 'KI-assistert diagnostikk'],
@@ -157,7 +157,7 @@ export const SERVICES = [
   {
     icon: Cpu, color: '#FF8A65',
     title: { en: 'Custom Electronics', no: 'Tilpasset elektronikk' },
-    body:  { en: 'From concept through prototype to production — hardware that connects the physical and digital worlds.', no: 'Fra konsept via prototype til produksjon — maskinvare som kobler den fysiske og digitale verden.' },
+    body:  { en: 'From concept through prototype to production, hardware that connects the physical and digital worlds.', no: 'Fra konsept via prototype til produksjon, maskinvare som kobler den fysiske og digitale verden.' },
     points: {
       en: ['PCB design & prototyping', 'Embedded firmware', 'IoT edge systems', 'CE & UKCA certification support'],
       no: ['PCB-design og prototyping', 'Innebygd fastvare', 'IoT-kantsystemer', 'CE og UKCA sertifiseringsstøtte'],
@@ -166,7 +166,7 @@ export const SERVICES = [
   {
     icon: Users, color: '#5A4BFF',
     title: { en: 'Talent & Staffing', no: 'Kompetanse og bemanning' },
-    body:  { en: 'Senior engineers and architects on demand. No CVs, no wasted time — the right person, ready to contribute from day one.', no: 'Seniorkonsulenter og arkitekter på bestilling. Ingen CV-er, ingen bortkastet tid — rett person, klar til å bidra fra dag én.' },
+    body:  { en: 'Senior engineers and architects on demand. No CVs, no wasted time, the right person, ready to contribute from day one.', no: 'Seniorkonsulenter og arkitekter på bestilling. Ingen CV-er, ingen bortkastet tid, rett person, klar til å bidra fra dag én.' },
     points: {
       en: ['Staff augmentation', 'Team embedding', 'Tech lead as a service', 'Architecture consulting'],
       no: ['Bemanningsforsterkning', 'Teaminnbygging', 'Teknisk leder som tjeneste', 'Arkitekturkonsulenttjenester'],
@@ -197,26 +197,26 @@ export const PRINCIPLES = [
   {
     icon: Heart,
     title: { en: 'Radical ownership',   no: 'Radikalt eierskap' },
-    body:  { en: "When we take on a problem, we own it — from first conversation to production and beyond.", no: 'Når vi tar på oss et problem, eier vi det — fra første samtale til produksjon og videre.' },
+    body:  { en: "When we take on a problem, we own it, from first conversation to production and beyond.", no: 'Når vi tar på oss et problem, eier vi det, fra første samtale til produksjon og videre.' },
   },
   {
     icon: Globe,
     title: { en: 'Sovereign by default', no: 'Suveren som standard' },
-    body:  { en: "Norwegian data, Norwegian infrastructure, Norwegian compliance. Not an afterthought — the foundation.", no: 'Norske data, norsk infrastruktur, norsk etterlevelse. Ikke en ettertanke — fundamentet.' },
+    body:  { en: "Norwegian data, Norwegian infrastructure, Norwegian compliance. Not an afterthought, the foundation.", no: 'Norske data, norsk infrastruktur, norsk etterlevelse. Ikke en ettertanke, fundamentet.' },
   },
 ]
 
 export const POSTS = [
   { slug: 'blog-oci-snowflake-2026', tag: 'Data Platform', date: 'May 2026', title: 'OCI + Snowflake: The Sovereign Data Stack for Norwegian Enterprises', excerpt: 'How combining Oracle Cloud Infrastructure with Snowflake delivers data sovereignty, performance, and compliance in one architecture.' },
-  { slug: 'blog-oracle-db-aws-licensing', tag: 'Oracle · Licensing', date: 'Apr 2026', title: 'Oracle Database on AWS: Licensing traps and how to avoid them', excerpt: 'A practical guide to Oracle licensing on AWS — the rules, the traps, and how large enterprises structure their agreements.' },
+  { slug: 'blog-oracle-db-aws-licensing', tag: 'Oracle · Licensing', date: 'Apr 2026', title: 'Oracle Database on AWS: Licensing traps and how to avoid them', excerpt: 'A practical guide to Oracle licensing on AWS, the rules, the traps, and how large enterprises structure their agreements.' },
   { slug: 'blog-oracle-db-aws-migration-methodology', tag: 'Oracle · Migration', date: 'Apr 2026', title: 'The Oracle-to-AWS Migration Methodology that scales', excerpt: 'Our 6-phase migration framework refined over 30+ zero-downtime database migrations.' },
-  { slug: 'blog-oracle-db-aws-terraform', tag: 'IaC · Oracle', date: 'Apr 2026', title: 'Terraforming Oracle Database@AWS at scale', excerpt: 'How we manage Oracle ExaDB infrastructure as code — modules, state management, and day-two operations.' },
+  { slug: 'blog-oracle-db-aws-terraform', tag: 'IaC · Oracle', date: 'Apr 2026', title: 'Terraforming Oracle Database@AWS at scale', excerpt: 'How we manage Oracle ExaDB infrastructure as code, modules, state management, and day-two operations.' },
   { slug: 'blog-oracle-db-aws-vs-azure', tag: 'Cloud · Oracle', date: 'Mar 2026', title: 'Oracle DB@AWS vs Oracle DB@Azure: An honest comparison', excerpt: 'Performance, cost, compliance, and operational differences after running production workloads on both clouds.' },
-  { slug: 'blog-oracle-db-aws-what-it-is', tag: 'Oracle · Cloud', date: 'Mar 2026', title: 'What is Oracle Database@AWS — and should you care?', excerpt: 'The new multicloud service explained: architecture, use cases, and when it makes sense versus alternatives.' },
+  { slug: 'blog-oracle-db-aws-what-it-is', tag: 'Oracle · Cloud', date: 'Mar 2026', title: 'What is Oracle Database@AWS, and should you care?', excerpt: 'The new multicloud service explained: architecture, use cases, and when it makes sense versus alternatives.' },
   { slug: 'blog-oracle-db-aws-when-to-use', tag: 'Oracle · Strategy', date: 'Mar 2026', title: 'When to use Oracle Database@AWS (and when not to)', excerpt: 'Decision framework for choosing Oracle ExaDB on AWS versus self-managed, RDS, or a full re-platform.' },
 ]
 
-// Helper — get localised value from any bilingual field
+// Helper, get localised value from any bilingual field
 export function loc<T extends { en: string; no: string }>(field: T, lang: Lang): string {
   return field[lang]
 }
