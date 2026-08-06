@@ -2,8 +2,11 @@
 
 import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { useLang } from '@/components/lang-provider'
+import { UI } from '@/lib/i18n'
 
 export function NewsletterForm() {
+  const { lang } = useLang()
   const [email, setEmail] = useState('')
   const [state, setState] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
 
@@ -29,14 +32,14 @@ export function NewsletterForm() {
   }
 
   if (state === 'done') {
-    return <p className="text-sm text-emerald-400 font-mono">✓ Subscribed</p>
+    return <p className="text-sm text-emerald-400 font-mono" role="status">{UI.nl_done[lang]}</p>
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex gap-2">
       <input
         type="email"
-        aria-label="Email address"
+        aria-label={UI.nl_email_label[lang]}
         placeholder="your@email.com"
         required
         value={email}

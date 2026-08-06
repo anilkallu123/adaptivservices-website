@@ -5,10 +5,26 @@ import Image from 'next/image'
 import { Linkedin } from 'lucide-react'
 import { NewsletterForm } from '@/components/newsletter-form'
 import { useTheme } from '@/components/theme-provider'
+import { useLang } from '@/components/lang-provider'
+import { UI } from '@/lib/i18n'
 
 export function Footer() {
   const { theme } = useTheme()
+  const { lang } = useLang()
   const dark = theme === 'dark'
+
+  const company = [
+    { href: '/about', key: 'footer_about' as const },
+    { href: '/case-studies', key: 'footer_cs' as const },
+    { href: '/blog', key: 'footer_insights' as const },
+    { href: '/contact', key: 'footer_contact_l' as const },
+  ]
+  const services = [
+    { href: '/what-we-do', key: 'footer_products' as const },
+    { href: '/what-we-do', key: 'footer_ai' as const },
+    { href: '/what-we-do', key: 'footer_cloud' as const },
+    { href: '/what-we-do', key: 'footer_electronics' as const },
+  ]
 
   return (
     <footer className="border-t mt-24" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
@@ -27,12 +43,12 @@ export function Footer() {
               <span><span className="grad-text">Adaptiv</span> AS</span>
             </Link>
             <p className="text-sm text-muted leading-relaxed mb-5">
-              An ambitious Norwegian IT venture, building products, platforms, and infrastructure for tomorrow.
+              {UI.footer_brand_p[lang]}
             </p>
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center gap-2 text-xs text-muted font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Oslo, Norway · 59.913°N, 10.752°E
+                {UI.footer_oslo_loc[lang]}
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -49,17 +65,12 @@ export function Footer() {
           </div>
 
           <div>
-            <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">Company</h5>
+            <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">{UI.footer_company[lang]}</h5>
             <ul className="space-y-2.5">
-              {[
-                { href: '/about', label: 'About' },
-                { href: '/case-studies', label: 'Case Studies' },
-                { href: '/blog', label: 'Insights' },
-                { href: '/contact', label: 'Contact' },
-              ].map(l => (
-                <li key={l.href}>
+              {company.map(l => (
+                <li key={l.key}>
                   <Link href={l.href} className="text-sm text-muted hover:text-[var(--text)] transition-colors">
-                    {l.label}
+                    {UI[l.key][lang]}
                   </Link>
                 </li>
               ))}
@@ -67,17 +78,12 @@ export function Footer() {
           </div>
 
           <div>
-            <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">Services</h5>
+            <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">{UI.footer_services[lang]}</h5>
             <ul className="space-y-2.5">
-              {[
-                { href: '/what-we-do', label: 'Products' },
-                { href: '/what-we-do', label: 'AI & ML' },
-                { href: '/what-we-do', label: 'Cloud' },
-                { href: '/what-we-do', label: 'Electronics' },
-              ].map((l, i) => (
+              {services.map((l, i) => (
                 <li key={i}>
                   <Link href={l.href} className="text-sm text-muted hover:text-[var(--text)] transition-colors">
-                    {l.label}
+                    {UI[l.key][lang]}
                   </Link>
                 </li>
               ))}
@@ -85,15 +91,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">Stay in touch</h5>
-            <p className="text-sm text-muted mb-3">Technical insights from Oslo.</p>
+            <h5 className="text-xs font-semibold tracking-widest uppercase text-muted mb-4">{UI.footer_contact_h[lang]}</h5>
+            <p className="text-sm text-muted mb-3">{UI.footer_nl_p[lang]}</p>
             <NewsletterForm />
           </div>
         </div>
 
         <div className="border-t pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-muted" style={{ borderColor: 'var(--border)' }}>
-          <span>© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250</span>
-          <span>Designed and built in Oslo</span>
+          <span>{UI.footer_copyright[lang]}</span>
+          <span>{UI.footer_built[lang]}</span>
         </div>
       </div>
     </footer>

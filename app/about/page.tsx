@@ -8,10 +8,10 @@ import { useLang } from '@/components/lang-provider'
 import { UI } from '@/lib/i18n'
 
 const FOUNDER_TAGS = [
-  { icon: Database, label: 'Oracle & Azure' },
-  { icon: Cloud,    label: 'Cloud Architecture' },
-  { icon: Bot,      label: 'AI & ML Systems' },
-  { icon: ShieldCheck, label: 'NSM / DIFI Compliance' },
+  { icon: Database, label: { en: 'Oracle & Azure', no: 'Oracle og Azure' } },
+  { icon: Cloud,    label: { en: 'Cloud Architecture', no: 'Skyarkitektur' } },
+  { icon: Bot,      label: { en: 'AI & ML Systems', no: 'KI- og ML-systemer' } },
+  { icon: ShieldCheck, label: { en: 'NSM / DIFI Compliance', no: 'NSM/DIFI-samsvar' } },
 ]
 
 export default function About() {
@@ -89,10 +89,10 @@ export default function About() {
 
                   <div className="flex flex-wrap gap-2 mb-6">
                     {FOUNDER_TAGS.map(t => (
-                      <span key={t.label} className="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full"
+                      <span key={t.label.en} className="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full"
                         style={{ background: 'var(--surface-2)', color: 'var(--text)', border: '1px solid var(--border)' }}>
                         <t.icon size={12} style={{ color: 'var(--label)' }} />
-                        {t.label}
+                        {loc(t.label, lang)}
                       </span>
                     ))}
                   </div>

@@ -159,6 +159,8 @@ export const UI = {
   footer_services:   { en: 'Services',              no: 'Tjenester' },
   footer_contact_h:  { en: 'Stay in touch',         no: 'Hold kontakten' },
   footer_nl_p:       { en: 'Technical insights from Oslo.', no: 'Teknisk innsikt fra Oslo.' },
+  nl_done:           { en: '✓ Subscribed', no: '✓ Abonnert' },
+  nl_email_label:    { en: 'Email address', no: 'E-postadresse' },
   footer_copyright:  { en: '© 2026 Adaptiv AS. All rights reserved. Org. nr. 937 171 250', no: '© 2026 Adaptiv AS. Alle rettigheter forbeholdt. Org.nr. 937 171 250' },
   footer_built:      { en: 'Designed and built in Oslo', no: 'Designet og bygget i Oslo' },
   footer_about:      { en: 'About',                 no: 'Om oss' },
