@@ -92,7 +92,7 @@ export function Nav() {
           <button
             onClick={toggleTheme}
             className="w-11 h-11 flex items-center justify-center rounded-lg text-muted hover:text-[var(--text)] transition-colors"
-            aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
+            aria-label={dark ? (lang === 'no' ? 'Bytt til lyst tema' : 'Switch to light theme') : (lang === 'no' ? 'Bytt til mørkt tema' : 'Switch to dark theme')}
           >
             {dark ? <Sun size={20} /> : <Moon size={20} />}
           </button>

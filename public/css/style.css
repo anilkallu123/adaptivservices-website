@@ -1210,3 +1210,13 @@ p { color: var(--text-secondary); line-height: 1.75; }
 }
 .cs-tag-process { border-color: rgba(123,79,255,0.3); color: rgba(180,150,255,0.85); background: rgba(123,79,255,0.07); }
 .cs-tag-scale   { border-color: rgba(0,212,255,0.25); color: rgba(130,220,255,0.85); background: rgba(0,212,255,0.06); }
+
+/* Responsive: wide comparison tables scroll horizontally instead of dragging the page sideways on mobile */
+@media (max-width: 767px) {
+  .comparison-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+}

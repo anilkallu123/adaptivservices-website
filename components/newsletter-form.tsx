@@ -54,11 +54,12 @@ export function NewsletterForm() {
       />
       <button
         type="submit"
+        aria-label={lang === 'no' ? 'Abonner' : 'Subscribe'}
         disabled={state === 'submitting'}
         className="w-11 h-11 flex items-center justify-center rounded-lg text-white transition-opacity hover:opacity-90 disabled:opacity-50"
         style={{ background: 'var(--btn-gradient)' }}
       >
-        <ArrowRight size={18} />
+        <ArrowRight size={18} aria-hidden="true" />
       </button>
     </form>
   )
