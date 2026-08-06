@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 
 export type Lang = 'en' | 'no'
 
@@ -20,6 +20,11 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
     if (typeof window === 'undefined') return 'no'
     try { return (localStorage.getItem('adaptiv_lang') as Lang) || 'no' } catch { return 'no' }
   })
+
+  // Keep <html lang> in sync with the active language (SSR defaults to 'no')
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
 
   const toggle = useCallback(() => {
     setLang(prev => {
