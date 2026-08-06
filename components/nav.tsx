@@ -59,6 +59,7 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
+              aria-current={pathname === l.href ? 'page' : undefined}
               className={`px-4 py-2.5 rounded-lg text-sm min-h-[44px] flex items-center transition-colors ${
                 pathname === l.href
                   ? 'text-[var(--text)] bg-white/5'
@@ -83,7 +84,7 @@ export function Nav() {
           <button
             onClick={toggleLang}
             className="w-11 h-11 flex items-center justify-center rounded-lg text-sm font-mono font-semibold text-muted hover:text-[var(--text)] transition-colors"
-            aria-label="Toggle language"
+            aria-label={lang === 'no' ? 'Switch to English' : 'Bytt til norsk'}
           >
             {lang === 'no' ? 'EN' : 'NO'}
           </button>
@@ -91,7 +92,7 @@ export function Nav() {
           <button
             onClick={toggleTheme}
             className="w-11 h-11 flex items-center justify-center rounded-lg text-muted hover:text-[var(--text)] transition-colors"
-            aria-label="Toggle theme"
+            aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
           >
             {dark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -99,6 +100,8 @@ export function Nav() {
             className="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-muted hover:text-[var(--text)] transition-colors"
             onClick={() => setOpen(o => !o)}
             aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -109,6 +112,7 @@ export function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
