@@ -207,13 +207,27 @@ export const PRINCIPLES = [
 ]
 
 export const POSTS = [
-  { slug: 'blog-oci-snowflake-2026', tag: 'Data Platform', date: 'May 2026', title: 'OCI + Snowflake: The Sovereign Data Stack for Norwegian Enterprises', excerpt: 'How combining Oracle Cloud Infrastructure with Snowflake delivers data sovereignty, performance, and compliance in one architecture.' },
-  { slug: 'blog-oracle-db-aws-licensing', tag: 'Oracle · Licensing', date: 'Apr 2026', title: 'Oracle Database on AWS: Licensing traps and how to avoid them', excerpt: 'A practical guide to Oracle licensing on AWS, the rules, the traps, and how large enterprises structure their agreements.' },
-  { slug: 'blog-oracle-db-aws-migration-methodology', tag: 'Oracle · Migration', date: 'Apr 2026', title: 'The Oracle-to-AWS Migration Methodology that scales', excerpt: 'Our 6-phase migration framework refined over 30+ zero-downtime database migrations.' },
-  { slug: 'blog-oracle-db-aws-terraform', tag: 'IaC · Oracle', date: 'Apr 2026', title: 'Terraforming Oracle Database@AWS at scale', excerpt: 'How we manage Oracle ExaDB infrastructure as code, modules, state management, and day-two operations.' },
-  { slug: 'blog-oracle-db-aws-vs-azure', tag: 'Cloud · Oracle', date: 'Mar 2026', title: 'Oracle DB@AWS vs Oracle DB@Azure: An honest comparison', excerpt: 'Performance, cost, compliance, and operational differences after running production workloads on both clouds.' },
-  { slug: 'blog-oracle-db-aws-what-it-is', tag: 'Oracle · Cloud', date: 'Mar 2026', title: 'What is Oracle Database@AWS, and should you care?', excerpt: 'The new multicloud service explained: architecture, use cases, and when it makes sense versus alternatives.' },
-  { slug: 'blog-oracle-db-aws-when-to-use', tag: 'Oracle · Strategy', date: 'Mar 2026', title: 'When to use Oracle Database@AWS (and when not to)', excerpt: 'Decision framework for choosing Oracle ExaDB on AWS versus self-managed, RDS, or a full re-platform.' },
+  { slug: 'blog-oci-snowflake-2026', tag: 'Data Platform', date: { en: 'May 2026', no: 'mai 2026' },
+    title: { en: 'OCI + Snowflake: The Sovereign Data Stack for Norwegian Enterprises', no: 'OCI + Snowflake: Den suverene datastacken for norske virksomheter' },
+    excerpt: { en: 'How combining Oracle Cloud Infrastructure with Snowflake delivers data sovereignty, performance, and compliance in one architecture.', no: 'Hvordan Oracle Cloud Infrastructure kombinert med Snowflake gir datasuverenitet, ytelse og etterlevelse i én arkitektur.' } },
+  { slug: 'blog-oracle-db-aws-licensing', tag: 'Oracle · Licensing', date: { en: 'Apr 2026', no: 'apr. 2026' },
+    title: { en: 'Oracle Database on AWS: Licensing traps and how to avoid them', no: 'Oracle Database på AWS: Lisensfeller og hvordan du unngår dem' },
+    excerpt: { en: 'A practical guide to Oracle licensing on AWS, the rules, the traps, and how large enterprises structure their agreements.', no: 'En praktisk guide til Oracle-lisensiering på AWS: reglene, fellene og hvordan store virksomheter strukturerer avtalene sine.' } },
+  { slug: 'blog-oracle-db-aws-migration-methodology', tag: 'Oracle · Migration', date: { en: 'Apr 2026', no: 'apr. 2026' },
+    title: { en: 'The Oracle-to-AWS Migration Methodology that scales', no: 'Oracle-til-AWS-migrasjonsmetoden som skalerer' },
+    excerpt: { en: 'Our 6-phase migration framework refined over 30+ zero-downtime database migrations.', no: 'Vårt 6-fase migrasjonsrammeverk, forfinet gjennom mer enn 30 migrasjoner uten nedetid.' } },
+  { slug: 'blog-oracle-db-aws-terraform', tag: 'IaC · Oracle', date: { en: 'Apr 2026', no: 'apr. 2026' },
+    title: { en: 'Terraforming Oracle Database@AWS at scale', no: 'Terraform for Oracle Database@AWS i stor skala' },
+    excerpt: { en: 'How we manage Oracle ExaDB infrastructure as code, modules, state management, and day-two operations.', no: 'Hvordan vi håndterer Oracle ExaDB-infrastruktur som kode: moduler, tilstandshåndtering og drift etter lansering.' } },
+  { slug: 'blog-oracle-db-aws-vs-azure', tag: 'Cloud · Oracle', date: { en: 'Mar 2026', no: 'mars 2026' },
+    title: { en: 'Oracle DB@AWS vs Oracle DB@Azure: An honest comparison', no: 'Oracle DB@AWS vs Oracle DB@Azure: En ærlig sammenligning' },
+    excerpt: { en: 'Performance, cost, compliance, and operational differences after running production workloads on both clouds.', no: 'Ytelse, kostnad, etterlevelse og driftsforskjeller etter å ha kjørt produksjonslast på begge skyene.' } },
+  { slug: 'blog-oracle-db-aws-what-it-is', tag: 'Oracle · Cloud', date: { en: 'Mar 2026', no: 'mars 2026' },
+    title: { en: 'What is Oracle Database@AWS, and should you care?', no: 'Hva er Oracle Database@AWS, og bør du bry deg?' },
+    excerpt: { en: 'The new multicloud service explained: architecture, use cases, and when it makes sense versus alternatives.', no: 'Den nye multisky-tjenesten forklart: arkitektur, bruksområder og når den gir mening sammenlignet med alternativene.' } },
+  { slug: 'blog-oracle-db-aws-when-to-use', tag: 'Oracle · Strategy', date: { en: 'Mar 2026', no: 'mars 2026' },
+    title: { en: 'When to use Oracle Database@AWS (and when not to)', no: 'Når du bør bruke Oracle Database@AWS (og når ikke)' },
+    excerpt: { en: 'Decision framework for choosing Oracle ExaDB on AWS versus self-managed, RDS, or a full re-platform.', no: 'Beslutningsrammeverk for å velge Oracle ExaDB på AWS kontra selvdrevet, RDS eller full replattforming.' } },
 ]
 
 // Helper, get localised value from any bilingual field

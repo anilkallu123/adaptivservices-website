@@ -13,7 +13,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const post = POSTS.find(p => p.slug === params.slug)
   if (!post) return {}
-  return { title: post.title, description: post.excerpt }
+  return { title: post.title.en, description: post.excerpt.en }
 }
 
 export default function BlogPost({ params }: Props) {

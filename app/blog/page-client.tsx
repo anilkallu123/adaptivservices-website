@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeUp, StaggerGrid } from '@/components/motion'
-import { POSTS } from '@/lib/data'
+import { POSTS, loc } from '@/lib/data'
 import { useLang } from '@/components/lang-provider'
 import { UI } from '@/lib/i18n'
 
@@ -40,10 +40,11 @@ export default function Blog() {
                     style={{ background: 'rgba(123,79,255,0.15)', color: 'var(--label)' }}>
                     {p.tag}
                   </span>
-                  <span className="text-sm text-muted font-mono">{p.date}</span>
+                  <span className="text-sm text-muted font-mono">{loc(p.date, lang)}</span>
+                  <span className="text-xs font-mono text-muted opacity-70 ml-auto" title={lang === 'no' ? 'Artikkelen er på engelsk' : 'Article in English'}>{lang === 'no' ? 'Engelsk' : 'English'}</span>
                 </div>
-                <h2 className="font-semibold leading-snug mb-3 flex-1" style={{ color: 'var(--text)', fontSize: '0.95rem' }}>{p.title}</h2>
-                <p className="text-base text-muted leading-relaxed mb-4">{p.excerpt}</p>
+                <h2 className="font-semibold leading-snug mb-3 flex-1" style={{ color: 'var(--text)', fontSize: '0.95rem' }}>{loc(p.title, lang)}</h2>
+                <p className="text-base text-muted leading-relaxed mb-4">{loc(p.excerpt, lang)}</p>
                 <span className="text-sm font-mono text-muted group-hover:text-[var(--text)] transition-colors flex items-center gap-1 min-h-[44px]">
                   {UI.blog_read[lang]} <ArrowRight size={14} />
                 </span>
